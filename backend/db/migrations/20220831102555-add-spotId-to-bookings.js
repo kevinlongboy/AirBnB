@@ -1,5 +1,7 @@
 'use strict';
 
+const { query } = require("express");
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
@@ -9,12 +11,12 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
     await queryInterface.addColumn(
-      'Reviews',
-      'userId',
+      'Bookings',
+      'spotId',
       {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Users' }
+        references: { model: 'Spots' }
       }
     )
   },
@@ -27,8 +29,8 @@ module.exports = {
      * await queryInterface.dropTable('users');
      */
     await queryInterface.removeColumn(
-      'Reviews',
-      'userId'
+      'Bookings',
+      'spotId',
     )
   }
 };
