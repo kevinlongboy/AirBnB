@@ -1,6 +1,7 @@
 'use strict';
 const { Model, Validator } = require('sequelize');
 const bcrypt = require('bcryptjs');
+const { all } = require('../../routes/api/spots');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -44,6 +45,20 @@ module.exports = (sequelize, DataTypes) => {
 
   User.init(
     {
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [2, 25]
+        }
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [2, 25]
+        }
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -56,18 +71,18 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [3, 256]
-        }
-      },
       hashedPassword: {
         type: DataTypes.STRING.BINARY,
         allowNull: false,
         validate: {
           len: [60, 60]
+        }
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [3, 256]
         }
       }
     },
