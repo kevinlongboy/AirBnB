@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-![AirBnB schema diagram](https://github.com/kevinlongboy/AirBnB/blob/main/assets/schema-diagram-2.png?raw=true)
+![AirBnB schema diagram](https://github.com/kevinlongboy/AirBnB/blob/main/assets/schema-diagrams/schema-diagram-2.png?raw=true)
 
 ## API Documentation
 
