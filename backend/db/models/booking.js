@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class SpotImage extends Model {
+  class Booking extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,22 +13,26 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  SpotImage.init({
-    url: {
-      type: DataTypes.STRING,
+  Booking.init({
+    startDate: {
+      type: DataTypes.DATEONLY,
       allowNull: false,
       validate: {
-        isUrl: true,
+        isDate: true,
+        isAfter: "2022-09-01",
       }
     },
-    preview: {
-      type: DataTypes.BOOLEAN,
+    endDate: {
+      type: DataTypes.DATEONLY,
       allowNull: false,
-      defaultValue: false,
+      validate: {
+        isDate: true,
+        isAfter: "2022-09-01",
+      }
     },
   }, {
     sequelize,
-    modelName: 'SpotImage',
+    modelName: 'Booking',
   });
-  return SpotImage;
+  return Booking;
 };
