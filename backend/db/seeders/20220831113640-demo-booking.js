@@ -2,7 +2,7 @@
 
 const { Op } = require('sequelize');
 
-const bookings = [
+const demoBookings = [
   { // Niles books Daphne's
     spotId: 3,
     ownerId: 2, // userId of who is renting spot
@@ -36,7 +36,7 @@ module.exports = {
     */
     await queryInterface.bulkInsert(
       'Bookings',
-      bookings,
+      demoBookings,
     )
   },
 
@@ -49,7 +49,7 @@ module.exports = {
      */
     await queryInterface.bulkDelete(
       'Bookings',
-      { [Op.or]: bookings },
+      { [Op.or]: demoBookings },
     )
   }
 };

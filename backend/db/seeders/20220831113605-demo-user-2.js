@@ -3,7 +3,7 @@
 const { Op } = require('sequelize');
 const bcrypt = require("bcryptjs");
 
-const users = [
+const demoUsers = [
   {
     firstName: 'Frasier',
     lastName: 'Crane',
@@ -54,7 +54,7 @@ module.exports = {
     */
     await queryInterface.bulkInsert(
       'Users',
-      users
+      demoUsers
     )
   },
 
@@ -67,7 +67,7 @@ module.exports = {
      */
     await queryInterface(
       'Users',
-      { [Op.or]: users }
+      { [Op.or]: demoUsers }
     )
   }
 };

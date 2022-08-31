@@ -2,7 +2,7 @@
 
 const { Op } = require('sequelize');
 
-const spots = [
+const demoSpots = [
   {
     ownerId: 1,
     address: '210 8th Ave N',
@@ -24,7 +24,7 @@ const spots = [
     lat: 47.628406,
     lng: -122.237693,
     name: 'Medina Mansion',
-    description: 'Humble and unobtrusive',
+    description: 'Humble grandeur',
     price: 2500.00
   },
   {
@@ -78,7 +78,7 @@ module.exports = {
     */
     await queryInterface.bulkInsert(
       'Spots',
-      spots
+      demoSpots
     )
   },
 
@@ -91,7 +91,7 @@ module.exports = {
      */
     await queryInterface.bulkDelete(
       'Spots',
-      { [Op.or]: spots }
+      { [Op.or]: demoSpots }
     )
   }
 };
