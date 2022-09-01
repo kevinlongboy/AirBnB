@@ -24,7 +24,7 @@ const demoSpots = [
     lat: 47.628406,
     lng: -122.237693,
     name: 'Medina Mansion',
-    description: 'Humble grandeur',
+    description: 'Modest grandeur',
     price: 2500.00
   },
   {
@@ -36,7 +36,7 @@ const demoSpots = [
     lat: 47.614840,
     lng: -122.352372,
     name: 'Belltown Loft',
-    description: 'Stylish with plenty of character',
+    description: 'Stylish with lots of character',
     price: 1050.00
   },
   {

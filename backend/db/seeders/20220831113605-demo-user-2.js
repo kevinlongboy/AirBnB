@@ -9,14 +9,14 @@ const demoUsers = [
     lastName: 'Crane',
     userName: 'fcrane',
     hashedPassword: bcrypt.hashSync('password'),
-    email: 'fcrane@seattle.com',
+    email: 'fcrane@kacl.com',
   },
   {
     firstName: 'Niles',
     lastName: 'Crane',
     userName: 'ncrane',
     hashedPassword: bcrypt.hashSync('password'),
-    email: 'ncrane@seattle.com',
+    email: 'ncrane@me.com',
   },
   {
     firstName: 'Daphne',
@@ -30,14 +30,14 @@ const demoUsers = [
     lastName: 'Doyle',
     userName: 'rdoyle',
     hashedPassword: bcrypt.hashSync('password'),
-    email: 'rdoyle@seattle.com',
+    email: 'rdoyle@kacl.com',
   },
   {
     firstName: 'Martin',
     lastName: 'Crane',
     userName: 'mcrane',
     hashedPassword: bcrypt.hashSync('password'),
-    email: 'mcrane@seattle.com',
+    email: 'mcrane@spd.gov',
   },
 ]
 
