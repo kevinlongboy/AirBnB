@@ -129,7 +129,7 @@ router.get('/:spotId/bookings', async (req, res) => {
 });
 
 // README, line 1099
-router.post('/:spotId/bookings', requireAuth, validateReview, async (req, res) => {
+router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res) => {
 
     let spotId = req.params.spotId;
     let findSpot = await Spot.findByPk(spotId);
