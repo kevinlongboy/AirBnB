@@ -4,7 +4,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Spot, User } = require('../../db/models');
+const { Spot, Review, User } = require('../../db/models');
 
 
 
@@ -79,6 +79,82 @@ const validateQuery = [
     handleValidationErrors
 ]
 
+const validateReview = [
+    check('review')
+        .exists({ checkFalsy: true })
+        .withMessage("Review text is required"),
+    check('stars')
+        .exists({ checkFalsy: true })
+        .withMessage("Stars must be an integer from 1 to 5"),
+    handleValidationErrors
+]
+
+
+/*********************************** spots/:spotId/reviews ***********************************/
+
+// README, line 684
+router.get('/:spotId/reviews', async (req, res) => {
+
+    let spotId = req.params.spotId;
+    let getSpotReviews = await Spot.findByPk(spotId);
+
+    if (!getSpotReviews) {
+        error.message = "Spot couldn't be found"
+        error.status = 404
+        next(err)
+
+    } else {
+        let getSpotReviews = await Spot.findAll({
+            where: { id: spotId },
+            include: [{
+                model: Review,
+            }]
+        });
+        res
+            .status(200)
+            .json({
+                "Reviews": getSpotReviews
+            })
+    }
+});
+
+// README, line 740
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
+
+    let spotId = req.params.spotId;
+    let findSpot = await Spot.findByPk(spotId);
+
+    if (!findSpot) {
+        error.message = "Spot couldn't be found"
+        error.status = 404
+        next(err)
+    }
+
+    let spotReviewExists = await User.findAll({
+        where: { id: req.user.id },
+        include: { model: Review },
+    });
+    if (spotReviewExists) {
+        error.message = "User already has a review for this spot";
+        statusCode = 403;
+        next(err)
+    }
+
+    try {
+        let { review, stars } = req.body;
+        let postSpotReview = await Review.create({
+            review: review,
+            stars: stars,
+        })
+        res.status(200).json(postSpotReview)
+
+    } catch (err) {
+        error.message = "Validation Error";
+        error.statusCode = 400;
+        next(err);
+    }
+});
+
 
 /*********************************** spots/:spotId/images ***********************************/
 
@@ -86,9 +162,9 @@ const validateQuery = [
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
     let spotId = req.params.spotId;
-    let postSpot = await Spot.findByPk(spotId);
+    let findSpot = await Spot.findByPk(spotId);
 
-    if (!postSpot) {
+    if (!findSpot) {
         error.message = "Spot couldn't be found"
         error.status = 404
         next(err)
@@ -278,7 +354,7 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
 /***************************************** /spots? ******************************************/
 
 // README, line 1405
-router.get('/', async (req, res) => {
+router.get('?', async (req, res) => {
 
     let query = {
         where: {},
@@ -325,5 +401,9 @@ router.get('/', async (req, res) => {
 router.use((err, req, res, next) => {
     res.json(err)
 })
+
+
+
+/****************************************** export ********************************************/
 
 module.exports = router;
