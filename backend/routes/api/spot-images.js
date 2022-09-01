@@ -20,7 +20,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
     let imageId = req.params.bookingId;
     let deleteSpotImage = await SpotImage.findByPk(imageId);
 
-    if (!deleteBooking) {
+    if (!deleteSpotImage) {
         error.message = "Spot Image couldn't be found";
         error.status = 404;
         next(err);
