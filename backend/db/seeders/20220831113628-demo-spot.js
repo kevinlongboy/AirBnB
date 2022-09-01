@@ -2,7 +2,7 @@
 
 const { Op } = require('sequelize');
 
-const spots = [
+const demoSpots = [
   {
     ownerId: 1,
     address: '210 8th Ave N',
@@ -12,7 +12,7 @@ const spots = [
     lat: 47.620224,
     lng: -122.340720,
     name: 'Queen Anne Condo',
-    description: 'Eclectic yet understated',
+    description: 'Eclectic',
     price: 1000.00
   },
   {
@@ -24,7 +24,7 @@ const spots = [
     lat: 47.628406,
     lng: -122.237693,
     name: 'Medina Mansion',
-    description: 'Humble and unobtrusive',
+    description: 'Modest grandeur',
     price: 2500.00
   },
   {
@@ -37,7 +37,7 @@ const spots = [
     lng: -122.352372,
     name: 'Belltown Loft',
     description: 'Stylish with plenty of character',
-    price: 1050.00
+    price: 200.00
   },
   {
     ownerId: 4,
@@ -49,7 +49,7 @@ const spots = [
     lng: -122.386955,
     name: 'Ballard Apartment',
     description: 'Cozy and inviting',
-    price: 1500.00
+    price: 250.00
   },
   {
     ownerId: 5,
@@ -61,7 +61,7 @@ const spots = [
     lng: -122.283928,
     name: 'Madrona House',
     description: 'Classic comfort',
-    price: 850.00
+    price: 150.00
   },
 ]
 
@@ -78,7 +78,7 @@ module.exports = {
     */
     await queryInterface.bulkInsert(
       'Spots',
-      spots
+      demoSpots
     )
   },
 
@@ -91,7 +91,7 @@ module.exports = {
      */
     await queryInterface.bulkDelete(
       'Spots',
-      { [Op.or]: spots }
+      { [Op.or]: demoSpots }
     )
   }
 };
