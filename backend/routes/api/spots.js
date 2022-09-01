@@ -4,7 +4,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Spot, Review, User } = require('../../db/models');
+const { Review, Spot, SpotImage, User } = require('../../db/models');
 
 
 
@@ -172,7 +172,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
     try {
         let { url, preview } = req.body;
-        let postSpotImage = await Spot.create({
+        let postSpotImage = await SpotImage.create({
             url: url,
             preview: preview,
         });
@@ -300,6 +300,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
             .json({
                 "Spots": getCurrentSpots
             })
+
     } catch (err) {
         error.message = "Spot couldn't be found"
         error.status = 404
