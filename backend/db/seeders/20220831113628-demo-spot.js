@@ -12,7 +12,7 @@ const demoSpots = [
     lat: 47.620224,
     lng: -122.340720,
     name: 'Queen Anne Condo',
-    description: 'Eclectic yet understated',
+    description: 'Eclectic',
     price: 1000.00
   },
   {
@@ -36,8 +36,8 @@ const demoSpots = [
     lat: 47.614840,
     lng: -122.352372,
     name: 'Belltown Loft',
-    description: 'Stylish with lots of character',
-    price: 1050.00
+    description: 'Stylish with plenty of character',
+    price: 200.00
   },
   {
     ownerId: 4,
@@ -49,7 +49,7 @@ const demoSpots = [
     lng: -122.386955,
     name: 'Ballard Apartment',
     description: 'Cozy and inviting',
-    price: 1500.00
+    price: 250.00
   },
   {
     ownerId: 5,
@@ -61,7 +61,7 @@ const demoSpots = [
     lng: -122.283928,
     name: 'Madrona House',
     description: 'Classic comfort',
-    price: 850.00
+    price: 150.00
   },
 ]
 

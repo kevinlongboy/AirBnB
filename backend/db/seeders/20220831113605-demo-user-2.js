@@ -39,6 +39,34 @@ const demoUsers = [
     hashedPassword: bcrypt.hashSync('password'),
     email: 'mcrane@spd.gov',
   },
+  {
+    firstName: 'Lilith',
+    lastName: 'Sternin',
+    userName: 'lsternin',
+    hashedPassword: bcrypt.hashSync('password'),
+    email: 'lsternin@sternin.com',
+  },
+  {
+    firstName: 'Gil',
+    lastName: 'Chesterton',
+    userName: 'gchesterton',
+    hashedPassword: bcrypt.hashSync('password'),
+    email: 'gchesterton@kacl.com',
+  },
+  {
+    firstName: 'Noel',
+    lastName: 'Shempsky',
+    userName: 'nshempsky',
+    hashedPassword: bcrypt.hashSync('password'),
+    email: 'nshempsky@kacl.com',
+  },
+  {
+    firstName: 'Bob',
+    lastName: 'Briscoe',
+    userName: 'bbriscoe',
+    hashedPassword: bcrypt.hashSync('password'),
+    email: 'bbriscoe@kacl.com',
+  },
 ]
 
 module.exports = {
