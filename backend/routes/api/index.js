@@ -28,14 +28,6 @@ router.use('/bookings', bookingsRouter);
 router.use('/spot-images', spotImagesRouter);
 router.use('/review-images', reviewImagesRouter);
 
-router.post('/test', (req, res) => {
-    res.json({ requestBody: req.body });
-});
-
-/************************* TEST ROUTES *************************/
-router.post('/test', function (req, res) {
-    res.json({ requestBody: req.body });
-});
 
 // GET /api/set-token-cookie
 router.get('/set-token-cookie', async (_req, res) => {
@@ -64,5 +56,10 @@ router.get(
         return res.json(req.user);
     }
 );
+
+/************************* TEST ROUTES *************************/
+router.post('/test', (req, res) => {
+    res.json({ requestBody: req.body });
+});
 
 module.exports = router;
