@@ -1,7 +1,6 @@
 'use strict';
 
 const bcrypt = require("bcryptjs");
-const Op = Sequelize.Op;
 
 const demoUsers = [
   {
@@ -73,32 +72,20 @@ let usernames = [];
 demoUsers.forEach(user => usernames.push(user.username))
 
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
-    await queryInterface.bulkInsert(
+  up: async (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert(
       'Users',
-      demoUsers
+      demoUsers,
+      {}
     )
   },
 
-  async down(queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-    await queryInterface.bulkDelete(
+  down: async (queryInterface, Sequelize) => {
+    const Op = Sequelize.Op;
+    return queryInterface.bulkDelete(
       'Users',
-      { username: { [Op.in]: usernames } }
+      { username: { [Op.in]: usernames } },
+      {}
     )
   }
 };

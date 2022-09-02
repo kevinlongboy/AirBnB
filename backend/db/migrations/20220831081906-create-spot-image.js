@@ -14,7 +14,7 @@ module.exports = {
       },
       preview: {
         allowNull: false,
-        boolean: Sequelize.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         defaultValue: false,
       },
       createdAt: {
