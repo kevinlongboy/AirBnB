@@ -1,6 +1,6 @@
 'use strict';
 
-const { Op } = require('sequelize');
+const Op = Sequelize.Op;
 
 const demoSpots = [
   {
@@ -65,6 +65,9 @@ const demoSpots = [
   },
 ]
 
+let ownerIds = [];
+demoSpots.forEach(spot => ownerIds.push(spot.ownerId))
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     /**
@@ -91,7 +94,7 @@ module.exports = {
      */
     await queryInterface.bulkDelete(
       'Spots',
-      { [Op.or]: demoSpots }
+      { ownerId: { [Op.in]: ownerIds } }
     )
   }
 };

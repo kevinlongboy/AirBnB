@@ -23,7 +23,7 @@ module.exports = {
       },
       hashedPassword: {
         type: Sequelize.STRING.BINARY,
-        allowNull: false
+        allowNull: false,
       },
       email: {
         type: Sequelize.STRING(256),

@@ -1,44 +1,42 @@
 'use strict';
 
-const { Op } = require('sequelize');
+const Op = Sequelize.Op;
 
 const demoReviews = [
   { // Niles reviews Daphne’s
-    id: 1,
     spotId: 3,
     userId: 2,
-    review: '',
+    review: 'Placeholder text for review',
     stars: 5,
   },
   { // Daphne reviews Roz’s
-    id: 2,
     spotId: 4,
     userId: 3,
-    review: 'I had the loveliest time at Ballard Apartment.',
+    review: 'I had the loveliest time at Ballard Apartment... placeholder text for review',
     stars: 5,
   },
   { // Roz reviews Martin’s
-    id: 3,
     spotId: 5,
     userId: 4,
-    review: ' ',
+    review: 'Placeholder text for review',
     stars: 4.5,
   },
   { // Niles reviews Frasier’s
-    id: 4,
     spotId: 1,
     userId: 2,
-    review: ' ',
+    review: 'Placeholder text for review',
     stars: 3.5,
   },
   { // Frasier reviews Niles'
-    id: 5,
     spotId: 2,
     userId: 1,
-    review: ' ',
+    review: 'Placeholder text for review',
     stars: 3,
   },
 ]
+
+let spotIds = [];
+demoReviews.forEach(review => spotIds.push(review.spotId))
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -66,7 +64,7 @@ module.exports = {
      */
     await queryInterface.bulkDelete(
       'Reviews',
-      { [Op.or]: demoReviews }
+      { spotId: { [Op.in]: spotIds } }
     )
   }
 };
