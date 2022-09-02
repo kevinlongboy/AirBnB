@@ -8,6 +8,14 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 const validateSignup = [
+    check('firstName')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 2 })
+        .withMessage('Password must be 2 characters or more.'),
+    check('lastName')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 2 })
+        .withMessage('Password must be 2 characters or more.'),
     check('email')
         .exists({ checkFalsy: true })
         .isEmail()
@@ -28,19 +36,17 @@ const validateSignup = [
 ];
 
 // Sign up
-router.post(
-    '/',
-    validateSignup,
-    async (req, res) => {
-        const { email, password, username } = req.body;
-        const user = await User.signup({ email, username, password });
+router.post('/', validateSignup, async (req, res) => {
 
-        await setTokenCookie(res, user);
+    const { firstName, lastName, email, password, username } = req.body;
+    let user = await User.signup({ firstName, lastName, email, username, password });
+    let token = await setTokenCookie(res, user);
 
-        return res.json({
-            user
-        });
-    }
-);
+    // must turn user into JSON
+    user = user.toJSON();
+    user.token = token;
+
+    return res.json(user);
+});
 
 module.exports = router;
