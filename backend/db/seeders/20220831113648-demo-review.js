@@ -1,7 +1,5 @@
 'use strict';
 
-const Op = Sequelize.Op;
-
 const demoReviews = [
   { // Niles reviews Daphne’s
     spotId: 3,
@@ -40,31 +38,19 @@ demoReviews.forEach(review => spotIds.push(review.spotId))
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
     await queryInterface.bulkInsert(
       'Reviews',
-      demoReviews
+      demoReviews,
+      {},
     )
   },
 
   async down(queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    const Op = Sequelize.Op;
     await queryInterface.bulkDelete(
       'Reviews',
-      { spotId: { [Op.in]: spotIds } }
+      { spotId: { [Op.in]: spotIds } },
+      {},
     )
   }
 };

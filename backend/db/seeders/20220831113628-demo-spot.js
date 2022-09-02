@@ -1,7 +1,5 @@
 'use strict';
 
-const Op = Sequelize.Op;
-
 const demoSpots = [
   {
     ownerId: 1,
@@ -13,7 +11,7 @@ const demoSpots = [
     lng: -122.340720,
     name: 'Queen Anne Condo',
     description: 'Eclectic',
-    price: 1000.00
+    price: 1000
   },
   {
     ownerId: 2,
@@ -25,7 +23,7 @@ const demoSpots = [
     lng: -122.237693,
     name: 'Medina Mansion',
     description: 'Modest grandeur',
-    price: 2500.00
+    price: 2500
   },
   {
     ownerId: 3,
@@ -37,7 +35,7 @@ const demoSpots = [
     lng: -122.352372,
     name: 'Belltown Loft',
     description: 'Stylish with plenty of character',
-    price: 200.00
+    price: 200
   },
   {
     ownerId: 4,
@@ -49,7 +47,7 @@ const demoSpots = [
     lng: -122.386955,
     name: 'Ballard Apartment',
     description: 'Cozy and inviting',
-    price: 250.00
+    price: 300
   },
   {
     ownerId: 5,
@@ -61,7 +59,7 @@ const demoSpots = [
     lng: -122.283928,
     name: 'Madrona House',
     description: 'Classic comfort',
-    price: 150.00
+    price: 150
   },
 ]
 
@@ -70,31 +68,19 @@ demoSpots.forEach(spot => ownerIds.push(spot.ownerId))
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
     await queryInterface.bulkInsert(
       'Spots',
-      demoSpots
+      demoSpots,
+      {},
     )
   },
 
   async down(queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    const Op = Sequelize.Op;
     await queryInterface.bulkDelete(
       'Spots',
-      { ownerId: { [Op.in]: ownerIds } }
+      { ownerId: { [Op.in]: ownerIds } },
+      {}
     )
   }
 };

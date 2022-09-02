@@ -3,20 +3,17 @@ const { Model } = require('sequelize');
 const { Sequelize } = require('.');
 
 module.exports = (sequelize, DataTypes) => {
+
   class Spot extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      // define association here
       Spot.belongsTo(models.User, { foreignKey: 'ownerId' });
       Spot.hasMany(models.Booking, { foreignKey: 'spotId' });
       Spot.hasMany(models.SpotImage, { foreignKey: 'spotId' });
       Spot.hasMany(models.Review, { foreignKey: 'spotId' });
     }
   }
+
   Spot.init({
     ownerId: {
       type: DataTypes.INTEGER,
@@ -27,25 +24,25 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: [2, 50],
-        containsBuildingNumberAndStreetName(value) {
-          let splitAddress = value.split(' ')
-          if (splitAddress.length < 2) {
-            throw new Error("Please enter valid address.")
-          }
+        // containsBuildingNumberAndStreetName(value) {
+        //   let splitAddress = value.split(' ')
+        //   if (splitAddress.length < 2) {
+        //     throw new Error("Please enter valid address.")
+        //   }
 
-          let buildingNumber = parseInt(splitAddress[0]);
-          if (typeof buildingNumber !== 'number') {
-            throw new Error("Please enter valid building number.")
-          }
-          // let streetName = splitAddress[1];
-          // let letters = streetName.split('');
-          // for (let letter of letters) {
-          //   let isNum = parseInt(letter)
-          //   if (typeof isNum === 'number') {
-          //     throw new Error("Please enter valid street name.")
-          //   }
-          // }
-        }
+        //   let buildingNumber = parseInt(splitAddress[0]);
+        //   if (typeof buildingNumber !== 'number') {
+        //     throw new Error("Please enter valid building number.")
+        //   }
+        //   // let streetName = splitAddress[1];
+        //   // let letters = streetName.split('');
+        //   // for (let letter of letters) {
+        //   //   let isNum = parseInt(letter)
+        //   //   if (typeof isNum === 'number') {
+        //   //     throw new Error("Please enter valid street name.")
+        //   //   }
+        //   // }
+        // }
       },
     },
     city: {
