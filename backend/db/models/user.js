@@ -1,7 +1,7 @@
 'use strict';
 const { Model, Validator } = require('sequelize');
 const bcrypt = require('bcryptjs');
-const { all } = require('../../routes/api/spots');
+// const { all } = require('../../routes/api/spots'); // NEVER AGAIN
 
 module.exports = (sequelize, DataTypes) => {
 

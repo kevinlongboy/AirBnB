@@ -102,6 +102,24 @@ const validateReview = [
 
 /********************************** spots/:spotId/bookings ***********************************/
 
+// router.get('/', async (req, res, next) => {
+
+//     // console.log("hit spots router")
+//     // res.send("okay")
+
+//     // try {
+//     // let getSpots = await Spot.findByPk(1);
+//     // console.log(getSpots)
+//     // res.status(200)
+//     res.json({ "Spots": "get spots" });
+//     // } catch (err) {
+//     //     error.message = "Spot couldn't be found"
+//     //     error.status = 404
+//     //     next(err);
+//     // }
+// });
+
+
 // README, line 1031
 router.get('/:spotId/bookings', async (req, res) => {
 
@@ -397,13 +415,12 @@ router.get('/:spotId', async (req, res, next) => {
 /****************************************** /spots ******************************************/
 
 // README, line 234
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
 
     try {
         let getSpots = await Spot.findAll();
-        res
-            .status(200)
-            .json(getSpots);
+        res.status(200)
+        res.send({ "Spots": getSpots });
     } catch (err) {
         error.message = "Spot couldn't be found"
         error.status = 404
@@ -440,45 +457,45 @@ router.get('/', async (req, res) => {
 /***************************************** /spots? ******************************************/
 
 // README, line 1405
-router.get('/', async (req, res) => {
+// router.get('/', async (req, res, next) => {
 
-    let query = {
-        where: {},
-        include: []
-    }
+//     let query = {
+//         where: {},
+//         include: []
+//     }
 
-    let page = req.query.page === undefined ? 0 : parseInt(req.query.page);
-    if (page > 10) page = 10;
+//     let page = req.query.page === undefined ? 0 : parseInt(req.query.page);
+//     if (page > 10) page = 10;
 
-    let size = req.query.size === undefined ? 20 : parseInt(req.query.size);
-    if (size > 20) size = 20;
+//     let size = req.query.size === undefined ? 20 : parseInt(req.query.size);
+//     if (size > 20) size = 20;
 
-    if (page >= 1 && size >= 1) {
-        query.limit = size;
-        query.offset = size * (page - 1);
-    }
+//     if (page >= 1 && size >= 1) {
+//         query.limit = size;
+//         query.offset = size * (page - 1);
+//     }
 
-    try {
-        if (req.query.minLat) query.where.lat = { [Op.gte]: req.query.minLat };
-        if (req.query.maxLat) query.where.lat = { [Op.lte]: req.query.maxLat };
-        if (req.query.minLng) query.where.lng = { [Op.gte]: req.query.minLng };
-        if (req.query.maxLng) query.where.lng = { [Op.lte]: req.query.maxLng };
-        if (req.query.minPrice) query.where.price = { [Op.gte]: req.query.minPrice };
-        if (req.query.maxPrice) query.where.price = { [Op.lte]: req.query.maxPrice };
+//     try {
+//         //     if (req.query.minLat) query.where.lat = { [Op.gte]: req.query.minLat };
+//         //     if (req.query.maxLat) query.where.lat = { [Op.lte]: req.query.maxLat };
+//         //     if (req.query.minLng) query.where.lng = { [Op.gte]: req.query.minLng };
+//         //     if (req.query.maxLng) query.where.lng = { [Op.lte]: req.query.maxLng };
+//         //     if (req.query.minPrice) query.where.price = { [Op.gte]: req.query.minPrice };
+//         //     if (req.query.maxPrice) query.where.price = { [Op.lte]: req.query.maxPrice };
 
-        let querySpots = await Spot.findAll(query);
-        res.status(200).json({
-            querySpots,
-            page,
-            size
-        });
+//         let querySpots = await Spot.findAll(query);
+//         res.status(200).json({
+//             "Spots": querySpots,
+//             page,
+//             size
+//         });
 
-    } catch (err) {
-        error.message = "Validation Error";
-        error.statusCode = 400;
-        next(err);
-    }
-});
+//     } catch (err) {
+//         error.message = "Validation Error";
+//         error.statusCode = 400;
+//         next(err);
+//     }
+// });
 
 
 
