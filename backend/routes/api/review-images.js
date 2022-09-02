@@ -43,3 +43,8 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
 router.use((err, req, res, next) => {
     res.json(err)
 })
+
+
+/****************************************** export ********************************************/
+
+module.exports = router;
