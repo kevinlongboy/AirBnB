@@ -22,6 +22,7 @@ const validateReview = [
 
 /******************************** /reviews/:reviewId/images **********************************/
 
+// Postman 18: "Create an Image for a Review"
 // README, line 840
 router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 

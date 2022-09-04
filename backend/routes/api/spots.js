@@ -222,7 +222,7 @@ const validateReview = [
 //     }
 // });
 
-// Postman 14: "Create a Review for a Spot"
+// Postman 15: "Create a Review for a Spot"
 // README, line 740
 router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
 
@@ -420,20 +420,19 @@ router.get('/:spotId', async (req, res, next) => {
     }
 });
 
-// Postman 12: "Edit a Spot"
+// Postman 13: "Edit a Spot"
 // README, line 501
 router.put('/:spotId', requireAuth, async (req, res, next) => {
 
     let spotId = req.params.spotId;
     let putSpot = await Spot.findByPk(spotId);
 
-    if (!putSpot) {
-        error.message = "Spot couldn't be found";
-        error.statusCode = 404;
-        next(error);
-    }
-
     try {
+        if (!putSpot) {
+            error.message = "Spot couldn't be found";
+            error.statusCode = 404;
+            next(error);
+        }
 
         let { address, city, state, country, lat, lng, name, description, price } = req.body;
 
