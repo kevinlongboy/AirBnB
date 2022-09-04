@@ -23,44 +23,56 @@ const validateReview = [
 /******************************** /reviews/:reviewId/images **********************************/
 
 // Postman 18: "Create an Image for a Review"
-// README, line 840
+// README, line 820
 router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 
+    console.log("findReview")
+
     let reviewId = req.params.reviewId;
+    console.log(reviewId)
     let findReview = await Review.findByPk(reviewId);
-
-    if (!findReview) {
-        error.message = "Review couldn't be found";
-        error.status = 404;
-        next(err);
-    }
-
-    let maxReviewImagesReached = await ReviewImage.findByPk(reviewId, {
-        include: {
-            model: Review,
-            attributes: []
-        },
-        attributes: [
-            [sequelize.fn('COUNT', sequelize.col("id")), "imageCount"]
-        ]
-    })
-    if (maxReviewImagesReached.length === 10) {
-        error.message = "Maximum number of images for this resource was reached";
-        error.statusCode = 403;
-        next(err);
-    }
+    console.log(findReview)
 
     try {
+
+        if (!findReview) {
+            error.message = "Review couldn't be found";
+            error.status = 404;
+            res
+                // .status(400)
+                .json(error);
+        }
+
+        let reviewImgCount = await ReviewImage.count()
+        console.log("------ This is the current image count: " + reviewImgCount + "------")
+        if (reviewImgCount === 10) {
+            error.message = "Maximum number of images for this resource was reached";
+            error.statusCode = 403;
+            res
+                // .status(403)
+                .json(error);
+        }
+
         let { url } = req.body;
-        let postReviewImage = await ReviewImage.create({
+        let postReviewImage = await findReview.createReviewImage({
             url: url,
         });
-        res.status(200).json(postReviewImage)
+        let printPostReviewImage = await ReviewImage.findByPk(postReviewImage.id, {
+            attributes: {
+                include: ["id", "url"],
+                exclude: ["createdAt", "updatedAt", "reviewId"]
+            },
+        })
+        res
+            .status(200)
+            .json(printPostReviewImage)
 
     } catch (err) {
         error.message = "Could not add image";
         error.statusCode = 404;
-        next(err);
+        res
+            // .status(404)
+            .json(err);
     }
 });
 

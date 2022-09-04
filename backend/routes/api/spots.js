@@ -235,7 +235,9 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
         if (!findSpot) {
             error.message = "Spot couldn't be found"
             error.statusCode = 404
-            res.json(error)
+            res
+                // .status(404)
+                .json(error)
         }
 
         let findAllSpotReviews = await Review.findAll({ // returns array of review for req. spot
@@ -245,7 +247,9 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
             console.log("this")
             error.message = "User already has a review for this spot";
             error.statusCode = 403;
-            res.json(error)
+            res
+                // .status(403)
+                .json(error)
         }
 
         let { review, stars } = req.body;
@@ -263,7 +267,9 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
     } catch (err) {
         error.message = "Validation Error";
         error.statusCode = 400;
-        res.json(error)
+        res
+            // .status(400)
+            .json(error)
     }
 });
 
@@ -283,12 +289,16 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
             url: url,
             preview: preview,
         });
-        res.status(200).json(postSpotImage)
+        res
+            .status(200)
+            .json(postSpotImage)
 
     } catch (err) {
         error.message = "Spot couldn't be found"
         error.status = 404
-        next(error)
+        res
+            // .status(404)
+            .json(error)
     }
 });
 
@@ -355,7 +365,9 @@ router.get('/current', requireAuth, async (req, res, next) => {
     } catch (err) {
         error.message = "Spot couldn't be found"
         error.status = 404
-        next(error);
+        res
+            // .status(404)
+            .json(error);
     }
 });
 
@@ -416,7 +428,9 @@ router.get('/:spotId', async (req, res, next) => {
     } catch (err) {
         error.message = "Spot couldn't be found";
         error.statusCode = 404;
-        next(error);
+        res
+            // .status(404)
+            .json(error);
     }
 });
 
@@ -431,7 +445,9 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
         if (!putSpot) {
             error.message = "Spot couldn't be found";
             error.statusCode = 404;
-            next(error);
+            res
+                // .status(404)
+                .json(error);
         }
 
         let { address, city, state, country, lat, lng, name, description, price } = req.body;
@@ -454,7 +470,9 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     } catch (err) {
         error.message = "Validation Error";
         error.statusCode = 404;
-        next(error);
+        res
+            // .status(404)
+            .json(error);
     }
 });
 
@@ -533,13 +551,16 @@ router.get('/', async (req, res, next) => {
 
             spotHasBeenReviewed.push(currSpot.id)
         }
-        res.status(200)
-        res.send({ "Spots": getSpots });
+        res
+            .status(200)
+            .json({ "Spots": getSpots });
 
     } catch (err) {
         error.message = "Spot couldn't be found"
         error.status = 404
-        next(error);
+        res
+            // .status(404)
+            .json(error);
     }
 });
 
@@ -568,12 +589,16 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
         postSpot.save();
         console.log(postSpot)
 
-        res.status(200).json(postSpot)
+        res
+            .status(200)
+            .json(postSpot)
 
     } catch (err) {
         error.message = "Validation Error";
         error.statusCode = 400;
-        next(error);
+        res
+            // .status(400)
+            .json(error);
     }
 });
 
