@@ -294,14 +294,14 @@ router.get('/:spotId', async (req, res, next) => {
     let currentSpotId = req.params.spotId;
 
     try {
-        let getSpot = await Spot.findByPk(currentSpotId);
+        let getSpot = await Spot.findByPk(currentSpotId)
+        console.log(getSpot.ownerId)
 
         /******************** add numReviews-key ********************/
         let reviewCount = await Review.count({
             where: { spotId: currentSpotId }
         });
         getSpot.dataValues.numReviews = reviewCount;
-
 
         /******************** add avgStarRating-key ********************/
         let starSum = await Review.sum('stars',
@@ -314,6 +314,25 @@ router.get('/:spotId', async (req, res, next) => {
         let starAvg = starSum / reviewCount;
         if (!starAvg) starAvg = 0
         getSpot.dataValues.avgStarRating = starAvg;
+
+        /******************** add SpotImages-key ********************/
+        let spotImgs = await SpotImage.findAll({
+            where: { spotId: currentSpotId },
+            attributes: {
+                include: ["id", "url", "preview"],
+                exclude: ["spotId", "createdAt", "updatedAt"]
+            },
+        })
+        getSpot.dataValues.SpotImages = spotImgs;
+
+        /******************** add Owner-key ********************/
+        let ownerData = await User.findByPk(getSpot.ownerId, {
+            attributes: {
+                include: ["id", "firstName", "lastName"],
+                exclude: ["username", "hashedPassword", "email", "createdAt", "updatedAt"]
+            },
+        })
+        getSpot.dataValues.Owner = ownerData;
 
 
         res
