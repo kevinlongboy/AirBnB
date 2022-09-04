@@ -4,7 +4,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Review, ReviewImage, Spot, User } = require('../../db/models');
+const { Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
 /************************************* global variables *************************************/
 
@@ -26,8 +26,6 @@ const validateReview = [
 // README, line 820
 router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 
-    console.log("findReview")
-
     let reviewId = req.params.reviewId;
     console.log(reviewId)
     let findReview = await Review.findByPk(reviewId);
@@ -37,14 +35,13 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 
         if (!findReview) {
             error.message = "Review couldn't be found";
-            error.status = 404;
+            error.statusCode = 404;
             res
                 // .status(400)
                 .json(error);
         }
 
         let reviewImgCount = await ReviewImage.count()
-        console.log("------ This is the current image count: " + reviewImgCount + "------")
         if (reviewImgCount === 10) {
             error.message = "Maximum number of images for this resource was reached";
             error.statusCode = 403;
@@ -73,6 +70,79 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
         res
             // .status(404)
             .json(err);
+    }
+});
+
+
+/************************************* /reviews/current **************************************/
+
+// Postman 20: "Get Reviews of Current User"
+// README, line 628
+router.get('/current', requireAuth, async (req, res, next) => {
+
+    let currentUser = req.user;
+    let currentUserId = req.user.id;
+
+    try {
+        let getCurrentUserReviews = await Review.findAll({ // returns array of review-objects
+            where: { userId: currentUserId },
+            order: [['id']]
+        });
+
+        let currentUserData = await User.findByPk(currentUserId, {
+            attributes: {
+                exclude: ['username', 'hashedPassword', 'email', 'createdAt', 'updatedAt']
+            }
+        })
+
+        for (let i = 0; i < getCurrentUserReviews.length; i++) {
+            let currReview = getCurrentUserReviews[i];
+
+            /******************** add User-key ********************/
+            currReview.dataValues.User = currentUserData.dataValues
+            // res.send(currReview)
+
+
+            /******************** add Spot-key ********************/
+            let currSpotData = await Spot.findByPk(currReview.spotId, {
+                attributes: {
+                    exclude: ['description', 'createdAt', 'updatedAt']
+                }
+            })
+            currReview.dataValues.Spot = currSpotData.dataValues
+            // res.json(currReview.spotId)
+
+            let currSpotPreviewImg = await SpotImage.findOne({
+                where: { spotId: currReview.spotId, preview: 1 },
+                exclude: ['id', 'spotId', 'createdAt', 'updatedAt']
+            })
+            currReview.dataValues.Spot.previewImage = currSpotPreviewImg.url
+            // res.json(currReview)
+
+
+            /******************** add ReviewImages-key ********************/
+            let currReviewImgs = await ReviewImage.findAll({
+                where: { reviewId: currReview.spotId },
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt', 'reviewId']
+                }
+            })
+            currReview.dataValues.ReviewImages = currReviewImgs
+            // res.json(currReview)
+        }
+
+        res
+            .status(200)
+            .json({
+                "Reviews": getCurrentUserReviews
+            })
+
+    } catch (err) {
+        error.message = "Spot couldn't be found"
+        error.statusCode = 404
+        res
+            // .status(404)
+            .json(error);
     }
 });
 
@@ -129,28 +199,7 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
 });
 
 
-/************************************* /reviews/current **************************************/
 
-// README, line 628
-router.get('/current', requireAuth, async (req, res, next) => {
-
-    try {
-        let getCurrentReviews = await User.findAll({
-            where: { id: req.user.id },
-            include: { model: Review },
-        });
-        res
-            .status(200)
-            .json({
-                "Reviews": getCurrentReviews
-            })
-
-    } catch (err) {
-        error.message = "Spot couldn't be found"
-        error.status = 404
-        next(err);
-    }
-});
 
 
 

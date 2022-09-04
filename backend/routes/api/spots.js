@@ -309,8 +309,8 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 // README, line 274
 router.get('/current', requireAuth, async (req, res, next) => {
 
-    let currentUser = req.user
-    let currentUserId = req.user.id
+    let currentUser = req.user;
+    let currentUserId = req.user.id;
 
     try {
         let getCurrentSpots = await Spot.findAll({
