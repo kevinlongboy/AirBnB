@@ -103,31 +103,85 @@ const validateReview = [
 
 /********************************** spots/:spotId/bookings ***********************************/
 
+
+// Postman 29, 30: "Get All Bookings for a Spot By Id"
 // README, line 1031
-// router.get('/:spotId/bookings', async (req, res) => {
+router.get('/:spotId/bookings', async (req, res) => {
 
-//     let spotId = req.params.spotId;
-//     let getSpotBookings = await Spot.findByPk(spotId);
+    let getSpotId = req.params.spotId;
+    let currentUser = req.user;
+    // let currentUserId = req.user.id; // Test for non-matching
+    let currentUserId = 5; // Test for matching
+    // res.json(spotId)
 
-//     if (!getSpotBookings) {
-//         error.message = "Spot couldn't be found"
-//         error.status = 404
-//         next(err)
 
-//     } else {
-//         let getSpotBookings = await Spot.findAll({
-//             where: { id: spotId },
-//             include: [{
-//                 model: Booking,
-//             }]
-//         });
-//         res
-//             .status(200)
-//             .json({
-//                 "Bookings": getSpotBookings
-//             })
-//     }
-// });
+    try {
+        let getAllBookings = await Booking.findAll({
+            where: { spotId: getSpotId }, // Test for non-matching AND for spot doesn't exist
+            // where: { spotId: 5 }, // Test for matching
+            raw: true
+        });
+        // res.json(getAllBookings)
+
+        if (getAllBookings.length === 0) {
+            error.message = "Spot couldn't be found"
+            error.statusCode = 404
+            res
+                // .status(404)
+                .json(error)
+        }
+
+        let bookingOwnerId = await Spot.findOne({
+            where: { id: getAllBookings[0].spotId },
+            attributes: {
+                exclude: ['id', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt']
+            },
+            raw: true
+        })
+        // res.json(bookingOwnerId)
+
+        /*************** Successful Response: If you ARE NOT the owner of the spot. ***************/
+        if (currentUserId != bookingOwnerId.ownerId) {
+            let publiclyViewBookings = await Booking.findAll({
+                attributes: {
+                    exclude: ['id', 'createdAt', 'updatedAt', 'userId']
+                },
+                order: [['spotId'], ['startDate'], ['endDate']]
+            })
+            res
+                .status(200)
+                .json({
+                    "Bookings": publiclyViewBookings
+                })
+        }
+
+
+        /*************** Successful Response: If you ARE the owner of the spot. ***************/
+        for (let i = 0; i < getAllBookings.length; i++) {
+            let booking = getAllBookings[i];
+
+            let bookingUserData = await User.findByPk(booking.userId, {
+                attributes: {
+                    exclude: ['username', 'hashedPassword', 'email', 'createdAt', 'updatedAt']
+                },
+                raw: true
+            })
+            booking.User = bookingUserData
+            console.log(booking)
+        }
+        res
+            .status(200)
+            .json({
+                "Bookings": getAllBookings
+            })
+
+    } catch (err) {
+        error.message = err;
+        res
+            .json(error)
+    }
+
+});
 
 // Postman 25, 26, 27: "Create a Booking Based on a Spot Id"
 // README, line 1099
@@ -136,6 +190,7 @@ router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res) 
     let currentUser = req.user;
     let currentUserId = req.user.id;
     let currSpotId = req.params.spotId;
+    // res.json(currSpotId)
     let findSpot = await Spot.findByPk(currSpotId);
     let { startDate, endDate } = req.body;
 
@@ -158,6 +213,7 @@ router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res) 
         }
 
         let allExistingBookings = await Booking.findAll({
+            where: { spotId: currSpotId },
             attributes: {
                 exclude: ['id', 'createdAt', 'updatedAt', 'userId', 'spotId']
             }
@@ -167,9 +223,19 @@ router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res) 
             let existingBooking = allExistingBookings[i]
             let existingStartDate = existingBooking.startDate
             let existingEndDate = existingBooking.endDate
-            // res.json(existingBooking)
 
-            if ((endDate >= existingStartDate) && (endDate <= existingEndDate)) {
+            if ((startDate === existingStartDate) && (endDate === existingEndDate)) {
+                error.message = "Sorry, this spot is already booked for the specified dates";
+                error.statusCode = 403;
+                error.errors = {
+                    startDate: "Start date conflicts with an existing booking",
+                    endDate: "End date conflict with an existing booking",
+                }
+                res
+                    // .status(400)
+                    .json(error)
+            }
+            else if ((endDate >= existingStartDate) && (endDate <= existingEndDate)) {
                 error.message = "Sorry, this spot is already booked for the specified dates";
                 error.statusCode = 403;
                 error.errors = { endDate: "End date conflicts with an existing booking" }
@@ -420,7 +486,7 @@ router.get('/:spotId', async (req, res, next) => {
 
         if (!getSpot) {
             error.message = "Spot couldn't be found";
-            error.statusCode = 404;
+            // error.statusCode = 404;
             res
                 // .status(404)
                 .json(error);
