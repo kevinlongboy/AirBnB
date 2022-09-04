@@ -181,18 +181,23 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
     }
 });
 
+// Postman 36: "Delete a Review - Send Twice to Error Check Invalid Id On Second Request"
 // README, line 947
 router.delete('/:reviewId', requireAuth, async (req, res) => {
 
     let reviewId = req.params.reviewId;
     let deleteReview = await Review.findByPk(reviewId);
 
-    if (!deleteReview) {
-        error.message = "Review couldn't be found";
-        error.status = 404;
-        next(err);
+    try {
+        if (!deleteReview) {
+            error.message = "Review couldn't be found";
+            error.status = 404;
+            res
+                // .status(404)
+                .json(error);
+        }
 
-    } else {
+
         deleteReview.destroy();
         deleteReview.save();
         res
@@ -201,7 +206,12 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
                 "message": "Successfully deleted",
                 "statusCode": 200
             })
-    };
+
+    } catch (err) {
+        error.message = err;
+        res
+            .json(error)
+    }
 });
 
 
