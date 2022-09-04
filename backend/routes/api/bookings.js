@@ -22,47 +22,91 @@ const validateBooking = [
 
 /************************************ /bookings/:bookingId ************************************/
 
+// Postman 31, 32: "Edit a Booking"
 // README, line 1181
 router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
 
-    let bookingId = req.params.bookingId;
-    let putBooking = await Review.findByPk(bookingId);
-
-    if (!putBooking) {
-        error.message = "Booking couldn't be found";
-        error.status = 404;
-        next(err);
-    }
-
+    // let bookingId = req.params.bookingId; // Test for bookingId not found
+    let bookingId = 2; // Test with this bookingId for now
     let { startDate, endDate } = req.body;
 
-    if (startDateExists) {
-        error.message = "Start date conflicts with an existing booking";
-        statusCode = 403;
-        next(err)
-    }
-    if (endDateExists) {
-        error.message = "End date conflicts with an existing booking";
-        statusCode = 403;
-        next(err)
-    }
-
-    if (putBooking.endDate.isAfter(this.date)) {
-        error.message = "Past bookings can't be modified";
-        statusCode = 403;
-        next(err)
-    }
-
     try {
-        if (startDate) putBooking, set({ startDate: startDate });
-        if (endDate) putBooking, set({ endDate: endDate });
-        await putBooking.save();
-        res.status(200).json(putBooking)
+        let putBooking = await Booking.findByPk(bookingId);
+
+        /*************** Error Handler: Spot couldn't be found ***************/
+        if (!putBooking) {
+            error.message = "Booking couldn't be found";
+            error.status = 404;
+            res
+                .status(404)
+                .json(error);
+        }
+
+        /*************** Error Handler: endDate cannot be on or before startDate ***************/
+        if (startDate >= endDate) {
+            error.message = "Validation error"
+            error.statusCode = 400
+            error.errors = { endDate: "endDate cannot be on or before startDate" }
+            res
+                // .status(400)
+                .json(error)
+        }
+
+        let allExistingBookings = await Booking.findAll({
+            where: { spotId: putBooking.spotId },
+            attributes: {
+                exclude: ['id', 'createdAt', 'updatedAt', 'userId', 'spotId']
+            }
+        });
+
+        /*************** Error Handler: Sorry, this spot is already booked for the specified dates ***************/
+        for (let i = 0; i < allExistingBookings.length; i++) {
+            let existingBooking = allExistingBookings[i]
+            let existingStartDate = existingBooking.startDate
+            let existingEndDate = existingBooking.endDate
+
+            if ((startDate === existingStartDate) && (endDate === existingEndDate)) {
+                error.message = "Sorry, this spot is already booked for the specified dates";
+                error.statusCode = 403;
+                error.errors = {
+                    startDate: "Start date conflicts with an existing booking",
+                    endDate: "End date conflict with an existing booking",
+                }
+                res
+                    // .status(400)
+                    .json(error)
+            }
+            else if ((endDate >= existingStartDate) && (endDate <= existingEndDate)) {
+                error.message = "Sorry, this spot is already booked for the specified dates";
+                error.statusCode = 403;
+                error.errors = { endDate: "End date conflicts with an existing booking" }
+                res
+                    // .status(400)
+                    .json(error)
+            } else if ((startDate >= existingStartDate) && (startDate <= existingEndDate)) {
+                error.message = "Sorry, this spot is already booked for the specified dates";
+                error.statusCode = 403;
+                error.errors = { startDate: "Start date conflicts with an existing booking" }
+                res
+                    // .status(400)
+                    .json(error)
+            }
+        }
+
+        /*************** Spot must NOT belong to the current user ***************/
+        if (putBooking.userId != req.user.id) {
+            if (startDate) putBooking.update({ startDate: startDate });
+            if (endDate) putBooking.update({ endDate: endDate });
+            await putBooking.save();
+            res
+                .status(200)
+                .json(putBooking)
+        }
 
     } catch (err) {
-        error.message = "Validation Error";
-        error.statusCode = 400;
-        next(err);
+        error.message = err;
+        res
+            .json(error);
     }
 });
 

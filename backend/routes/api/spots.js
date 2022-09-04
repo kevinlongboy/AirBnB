@@ -114,7 +114,6 @@ router.get('/:spotId/bookings', async (req, res) => {
     let currentUserId = 5; // Test for matching
     // res.json(spotId)
 
-
     try {
         let getAllBookings = await Booking.findAll({
             where: { spotId: getSpotId }, // Test for non-matching AND for spot doesn't exist
