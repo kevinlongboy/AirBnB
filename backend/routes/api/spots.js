@@ -196,31 +196,55 @@ const validateReview = [
 
 /*********************************** spots/:spotId/reviews ***********************************/
 
+// Postman 21: "Get Reviews by Spot Id"
 // README, line 684
-// router.get('/:spotId/reviews', async (req, res) => {
+router.get('/:spotId/reviews', async (req, res) => {
 
-//     let spotId = req.params.spotId;
-//     let getSpotReviews = await Spot.findByPk(spotId);
+    let currSpotId = req.params.spotId;
+    let findSpot = await Spot.findByPk(currSpotId);
 
-//     if (!getSpotReviews) {
-//         error.message = "Spot couldn't be found"
-//         error.status = 404
-//         next(err)
+    if (!findSpot) {
+        error.message = "Spot couldn't be found"
+        error.status = 404
+        res
+            // .status(404)
+            .json(error)
 
-//     } else {
-//         let getSpotReviews = await Spot.findAll({
-//             where: { id: spotId },
-//             include: [{
-//                 model: Review,
-//             }]
-//         });
-//         res
-//             .status(200)
-//             .json({
-//                 "Reviews": getSpotReviews
-//             })
-//     }
-// });
+    } else {
+        let findAllSpotReviews = await Review.findAll({
+            where: { spotId: currSpotId }
+        })
+
+        let currentUserId = req.user.id;
+        let currentUserData = await User.findByPk(currentUserId, {
+            attributes: {
+                exclude: ['username', 'hashedPassword', 'email', 'createdAt', 'updatedAt']
+            }
+        })
+
+        for (let i = 0; i < findAllSpotReviews.length; i++) {
+            let currReview = findAllSpotReviews[i];
+
+            /******************** add User-key ********************/
+            currReview.dataValues.User = currentUserData.dataValues
+
+            /******************** add ReviewImages-key ********************/
+            let currReviewImgs = await ReviewImage.findAll({
+                where: { reviewId: currReview.spotId },
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt', 'reviewId']
+                }
+            })
+            currReview.dataValues.ReviewImages = currReviewImgs
+        }
+
+        res
+            .status(200)
+            .json({
+                "Reviews": findAllSpotReviews
+            })
+    }
+});
 
 // Postman 15: "Create a Review for a Spot"
 // README, line 740
