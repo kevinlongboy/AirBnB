@@ -4,9 +4,8 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
+const { Op } = require('sequelize');
 const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
-const review = require('../../db/models/review');
-
 
 
 /************************************* global variables *************************************/
@@ -500,12 +499,11 @@ router.get('/:spotId', async (req, res, next) => {
         getSpot.dataValues.numReviews = reviewCount;
 
         /******************** add avgStarRating-key ********************/
-        let starSum = await Review.sum('stars',
-            {
-                where: {
-                    spotId: currentSpotId
-                }
-            })
+        let starSum = await Review.sum('stars', {
+            where: {
+                spotId: currentSpotId
+            }
+        })
 
         let starAvg = starSum / reviewCount;
         if (!starAvg) starAvg = 0
@@ -623,6 +621,9 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
 // Postman 6: "Get All Spots"
 // README, line 234
+// *AND*
+// Postman 38: "Get All Spots - Page/Size Params"
+// README, line 1405
 router.get('/', async (req, res, next) => {
 
     // get array of all spot objects
@@ -631,7 +632,33 @@ router.get('/', async (req, res, next) => {
     // add average rating to spot object
 
     try {
-        let getSpots = await Spot.findAll(); // array of all spots
+        let query = {
+            where: {},
+            include: []
+        }
+
+        /**************************** add filter ****************************/
+        if (req.query.minLat) query.where.lat = { [Op.gte]: req.query.minLat };
+        if (req.query.maxLat) query.where.lat = { [Op.lte]: req.query.maxLat };
+        if (req.query.minLng) query.where.lng = { [Op.gte]: req.query.minLng };
+        if (req.query.maxLng) query.where.lng = { [Op.lte]: req.query.maxLng };
+        if (req.query.minPrice) query.where.price = { [Op.gte]: req.query.minPrice };
+        if (req.query.maxPrice) query.where.price = { [Op.lte]: req.query.maxPrice };
+
+        /**************************** add pagination ****************************/
+        let page = req.query.page === undefined ? 0 : parseInt(req.query.page);
+        if (page > 10) page = 10;
+
+        let size = req.query.size === undefined ? 20 : parseInt(req.query.size);
+        if (size > 20) size = 20;
+
+        if (page >= 1 && size >= 1) {
+            query.limit = size;
+            query.offset = size * (page - 1);
+        }
+
+        /**************************** query ****************************/
+        let getSpots = await Spot.findAll(query); // array of all spots
 
         let spotHasBeenReviewed = []
 
@@ -640,7 +667,7 @@ router.get('/', async (req, res, next) => {
 
             if (!spotHasBeenReviewed.includes(currSpot.id)) {
 
-                /******************** add avgRating-key ********************/
+                /**************************** add avgRating-key ****************************/
                 let currSpotReviews = await Review.findAll({ // returns array of current spot's reviews
                     where: { spotId: currSpot.id },
                 })
@@ -653,7 +680,7 @@ router.get('/', async (req, res, next) => {
                 let aveStars = sumStars / currSpotReviews.length
                 currSpot.dataValues.avgRatings = aveStars
 
-                /******************** add avgRating-key ********************/
+                /**************************** add avgRating-key ****************************/
                 let currSpotImages = await SpotImage.findAll({ // returns array of current spot's images
                     where: { spotId: currSpot.id },
                 })
@@ -672,7 +699,11 @@ router.get('/', async (req, res, next) => {
         }
         res
             .status(200)
-            .json({ "Spots": getSpots });
+            .json({
+                "Spots": getSpots,
+                page,
+                size
+            });
 
     } catch (err) {
         error.message = "Spot couldn't be found"
@@ -720,51 +751,6 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
             .json(error);
     }
 });
-
-
-/***************************************** /spots? ******************************************/
-
-// README, line 1405
-// router.get('/', async (req, res, next) => {
-
-//     let query = {
-//         where: {},
-//         include: []
-//     }
-
-//     let page = req.query.page === undefined ? 0 : parseInt(req.query.page);
-//     if (page > 10) page = 10;
-
-//     let size = req.query.size === undefined ? 20 : parseInt(req.query.size);
-//     if (size > 20) size = 20;
-
-//     if (page >= 1 && size >= 1) {
-//         query.limit = size;
-//         query.offset = size * (page - 1);
-//     }
-
-//     try {
-//         //     if (req.query.minLat) query.where.lat = { [Op.gte]: req.query.minLat };
-//         //     if (req.query.maxLat) query.where.lat = { [Op.lte]: req.query.maxLat };
-//         //     if (req.query.minLng) query.where.lng = { [Op.gte]: req.query.minLng };
-//         //     if (req.query.maxLng) query.where.lng = { [Op.lte]: req.query.maxLng };
-//         //     if (req.query.minPrice) query.where.price = { [Op.gte]: req.query.minPrice };
-//         //     if (req.query.maxPrice) query.where.price = { [Op.lte]: req.query.maxPrice };
-
-//         let querySpots = await Spot.findAll(query);
-//         res.status(200).json({
-//             "Spots": querySpots,
-//             page,
-//             size
-//         });
-
-//     } catch (err) {
-//         error.message = "Validation Error";
-//         error.statusCode = 400;
-//         next(err);
-//     }
-// });
-
 
 
 /*************************************** error handler ****************************************/
