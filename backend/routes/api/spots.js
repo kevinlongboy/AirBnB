@@ -222,42 +222,50 @@ const validateReview = [
 //     }
 // });
 
+// Postman 14: "Create a Review for a Spot"
 // README, line 740
-// router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
 
-//     let spotId = req.params.spotId;
-//     let findSpot = await Spot.findByPk(spotId);
+    let currentUser = req.user;
+    let currentUserId = req.user.id;
+    let postSpotId = req.params.spotId;
 
-//     if (!findSpot) {
-//         error.message = "Spot couldn't be found"
-//         error.status = 404
-//         next(err)
-//     }
+    try {
+        let findSpot = await Spot.findByPk(postSpotId);
+        if (!findSpot) {
+            error.message = "Spot couldn't be found"
+            error.statusCode = 404
+            res.json(error)
+        }
 
-//     let spotReviewExists = await User.findAll({
-//         where: { id: req.user.id },
-//         include: { model: Review },
-//     });
-//     if (spotReviewExists) {
-//         error.message = "User already has a review for this spot";
-//         statusCode = 403;
-//         next(err)
-//     }
+        let findAllSpotReviews = await Review.findAll({ // returns array of review for req. spot
+            where: { userId: currentUserId, spotId: postSpotId }
+        });
+        if (findAllSpotReviews.length > 0) {
+            console.log("this")
+            error.message = "User already has a review for this spot";
+            error.statusCode = 403;
+            res.json(error)
+        }
 
-//     try {
-//         let { review, stars } = req.body;
-//         let postSpotReview = await Review.create({
-//             review: review,
-//             stars: stars,
-//         })
-//         res.status(200).json(postSpotReview)
+        let { review, stars } = req.body;
+        let postSpotReview = await currentUser.createReview({
+            spotId: postSpotId,
+            userId: currentUserId,
+            review: review,
+            stars: stars,
+        })
+        postSpotReview.save();
+        res
+            .status(200)
+            .json(postSpotReview)
 
-//     } catch (err) {
-//         error.message = "Validation Error";
-//         error.statusCode = 400;
-//         next(err);
-//     }
-// });
+    } catch (err) {
+        error.message = "Validation Error";
+        error.statusCode = 400;
+        res.json(error)
+    }
+});
 
 
 /*********************************** spots/:spotId/images ***********************************/
@@ -285,149 +293,9 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 });
 
 
-/************************************** /spots/:spotId **************************************/
-
-// Postman 10: "Get Details of a Spot by Id"
-// README, line 314
-router.get('/:spotId', async (req, res, next) => {
-
-    let currentSpotId = req.params.spotId;
-
-    try {
-        let getSpot = await Spot.findByPk(currentSpotId)
-        console.log(getSpot.ownerId)
-
-        /******************** add numReviews-key ********************/
-        let reviewCount = await Review.count({
-            where: { spotId: currentSpotId }
-        });
-        getSpot.dataValues.numReviews = reviewCount;
-
-        /******************** add avgStarRating-key ********************/
-        let starSum = await Review.sum('stars',
-            {
-                where: {
-                    spotId: currentSpotId
-                }
-            })
-
-        let starAvg = starSum / reviewCount;
-        if (!starAvg) starAvg = 0
-        getSpot.dataValues.avgStarRating = starAvg;
-
-        /******************** add SpotImages-key ********************/
-        let spotImgs = await SpotImage.findAll({
-            where: { spotId: currentSpotId },
-            attributes: {
-                include: ["id", "url", "preview"],
-                exclude: ["spotId", "createdAt", "updatedAt"]
-            },
-        })
-        getSpot.dataValues.SpotImages = spotImgs;
-
-        /******************** add Owner-key ********************/
-        let ownerData = await User.findByPk(getSpot.ownerId, {
-            attributes: {
-                include: ["id", "firstName", "lastName"],
-                exclude: ["username", "hashedPassword", "email", "createdAt", "updatedAt"]
-            },
-        })
-        getSpot.dataValues.Owner = ownerData;
-
-
-        res
-            .status(200)
-            .json(getSpot)
-
-    } catch (err) {
-        error.message = "Spot couldn't be found";
-        error.statusCode = 404;
-        next(error);
-    }
-});
-
-// README, line 501
-// router.put('/:spotId', requireAuth, async (req, res, next) => {
-
-//     let spotId = req.params.spotId;
-//     let putSpot = await Spot.findByPk(spotId);
-
-//     if (!putSpot) {
-//         error.message = "Spot couldn't be found";
-//         error.statusCode = 404;
-//         next(err);
-//     }
-
-//     try {
-
-//         error.errors = {};
-//         let { address, city, state, country, lat, lng, name, description, price } = req.body;
-
-//         if (address) putSpot.set({ address: address });
-//         else if (err) error.errors.address = "Street address is required";
-
-//         if (city) putSpot.set({ city: city });
-//         else if (err) error.errors.city = "City is required";
-
-//         if (state) putSpot.set({ state: state });
-//         else if (err) error.errors.state = "State is required";
-
-//         if (country) putSpot.set({ country: country });
-//         else if (err) error.errors.country = "Country is required";
-
-//         if (lat) putSpot.set({ lat: lat });
-//         else if (err) error.errors.lat = "Latitude is not valid";
-
-//         if (lng) putSpot.set({ lng: lng });
-//         else if (err) error.errors.lng = "Longitude is not valid";
-
-//         if (name) putSpot.set({ name: name });
-//         else if (err) error.errors.name = "Name must be less than 50 characters";
-
-//         if (description) putSpot.set({ description: description });
-//         else if (err) error.errors.description = "Description is required";
-
-//         if (price) putSpot.set({ price: price });
-//         else if (err) error.errors.price = "Price per day is required";
-
-//         await putSpot.save();
-
-//         res.status(200).json(putSpot)
-
-//     } catch (err) {
-//         err.message = "Validation Error";
-//         err.statusCode = 404;
-//         next(err);
-//     }
-// });
-
-// README, line 589
-// router.delete('/:spotId', requireAuth, async (req, res, next) => {
-
-//     let spotId = req.params.spotId;
-//     let deleteSpot = await Spot.findByPk(spotId);
-
-//     if (!deleteSpot) {
-//         error.message = "Spot couldn't be found";
-//         error.statusCode = 404;
-//         next(err);
-
-//     } else {
-//         deleteSpot.destroy();
-//         deleteSpot.save();
-//         res
-//             .status(200)
-//             .json({
-//                 "message": "Successfully deleted",
-//                 "statusCode": 200
-//             })
-//     }
-// });
-
-
 /************************************** /spots/current **************************************/
 
-// Postman 9: "Get Spots of Current User"
+// Postman 10: "Get Spots of Current User"
 // README, line 274
 router.get('/current', requireAuth, async (req, res, next) => {
 
@@ -490,6 +358,129 @@ router.get('/current', requireAuth, async (req, res, next) => {
         next(error);
     }
 });
+
+
+/************************************** /spots/:spotId **************************************/
+
+// Postman 11: "Get Details of a Spot by Id"
+// README, line 314
+router.get('/:spotId', async (req, res, next) => {
+
+    let currentSpotId = req.params.spotId;
+
+    try {
+        let getSpot = await Spot.findByPk(currentSpotId)
+        console.log(getSpot.ownerId)
+
+        /******************** add numReviews-key ********************/
+        let reviewCount = await Review.count({
+            where: { spotId: currentSpotId }
+        });
+        getSpot.dataValues.numReviews = reviewCount;
+
+        /******************** add avgStarRating-key ********************/
+        let starSum = await Review.sum('stars',
+            {
+                where: {
+                    spotId: currentSpotId
+                }
+            })
+
+        let starAvg = starSum / reviewCount;
+        if (!starAvg) starAvg = 0
+        getSpot.dataValues.avgStarRating = starAvg;
+
+        /******************** add SpotImages-key ********************/
+        let spotImgs = await SpotImage.findAll({
+            where: { spotId: currentSpotId },
+            attributes: {
+                include: ["id", "url", "preview"],
+                exclude: ["spotId", "createdAt", "updatedAt"]
+            },
+        })
+        getSpot.dataValues.SpotImages = spotImgs;
+
+        /******************** add Owner-key ********************/
+        let ownerData = await User.findByPk(getSpot.ownerId, {
+            attributes: {
+                include: ["id", "firstName", "lastName"],
+                exclude: ["username", "hashedPassword", "email", "createdAt", "updatedAt"]
+            },
+        })
+        getSpot.dataValues.Owner = ownerData;
+
+        res
+            .status(200)
+            .json(getSpot)
+
+    } catch (err) {
+        error.message = "Spot couldn't be found";
+        error.statusCode = 404;
+        next(error);
+    }
+});
+
+// Postman 12: "Edit a Spot"
+// README, line 501
+router.put('/:spotId', requireAuth, async (req, res, next) => {
+
+    let spotId = req.params.spotId;
+    let putSpot = await Spot.findByPk(spotId);
+
+    if (!putSpot) {
+        error.message = "Spot couldn't be found";
+        error.statusCode = 404;
+        next(error);
+    }
+
+    try {
+
+        let { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+        if (address) putSpot.set({ address: address });
+        if (city) putSpot.set({ city: city });
+        if (state) putSpot.set({ state: state });
+        if (country) putSpot.set({ country: country });
+        if (lat) putSpot.set({ lat: lat });
+        if (lng) putSpot.set({ lng: lng });
+        if (name) putSpot.set({ name: name });
+        if (description) putSpot.set({ description: description });
+        if (price) putSpot.set({ price: price });
+        await putSpot.save();
+
+        res
+            .status(200)
+            .json(putSpot)
+
+    } catch (err) {
+        error.message = "Validation Error";
+        error.statusCode = 404;
+        next(error);
+    }
+});
+
+// README, line 589
+// router.delete('/:spotId', requireAuth, async (req, res, next) => {
+
+//     let spotId = req.params.spotId;
+//     let deleteSpot = await Spot.findByPk(spotId);
+
+//     if (!deleteSpot) {
+//         error.message = "Spot couldn't be found";
+//         error.statusCode = 404;
+//         next(err);
+
+//     } else {
+//         deleteSpot.destroy();
+//         deleteSpot.save();
+//         res
+//             .status(200)
+//             .json({
+//                 "message": "Successfully deleted",
+//                 "statusCode": 200
+//             })
+//     }
+// });
 
 
 /****************************************** /spots ******************************************/
