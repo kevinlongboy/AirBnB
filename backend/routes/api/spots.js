@@ -268,12 +268,6 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     let spotId = req.params.spotId;
     let findSpot = await Spot.findByPk(spotId);
 
-    if (!findSpot) {
-        error.message = "Spot couldn't be found"
-        error.status = 404
-        next(err)
-    }
-
     try {
         let { url, preview } = req.body;
         let postSpotImage = await findSpot.createSpotImage({
@@ -283,9 +277,9 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
         res.status(200).json(postSpotImage)
 
     } catch (err) {
-        error.message = "Could not add image";
-        error.statusCode = 404;
-        next(err);
+        error.message = "Spot couldn't be found"
+        error.status = 404
+        next(error)
     }
 });
 
@@ -470,7 +464,7 @@ router.get('/', async (req, res, next) => {
     } catch (err) {
         error.message = "Spot couldn't be found"
         error.status = 404
-        next(err);
+        next(error);
     }
 });
 
@@ -480,12 +474,6 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
 
     let currentUser = req.user
     let currentUserId = req.user.id
-
-    if (!currentUser) {
-        error.message = "Validation Error";
-        error.statusCode = 400;
-        next(err);
-    }
 
     try {
         let { address, city, state, country, lat, lng, name, description, price } = req.body;
@@ -510,7 +498,7 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
     } catch (err) {
         error.message = "Validation Error";
         error.statusCode = 400;
-        next(err);
+        next(error);
     }
 });
 
