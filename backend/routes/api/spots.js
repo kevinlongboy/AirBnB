@@ -4,7 +4,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Booking, Review, Spot, SpotImage, User } = require('../../db/models');
+const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
 
 
@@ -121,30 +121,30 @@ const validateReview = [
 
 
 // README, line 1031
-router.get('/:spotId/bookings', async (req, res) => {
+// router.get('/:spotId/bookings', async (req, res) => {
 
-    let spotId = req.params.spotId;
-    let getSpotBookings = await Spot.findByPk(spotId);
+//     let spotId = req.params.spotId;
+//     let getSpotBookings = await Spot.findByPk(spotId);
 
-    if (!getSpotBookings) {
-        error.message = "Spot couldn't be found"
-        error.status = 404
-        next(err)
+//     if (!getSpotBookings) {
+//         error.message = "Spot couldn't be found"
+//         error.status = 404
+//         next(err)
 
-    } else {
-        let getSpotBookings = await Spot.findAll({
-            where: { id: spotId },
-            include: [{
-                model: Booking,
-            }]
-        });
-        res
-            .status(200)
-            .json({
-                "Bookings": getSpotBookings
-            })
-    }
-});
+//     } else {
+//         let getSpotBookings = await Spot.findAll({
+//             where: { id: spotId },
+//             include: [{
+//                 model: Booking,
+//             }]
+//         });
+//         res
+//             .status(200)
+//             .json({
+//                 "Bookings": getSpotBookings
+//             })
+//     }
+// });
 
 // README, line 1099
 // router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res) => {
@@ -196,30 +196,30 @@ router.get('/:spotId/bookings', async (req, res) => {
 /*********************************** spots/:spotId/reviews ***********************************/
 
 // README, line 684
-router.get('/:spotId/reviews', async (req, res) => {
+// router.get('/:spotId/reviews', async (req, res) => {
 
-    let spotId = req.params.spotId;
-    let getSpotReviews = await Spot.findByPk(spotId);
+//     let spotId = req.params.spotId;
+//     let getSpotReviews = await Spot.findByPk(spotId);
 
-    if (!getSpotReviews) {
-        error.message = "Spot couldn't be found"
-        error.status = 404
-        next(err)
+//     if (!getSpotReviews) {
+//         error.message = "Spot couldn't be found"
+//         error.status = 404
+//         next(err)
 
-    } else {
-        let getSpotReviews = await Spot.findAll({
-            where: { id: spotId },
-            include: [{
-                model: Review,
-            }]
-        });
-        res
-            .status(200)
-            .json({
-                "Reviews": getSpotReviews
-            })
-    }
-});
+//     } else {
+//         let getSpotReviews = await Spot.findAll({
+//             where: { id: spotId },
+//             include: [{
+//                 model: Review,
+//             }]
+//         });
+//         res
+//             .status(200)
+//             .json({
+//                 "Reviews": getSpotReviews
+//             })
+//     }
+// });
 
 // README, line 740
 // router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
@@ -292,22 +292,22 @@ router.get('/:spotId/reviews', async (req, res) => {
 /************************************** /spots/:spotId **************************************/
 
 // README, line 314
-router.get('/:spotId', async (req, res, next) => {
+// router.get('/:spotId', async (req, res, next) => {
 
-    let spotId = req.params.spotId;
+//     let spotId = req.params.spotId;
 
-    try {
-        let getSpot = await Spot.findByPk(spotId)
-        res
-            .status(200)
-            .json(getSpot)
+//     try {
+//         let getSpot = await Spot.findByPk(spotId)
+//         res
+//             .status(200)
+//             .json(getSpot)
 
-    } catch (err) {
-        error.message = "Spot couldn't be found";
-        error.statusCode = 404;
-        next(err);
-    }
-});
+//     } catch (err) {
+//         error.message = "Spot couldn't be found";
+//         error.statusCode = 404;
+//         next(err);
+//     }
+// });
 
 // README, line 501
 // router.put('/:spotId', requireAuth, async (req, res, next) => {
@@ -417,10 +417,54 @@ router.get('/:spotId', async (req, res, next) => {
 // README, line 234
 router.get('/', async (req, res, next) => {
 
+    // get array of all spot objects
+    // iterate through array
+    // for each item in array, aggregate average rating
+    // add average rating to spot object
+
     try {
-        let getSpots = await Spot.findAll();
+        let getSpots = await Spot.findAll(); // array of all spots
+
+        let spotHasBeenReviewed = []
+
+        for (let i = 0; i < getSpots.length; i++) {
+            let currSpot = getSpots[i]
+
+            if (!spotHasBeenReviewed.includes(currSpot.id)) {
+
+                /******************** add avgRating-key ********************/
+                let currSpotReviews = await Review.findAll({ // returns array of current spot's reviews
+                    where: { spotId: currSpot.id },
+                })
+
+                let sumStars = 0
+                for (let j = 0; j < currSpotReviews.length; j++) {
+                    let currReview = currSpotReviews[j];
+                    sumStars += currReview.stars
+                }
+                let aveStars = sumStars / currSpotReviews.length
+                currSpot.dataValues.avgRatings = aveStars
+
+                /******************** add avgRating-key ********************/
+                let currSpotImages = await SpotImage.findAll({ // returns array of current spot's images
+                    where: { spotId: currSpot.id },
+                })
+
+                let prevImg = ""
+                for (let k = 0; k < currSpotImages.length; k++) {
+                    let currImage = currSpotImages[k];
+                    if (currImage.preview === "1") {
+                        prevImg = currImage.url
+                    }
+                }
+                currSpot.dataValues.previewImage = prevImg
+            }
+
+            spotHasBeenReviewed.push(currSpot.id)
+        }
         res.status(200)
         res.send({ "Spots": getSpots });
+
     } catch (err) {
         error.message = "Spot couldn't be found"
         error.status = 404
