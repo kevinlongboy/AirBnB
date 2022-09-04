@@ -149,29 +149,35 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
 /************************************ /reviews/:reviewId *************************************/
 
+// Postman 23: "Edit a Review"
 // README, line 879
 router.put('/:reviewId', requireAuth, async (req, res) => {
 
     let reviewId = req.params.reviewId;
     let putReview = await Review.findByPk(reviewId);
 
-    if (!putReview) {
-        error.message = "Review couldn't be found";
-        error.status = 404;
-        next(err);
-    }
-
     try {
+        if (!putReview) {
+            error.message = "Review couldn't be found";
+            error.statusCode = 404;
+            res
+                .status(404)
+                .json(error);
+        }
+
         let { review, stars } = req.body;
-        if (review) putReview, set({ review: review });
-        if (stars) putReview, set({ stars: stars });
+        if (review) await putReview.update({ review: review });
+        if (stars) putReview.set({ stars: stars });
         await putReview.save();
-        res.status(200).json(putReview)
+
+        res
+            .status(200)
+            .json(putReview)
 
     } catch (err) {
         error.message = "Validation Error";
         error.statusCode = 400;
-        next(err);
+        next(error);
     }
 });
 

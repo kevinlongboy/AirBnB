@@ -475,7 +475,6 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
         }
 
         let { address, city, state, country, lat, lng, name, description, price } = req.body;
-
         if (address) putSpot.set({ address: address });
         if (city) putSpot.set({ city: city });
         if (state) putSpot.set({ state: state });
