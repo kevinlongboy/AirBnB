@@ -103,24 +103,6 @@ const validateReview = [
 
 /********************************** spots/:spotId/bookings ***********************************/
 
-// router.get('/', async (req, res, next) => {
-
-//     // console.log("hit spots router")
-//     // res.send("okay")
-
-//     // try {
-//     // let getSpots = await Spot.findByPk(1);
-//     // console.log(getSpots)
-//     // res.status(200)
-//     res.json({ "Spots": "get spots" });
-//     // } catch (err) {
-//     //     error.message = "Spot couldn't be found"
-//     //     error.status = 404
-//     //     next(err);
-//     // }
-// });
-
-
 // README, line 1031
 // router.get('/:spotId/bookings', async (req, res) => {
 
@@ -147,51 +129,54 @@ const validateReview = [
 //     }
 // });
 
+// Postman 25: "Create a Booking Based on a Spot Id"
 // README, line 1099
-// router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res) => {
+router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res) => {
 
-//     let spotId = req.params.spotId;
-//     let findSpot = await Spot.findByPk(spotId);
+    let spotId = req.params.spotId;
 
-//     if (!findSpot) {
-//         error.message = "Spot couldn't be found"
-//         error.status = 404
-//         next(err)
-//     }
+    try {
+        let findSpot = await Spot.findByPk(spotId);
+        if (!findSpot) {
+            error.message = "Spot couldn't be found"
+            error.statusCode = 404
+            res
+                // .status(404)
+                .json(error)
+        }
 
-//     let { startDate, endDate } = req.body;
+        let { startDate, endDate } = req.body;
 
-//     let startDateExists = await Booking.findAll({
-//         where: { startDate: startDate },
-//     });
-//     let endDateExists = await Booking.findAll({
-//         where: { endDate: endDate },
-//     });
+        // let startDateExists = await Booking.findAll({
+        //     where: { startDate: startDate },
+        // });
+        // let endDateExists = await Booking.findAll({
+        //     where: { endDate: endDate },
+        // });
 
-//     if (startDateExists) {
-//         error.message = "Start date conflicts with an existing booking";
-//         statusCode = 403;
-//         next(err)
-//     }
-//     if (endDateExists) {
-//         error.message = "End date conflicts with an existing booking";
-//         statusCode = 403;
-//         next(err)
-//     }
+        // if (startDateExists) {
+        //     error.message = "Start date conflicts with an existing booking";
+        //     statusCode = 403;
+        //     next(err)
+        // }
+        // if (endDateExists) {
+        //     error.message = "End date conflicts with an existing booking";
+        //     statusCode = 403;
+        //     next(err)
+        // }
 
-//     try {
-//         let postSpotBooking = await Booking.create({
-//             startDate: startDate,
-//             endDate: endDate,
-//         })
-//         res.status(200).json(postSpotBooking)
+        // let postSpotBooking = await Booking.create({
+        //     startDate: startDate,
+        //     endDate: endDate,
+        // })
+        // res.status(200).json(postSpotBooking)
 
-//     } catch (err) {
-//         error.message = "Validation Error";
-//         error.statusCode = 400;
-//         next(err);
-//     }
-// });
+    } catch (err) {
+        error.message = "Validation Error";
+        error.statusCode = 400;
+        next(err);
+    }
+});
 
 
 /*********************************** spots/:spotId/reviews ***********************************/
