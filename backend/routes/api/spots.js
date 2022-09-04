@@ -261,32 +261,33 @@ const validateReview = [
 
 /*********************************** spots/:spotId/images ***********************************/
 
+// Postman 8: "Create an Image for a Spot"
 // README, line 454
-// router.post('/:spotId/images', requireAuth, async (req, res, next) => {
+router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
-//     let spotId = req.params.spotId;
-//     let findSpot = await Spot.findByPk(spotId);
+    let spotId = req.params.spotId;
+    let findSpot = await Spot.findByPk(spotId);
 
-//     if (!findSpot) {
-//         error.message = "Spot couldn't be found"
-//         error.status = 404
-//         next(err)
-//     }
+    if (!findSpot) {
+        error.message = "Spot couldn't be found"
+        error.status = 404
+        next(err)
+    }
 
-//     try {
-//         let { url, preview } = req.body;
-//         let postSpotImage = await SpotImage.create({
-//             url: url,
-//             preview: preview,
-//         });
-//         res.status(200).json(postSpotImage)
+    try {
+        let { url, preview } = req.body;
+        let postSpotImage = await findSpot.createSpotImage({
+            url: url,
+            preview: preview,
+        });
+        res.status(200).json(postSpotImage)
 
-//     } catch (err) {
-//         error.message = "Could not add image";
-//         error.statusCode = 404;
-//         next(err);
-//     }
-// });
+    } catch (err) {
+        error.message = "Could not add image";
+        error.statusCode = 404;
+        next(err);
+    }
+});
 
 
 /************************************** /spots/:spotId **************************************/
@@ -414,6 +415,7 @@ const validateReview = [
 
 /****************************************** /spots ******************************************/
 
+// Postman 6: "Get All Spots"
 // README, line 234
 router.get('/', async (req, res, next) => {
 
@@ -472,30 +474,45 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+// Postman 7: "Create a Spot"
 // README, line 380
-// router.post('/', requireAuth, validateSpot, async (req, res) => {
+router.post('/', requireAuth, validateSpot, async (req, res) => {
 
-//     try {
-//         let { address, city, state, country, lat, lng, name, description, price } = req.body;
-//         let postSpot = await Spot.create({
-//             address: address,
-//             city: city,
-//             state: state,
-//             country: country,
-//             lat: lat,
-//             lng: lng,
-//             name: name,
-//             description: description,
-//             price: price,
-//         });
-//         res.status(200).json(postSpot)
+    let currentUser = req.user
+    let currentUserId = req.user.id
 
-//     } catch (err) {
-//         error.message = "Validation Error";
-//         error.statusCode = 400;
-//         next(err);
-//     }
-// });
+    if (!currentUser) {
+        error.message = "Validation Error";
+        error.statusCode = 400;
+        next(err);
+    }
+
+    try {
+        let { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+        let postSpot = await currentUser.createSpot({
+            ownerId: currentUserId,
+            address: address,
+            city: city,
+            state: state,
+            country: country,
+            lat: lat,
+            lng: lng,
+            name: name,
+            description: description,
+            price: price,
+        });
+        postSpot.save();
+        console.log(postSpot)
+
+        res.status(200).json(postSpot)
+
+    } catch (err) {
+        error.message = "Validation Error";
+        error.statusCode = 400;
+        next(err);
+    }
+});
 
 
 /***************************************** /spots? ******************************************/
