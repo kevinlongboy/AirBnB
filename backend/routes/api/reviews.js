@@ -5,6 +5,7 @@ const { check } = require('express-validator');
 const { requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
+const review = require('../../db/models/review');
 
 /************************************* global variables *************************************/
 
@@ -186,18 +187,9 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 router.delete('/:reviewId', requireAuth, async (req, res) => {
 
     let reviewId = req.params.reviewId;
-    let deleteReview = await Review.findByPk(reviewId);
+    let deleteReview = await Review.findByPk(reviewId); // BUG: postman crashes upon second test
 
     try {
-        if (!deleteReview) {
-            error.message = "Review couldn't be found";
-            error.status = 404;
-            res
-                // .status(404)
-                .json(error);
-        }
-
-
         deleteReview.destroy();
         deleteReview.save();
         res
@@ -208,9 +200,11 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
             })
 
     } catch (err) {
-        error.message = err;
+        error.message = "Review couldn't be found";
+        error.status = 404;
         res
-            .json(error)
+            // .status(404)
+            .json(error);
     }
 });
 

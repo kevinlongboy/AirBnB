@@ -584,28 +584,39 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     }
 });
 
+// Postman 37: "Send Twice to Error Check Invalid Id On Second Request"
 // README, line 589
-// router.delete('/:spotId', requireAuth, async (req, res, next) => {
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
-//     let spotId = req.params.spotId;
-//     let deleteSpot = await Spot.findByPk(spotId);
+    let spotId = req.params.spotId;
+    let deleteSpot = await Spot.findByPk(spotId); //BUG: postman crashes upon second test
 
-//     if (!deleteSpot) {
-//         error.message = "Spot couldn't be found";
-//         error.statusCode = 404;
-//         next(err);
+    try {
+        if (!deleteSpot) {
+            error.message = "Spot couldn't be found";
+            error.status = 404;
+            res
+                // .status(404)
+                .json(error);
 
-//     } else {
-//         deleteSpot.destroy();
-//         deleteSpot.save();
-//         res
-//             .status(200)
-//             .json({
-//                 "message": "Successfully deleted",
-//                 "statusCode": 200
-//             })
-//     }
-// });
+        }
+
+        deleteSpot.destroy();
+        deleteSpot.save();
+        res
+            .status(200)
+            .json({
+                "message": "Successfully deleted",
+                "statusCode": 200
+            })
+    } catch (err) {
+        error.message = "Invalid credentials";
+        error.status = 404;
+        res
+            // .status(404)
+            .json(error);
+    }
+});
 
 
 /****************************************** /spots ******************************************/
