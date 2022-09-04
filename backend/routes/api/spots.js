@@ -129,14 +129,17 @@ const validateReview = [
 //     }
 // });
 
-// Postman 25: "Create a Booking Based on a Spot Id"
+// Postman 25, 26, 27: "Create a Booking Based on a Spot Id"
 // README, line 1099
 router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res) => {
 
-    let spotId = req.params.spotId;
+    let currentUser = req.user;
+    let currentUserId = req.user.id;
+    let currSpotId = req.params.spotId;
+    let findSpot = await Spot.findByPk(currSpotId);
+    let { startDate, endDate } = req.body;
 
     try {
-        let findSpot = await Spot.findByPk(spotId);
         if (!findSpot) {
             error.message = "Spot couldn't be found"
             error.statusCode = 404
@@ -145,36 +148,58 @@ router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res) 
                 .json(error)
         }
 
-        let { startDate, endDate } = req.body;
+        if (startDate >= endDate) {
+            error.message = "Validation error"
+            error.statusCode = 400
+            error.errors = { endDate: "endDate cannot be on or before startDate" }
+            res
+                // .status(400)
+                .json(error)
+        }
 
-        // let startDateExists = await Booking.findAll({
-        //     where: { startDate: startDate },
-        // });
-        // let endDateExists = await Booking.findAll({
-        //     where: { endDate: endDate },
-        // });
+        let allExistingBookings = await Booking.findAll({
+            attributes: {
+                exclude: ['id', 'createdAt', 'updatedAt', 'userId', 'spotId']
+            }
+        });
 
-        // if (startDateExists) {
-        //     error.message = "Start date conflicts with an existing booking";
-        //     statusCode = 403;
-        //     next(err)
-        // }
-        // if (endDateExists) {
-        //     error.message = "End date conflicts with an existing booking";
-        //     statusCode = 403;
-        //     next(err)
-        // }
+        for (let i = 0; i < allExistingBookings.length; i++) {
+            let existingBooking = allExistingBookings[i]
+            let existingStartDate = existingBooking.startDate
+            let existingEndDate = existingBooking.endDate
+            // res.json(existingBooking)
 
-        // let postSpotBooking = await Booking.create({
-        //     startDate: startDate,
-        //     endDate: endDate,
-        // })
-        // res.status(200).json(postSpotBooking)
+            if ((endDate >= existingStartDate) && (endDate <= existingEndDate)) {
+                error.message = "Sorry, this spot is already booked for the specified dates";
+                error.statusCode = 403;
+                error.errors = { endDate: "End date conflicts with an existing booking" }
+                res
+                    // .status(400)
+                    .json(error)
+            } else if ((startDate >= existingStartDate) && (startDate <= existingEndDate)) {
+                error.message = "Sorry, this spot is already booked for the specified dates";
+                error.statusCode = 403;
+                error.errors = { startDate: "Start date conflicts with an existing booking" }
+                res
+                    // .status(400)
+                    .json(error)
+            }
+        }
+
+        let postSpotBooking = await findSpot.createBooking({
+            spotId: currSpotId,
+            userId: currentUserId,
+            startDate: startDate,
+            endDate: endDate,
+        })
+        res
+            .status(200)
+            .json(postSpotBooking)
 
     } catch (err) {
         error.message = "Validation Error";
         error.statusCode = 400;
-        next(err);
+        next(error);
     }
 });
 
@@ -249,29 +274,29 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
                 .json(error)
         }
 
-        let findAllSpotReviews = await Review.findAll({ // returns array of review for req. spot
+        let spotReviewExists = await Review.findAll({ // returns array of review for req. spot
             where: { userId: currentUserId, spotId: postSpotId }
         });
-        if (findAllSpotReviews.length > 0) {
-            console.log("this")
+        if (spotReviewExists.length >= 0) {
             error.message = "User already has a review for this spot";
             error.statusCode = 403;
             res
                 // .status(403)
                 .json(error)
-        }
 
-        let { review, stars } = req.body;
-        let postSpotReview = await currentUser.createReview({
-            spotId: postSpotId,
-            userId: currentUserId,
-            review: review,
-            stars: stars,
-        })
-        postSpotReview.save();
-        res
-            .status(200)
-            .json(postSpotReview)
+        } else {
+            let { review, stars } = req.body;
+            let postSpotReview = await currentUser.createReview({
+                spotId: postSpotId,
+                userId: currentUserId,
+                review: review,
+                stars: stars,
+            })
+            postSpotReview.save();
+            res
+                .status(200)
+                .json(postSpotReview)
+        }
 
     } catch (err) {
         error.message = "Validation Error";
@@ -390,7 +415,17 @@ router.get('/:spotId', async (req, res, next) => {
     let currentSpotId = req.params.spotId;
 
     try {
+
         let getSpot = await Spot.findByPk(currentSpotId)
+
+        if (!getSpot) {
+            error.message = "Spot couldn't be found";
+            error.statusCode = 404;
+            res
+                // .status(404)
+                .json(error);
+        }
+
         console.log(getSpot.ownerId)
 
         /******************** add numReviews-key ********************/
@@ -436,9 +471,9 @@ router.get('/:spotId', async (req, res, next) => {
 
     } catch (err) {
         error.message = "Spot couldn't be found";
-        error.statusCode = 404;
+        error.statusCode = 400;
         res
-            // .status(404)
+            // .status(400)
             .json(error);
     }
 });

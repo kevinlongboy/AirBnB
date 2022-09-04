@@ -13,7 +13,7 @@ const demoBookings = [
     spotId: 4,
     userId: 3,
     startDate: '2022-11-11',
-    endDate: '2022-11-11',
+    endDate: '2022-11-12',
   },
   // Roz books Martin's
   {
