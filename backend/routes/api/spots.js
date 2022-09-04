@@ -277,7 +277,7 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
         let spotReviewExists = await Review.findAll({ // returns array of review for req. spot
             where: { userId: currentUserId, spotId: postSpotId }
         });
-        if (spotReviewExists.length >= 0) {
+        if (spotReviewExists.length > 0) {
             error.message = "User already has a review for this spot";
             error.statusCode = 403;
             res
@@ -470,8 +470,8 @@ router.get('/:spotId', async (req, res, next) => {
             .json(getSpot)
 
     } catch (err) {
-        error.message = "Spot couldn't be found";
-        error.statusCode = 400;
+        error.message = err
+        // error.statusCode = 400;
         res
             // .status(400)
             .json(error);
