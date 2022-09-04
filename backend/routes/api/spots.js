@@ -5,6 +5,7 @@ const { check } = require('express-validator');
 const { requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
+const review = require('../../db/models/review');
 
 
 
@@ -286,23 +287,45 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
 /************************************** /spots/:spotId **************************************/
 
+// Postman 10: "Get Details of a Spot by Id"
 // README, line 314
-// router.get('/:spotId', async (req, res, next) => {
+router.get('/:spotId', async (req, res, next) => {
 
-//     let spotId = req.params.spotId;
+    let currentSpotId = req.params.spotId;
 
-//     try {
-//         let getSpot = await Spot.findByPk(spotId)
-//         res
-//             .status(200)
-//             .json(getSpot)
+    try {
+        let getSpot = await Spot.findByPk(currentSpotId);
 
-//     } catch (err) {
-//         error.message = "Spot couldn't be found";
-//         error.statusCode = 404;
-//         next(err);
-//     }
-// });
+        /******************** add numReviews-key ********************/
+        let reviewCount = await Review.count({
+            where: { spotId: currentSpotId }
+        });
+        getSpot.dataValues.numReviews = reviewCount;
+
+
+        /******************** add avgStarRating-key ********************/
+        let starSum = await Review.sum('stars',
+            {
+                where: {
+                    spotId: currentSpotId
+                }
+            })
+
+        let starAvg = starSum / reviewCount;
+        if (!starAvg) starAvg = 0
+        getSpot.dataValues.avgStarRating = starAvg;
+
+
+        res
+            .status(200)
+            .json(getSpot)
+
+    } catch (err) {
+        error.message = "Spot couldn't be found";
+        error.statusCode = 404;
+        next(error);
+    }
+});
 
 // README, line 501
 // router.put('/:spotId', requireAuth, async (req, res, next) => {
