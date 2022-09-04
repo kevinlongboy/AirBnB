@@ -385,26 +385,69 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
 /************************************** /spots/current **************************************/
 
+// Postman 9: "Get Spots of Current User"
 // README, line 274
-// router.get('/current', requireAuth, async (req, res, next) => {
+router.get('/current', requireAuth, async (req, res, next) => {
 
-//     try {
-//         let getCurrentSpots = await User.findAll({
-//             where: { id: req.user.id },
-//             include: { model: Spot },
-//         });
-//         res
-//             .status(200)
-//             .json({
-//                 "Spots": getCurrentSpots
-//             })
+    let currentUser = req.user
+    let currentUserId = req.user.id
 
-//     } catch (err) {
-//         error.message = "Spot couldn't be found"
-//         error.status = 404
-//         next(err);
-//     }
-// });
+    try {
+        let getCurrentSpots = await Spot.findAll({
+            where: { ownerId: currentUserId },
+        });
+
+        let spotHasBeenReviewed = []
+
+        for (let i = 0; i < getCurrentSpots.length; i++) {
+            let currSpot = getCurrentSpots[i]
+
+            if (!spotHasBeenReviewed.includes(currSpot.id)) {
+
+                /******************** add avgRating-key ********************/
+                let currSpotReviews = await Review.findAll({ // returns array of current spot's reviews
+                    where: { spotId: currSpot.id },
+                })
+
+                let sumStars = 0
+                for (let j = 0; j < currSpotReviews.length; j++) {
+                    let currReview = currSpotReviews[j];
+                    sumStars += currReview.stars
+                }
+                let aveStars = sumStars / currSpotReviews.length
+                currSpot.dataValues.avgRatings = aveStars
+
+                /******************** add avgRating-key ********************/
+                let currSpotImages = await SpotImage.findAll({ // returns array of current spot's images
+                    where: { spotId: currSpot.id },
+                })
+
+                let prevImg = ""
+                for (let k = 0; k < currSpotImages.length; k++) {
+                    let currImage = currSpotImages[k];
+                    if (currImage.preview === "1") {
+                        prevImg = currImage.url
+                    }
+
+                }
+                currSpot.dataValues.previewImage = prevImg
+
+            }
+            spotHasBeenReviewed.push(currSpot.id)
+
+        }
+        res
+            .status(200)
+            .json({
+                "Spots": getCurrentSpots
+            })
+
+    } catch (err) {
+        error.message = "Spot couldn't be found"
+        error.status = 404
+        next(error);
+    }
+});
 
 
 /****************************************** /spots ******************************************/
