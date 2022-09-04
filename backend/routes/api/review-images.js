@@ -21,23 +21,30 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
     let deleteImageId = req.params.imageId;
     let deleteReviewImage = await SpotImage.findByPk(deleteImageId);
 
-    if (!deleteReviewImage) {
-        error.message = "Review Image couldn't be found";
-        error.status = 404;
-        res
-            // .status(404)
-            .json(error);
+    try {
+        if (!deleteReviewImage) {
+            error.message = "Review Image couldn't be found";
+            error.status = 404;
+            res
+                // .status(404)
+                .json(error);
 
-    } else {
-        deleteReviewImage.destroy();
-        deleteReviewImage.save();
+        } else {
+            deleteReviewImage.destroy();
+            deleteReviewImage.save();
+            res
+                .status(200)
+                .json({
+                    "message": "Successfully deleted",
+                    "statusCode": 200
+                })
+        };
+
+    } catch (err) {
+        error.message = err;
         res
-            .status(200)
-            .json({
-                "message": "Successfully deleted",
-                "statusCode": 200
-            })
-    };
+            .json(error)
+    }
 });
 
 

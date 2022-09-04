@@ -110,24 +110,40 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
     }
 });
 
-
+// Postman 35: "Delete a Booking - Send Twice to Error Check Invalid Id On Second Request"
 // README, line 1278
 router.delete('/:bookingId', requireAuth, async (req, res) => {
 
-    let bookingId = req.params.bookingId;
-    let deleteBooking = await Review.findByPk(bookingId);
+    // let bookingId = req.params.bookingId;
+    // res.json(bookingId)
+    let bookingId = 6; // Use this to test while bookingId = null
 
-    if (!deleteBooking) {
-        error.message = "Booking couldn't be found";
-        error.status = 404;
-        next(err);
+    let deleteBooking = await Booking.findByPk(bookingId);
 
-    } else if (deleteBooking.startDate.isBefore(this.date)) {
-        error.message = "Bookings that have been started can't be deleted";
-        error.status = 403;
-        next(err);
+    try {
 
-    } else {
+        if (!deleteBooking) {
+            error.message = "Booking couldn't be found";
+            error.status = 404;
+            res
+                // .status(404)
+                .json(error);
+        }
+
+        let currentDate = new Date();
+        let dd = String(currentDate.getDate()).padStart(2, '0');
+        let mm = String(currentDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        let yyyy = currentDate.getFullYear();
+        currentDate = `${yyyy}-${mm}-${dd}`;
+
+        if ((deleteBooking.startDate < currentDate) && (deleteBooking.endDate > currentDate)) {
+            error.message = "Bookings that have been started can't be deleted";
+            error.status = 403;
+            res
+                .status(403)
+                .json(error);
+        }
+
         deleteBooking.destroy();
         deleteBooking.save();
         res
@@ -135,8 +151,13 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
             .json({
                 "message": "Successfully deleted",
                 "statusCode": 200
-            })
-    };
+            });
+
+    } catch (err) {
+        error.message = err;
+        res
+            .json(error)
+    }
 });
 
 
