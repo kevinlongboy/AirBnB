@@ -4,7 +4,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Booking, Review, ReviewImage, Spot, User } = require('../../db/models');
+const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
 /************************************** global variables **************************************/
 
@@ -98,13 +98,38 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 
 /************************************* /bookings/current **************************************/
 
+// Postman 28: "Get All Current User's Bookings"
 // README, line 986
 router.get('/current', requireAuth, async (req, res, next) => {
 
-    let getCurrentBookings = await User.findAll({
-        where: { id: req.user.id },
-        include: { model: Booking },
+
+    let getCurrentBookings = await Booking.findAll({
+        where: { userId: req.user.id },
+        raw: true
     });
+
+    for (let i = 0; i < getCurrentBookings.length; i++) {
+
+        let booking = getCurrentBookings[i];
+
+        let bookingSpotInfo = await Spot.findByPk(booking.spotId, {
+            attributes: {
+                exclude: ['description', 'createdAt', 'updatedAt']
+            },
+            raw: true
+        })
+        booking.Spot = bookingSpotInfo;
+
+        let spotPreviewImg = await SpotImage.findOne({
+            where: { spotId: booking.Spot.id, preview: 1 },
+            attributes: {
+                exclude: ['id', 'preview', 'spotId', 'createdAt', 'updatedAt']
+            },
+            raw: true
+        })
+        booking.Spot.previewImage = spotPreviewImg.url
+
+    }
     res
         .status(200)
         .json({
@@ -115,9 +140,8 @@ router.get('/current', requireAuth, async (req, res, next) => {
 /*************************************** error handler ****************************************/
 
 router.use((err, req, res, next) => {
-    res.json(err)
+    res.json(error)
 })
-
 
 
 /****************************************** export ********************************************/
