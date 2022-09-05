@@ -743,7 +743,7 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
             description: description,
             price: price,
         });
-        postSpot.save();
+        // postSpot.save();
         console.log(postSpot)
 
         return res
