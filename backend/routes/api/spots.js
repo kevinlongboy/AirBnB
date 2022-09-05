@@ -745,7 +745,6 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
             price: price,
         });
         postSpot.save();
-        console.log(postSpot)
 
         return res
             .status(200)
