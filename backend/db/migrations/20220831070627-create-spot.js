@@ -17,7 +17,7 @@ module.exports = {
         allowNull: false,
       },
       state: {
-        type: Sequelize.STRING(2),
+        type: Sequelize.STRING,
         allowNull: false
       },
       country: {
@@ -25,11 +25,11 @@ module.exports = {
         allowNull: false
       },
       lat: {
-        type: Sequelize.FLOAT(10, 6),
+        type: Sequelize.FLOAT,
         allowNull: false
       },
       lng: {
-        type: Sequelize.FLOAT(10, 6),
+        type: Sequelize.FLOAT,
         allowNull: false
       },
       name: {
@@ -41,7 +41,7 @@ module.exports = {
         allowNull: false
       },
       price: {
-        type: Sequelize.FLOAT(7, 2),
+        type: Sequelize.FLOAT,
         allowNull: false
       },
       createdAt: {

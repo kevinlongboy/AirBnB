@@ -747,7 +747,7 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
         postSpot.save();
 
         return res
-            .status(200)
+            .status(201)
             .json(postSpot)
 
     } catch (err) {
