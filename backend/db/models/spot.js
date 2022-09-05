@@ -82,14 +82,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        isDecimal: true
+        // isDecimal: true
       },
     },
     lng: {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        isDecimal: true
+        // isDecimal: true
       },
     },
     name: {
@@ -111,7 +111,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
-        isDecimal: true,
+        // isDecimal: true,
         min: 0
       },
     },
