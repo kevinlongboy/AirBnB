@@ -28,17 +28,14 @@ const validateReview = [
 router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 
     let reviewId = req.params.reviewId;
-    console.log(reviewId)
     let findReview = await Review.findByPk(reviewId);
-    console.log(findReview)
 
     try {
 
         if (!findReview) {
             error.message = "Review couldn't be found";
             error.statusCode = 404;
-            res
-                // .status(400)
+            return res
                 .json(error);
         }
 
@@ -46,8 +43,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
         if (reviewImgCount === 10) {
             error.message = "Maximum number of images for this resource was reached";
             error.statusCode = 403;
-            res
-                // .status(403)
+            return res
                 .json(error);
         }
 
@@ -61,15 +57,14 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
                 exclude: ["createdAt", "updatedAt", "reviewId"]
             },
         })
-        res
+        return res
             .status(200)
             .json(printPostReviewImage)
 
     } catch (err) {
         error.message = "Could not add image";
         error.statusCode = 404;
-        res
-            // .status(404)
+        return res
             .json(err);
     }
 });
@@ -87,52 +82,53 @@ router.get('/current', requireAuth, async (req, res, next) => {
     try {
         let getCurrentUserReviews = await Review.findAll({ // returns array of review-objects
             where: { userId: currentUserId },
-            order: [['id']]
+            order: [['id']],
+            raw: true,
         });
 
         let currentUserData = await User.findByPk(currentUserId, {
             attributes: {
                 exclude: ['username', 'hashedPassword', 'email', 'createdAt', 'updatedAt']
-            }
+            },
+            raw: true
         })
 
         for (let i = 0; i < getCurrentUserReviews.length; i++) {
             let currReview = getCurrentUserReviews[i];
 
             /******************** add User-key ********************/
-            currReview.dataValues.User = currentUserData.dataValues
-            // res.send(currReview)
-
+            currReview.User = currentUserData
 
             /******************** add Spot-key ********************/
             let currSpotData = await Spot.findByPk(currReview.spotId, {
                 attributes: {
                     exclude: ['description', 'createdAt', 'updatedAt']
-                }
+                },
+                raw: true,
             })
-            currReview.dataValues.Spot = currSpotData.dataValues
-            // res.json(currReview.spotId)
+            currReview.Spot = currSpotData
 
             let currSpotPreviewImg = await SpotImage.findOne({
                 where: { spotId: currReview.spotId, preview: 1 },
-                exclude: ['id', 'spotId', 'createdAt', 'updatedAt']
+                attributes: {
+                    exclude: ['id', 'spotId', 'createdAt', 'updatedAt']
+                },
+                raw: true,
             })
-            currReview.dataValues.Spot.previewImage = currSpotPreviewImg.url
-            // res.json(currReview)
-
+            currReview.Spot.previewImage = currSpotPreviewImg.url
 
             /******************** add ReviewImages-key ********************/
             let currReviewImgs = await ReviewImage.findAll({
                 where: { reviewId: currReview.spotId },
                 attributes: {
                     exclude: ['createdAt', 'updatedAt', 'reviewId']
-                }
+                },
+                raw: true,
             })
-            currReview.dataValues.ReviewImages = currReviewImgs
-            // res.json(currReview)
+            currReview.ReviewImages = currReviewImgs
         }
 
-        res
+        return res
             .status(200)
             .json({
                 "Reviews": getCurrentUserReviews
@@ -141,8 +137,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
     } catch (err) {
         error.message = "Spot couldn't be found"
         error.statusCode = 404
-        res
-            // .status(404)
+        return res
             .json(error);
     }
 });
@@ -161,8 +156,7 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
         if (!putReview) {
             error.message = "Review couldn't be found";
             error.statusCode = 404;
-            res
-                .status(404)
+            return res
                 .json(error);
         }
 
@@ -171,14 +165,15 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
         if (stars) putReview.set({ stars: stars });
         await putReview.save();
 
-        res
+        return res
             .status(200)
             .json(putReview)
 
     } catch (err) {
         error.message = "Validation Error";
         error.statusCode = 400;
-        next(error);
+        return res
+            .json(error);
     }
 });
 
@@ -192,7 +187,7 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
     try {
         deleteReview.destroy();
         deleteReview.save();
-        res
+        return res
             .status(200)
             .json({
                 "message": "Successfully deleted",
@@ -202,8 +197,7 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
     } catch (err) {
         error.message = "Review couldn't be found";
         error.status = 404;
-        res
-            // .status(404)
+        return res
             .json(error);
     }
 });
@@ -216,7 +210,7 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
 /*************************************** error handler ****************************************/
 
 router.use((err, req, res, next) => {
-    res.json(err)
+    return res.json(err)
 })
 
 
