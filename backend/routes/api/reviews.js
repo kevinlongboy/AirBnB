@@ -109,7 +109,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
             currReview.Spot = currSpotData
 
             let currSpotPreviewImg = await SpotImage.findOne({
-                where: { spotId: currReview.spotId, preview: 1 },
+                where: { spotId: currReview.spotId, preview: true },
                 attributes: {
                     exclude: ['id', 'spotId', 'createdAt', 'updatedAt']
                 },

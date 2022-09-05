@@ -450,7 +450,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
                 /******************** add avgRating-key ********************/
                 let prevImg = await SpotImage.findOne({ // returns array of current spot's images
-                    where: { spotId: currSpot.id, preview: 1 },
+                    where: { spotId: currSpot.id, preview: true },
                     attributes: {
                         exclude: ['id', 'spotId', 'preview', 'createdAt', 'updatedAt']
                     },

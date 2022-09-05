@@ -170,7 +170,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         booking.Spot = bookingSpotInfo;
 
         let spotPreviewImg = await SpotImage.findOne({
-            where: { spotId: booking.Spot.id, preview: 1 },
+            where: { spotId: booking.Spot.id, preview: true },
             attributes: {
                 exclude: ['id', 'preview', 'spotId', 'createdAt', 'updatedAt']
             },
