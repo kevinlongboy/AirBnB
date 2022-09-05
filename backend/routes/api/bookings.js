@@ -26,8 +26,10 @@ const validateBooking = [
 // README, line 1181
 router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
 
-    // let bookingId = req.params.bookingId; // Test for bookingId not found
-    let bookingId = 2; // Test with this bookingId for now
+
+    let bookingId = req.params.bookingId;
+    // res.json(bookingId)
+    // bookingId = 4
     let { startDate, endDate } = req.body;
 
     try {
@@ -37,8 +39,7 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
         if (!putBooking) {
             error.message = "Booking couldn't be found";
             error.status = 404;
-            res
-                .status(404)
+            return res
                 .json(error);
         }
 
@@ -47,8 +48,7 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
             error.message = "Validation error"
             error.statusCode = 400
             error.errors = { endDate: "endDate cannot be on or before startDate" }
-            res
-                // .status(400)
+            return res
                 .json(error)
         }
 
@@ -72,40 +72,35 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
                     startDate: "Start date conflicts with an existing booking",
                     endDate: "End date conflict with an existing booking",
                 }
-                res
-                    // .status(400)
-                    .json(error)
-            }
-            else if ((endDate >= existingStartDate) && (endDate <= existingEndDate)) {
+                return res.json(error)
+
+            } else if ((endDate >= existingStartDate) && (endDate <= existingEndDate)) {
                 error.message = "Sorry, this spot is already booked for the specified dates";
                 error.statusCode = 403;
                 error.errors = { endDate: "End date conflicts with an existing booking" }
-                res
-                    // .status(400)
-                    .json(error)
+                return res.json(error)
+
             } else if ((startDate >= existingStartDate) && (startDate <= existingEndDate)) {
                 error.message = "Sorry, this spot is already booked for the specified dates";
                 error.statusCode = 403;
                 error.errors = { startDate: "Start date conflicts with an existing booking" }
-                res
-                    // .status(400)
-                    .json(error)
+                return res.json(error)
             }
         }
 
-        /*************** Spot must NOT belong to the current user ***************/
-        if (putBooking.userId != req.user.id) {
+        /*************** Booking must belong to the current user ***************/
+        if (putBooking.userId == req.user.id) {
             if (startDate) putBooking.update({ startDate: startDate });
             if (endDate) putBooking.update({ endDate: endDate });
             await putBooking.save();
-            res
+            return res
                 .status(200)
                 .json(putBooking)
         }
 
     } catch (err) {
         error.message = err;
-        res
+        return res
             .json(error);
     }
 });
@@ -116,35 +111,33 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 
     // let bookingId = req.params.bookingId;
     // res.json(bookingId)
-    let bookingId = 6; // Use this to test while bookingId = null
+    let bookingId = 4; // Use this to test while bookingId = null
 
     let deleteBooking = await Booking.findByPk(bookingId);
 
     if (!deleteBooking) {
         error.message = "Booking couldn't be found";
         error.status = 404;
-        res
-            // .status(404)
+        return res
             .json(error);
     }
 
     let currentDate = new Date();
     let dd = String(currentDate.getDate()).padStart(2, '0');
-    let mm = String(currentDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let mm = String(currentDate.getMonth() + 1).padStart(2, '0');
     let yyyy = currentDate.getFullYear();
     currentDate = `${yyyy}-${mm}-${dd}`;
 
     if ((deleteBooking.startDate < currentDate) && (deleteBooking.endDate > currentDate)) {
         error.message = "Bookings that have been started can't be deleted";
         error.status = 403;
-        res
-            .status(403)
+        return res
             .json(error);
     }
 
     deleteBooking.destroy();
     deleteBooking.save();
-    res
+    return res
         .status(200)
         .json({
             "message": "Successfully deleted",
@@ -158,7 +151,6 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 // Postman 28: "Get All Current User's Bookings"
 // README, line 986
 router.get('/current', requireAuth, async (req, res, next) => {
-
 
     let getCurrentBookings = await Booking.findAll({
         where: { userId: req.user.id },
@@ -187,7 +179,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
         booking.Spot.previewImage = spotPreviewImg.url
 
     }
-    res
+    return res
         .status(200)
         .json({
             "Bookings": getCurrentBookings
@@ -197,7 +189,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 /*************************************** error handler ****************************************/
 
 router.use((err, req, res, next) => {
-    res.json(error)
+    return res.json(error)
 })
 
 

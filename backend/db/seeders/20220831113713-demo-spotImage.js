@@ -25,7 +25,7 @@ const demoSpotImages = [
     // id: 4,
     spotId: 2,
     url: '../../../assets/images/spot-images/medina-mansion/medina-spot-1.jpg',
-    preview: false,
+    preview: true,
   },
   {
     // id: 5,

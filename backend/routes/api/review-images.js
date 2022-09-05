@@ -25,14 +25,13 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
         if (!deleteReviewImage) {
             error.message = "Review Image couldn't be found";
             error.status = 404;
-            res
-                // .status(404)
+            return res
                 .json(error);
 
         } else {
             deleteReviewImage.destroy();
             deleteReviewImage.save();
-            res
+            return res
                 .status(200)
                 .json({
                     "message": "Successfully deleted",
@@ -42,7 +41,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
 
     } catch (err) {
         error.message = err;
-        res
+        return res
             .json(error)
     }
 });
@@ -51,7 +50,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
 /*************************************** error handler ****************************************/
 
 router.use((err, req, res, next) => {
-    res.json(err)
+    return res.json(err)
 })
 
 
