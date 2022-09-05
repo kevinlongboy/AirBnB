@@ -10,7 +10,7 @@ const demoReviews = [
   { // Daphne reviews Roz’s
     spotId: 4,
     userId: 3,
-    review: 'I had the loveliest time at Ballard Apartment... placeholder text for review',
+    review: 'Placeholder text for review',
     stars: 5,
   },
   { // Roz reviews Martin’s
