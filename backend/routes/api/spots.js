@@ -4,8 +4,8 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
-const { Booking, Review, Spot, SpotImage, User } = require('../../db/models');
-
+const { Op } = require('sequelize');
+const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
 
 /************************************* global variables *************************************/
@@ -102,401 +102,655 @@ const validateReview = [
 
 /********************************** spots/:spotId/bookings ***********************************/
 
-// router.get('/', async (req, res, next) => {
 
-//     // console.log("hit spots router")
-//     // res.send("okay")
-
-//     // try {
-//     // let getSpots = await Spot.findByPk(1);
-//     // console.log(getSpots)
-//     // res.status(200)
-//     res.json({ "Spots": "get spots" });
-//     // } catch (err) {
-//     //     error.message = "Spot couldn't be found"
-//     //     error.status = 404
-//     //     next(err);
-//     // }
-// });
-
-
+// Postman 29, 30: "Get All Bookings for a Spot By Id"
 // README, line 1031
 router.get('/:spotId/bookings', async (req, res) => {
 
-    let spotId = req.params.spotId;
-    let getSpotBookings = await Spot.findByPk(spotId);
+    let getSpotId = req.params.spotId;
+    let currentUser = req.user;
+    // let currentUserId = req.user.id; // Test for non-matching
+    let currentUserId = 5; // Test for matching
+    // res.json(spotId)
 
-    if (!getSpotBookings) {
-        error.message = "Spot couldn't be found"
-        error.status = 404
-        next(err)
-
-    } else {
-        let getSpotBookings = await Spot.findAll({
-            where: { id: spotId },
-            include: [{
-                model: Booking,
-            }]
+    try {
+        let getAllBookings = await Booking.findAll({
+            where: { spotId: getSpotId }, // Test for non-matching AND for spot doesn't exist
+            // where: { spotId: 5 }, // Test for matching
+            raw: true
         });
+        // res.json(getAllBookings)
+
+        if (getAllBookings.length === 0) {
+            error.message = "Spot couldn't be found"
+            error.statusCode = 404
+            res
+                // .status(404)
+                .json(error)
+        }
+
+        let bookingOwnerId = await Spot.findOne({
+            where: { id: getAllBookings[0].spotId },
+            attributes: {
+                exclude: ['id', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'description', 'price', 'createdAt', 'updatedAt']
+            },
+            raw: true
+        })
+        // res.json(bookingOwnerId)
+
+        /*************** Successful Response: If you ARE NOT the owner of the spot. ***************/
+        if (currentUserId != bookingOwnerId.ownerId) {
+            let publiclyViewBookings = await Booking.findAll({
+                attributes: {
+                    exclude: ['id', 'createdAt', 'updatedAt', 'userId']
+                },
+                order: [['spotId'], ['startDate'], ['endDate']]
+            })
+            res
+                .status(200)
+                .json({
+                    "Bookings": publiclyViewBookings
+                })
+        }
+
+
+        /*************** Successful Response: If you ARE the owner of the spot. ***************/
+        for (let i = 0; i < getAllBookings.length; i++) {
+            let booking = getAllBookings[i];
+
+            let bookingUserData = await User.findByPk(booking.userId, {
+                attributes: {
+                    exclude: ['username', 'hashedPassword', 'email', 'createdAt', 'updatedAt']
+                },
+                raw: true
+            })
+            booking.User = bookingUserData
+            console.log(booking)
+        }
         res
             .status(200)
             .json({
-                "Bookings": getSpotBookings
+                "Bookings": getAllBookings
             })
+
+    } catch (err) {
+        error.message = err;
+        res
+            .json(error)
     }
+
 });
 
+// Postman 25, 26, 27: "Create a Booking Based on a Spot Id"
 // README, line 1099
-// router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res) => {
+router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res) => {
 
-//     let spotId = req.params.spotId;
-//     let findSpot = await Spot.findByPk(spotId);
+    let currentUser = req.user;
+    let currentUserId = req.user.id;
+    let currSpotId = req.params.spotId;
+    // res.json(currSpotId)
+    let findSpot = await Spot.findByPk(currSpotId);
+    let { startDate, endDate } = req.body;
 
-//     if (!findSpot) {
-//         error.message = "Spot couldn't be found"
-//         error.status = 404
-//         next(err)
-//     }
+    try {
+        if (!findSpot) {
+            error.message = "Spot couldn't be found"
+            error.statusCode = 404
+            res
+                // .status(404)
+                .json(error)
+        }
 
-//     let { startDate, endDate } = req.body;
+        if (startDate >= endDate) {
+            error.message = "Validation error"
+            error.statusCode = 400
+            error.errors = { endDate: "endDate cannot be on or before startDate" }
+            res
+                // .status(400)
+                .json(error)
+        }
 
-//     let startDateExists = await Booking.findAll({
-//         where: { startDate: startDate },
-//     });
-//     let endDateExists = await Booking.findAll({
-//         where: { endDate: endDate },
-//     });
+        let allExistingBookings = await Booking.findAll({
+            where: { spotId: currSpotId },
+            attributes: {
+                exclude: ['id', 'createdAt', 'updatedAt', 'userId', 'spotId']
+            }
+        });
 
-//     if (startDateExists) {
-//         error.message = "Start date conflicts with an existing booking";
-//         statusCode = 403;
-//         next(err)
-//     }
-//     if (endDateExists) {
-//         error.message = "End date conflicts with an existing booking";
-//         statusCode = 403;
-//         next(err)
-//     }
+        for (let i = 0; i < allExistingBookings.length; i++) {
+            let existingBooking = allExistingBookings[i]
+            let existingStartDate = existingBooking.startDate
+            let existingEndDate = existingBooking.endDate
 
-//     try {
-//         let postSpotBooking = await Booking.create({
-//             startDate: startDate,
-//             endDate: endDate,
-//         })
-//         res.status(200).json(postSpotBooking)
+            if ((startDate === existingStartDate) && (endDate === existingEndDate)) {
+                error.message = "Sorry, this spot is already booked for the specified dates";
+                error.statusCode = 403;
+                error.errors = {
+                    startDate: "Start date conflicts with an existing booking",
+                    endDate: "End date conflict with an existing booking",
+                }
+                res
+                    // .status(400)
+                    .json(error)
+            }
+            else if ((endDate >= existingStartDate) && (endDate <= existingEndDate)) {
+                error.message = "Sorry, this spot is already booked for the specified dates";
+                error.statusCode = 403;
+                error.errors = { endDate: "End date conflicts with an existing booking" }
+                res
+                    // .status(400)
+                    .json(error)
+            } else if ((startDate >= existingStartDate) && (startDate <= existingEndDate)) {
+                error.message = "Sorry, this spot is already booked for the specified dates";
+                error.statusCode = 403;
+                error.errors = { startDate: "Start date conflicts with an existing booking" }
+                res
+                    // .status(400)
+                    .json(error)
+            }
+        }
 
-//     } catch (err) {
-//         error.message = "Validation Error";
-//         error.statusCode = 400;
-//         next(err);
-//     }
-// });
+        let postSpotBooking = await findSpot.createBooking({
+            spotId: currSpotId,
+            userId: currentUserId,
+            startDate: startDate,
+            endDate: endDate,
+        })
+        res
+            .status(200)
+            .json(postSpotBooking)
+
+    } catch (err) {
+        error.message = "Validation Error";
+        error.statusCode = 400;
+        next(error);
+    }
+});
 
 
 /*********************************** spots/:spotId/reviews ***********************************/
 
+// Postman 21: "Get Reviews by Spot Id"
 // README, line 684
 router.get('/:spotId/reviews', async (req, res) => {
 
-    let spotId = req.params.spotId;
-    let getSpotReviews = await Spot.findByPk(spotId);
+    let currSpotId = req.params.spotId;
+    let findSpot = await Spot.findByPk(currSpotId);
 
-    if (!getSpotReviews) {
+    if (!findSpot) {
         error.message = "Spot couldn't be found"
         error.status = 404
-        next(err)
+        res
+            // .status(404)
+            .json(error)
 
     } else {
-        let getSpotReviews = await Spot.findAll({
-            where: { id: spotId },
-            include: [{
-                model: Review,
-            }]
-        });
+        let findAllSpotReviews = await Review.findAll({
+            where: { spotId: currSpotId }
+        })
+
+        let currentUserId = req.user.id;
+        let currentUserData = await User.findByPk(currentUserId, {
+            attributes: {
+                exclude: ['username', 'hashedPassword', 'email', 'createdAt', 'updatedAt']
+            }
+        })
+
+        for (let i = 0; i < findAllSpotReviews.length; i++) {
+            let currReview = findAllSpotReviews[i];
+
+            /******************** add User-key ********************/
+            currReview.dataValues.User = currentUserData.dataValues
+
+            /******************** add ReviewImages-key ********************/
+            let currReviewImgs = await ReviewImage.findAll({
+                where: { reviewId: currReview.spotId },
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt', 'reviewId']
+                }
+            })
+            currReview.dataValues.ReviewImages = currReviewImgs
+        }
+
         res
             .status(200)
             .json({
-                "Reviews": getSpotReviews
+                "Reviews": findAllSpotReviews
             })
     }
 });
 
+// Postman 15: "Create a Review for a Spot"
 // README, line 740
-// router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
 
-//     let spotId = req.params.spotId;
-//     let findSpot = await Spot.findByPk(spotId);
+    let currentUser = req.user;
+    let currentUserId = req.user.id;
+    let postSpotId = req.params.spotId;
 
-//     if (!findSpot) {
-//         error.message = "Spot couldn't be found"
-//         error.status = 404
-//         next(err)
-//     }
+    try {
+        let findSpot = await Spot.findByPk(postSpotId);
+        if (!findSpot) {
+            error.message = "Spot couldn't be found"
+            error.statusCode = 404
+            res
+                // .status(404)
+                .json(error)
+        }
 
-//     let spotReviewExists = await User.findAll({
-//         where: { id: req.user.id },
-//         include: { model: Review },
-//     });
-//     if (spotReviewExists) {
-//         error.message = "User already has a review for this spot";
-//         statusCode = 403;
-//         next(err)
-//     }
+        let spotReviewExists = await Review.findAll({ // returns array of review for req. spot
+            where: { userId: currentUserId, spotId: postSpotId }
+        });
+        if (spotReviewExists.length > 0) {
+            error.message = "User already has a review for this spot";
+            error.statusCode = 403;
+            res
+                // .status(403)
+                .json(error)
 
-//     try {
-//         let { review, stars } = req.body;
-//         let postSpotReview = await Review.create({
-//             review: review,
-//             stars: stars,
-//         })
-//         res.status(200).json(postSpotReview)
+        } else {
+            let { review, stars } = req.body;
+            let postSpotReview = await currentUser.createReview({
+                spotId: postSpotId,
+                userId: currentUserId,
+                review: review,
+                stars: stars,
+            })
+            postSpotReview.save();
+            res
+                .status(200)
+                .json(postSpotReview)
+        }
 
-//     } catch (err) {
-//         error.message = "Validation Error";
-//         error.statusCode = 400;
-//         next(err);
-//     }
-// });
+    } catch (err) {
+        error.message = "Validation Error";
+        error.statusCode = 400;
+        res
+            // .status(400)
+            .json(error)
+    }
+});
 
 
 /*********************************** spots/:spotId/images ***********************************/
 
+// Postman 8: "Create an Image for a Spot"
 // README, line 454
-// router.post('/:spotId/images', requireAuth, async (req, res, next) => {
+router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
-//     let spotId = req.params.spotId;
-//     let findSpot = await Spot.findByPk(spotId);
+    let spotId = req.params.spotId;
+    let findSpot = await Spot.findByPk(spotId);
 
-//     if (!findSpot) {
-//         error.message = "Spot couldn't be found"
-//         error.status = 404
-//         next(err)
-//     }
+    try {
+        let { url, preview } = req.body;
+        let postSpotImage = await findSpot.createSpotImage({
+            url: url,
+            preview: preview,
+        });
+        res
+            .status(200)
+            .json(postSpotImage)
 
-//     try {
-//         let { url, preview } = req.body;
-//         let postSpotImage = await SpotImage.create({
-//             url: url,
-//             preview: preview,
-//         });
-//         res.status(200).json(postSpotImage)
+    } catch (err) {
+        error.message = "Spot couldn't be found"
+        error.status = 404
+        res
+            // .status(404)
+            .json(error)
+    }
+});
 
-//     } catch (err) {
-//         error.message = "Could not add image";
-//         error.statusCode = 404;
-//         next(err);
-//     }
-// });
+
+/************************************** /spots/current **************************************/
+
+// Postman 10: "Get Spots of Current User"
+// README, line 274
+router.get('/current', requireAuth, async (req, res, next) => {
+
+    let currentUser = req.user;
+    let currentUserId = req.user.id;
+
+    try {
+        let getCurrentSpots = await Spot.findAll({
+            where: { ownerId: currentUserId },
+        });
+
+        let spotHasBeenReviewed = []
+
+        for (let i = 0; i < getCurrentSpots.length; i++) {
+            let currSpot = getCurrentSpots[i]
+
+            if (!spotHasBeenReviewed.includes(currSpot.id)) {
+
+                /******************** add avgRating-key ********************/
+                let currSpotReviews = await Review.findAll({ // returns array of current spot's reviews
+                    where: { spotId: currSpot.id },
+                })
+
+                let sumStars = 0
+                for (let j = 0; j < currSpotReviews.length; j++) {
+                    let currReview = currSpotReviews[j];
+                    sumStars += currReview.stars
+                }
+                let aveStars = sumStars / currSpotReviews.length
+                currSpot.dataValues.avgRatings = aveStars
+
+                /******************** add avgRating-key ********************/
+                let currSpotImages = await SpotImage.findAll({ // returns array of current spot's images
+                    where: { spotId: currSpot.id },
+                })
+
+                let prevImg = ""
+                for (let k = 0; k < currSpotImages.length; k++) {
+                    let currImage = currSpotImages[k];
+                    if (currImage.preview === "1") {
+                        prevImg = currImage.url
+                    }
+
+                }
+                currSpot.dataValues.previewImage = prevImg
+
+            }
+            spotHasBeenReviewed.push(currSpot.id)
+
+        }
+        res
+            .status(200)
+            .json({
+                "Spots": getCurrentSpots
+            })
+
+    } catch (err) {
+        error.message = "Spot couldn't be found"
+        error.status = 404
+        res
+            // .status(404)
+            .json(error);
+    }
+});
 
 
 /************************************** /spots/:spotId **************************************/
 
+// Postman 11: "Get Details of a Spot by Id"
 // README, line 314
 router.get('/:spotId', async (req, res, next) => {
 
-    let spotId = req.params.spotId;
+    let currentSpotId = req.params.spotId;
 
     try {
-        let getSpot = await Spot.findByPk(spotId)
+
+        let getSpot = await Spot.findByPk(currentSpotId)
+
+        if (!getSpot) {
+            error.message = "Spot couldn't be found";
+            // error.statusCode = 404;
+            res
+                // .status(404)
+                .json(error);
+        }
+
+        console.log(getSpot.ownerId)
+
+        /******************** add numReviews-key ********************/
+        let reviewCount = await Review.count({
+            where: { spotId: currentSpotId }
+        });
+        getSpot.dataValues.numReviews = reviewCount;
+
+        /******************** add avgStarRating-key ********************/
+        let starSum = await Review.sum('stars', {
+            where: {
+                spotId: currentSpotId
+            }
+        })
+
+        let starAvg = starSum / reviewCount;
+        if (!starAvg) starAvg = 0
+        getSpot.dataValues.avgStarRating = starAvg;
+
+        /******************** add SpotImages-key ********************/
+        let spotImgs = await SpotImage.findAll({
+            where: { spotId: currentSpotId },
+            attributes: {
+                include: ["id", "url", "preview"],
+                exclude: ["spotId", "createdAt", "updatedAt"]
+            },
+        })
+        getSpot.dataValues.SpotImages = spotImgs;
+
+        /******************** add Owner-key ********************/
+        let ownerData = await User.findByPk(getSpot.ownerId, {
+            attributes: {
+                include: ["id", "firstName", "lastName"],
+                exclude: ["username", "hashedPassword", "email", "createdAt", "updatedAt"]
+            },
+        })
+        getSpot.dataValues.Owner = ownerData;
+
         res
             .status(200)
             .json(getSpot)
 
     } catch (err) {
-        error.message = "Spot couldn't be found";
-        error.statusCode = 404;
-        next(err);
+        error.message = err
+        // error.statusCode = 400;
+        res
+            // .status(400)
+            .json(error);
     }
 });
 
+// Postman 13: "Edit a Spot"
 // README, line 501
-// router.put('/:spotId', requireAuth, async (req, res, next) => {
+router.put('/:spotId', requireAuth, async (req, res, next) => {
 
-//     let spotId = req.params.spotId;
-//     let putSpot = await Spot.findByPk(spotId);
+    let spotId = req.params.spotId;
+    let putSpot = await Spot.findByPk(spotId);
 
-//     if (!putSpot) {
-//         error.message = "Spot couldn't be found";
-//         error.statusCode = 404;
-//         next(err);
-//     }
+    try {
+        if (!putSpot) {
+            error.message = "Spot couldn't be found";
+            error.statusCode = 404;
+            res
+                // .status(404)
+                .json(error);
+        }
 
-//     try {
+        let { address, city, state, country, lat, lng, name, description, price } = req.body;
+        if (address) putSpot.set({ address: address });
+        if (city) putSpot.set({ city: city });
+        if (state) putSpot.set({ state: state });
+        if (country) putSpot.set({ country: country });
+        if (lat) putSpot.set({ lat: lat });
+        if (lng) putSpot.set({ lng: lng });
+        if (name) putSpot.set({ name: name });
+        if (description) putSpot.set({ description: description });
+        if (price) putSpot.set({ price: price });
+        await putSpot.save();
 
-//         error.errors = {};
-//         let { address, city, state, country, lat, lng, name, description, price } = req.body;
+        res
+            .status(200)
+            .json(putSpot)
 
-//         if (address) putSpot.set({ address: address });
-//         else if (err) error.errors.address = "Street address is required";
+    } catch (err) {
+        error.message = "Validation Error";
+        error.statusCode = 404;
+        res
+            // .status(404)
+            .json(error);
+    }
+});
 
-//         if (city) putSpot.set({ city: city });
-//         else if (err) error.errors.city = "City is required";
-
-//         if (state) putSpot.set({ state: state });
-//         else if (err) error.errors.state = "State is required";
-
-//         if (country) putSpot.set({ country: country });
-//         else if (err) error.errors.country = "Country is required";
-
-//         if (lat) putSpot.set({ lat: lat });
-//         else if (err) error.errors.lat = "Latitude is not valid";
-
-//         if (lng) putSpot.set({ lng: lng });
-//         else if (err) error.errors.lng = "Longitude is not valid";
-
-//         if (name) putSpot.set({ name: name });
-//         else if (err) error.errors.name = "Name must be less than 50 characters";
-
-//         if (description) putSpot.set({ description: description });
-//         else if (err) error.errors.description = "Description is required";
-
-//         if (price) putSpot.set({ price: price });
-//         else if (err) error.errors.price = "Price per day is required";
-
-//         await putSpot.save();
-
-//         res.status(200).json(putSpot)
-
-//     } catch (err) {
-//         err.message = "Validation Error";
-//         err.statusCode = 404;
-//         next(err);
-//     }
-// });
-
+// Postman 37: "Send Twice to Error Check Invalid Id On Second Request"
 // README, line 589
-// router.delete('/:spotId', requireAuth, async (req, res, next) => {
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
-//     let spotId = req.params.spotId;
-//     let deleteSpot = await Spot.findByPk(spotId);
+    let spotId = req.params.spotId;
+    let deleteSpot = await Spot.findByPk(spotId); //BUG: postman crashes upon second test
 
-//     if (!deleteSpot) {
-//         error.message = "Spot couldn't be found";
-//         error.statusCode = 404;
-//         next(err);
+    try {
+        if (!deleteSpot) {
+            error.message = "Spot couldn't be found";
+            error.status = 404;
+            res
+                // .status(404)
+                .json(error);
 
-//     } else {
-//         deleteSpot.destroy();
-//         deleteSpot.save();
-//         res
-//             .status(200)
-//             .json({
-//                 "message": "Successfully deleted",
-//                 "statusCode": 200
-//             })
-//     }
-// });
+        }
 
-
-/************************************** /spots/current **************************************/
-
-// README, line 274
-// router.get('/current', requireAuth, async (req, res, next) => {
-
-//     try {
-//         let getCurrentSpots = await User.findAll({
-//             where: { id: req.user.id },
-//             include: { model: Spot },
-//         });
-//         res
-//             .status(200)
-//             .json({
-//                 "Spots": getCurrentSpots
-//             })
-
-//     } catch (err) {
-//         error.message = "Spot couldn't be found"
-//         error.status = 404
-//         next(err);
-//     }
-// });
+        deleteSpot.destroy();
+        deleteSpot.save();
+        res
+            .status(200)
+            .json({
+                "message": "Successfully deleted",
+                "statusCode": 200
+            })
+    } catch (err) {
+        error.message = "Invalid credentials";
+        error.status = 404;
+        res
+            // .status(404)
+            .json(error);
+    }
+});
 
 
 /****************************************** /spots ******************************************/
 
+// Postman 6: "Get All Spots"
 // README, line 234
+// *AND*
+// Postman 38: "Get All Spots - Page/Size Params"
+// README, line 1405
 router.get('/', async (req, res, next) => {
 
+    // get array of all spot objects
+    // iterate through array
+    // for each item in array, aggregate average rating
+    // add average rating to spot object
+
     try {
-        let getSpots = await Spot.findAll();
-        res.status(200)
-        res.send({ "Spots": getSpots });
+        let query = {
+            where: {},
+            include: []
+        }
+
+        /**************************** add filter ****************************/
+        if (req.query.minLat) query.where.lat = { [Op.gte]: req.query.minLat };
+        if (req.query.maxLat) query.where.lat = { [Op.lte]: req.query.maxLat };
+        if (req.query.minLng) query.where.lng = { [Op.gte]: req.query.minLng };
+        if (req.query.maxLng) query.where.lng = { [Op.lte]: req.query.maxLng };
+        if (req.query.minPrice) query.where.price = { [Op.gte]: req.query.minPrice };
+        if (req.query.maxPrice) query.where.price = { [Op.lte]: req.query.maxPrice };
+
+        /**************************** add pagination ****************************/
+        let page = req.query.page === undefined ? 0 : parseInt(req.query.page);
+        if (page > 10) page = 10;
+
+        let size = req.query.size === undefined ? 20 : parseInt(req.query.size);
+        if (size > 20) size = 20;
+
+        if (page >= 1 && size >= 1) {
+            query.limit = size;
+            query.offset = size * (page - 1);
+        }
+
+        /**************************** query ****************************/
+        let getSpots = await Spot.findAll(query); // array of all spots
+
+        let spotHasBeenReviewed = []
+
+        for (let i = 0; i < getSpots.length; i++) {
+            let currSpot = getSpots[i]
+
+            if (!spotHasBeenReviewed.includes(currSpot.id)) {
+
+                /**************************** add avgRating-key ****************************/
+                let currSpotReviews = await Review.findAll({ // returns array of current spot's reviews
+                    where: { spotId: currSpot.id },
+                })
+
+                let sumStars = 0
+                for (let j = 0; j < currSpotReviews.length; j++) {
+                    let currReview = currSpotReviews[j];
+                    sumStars += currReview.stars
+                }
+                let aveStars = sumStars / currSpotReviews.length
+                currSpot.dataValues.avgRatings = aveStars
+
+                /**************************** add avgRating-key ****************************/
+                let currSpotImages = await SpotImage.findAll({ // returns array of current spot's images
+                    where: { spotId: currSpot.id },
+                })
+
+                let prevImg = ""
+                for (let k = 0; k < currSpotImages.length; k++) {
+                    let currImage = currSpotImages[k];
+                    if (currImage.preview === "1") {
+                        prevImg = currImage.url
+                    }
+                }
+                currSpot.dataValues.previewImage = prevImg
+            }
+
+            spotHasBeenReviewed.push(currSpot.id)
+        }
+        res
+            .status(200)
+            .json({
+                "Spots": getSpots,
+                page,
+                size
+            });
+
     } catch (err) {
         error.message = "Spot couldn't be found"
         error.status = 404
-        next(err);
+        res
+            // .status(404)
+            .json(error);
     }
 });
 
+// Postman 7: "Create a Spot"
 // README, line 380
-// router.post('/', requireAuth, validateSpot, async (req, res) => {
+router.post('/', requireAuth, validateSpot, async (req, res) => {
 
-//     try {
-//         let { address, city, state, country, lat, lng, name, description, price } = req.body;
-//         let postSpot = await Spot.create({
-//             address: address,
-//             city: city,
-//             state: state,
-//             country: country,
-//             lat: lat,
-//             lng: lng,
-//             name: name,
-//             description: description,
-//             price: price,
-//         });
-//         res.status(200).json(postSpot)
+    let currentUser = req.user
+    let currentUserId = req.user.id
 
-//     } catch (err) {
-//         error.message = "Validation Error";
-//         error.statusCode = 400;
-//         next(err);
-//     }
-// });
+    try {
+        let { address, city, state, country, lat, lng, name, description, price } = req.body;
 
+        let postSpot = await currentUser.createSpot({
+            ownerId: currentUserId,
+            address: address,
+            city: city,
+            state: state,
+            country: country,
+            lat: lat,
+            lng: lng,
+            name: name,
+            description: description,
+            price: price,
+        });
+        postSpot.save();
+        console.log(postSpot)
 
-/***************************************** /spots? ******************************************/
+        res
+            .status(200)
+            .json(postSpot)
 
-// README, line 1405
-// router.get('/', async (req, res, next) => {
-
-//     let query = {
-//         where: {},
-//         include: []
-//     }
-
-//     let page = req.query.page === undefined ? 0 : parseInt(req.query.page);
-//     if (page > 10) page = 10;
-
-//     let size = req.query.size === undefined ? 20 : parseInt(req.query.size);
-//     if (size > 20) size = 20;
-
-//     if (page >= 1 && size >= 1) {
-//         query.limit = size;
-//         query.offset = size * (page - 1);
-//     }
-
-//     try {
-//         //     if (req.query.minLat) query.where.lat = { [Op.gte]: req.query.minLat };
-//         //     if (req.query.maxLat) query.where.lat = { [Op.lte]: req.query.maxLat };
-//         //     if (req.query.minLng) query.where.lng = { [Op.gte]: req.query.minLng };
-//         //     if (req.query.maxLng) query.where.lng = { [Op.lte]: req.query.maxLng };
-//         //     if (req.query.minPrice) query.where.price = { [Op.gte]: req.query.minPrice };
-//         //     if (req.query.maxPrice) query.where.price = { [Op.lte]: req.query.maxPrice };
-
-//         let querySpots = await Spot.findAll(query);
-//         res.status(200).json({
-//             "Spots": querySpots,
-//             page,
-//             size
-//         });
-
-//     } catch (err) {
-//         error.message = "Validation Error";
-//         error.statusCode = 400;
-//         next(err);
-//     }
-// });
-
+    } catch (err) {
+        error.message = "Validation Error";
+        error.statusCode = 400;
+        res
+            // .status(400)
+            .json(error);
+    }
+});
 
 
 /*************************************** error handler ****************************************/

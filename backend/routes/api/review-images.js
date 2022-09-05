@@ -14,27 +14,37 @@ let error = {};
 
 /************************************* /spot-images/:imageId *************************************/
 
+// Postman 34: "Delete a Review Image - Send Twice to Error Check Invalid Id On Second Request Copy"
 // README, line 1368
 router.delete('/:imageId', requireAuth, async (req, res) => {
 
-    let imageId = req.params.bookingId;
-    let deleteReviewImage = await SpotImage.findByPk(imageId);
+    let deleteImageId = req.params.imageId;
+    let deleteReviewImage = await SpotImage.findByPk(deleteImageId);
 
-    if (!deleteReviewImage) {
-        error.message = "Review Image couldn't be found";
-        error.status = 404;
-        next(err);
+    try {
+        if (!deleteReviewImage) {
+            error.message = "Review Image couldn't be found";
+            error.status = 404;
+            res
+                // .status(404)
+                .json(error);
 
-    } else {
-        deleteReviewImage.destroy();
-        deleteReviewImage.save();
+        } else {
+            deleteReviewImage.destroy();
+            deleteReviewImage.save();
+            res
+                .status(200)
+                .json({
+                    "message": "Successfully deleted",
+                    "statusCode": 200
+                })
+        };
+
+    } catch (err) {
+        error.message = err;
         res
-            .status(200)
-            .json({
-                "message": "Successfully deleted",
-                "statusCode": 200
-            })
-    };
+            .json(error)
+    }
 });
 
 
