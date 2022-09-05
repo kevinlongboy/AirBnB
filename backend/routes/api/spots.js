@@ -714,11 +714,10 @@ router.get('/', async (req, res, next) => {
             });
 
     } catch (err) {
-        console.log(err)
         error.message = "Spot couldn't be found"
         error.status = 404
         return res
-            .json(error);
+            .json(err);
     }
 });
 
