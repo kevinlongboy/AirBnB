@@ -22,7 +22,7 @@ const demoUsers = [
     lastName: 'Moon',
     username: 'dmoon',
     hashedPassword: bcrypt.hashSync('passwordC'),
-    email: 'dmoon@manchester.com',
+    email: 'dmoon@hotmail.co.uk',
   },
   {
     firstName: 'Roz',
@@ -57,14 +57,14 @@ const demoUsers = [
     lastName: 'Shempsky',
     username: 'nshempsky',
     hashedPassword: bcrypt.hashSync('passwordH'),
-    email: 'nshempsky@kacl.com',
+    email: 'nshempsky@sfi.org',
   },
   {
     firstName: 'Bob',
     lastName: 'Briscoe',
     username: 'bbriscoe',
     hashedPassword: bcrypt.hashSync('passwordI'),
-    email: 'bbriscoe@kacl.com',
+    email: 'bbriscoe@yahoo.com',
   },
 ]
 

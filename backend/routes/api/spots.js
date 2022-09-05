@@ -178,7 +178,6 @@ router.get('/:spotId/bookings', async (req, res) => {
         res
             .json(error)
     }
-
 });
 
 // Postman 25, 26, 27: "Create a Booking Based on a Spot Id"
