@@ -721,6 +721,7 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+
 // Postman 7: "Create a Spot"
 // README, line 380
 router.post('/', requireAuth, validateSpot, async (req, res) => {
@@ -743,7 +744,7 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
             description: description,
             price: price,
         });
-        // postSpot.save();
+        postSpot.save();
         console.log(postSpot)
 
         return res
