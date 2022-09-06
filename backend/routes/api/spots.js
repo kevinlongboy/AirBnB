@@ -10,9 +10,6 @@ const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../d
 
 /************************************* global variables *************************************/
 
-// declare spotId here? >> DRY
-let error = {};
-
 const validateSpot = [
     check('address')
         .exists({ checkFalsy: true })
@@ -630,10 +627,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 // README, line 1405
 router.get('/', async (req, res, next) => {
 
-    // get array of all spot objects
-    // iterate through array
-    // for each item in array, aggregate average rating
-    // add average rating to spot object
+    let err = {};
 
     try {
         let query = {
@@ -713,11 +707,9 @@ router.get('/', async (req, res, next) => {
                 size
             });
 
-    } catch (err) {
-        error.message = "Spot couldn't be found"
-        error.status = 404
-        return res
-            .json(err);
+    } catch (error) {
+        err.error = error
+        return res.json(err);
     }
 });
 
@@ -728,9 +720,65 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
 
     let currentUser = req.user
     let currentUserId = req.user.id
+    let err = {};
 
     try {
         let { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+        if (!address) {
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors = { address: "Street address is required" }
+            return res.json(err);
+        }
+        if (!city) {
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors = { city: "City is required" }
+            return res.json(err);
+        }
+        if (!state) {
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors = { state: "State is required" }
+            return res.json(err);
+        }
+        if (!country) {
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors = { country: "Country is required" }
+            return res.json(err);
+        }
+        if (!lat) {
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors = { lat: "Latitude is not valid" }
+            return res.json(err);
+        }
+        if (!lng) {
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors = { lng: "Longitude is not valid" }
+            return res.json(err);
+        }
+        if (!name) {
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors = { name: "Name must be less than 50 characters" }
+            return res.json(err);
+        }
+        if (!description) {
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors = { description: "Description is required" }
+            return res.json(err);
+        }
+        if (!price) {
+            err.message = "Validation Error";
+            err.status = 400;
+            err.errors = { price: "Price per day is required" }
+            return res.json(err);
+        }
 
         let postSpot = await currentUser.createSpot({
             ownerId: currentUserId,
@@ -750,12 +798,9 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
             .status(201)
             .json(postSpot)
 
-    } catch (err) {
-        error.message = "Validation Error";
-        error.statusCode = 400;
-        error.errors = err;
-        return res
-            .json(error);
+    } catch (error) {
+        err.error = error
+        return res.json(err);
     }
 });
 
