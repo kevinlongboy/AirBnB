@@ -35,18 +35,55 @@ const validateSignup = [
     handleValidationErrors
 ];
 
-// Sign up
+// Postman 2: "Sign up"
+// README, line 141
 router.post('/', validateSignup, async (req, res) => {
 
     const { firstName, lastName, email, password, username } = req.body;
-    let user = await User.signup({ firstName, lastName, email, username, password });
-    let token = await setTokenCookie(res, user);
 
-    // must turn user into JSON
-    user = user.toJSON();
-    user.token = token;
+    try {
 
-    return res.json(user);
+        let emailExists = await User.findOne({
+            where: { email: email },
+            raw: true
+        })
+        let usernameExists = await User.findOne({
+            where: { username: username },
+            raw: true
+        })
+
+        let err = {}
+        if (emailExists) {
+            err.message = "User already exists";
+            err.statusCode = 403;
+            err.errors = { email: "User with that email already exists" };
+            res.json(err)
+        }
+        if (usernameExists) {
+            err.message = "User already exists";
+            err.statusCode = 403;
+            err.errors = { username: "User with that username already exists" };
+            res.json(err)
+        }
+
+        let user = await User.signup({ firstName, lastName, email, username, password });
+        let token = await setTokenCookie(res, user);
+
+        returnUser = await User.findByPk(user.id, {
+            attributes: {
+                exclude: ['username']
+            },
+            raw: true
+        })
+        returnUser.email = email
+        returnUser.username = username
+        returnUser.token = token
+        return res.json(returnUser)
+        
+    } catch (err) {
+        err.error = err;
+        res.json(err);
+    }
 });
 
 module.exports = router;
