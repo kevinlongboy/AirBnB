@@ -197,7 +197,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     let error = {};
 
     try {
-        let findSpot = await Spot.findByPk(currSpotId, { raw: true });
+        let findSpot = await Spot.findByPk(currSpotId);
 
         if (!findSpot) {
             error.message = "Spot couldn't be found"
@@ -234,7 +234,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             let existingStartDate = existingBooking.startDate
             let existingEndDate = existingBooking.endDate
 
-            if ((startDate === existingStartDate) && (endDate === existingEndDate)) {
+            if ((startDate == existingStartDate) && (endDate == existingEndDate)) {
                 error.message = "Sorry, this spot is already booked for the specified dates";
                 error.statusCode = 403;
                 error.errors = {
@@ -259,7 +259,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
         if (currentUserId !== findSpotOwnerId) {
             let postSpotBooking = await findSpot.createBooking({
-                spotId: parseInt(currSpotId),
+                spotId: currSpotId,
                 userId: currentUserId,
                 startDate: startDate,
                 endDate: endDate,
