@@ -149,6 +149,9 @@ router.get('/:spotId/bookings', async (req, res) => {
         /*************** Successful Response: If you ARE NOT the owner of the spot. ***************/
         if (currentUserId != bookingOwnerId.ownerId) {
             let publiclyViewBookings = await Booking.findAll({
+                where: {
+                    spotId: getSpotId
+                },
                 attributes: {
                     exclude: ['id', 'createdAt', 'updatedAt', 'userId']
                 },
