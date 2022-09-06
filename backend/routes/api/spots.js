@@ -383,17 +383,17 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
 // README, line 454
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
-    let spotId = req.params.spotId;
+    let spotId = parseInt(req.params.spotId);
     let err = {};
 
     try {
-        let findSpot = await Spot.findByPk(spotId);
+        let findSpot = await Spot.findByPk(spotId, { raw: true });
 
         if (!findSpot) {
-            error.message = "Spot couldn't be found"
-            error.status = 404
+            err.message = "Spot couldn't be found"
+            err.status = 404
             return res
-                .json(error)
+                .json(err)
         }
 
         let { url, preview } = req.body;
