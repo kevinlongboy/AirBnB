@@ -25,24 +25,30 @@ router.post('/', validateLogin, async (req, res, next) => {
     const { credential, password } = req.body;
     let err = new Error()
 
-    const user = await User.login({ credential, password });
+    try {
+        const user = await User.login({ credential, password });
 
-    if (!user) {
-        // const err = new Error('Login failed');
-        // err.title = 'Login failed';
-        // err.errors = ['The provided credentials were invalid.'];
-        err.message = "Invalid credentials"
-        err.statusCode = 401;
+        if (!user) {
+            // const err = new Error('Login failed');
+            // err.title = 'Login failed';
+            // err.errors = ['The provided credentials were invalid.'];
+            err.message = "Invalid credentials"
+            err.statusCode = 401;
+            return res.json(err);
+        }
+
+        let token = await setTokenCookie(res, user);
+
+        let printUser = await User.findByPk(user.id, { raw: true });
+        printUser.email = credential;
+        printUser.token = token;
+
+        return res.json(printUser)
+
+    } catch (error) {
+        err.error = error;
         return res.json(err);
     }
-
-    let token = await setTokenCookie(res, user);
-
-    let printUser = await User.findByPk(user.id, { raw: true });
-    printUser.email = credential;
-    printUser.token = token;
-
-    return res.json(printUser)
 });
 
 // Log out
@@ -54,19 +60,35 @@ router.delete(
     }
 );
 
-// Restore session user
-router.get(
-    '/',
-    restoreUser,
-    (req, res) => {
-        const { user } = req;
+// Postman 5: "Get Current User"
+// README, line 48
+router.get('/', restoreUser, (req, res) => {
+
+    const { user } = req;
+    let err = {};
+
+    try {
+
         if (user) {
-            return res.json({
-                user: user.toSafeObject()
-            });
+            let printUser = {};
+            printUser.id = user.id;
+            printUser.firstName = user.firstName;
+            printUser.lastName = user.lastName;
+            printUser.email = user.email;
+            printUser.username = user.username;
+            res.json(printUser)
+
+            return res
+                .status(200)
+                .json(user)
+
         } else return res.json({});
+
+    } catch (error) {
+        err.error = error;
+        res.json(err)
     }
-);
+});
 
 
 

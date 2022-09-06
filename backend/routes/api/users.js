@@ -77,7 +77,9 @@ router.post('/', validateSignup, async (req, res) => {
         returnUser.email = email
         returnUser.username = username
         returnUser.token = token
-        return res.json(returnUser)
+        return res
+            .status(200)
+            .json(returnUser)
 
     } catch (err) {
         err.error = err;
