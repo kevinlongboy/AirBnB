@@ -7,9 +7,8 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 const review = require('../../db/models/review');
 
-/************************************* global variables *************************************/
 
-let error = {};
+/************************************* global variables *************************************/
 
 const validateReview = [
     check('review')
@@ -21,30 +20,30 @@ const validateReview = [
     handleValidationErrors
 ]
 
+
 /******************************** /reviews/:reviewId/images **********************************/
 
-// Postman 18: "Create an Image for a Review"
+// Postman 18, 19: "Create an Image for a Review"
 // README, line 820
 router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
 
     let reviewId = req.params.reviewId;
-    let findReview = await Review.findByPk(reviewId);
+    let error = {};
 
     try {
+        let findReview = await Review.findByPk(reviewId);
 
         if (!findReview) {
             error.message = "Review couldn't be found";
             error.statusCode = 404;
-            return res
-                .json(error);
+            return res.json(error);
         }
 
         let reviewImgCount = await ReviewImage.count()
         if (reviewImgCount === 10) {
             error.message = "Maximum number of images for this resource was reached";
             error.statusCode = 403;
-            return res
-                .json(error);
+            return res.json(error);
         }
 
         let { url } = req.body;
@@ -62,10 +61,8 @@ router.post('/:reviewId/images', requireAuth, async (req, res, next) => {
             .json(printPostReviewImage)
 
     } catch (err) {
-        error.message = "Could not add image";
-        error.statusCode = 404;
-        return res
-            .json(err);
+        error.error = err
+        return res.json(error);
     }
 });
 
@@ -78,6 +75,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
     let currentUser = req.user;
     let currentUserId = req.user.id;
+    let error = {};
 
     try {
         let getCurrentUserReviews = await Review.findAll({ // returns array of review-objects
@@ -135,10 +133,8 @@ router.get('/current', requireAuth, async (req, res, next) => {
             })
 
     } catch (err) {
-        error.message = "Spot couldn't be found"
-        error.statusCode = 404
-        return res
-            .json(error);
+        error.error = err
+        return res.json(error);
     }
 });
 
@@ -150,14 +146,15 @@ router.get('/current', requireAuth, async (req, res, next) => {
 router.put('/:reviewId', requireAuth, async (req, res) => {
 
     let reviewId = req.params.reviewId;
-    let putReview = await Review.findByPk(reviewId);
+    let error = {};
 
     try {
+        let putReview = await Review.findByPk(reviewId);
+
         if (!putReview) {
             error.message = "Review couldn't be found";
             error.statusCode = 404;
-            return res
-                .json(error);
+            return res.json(error);
         }
 
         let { review, stars } = req.body;
@@ -170,10 +167,8 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
             .json(putReview)
 
     } catch (err) {
-        error.message = "Validation Error";
-        error.statusCode = 400;
-        return res
-            .json(error);
+        error.error = err
+        return res.json(error);
     }
 });
 
@@ -182,9 +177,17 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 router.delete('/:reviewId', requireAuth, async (req, res) => {
 
     let reviewId = req.params.reviewId;
-    let deleteReview = await Review.findByPk(reviewId); // BUG: postman crashes upon second test
+    let error = {};
 
     try {
+        let deleteReview = await Review.findByPk(reviewId);
+
+        if (!deleteReview) {
+            error.message = "Review couldn't be found";
+            error.status = 404;
+            return res.json(error);
+        }
+
         deleteReview.destroy();
         deleteReview.save();
         return res
@@ -195,16 +198,10 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
             })
 
     } catch (err) {
-        error.message = "Review couldn't be found";
-        error.status = 404;
-        return res
-            .json(error);
+        error.error = err
+        return res.json(error);
     }
 });
-
-
-
-
 
 
 /*************************************** error handler ****************************************/
@@ -212,7 +209,6 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
 router.use((err, req, res, next) => {
     return res.json(err)
 })
-
 
 
 /****************************************** export ********************************************/

@@ -7,6 +7,9 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
+
+/************************************* global variables *************************************/
+
 const validateSignup = [
     check('firstName')
         .exists({ checkFalsy: true })
@@ -35,11 +38,15 @@ const validateSignup = [
     handleValidationErrors
 ];
 
+
+/****************************************** /users ******************************************/
+
 // Postman 2: "Sign up"
 // README, line 141
 router.post('/', validateSignup, async (req, res) => {
 
     const { firstName, lastName, email, password, username } = req.body;
+    let error = {};
 
     try {
         let emailExists = await User.findOne({
@@ -51,18 +58,17 @@ router.post('/', validateSignup, async (req, res) => {
             raw: true
         })
 
-        let err = {}
         if (emailExists) {
-            err.message = "User already exists";
-            err.statusCode = 403;
-            err.errors = { email: "User with that email already exists" };
-            res.json(err)
+            error.message = "User already exists";
+            error.statusCode = 403;
+            error.errors = { email: "User with that email already exists" };
+            res.json(error)
         }
         if (usernameExists) {
-            err.message = "User already exists";
-            err.statusCode = 403;
-            err.errors = { username: "User with that username already exists" };
-            res.json(err)
+            error.message = "User already exists";
+            error.statusCode = 403;
+            error.errors = { username: "User with that username already exists" };
+            res.json(error)
         }
 
         let user = await User.signup({ firstName, lastName, email, username, password });
@@ -82,9 +88,12 @@ router.post('/', validateSignup, async (req, res) => {
             .json(returnUser)
 
     } catch (err) {
-        err.error = err;
-        res.json(err);
+        error.error = error
+        return res.json(error);
     }
 });
+
+
+/****************************************** export ********************************************/
 
 module.exports = router;

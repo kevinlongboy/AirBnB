@@ -99,22 +99,24 @@ const validateReview = [
 
 /********************************** spots/:spotId/bookings ***********************************/
 
-
 // Postman 29, 30: "Get All Bookings for a Spot By Id"
 // README, line 1031
 // *NOTE*
-// first test should return error, since no bookings were created for the Spot (id #6) created during testing
-// and User (id #10) that was created during testing owns Spot #6, and cannot book their own spot
+// first test should return error, since no bookings were created for Spot (id #6) during testing
+// and User (id #10) that was created during testing owns Spot (id #6), and cannot book their own spot
 router.get('/:spotId/bookings', async (req, res) => {
 
-    let getSpotId = parseInt(req.params.spotId)
-    // getSpotId = 5 // Uncomment to test if spot belongs to current user (1/2)
     let currentUser = req.user;
+
     let currentUserId = req.user.id;
-    // currentUserId = 5 // Uncomment to test if spot belongs to current user (2/2)
+    // currentUserId = 5 // Uncomment to test if spot belongs to current user (1/2)
+
+    let getSpotId = parseInt(req.params.spotId)
+    // getSpotId = 5 // Uncomment to test if spot belongs to current user (2/2)
+
+    let error = {};
 
     try {
-
         let spotExists = await Spot.findByPk(getSpotId)
         if (!spotExists) {
             return res.json({
@@ -172,6 +174,7 @@ router.get('/:spotId/bookings', async (req, res) => {
             })
             booking.User = bookingUserData
         }
+
         return res
             .status(200)
             .json({
@@ -179,7 +182,8 @@ router.get('/:spotId/bookings', async (req, res) => {
             })
 
     } catch (err) {
-        return res.json(err)
+        error.error = err
+        return res.json(error);
     }
 });
 
@@ -189,23 +193,20 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
     let currentUser = req.user;
     let currentUserId = req.user.id;
-
-    let currSpotId = req.params.spotId;
-    // currSpotId is 5, which will create problem for "Get All Bookings for a Spot By Id"
-    // should it not create a booking for a spot created during testing?
-    // answer: no, since user cannot book their own spot
+    let currSpotId = parseInt(req.params.spotId);
+    let error = {};
 
     try {
-        let findSpot = await Spot.findByPk(currSpotId);
-        let findSpotOwnerId = findSpot.ownerId
-
-        let { startDate, endDate } = req.body;
+        let findSpot = await Spot.findByPk(currSpotId, { raw: true });
 
         if (!findSpot) {
             error.message = "Spot couldn't be found"
             error.statusCode = 404
             return res.json(error)
         }
+
+        let findSpotOwnerId = findSpot.ownerId
+        let { startDate, endDate } = req.body;
 
         if (startDate >= endDate) {
             error.message = "Validation error"
@@ -257,73 +258,77 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
                 startDate: startDate,
                 endDate: endDate,
             })
+
             return res
                 .status(200)
                 .json(postSpotBooking)
         }
 
     } catch (err) {
-        // error.message = "Validation Error";
-        // error.statusCode = 400;
-        return res.json({
-            message: "Spot couldn't be found",
-            statusCode: 404
-        });
+        error.error = err
+        return res.json(error);
     }
 });
 
 
 /*********************************** spots/:spotId/reviews ***********************************/
 
-// Postman 21: "Get Reviews by Spot Id"
+// Postman 21, 22: "Get Reviews by Spot Id"
 // README, line 684
 router.get('/:spotId/reviews', async (req, res) => {
 
     let currSpotId = req.params.spotId;
-    let findSpot = await Spot.findByPk(currSpotId);
+    let error = {};
 
-    if (!findSpot) {
-        error.message = "Spot couldn't be found"
-        error.statusCode = 404
-        return res
-            .json(error)
+    try {
+        let findSpot = await Spot.findByPk(currSpotId);
 
-    } else {
-        let findAllSpotReviews = await Review.findAll({
-            where: { spotId: currSpotId },
-            raw: true
-        })
+        if (!findSpot) {
+            error.message = "Spot couldn't be found"
+            error.statusCode = 404
+            return res.json(error)
 
-        let currentUserId = req.user.id;
-        let currentUserData = await User.findByPk(currentUserId, {
-            attributes: {
-                exclude: ['username', 'hashedPassword', 'email', 'createdAt', 'updatedAt']
-            },
-            raw: true,
-        })
+        } else {
+            let findAllSpotReviews = await Review.findAll({
+                where: { spotId: currSpotId },
+                raw: true
+            })
 
-        for (let i = 0; i < findAllSpotReviews.length; i++) {
-            let currReview = findAllSpotReviews[i];
-
-            /******************** add User-key ********************/
-            currReview.User = currentUserData
-
-            /******************** add ReviewImages-key ********************/
-            let currReviewImgs = await ReviewImage.findAll({
-                where: { reviewId: currReview.spotId },
+            let currentUserId = req.user.id;
+            let currentUserData = await User.findByPk(currentUserId, {
                 attributes: {
-                    exclude: ['createdAt', 'updatedAt', 'reviewId']
+                    exclude: ['username', 'hashedPassword', 'email', 'createdAt', 'updatedAt']
                 },
                 raw: true,
             })
-            currReview.ReviewImages = currReviewImgs
+
+            for (let i = 0; i < findAllSpotReviews.length; i++) {
+                let currReview = findAllSpotReviews[i];
+
+                /******************** add User-key ********************/
+                currReview.User = currentUserData
+
+                /******************** add ReviewImages-key ********************/
+                let currReviewImgs = await ReviewImage.findAll({
+                    where: { reviewId: currReview.spotId },
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt', 'reviewId']
+                    },
+                    raw: true,
+                })
+                currReview.ReviewImages = currReviewImgs
+            }
+
+            return res
+                .status(200)
+                .json({
+                    "Reviews": findAllSpotReviews
+                })
         }
 
-        return res
-            .status(200)
-            .json({
-                "Reviews": findAllSpotReviews
-            })
+    } catch (err) {
+        error.error = err
+        return res.json(error);
     }
 });
 
@@ -334,14 +339,15 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
     let currentUser = req.user;
     let currentUserId = req.user.id;
     let postSpotId = req.params.spotId;
+    let error = {};
 
     try {
         let findSpot = await Spot.findByPk(postSpotId);
+
         if (!findSpot) {
             error.message = "Spot couldn't be found"
             error.statusCode = 404
-            return res
-                .json(error)
+            return res.json(error)
         }
 
         let spotReviewExists = await Review.findAll({ // returns array of review for req. spot
@@ -350,8 +356,7 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
         if (spotReviewExists.length > 0) {
             error.message = "User already has a review for this spot";
             error.statusCode = 403;
-            return res
-                .json(error)
+            return res.json(error)
 
         } else {
             let { review, stars } = req.body;
@@ -363,16 +368,13 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
             })
             postSpotReview.save();
             return res
-                .status(200)
+                .status(201)
                 .json(postSpotReview)
         }
 
     } catch (err) {
-        error.message = "Validation Error";
-        error.statusCode = 400;
-        error.errors = err;
-        return res
-            .json(error)
+        error.error = err
+        return res.json(error);
     }
 });
 
@@ -384,16 +386,16 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
     let spotId = parseInt(req.params.spotId);
-    let err = {};
+    let error = {};
 
     try {
-        let findSpot = await Spot.findByPk(spotId, { raw: true });
+        let findSpot = await Spot.findByPk(spotId);
 
         if (!findSpot) {
-            err.message = "Spot couldn't be found"
-            err.status = 404
+            error.message = "Spot couldn't be found"
+            error.status = 404
             return res
-                .json(err)
+                .json(error)
         }
 
         let { url, preview } = req.body;
@@ -411,9 +413,9 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
             .status(200)
             .json(printSpotImage)
 
-    } catch (error) {
-        err.error = error
-        return res.json(err);
+    } catch (err) {
+        error.error = err
+        return res.json(error);
     }
 });
 
@@ -426,6 +428,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
 
     let currentUser = req.user;
     let currentUserId = req.user.id;
+    let error = {};
 
     try {
         let getCurrentSpots = await Spot.findAll({
@@ -489,21 +492,16 @@ router.get('/current', requireAuth, async (req, res, next) => {
 router.get('/:spotId', async (req, res, next) => {
 
     let currentSpotId = req.params.spotId;
+    let error = {};
 
     try {
         let getSpot = await Spot.findByPk(currentSpotId)
 
         if (!getSpot) {
-            // error.message = "Spot couldn't be found";
-            // error.statusCode = 404;
-            // return res.json(error)
-            return res.json({
-                "message": "Spot couldn't be found",
-                "statusCode": 404
-            });
+            error.message = "Spot couldn't be found";
+            error.statusCode = 404;
+            return res.json(error)
         }
-
-        console.log(getSpot.ownerId)
 
         /******************** add numReviews-key ********************/
         let reviewCount = await Review.count({
@@ -546,9 +544,8 @@ router.get('/:spotId', async (req, res, next) => {
             .json(getSpot)
 
     } catch (err) {
-        error.message = err
-        return res
-            .json(error);
+        error.error = err
+        return res.json(error);
     }
 });
 
@@ -557,14 +554,14 @@ router.get('/:spotId', async (req, res, next) => {
 router.put('/:spotId', requireAuth, async (req, res, next) => {
 
     let spotId = req.params.spotId;
-    let putSpot = await Spot.findByPk(spotId);
+    let error = {};
 
     try {
+        let putSpot = await Spot.findByPk(spotId);
         if (!putSpot) {
             error.message = "Spot couldn't be found";
             error.statusCode = 404;
-            return res
-                .json(error);
+            return res.json(error);
         }
 
         let { address, city, state, country, lat, lng, name, description, price } = req.body;
@@ -584,11 +581,8 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
             .json(putSpot)
 
     } catch (err) {
-        error.message = "Validation Error";
-        error.statusCode = 400;
-        error.errors = err;
-        return res
-            .json(error);
+        error.error = err
+        return res.json(error);
     }
 });
 
@@ -597,14 +591,15 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
 router.delete('/:spotId', requireAuth, async (req, res, next) => {
 
     let spotId = req.params.spotId;
-    let deleteSpot = await Spot.findByPk(spotId); //BUG: postman crashes upon second test
+    let error = {};
 
     try {
+        let deleteSpot = await Spot.findByPk(spotId);
+
         if (!deleteSpot) {
             error.message = "Spot couldn't be found";
             error.status = 404;
-            return res
-                .json(error);
+            return res.json(error);
 
         }
 
@@ -616,11 +611,10 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
                 "message": "Successfully deleted",
                 "statusCode": 200
             })
+
     } catch (err) {
-        error.message = "Invalid credentials";
-        error.status = 404;
-        return res
-            .json(error);
+        error.error = err
+        return res.json(error);
     }
 });
 
@@ -634,7 +628,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 // README, line 1405
 router.get('/', async (req, res, next) => {
 
-    let err = {};
+    let error = {};
 
     try {
         let query = {
@@ -714,9 +708,9 @@ router.get('/', async (req, res, next) => {
                 size
             });
 
-    } catch (error) {
-        err.error = error
-        return res.json(err);
+    } catch (err) {
+        error.error = err
+        return res.json(error);
     }
 });
 
@@ -727,65 +721,65 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
 
     let currentUser = req.user
     let currentUserId = req.user.id
-    let err = {};
+    let error = {};
 
     try {
         let { address, city, state, country, lat, lng, name, description, price } = req.body;
 
-        if (!address) {
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors = { address: "Street address is required" }
-            return res.json(err);
-        }
-        if (!city) {
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors = { city: "City is required" }
-            return res.json(err);
-        }
-        if (!state) {
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors = { state: "State is required" }
-            return res.json(err);
-        }
-        if (!country) {
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors = { country: "Country is required" }
-            return res.json(err);
-        }
-        if (!lat) {
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors = { lat: "Latitude is not valid" }
-            return res.json(err);
-        }
-        if (!lng) {
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors = { lng: "Longitude is not valid" }
-            return res.json(err);
-        }
-        if (!name) {
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors = { name: "Name must be less than 50 characters" }
-            return res.json(err);
-        }
-        if (!description) {
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors = { description: "Description is required" }
-            return res.json(err);
-        }
-        if (!price) {
-            err.message = "Validation Error";
-            err.status = 400;
-            err.errors = { price: "Price per day is required" }
-            return res.json(err);
-        }
+        // if (!address) {
+        //     err.message = "Validation Error";
+        //     err.status = 400;
+        //     err.errors = { address: "Street address is required" }
+        //     return res.json(err);
+        // }
+        // if (!city) {
+        //     err.message = "Validation Error";
+        //     err.status = 400;
+        //     err.errors = { city: "City is required" }
+        //     return res.json(err);
+        // }
+        // if (!state) {
+        //     err.message = "Validation Error";
+        //     err.status = 400;
+        //     err.errors = { state: "State is required" }
+        //     return res.json(err);
+        // }
+        // if (!country) {
+        //     err.message = "Validation Error";
+        //     err.status = 400;
+        //     err.errors = { country: "Country is required" }
+        //     return res.json(err);
+        // }
+        // if (!lat) {
+        //     err.message = "Validation Error";
+        //     err.status = 400;
+        //     err.errors = { lat: "Latitude is not valid" }
+        //     return res.json(err);
+        // }
+        // if (!lng) {
+        //     err.message = "Validation Error";
+        //     err.status = 400;
+        //     err.errors = { lng: "Longitude is not valid" }
+        //     return res.json(err);
+        // }
+        // if (!name) {
+        //     err.message = "Validation Error";
+        //     err.status = 400;
+        //     err.errors = { name: "Name must be less than 50 characters" }
+        //     return res.json(err);
+        // }
+        // if (!description) {
+        //     err.message = "Validation Error";
+        //     err.status = 400;
+        //     err.errors = { description: "Description is required" }
+        //     return res.json(err);
+        // }
+        // if (!price) {
+        //     err.message = "Validation Error";
+        //     err.status = 400;
+        //     err.errors = { price: "Price per day is required" }
+        //     return res.json(err);
+        // }
 
         let postSpot = await currentUser.createSpot({
             ownerId: currentUserId,
@@ -805,9 +799,9 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
             .status(201)
             .json(postSpot)
 
-    } catch (error) {
-        err.error = error
-        return res.json(err);
+    } catch (err) {
+        error.error = err
+        return res.json(error);
     }
 });
 

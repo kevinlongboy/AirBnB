@@ -7,26 +7,24 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
 
-/************************************* global variables *************************************/
-
-let error = {};
-
-
 /************************************* /spot-images/:imageId *************************************/
 
 // Postman 34: "Delete a Review Image - Send Twice to Error Check Invalid Id On Second Request Copy"
 // README, line 1368
 router.delete('/:imageId', requireAuth, async (req, res) => {
 
+
     let deleteImageId = req.params.imageId;
-    let deleteReviewImage = await SpotImage.findByPk(deleteImageId);
+    let error = {};
+
 
     try {
+        let deleteReviewImage = await SpotImage.findByPk(deleteImageId);
+
         if (!deleteReviewImage) {
             error.message = "Review Image couldn't be found";
             error.status = 404;
-            return res
-                .json(error);
+            return res.json(error);
 
         } else {
             deleteReviewImage.destroy();
@@ -40,9 +38,8 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
         };
 
     } catch (err) {
-        error.message = err;
-        return res
-            .json(error)
+        error.error = err
+        return res.json(error);
     }
 });
 

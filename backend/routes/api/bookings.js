@@ -6,9 +6,8 @@ const { requireAuth } = require('../../utils/auth');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
-/************************************** global variables **************************************/
 
-let error = {};
+/************************************** global variables **************************************/
 
 const validateBooking = [
     check('startDate')
@@ -20,17 +19,15 @@ const validateBooking = [
     handleValidationErrors
 ]
 
+
 /************************************ /bookings/:bookingId ************************************/
 
 // Postman 31, 32: "Edit a Booking"
 // README, line 1181
 router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
 
-
     let bookingId = req.params.bookingId;
-    // res.json(bookingId)
-    // bookingId = 4
-    let { startDate, endDate } = req.body;
+    let error = {};
 
     try {
         let putBooking = await Booking.findByPk(bookingId);
@@ -43,13 +40,14 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
                 .json(error);
         }
 
+        let { startDate, endDate } = req.body;
+
         /*************** Error Handler: endDate cannot be on or before startDate ***************/
         if (startDate >= endDate) {
             error.message = "Validation error"
             error.statusCode = 400
             error.errors = { endDate: "endDate cannot be on or before startDate" }
-            return res
-                .json(error)
+            return res.json(error)
         }
 
         let allExistingBookings = await Booking.findAll({
@@ -100,49 +98,54 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
 
     } catch (err) {
         error.message = err;
-        return res
-            .json(error);
+        return res.json(error);
     }
 });
+
 
 // Postman 35: "Delete a Booking - Send Twice to Error Check Invalid Id On Second Request"
 // README, line 1278
 router.delete('/:bookingId', requireAuth, async (req, res) => {
 
-    // let bookingId = req.params.bookingId;
-    // res.json(bookingId)
-    let bookingId = 4; // Use this to test while bookingId = null
+    let bookingId = req.params.bookingId;
+    let error = {};
 
-    let deleteBooking = await Booking.findByPk(bookingId);
+    try {
+        let deleteBooking = await Booking.findByPk(bookingId);
 
-    if (!deleteBooking) {
-        error.message = "Booking couldn't be found";
-        error.status = 404;
+        if (!deleteBooking) {
+            error.message = "Booking couldn't be found";
+            error.status = 404;
+            return res
+                .json(error);
+        }
+
+        let currentDate = new Date();
+        let dd = String(currentDate.getDate()).padStart(2, '0');
+        let mm = String(currentDate.getMonth() + 1).padStart(2, '0');
+        let yyyy = currentDate.getFullYear();
+        currentDate = `${yyyy}-${mm}-${dd}`;
+
+        if ((deleteBooking.startDate < currentDate) && (deleteBooking.endDate > currentDate)) {
+            error.message = "Bookings that have been started can't be deleted";
+            error.status = 403;
+            return res
+                .json(error);
+        }
+
+        deleteBooking.destroy();
+        deleteBooking.save();
         return res
-            .json(error);
+            .status(200)
+            .json({
+                "message": "Successfully deleted",
+                "statusCode": 200
+            });
+
+    } catch (err) {
+        error.error = err
+        return res.json(error);
     }
-
-    let currentDate = new Date();
-    let dd = String(currentDate.getDate()).padStart(2, '0');
-    let mm = String(currentDate.getMonth() + 1).padStart(2, '0');
-    let yyyy = currentDate.getFullYear();
-    currentDate = `${yyyy}-${mm}-${dd}`;
-
-    if ((deleteBooking.startDate < currentDate) && (deleteBooking.endDate > currentDate)) {
-        error.message = "Bookings that have been started can't be deleted";
-        error.status = 403;
-        return res
-            .json(error);
-    }
-
-    deleteBooking.destroy();
-    deleteBooking.save();
-    return res
-        .status(200)
-        .json({
-            "message": "Successfully deleted",
-            "statusCode": 200
-        });
 });
 
 
@@ -152,39 +155,48 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 // README, line 986
 router.get('/current', requireAuth, async (req, res, next) => {
 
-    let getCurrentBookings = await Booking.findAll({
-        where: { userId: req.user.id },
-        raw: true
-    });
+    let error = {};
 
-    for (let i = 0; i < getCurrentBookings.length; i++) {
-
-        let booking = getCurrentBookings[i];
-
-        let bookingSpotInfo = await Spot.findByPk(booking.spotId, {
-            attributes: {
-                exclude: ['description', 'createdAt', 'updatedAt']
-            },
+    try {
+        let getCurrentBookings = await Booking.findAll({
+            where: { userId: req.user.id },
             raw: true
-        })
-        booking.Spot = bookingSpotInfo;
+        });
 
-        let spotPreviewImg = await SpotImage.findOne({
-            where: { spotId: booking.Spot.id, preview: true },
-            attributes: {
-                exclude: ['id', 'preview', 'spotId', 'createdAt', 'updatedAt']
-            },
-            raw: true
-        })
-        booking.Spot.previewImage = spotPreviewImg.url
+        for (let i = 0; i < getCurrentBookings.length; i++) {
 
+            let booking = getCurrentBookings[i];
+
+            let bookingSpotInfo = await Spot.findByPk(booking.spotId, {
+                attributes: {
+                    exclude: ['description', 'createdAt', 'updatedAt']
+                },
+                raw: true
+            })
+            booking.Spot = bookingSpotInfo;
+
+            let spotPreviewImg = await SpotImage.findOne({
+                where: { spotId: booking.Spot.id, preview: true },
+                attributes: {
+                    exclude: ['id', 'preview', 'spotId', 'createdAt', 'updatedAt']
+                },
+                raw: true
+            })
+            booking.Spot.previewImage = spotPreviewImg.url
+
+        }
+        return res
+            .status(200)
+            .json({
+                "Bookings": getCurrentBookings
+            })
+
+    } catch (err) {
+        error.error = err
+        return res.json(error);
     }
-    return res
-        .status(200)
-        .json({
-            "Bookings": getCurrentBookings
-        })
 });
+
 
 /*************************************** error handler ****************************************/
 

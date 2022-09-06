@@ -7,6 +7,9 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
+
+/************************************* global variables *************************************/
+
 const validateLogin = [
     check('credential')
         .exists({ checkFalsy: true })
@@ -18,12 +21,15 @@ const validateLogin = [
     handleValidationErrors
 ];
 
+
+/********************************** /session ***********************************/
+
 // Postman 3, 4: "Log in"
 // README, line 74
 router.post('/', validateLogin, async (req, res, next) => {
 
     const { credential, password } = req.body;
-    let err = new Error()
+    let error = {};
 
     try {
         const user = await User.login({ credential, password });
@@ -32,9 +38,9 @@ router.post('/', validateLogin, async (req, res, next) => {
             // const err = new Error('Login failed');
             // err.title = 'Login failed';
             // err.errors = ['The provided credentials were invalid.'];
-            err.message = "Invalid credentials"
-            err.statusCode = 401;
-            return res.json(err);
+            error.message = "Invalid credentials"
+            error.statusCode = 401;
+            return res.json(error);
         }
 
         let token = await setTokenCookie(res, user);
@@ -45,9 +51,9 @@ router.post('/', validateLogin, async (req, res, next) => {
 
         return res.json(printUser)
 
-    } catch (error) {
-        err.error = error;
-        return res.json(err);
+    } catch (err) {
+        error.error = err;
+        return res.json(error);
     }
 });
 
@@ -65,7 +71,7 @@ router.delete(
 router.get('/', restoreUser, (req, res) => {
 
     const { user } = req;
-    let err = {};
+    let error = {};
 
     try {
 
@@ -84,12 +90,13 @@ router.get('/', restoreUser, (req, res) => {
 
         } else return res.json({});
 
-    } catch (error) {
-        err.error = error;
-        res.json(err)
+    } catch (err) {
+        error.err = err;
+        res.json(error)
     }
 });
 
 
+/****************************************** export ********************************************/
 
 module.exports = router;
