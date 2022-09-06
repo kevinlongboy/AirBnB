@@ -18,30 +18,30 @@ const validateLogin = [
     handleValidationErrors
 ];
 
-// Log in
-router.post(
-    '/',
-    validateLogin,
-    async (req, res, next) => {
-        const { credential, password } = req.body;
+// Postman 3: "Log in"
+// README, line 74
+router.post('/', validateLogin, async (req, res, next) => {
 
-        const user = await User.login({ credential, password });
+    const { credential, password } = req.body;
 
-        if (!user) {
-            const err = new Error('Login failed');
-            err.status = 401;
-            err.title = 'Login failed';
-            err.errors = ['The provided credentials were invalid.'];
-            return next(err);
-        }
+    const user = await User.login({ credential, password });
 
-        await setTokenCookie(res, user);
-
-        return res.json({
-            user
-        });
+    if (!user) {
+        const err = new Error('Login failed');
+        err.status = 401;
+        err.title = 'Login failed';
+        err.errors = ['The provided credentials were invalid.'];
+        return next(err);
     }
-);
+
+    let token = await setTokenCookie(res, user);
+
+    let printUser = await User.findByPk(user.id, { raw: true });
+    printUser.email = credential;
+    printUser.token = token;
+
+    return res.json(printUser)
+});
 
 // Log out
 router.delete(

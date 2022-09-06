@@ -42,7 +42,6 @@ router.post('/', validateSignup, async (req, res) => {
     const { firstName, lastName, email, password, username } = req.body;
 
     try {
-
         let emailExists = await User.findOne({
             where: { email: email },
             raw: true
@@ -79,7 +78,7 @@ router.post('/', validateSignup, async (req, res) => {
         returnUser.username = username
         returnUser.token = token
         return res.json(returnUser)
-        
+
     } catch (err) {
         err.error = err;
         res.json(err);
