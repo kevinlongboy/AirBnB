@@ -208,6 +208,12 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
         let findSpotOwnerId = findSpot.ownerId
         let { startDate, endDate } = req.body;
 
+        if (currentUserId === findSpotOwnerId) {
+            error.message = "Sorry, cannot book your own spot"
+            error.statusCode = 400
+            return res.json(error)
+        }
+
         if (startDate >= endDate) {
             error.message = "Validation error"
             error.statusCode = 400
@@ -332,7 +338,7 @@ router.get('/:spotId/reviews', async (req, res) => {
     }
 });
 
-// Postman 15: "Create a Review for a Spot"
+// Postman 15, 16, 17: "Create a Review for a Spot"
 // README, line 740
 router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
 
