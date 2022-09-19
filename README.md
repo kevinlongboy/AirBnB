@@ -1,14 +1,14 @@
 # CraneBnB
 
-An AirBnB Clone
+_An AirBnB Clone_
 
 ## Contents
 
 - <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#welcome-to-seattle" alt="Description of CraneBnB API">Description</a>
-- Overview
-- Download
-- Features
-- Tech
+- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#overview" alt="Overview of CraneBnB API">Features</a>
+- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#get-started" alt="Download CraneBnB API">Download</a>
+- Future Implementations
+- Tech Stack
 - Demo
 - Connect
 
@@ -20,9 +20,9 @@ An AirBnB Clone
 
 ## Get Started
 
-## Future Features
+## Planned Features
 
-## Technologies Used
+## Languages and Libraries Used
 
 Framework:
 
