@@ -3,15 +3,16 @@
 An AirBnB Clone
 
 ## Contents
-* Description
-* Overview
-* Download
-* Features
-* Tech
-* Demo
-* Connect
 
-***
+- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#welcome-to-seattle" alt="Description of CraneBnB API">Description</a>
+- Overview
+- Download
+- Features
+- Tech
+- Demo
+- Connect
+
+---
 
 ## Welcome to Seattle
 
