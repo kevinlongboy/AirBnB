@@ -55,9 +55,11 @@ Ready to install CraneBnB? Follow the instructions below:
 
 1. Navigate to the <a href="https://github.com/kevinlongboy/AirBnB" alt="CraneBnB GitHub repository link">GitHub repository page</a>.
    <br>
+   <br>
 2. Click on the 'Code' button:
    <br>
    <img src="assets/instructions/github-repository-page.png" alt="CraneBnB repository page" width="500"/>
+   <br>
    <br>
 3. Select 'Download ZIP' from the dropdown menu:
    <br>
