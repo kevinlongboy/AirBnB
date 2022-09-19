@@ -16,20 +16,40 @@ Contents
 
 ## 🌊 Welcome to Seattle
 
-... And welcome to CraneBnB, a virtual meeting place that connects visitors, and the like, to the finest _guest maisonettes_ in the Greater Seattle Area. Inspired by <a href="https://www.airbnb.com/" alt="AirBnB website">AirBnB</a>, CraneBnB allows its members the ability host visitors in their own homes, or become guests in others' spaces.
+... And welcome to CraneBnB, a virtual meeting place that connects visitors, and the like, to the finest _guest maisonettes_ in the Greater Seattle Area. Inspired by <a href="https://www.airbnb.com/" alt="AirBnB website">AirBnB</a>, CraneBnB allows its members the ability to host visitors in their own homes, or become guests in members' spaces.
 
-Don't miss this truly one in a lifetime opportunity to experience what Seattle has to offer. _Where else can you see an ocean wave, a fish fly, a mountain peak, and the world's largest needle?_
+Don't miss this truly once in a lifetime opportunity to experience what Seattle has to offer. _Where else can you see an ocean wave, a fish fly, a mountain peak, and the world's largest needle?_
 <br>
 <br>
 <img src="assets/gifs/frasier-niles-toast.gif" alt="Frasier and Niles Toasting GIF" width="250">
 
 ## 👀 Overview
 
+Before navigating the site, users have the option to choose between the role of a Host, a Guest, or perhaps even both!
+
 ### Spots
+_The main feature of CraneBnB_
+
+As a Host, users are able to list their home on the site and highlight its best qualities in the listing. Hosts should give a brief description of their home, henceforth known as a "Spot", then choose a befitting rate for a nightly stay.
+
+As a Guest, users are able to peruse through CraneBnB to find the perfect place for their stay in Seattle.
+<br>
+<br>
+<img src="assets/gifs/fraiser-alistair-hilarious-chair.gif" alt="Frasier Alistair Hilarious Chair GIF" width="250">
 
 ### Reviews
+_Hear the peoples' voice_
+
+CraneBnB gives its members the ability voice their opinions and share their experiences from previous stays.
+
+Users can also modify and delete any pervious posts they've previously posted.
+<br>
+<br>
+<img src="assets/gifs/roz-why-are-you-telling-her-this.gif" alt="Roz Why are You Telling Her This GIF" width="250">
 
 ## 🖱 Get Started
+
+###
 
 ## ⏳ Future Implementations
 
@@ -66,4 +86,4 @@ Don't miss this truly one in a lifetime opportunity to experience what Seattle h
 <a href="https://github.com/kevinlongboy"><img vertical-align="middle" alt="Developer's GitHub Page" width="45px" src="assets/social-media-branding/github-logo.png"/></a> <a href="https://www.linkedin.com/in/kevinlongboy/"><img vertical-align="middle" alt="Developer's LinkedIn Page" width="45px" src="assets/social-media-branding/linkedin-logo.png"/></a>
 <br>
 <br>
-<img src="assets/gifs/frasier-im-listening.gif" alt="Frasier I'm Listening GIF" width="480">
+<img src="assets/gifs/frasier-im-listening.gif" alt="Frasier I'm Listening GIF" width="350">
