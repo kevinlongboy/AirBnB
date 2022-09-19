@@ -23,7 +23,7 @@ Don't miss this truly once in a lifetime opportunity to experience what Seattle 
 <br>
 <img src="assets/gifs/frasier-niles-toast.gif" alt="Frasier and Niles Toasting GIF" width="250">
 
-## 👀 Overview
+## 👀 API Overview
 
 When navigating the site, users have the option to choose between the role of a Host, a Guest, or perhaps even both!
 
@@ -56,10 +56,18 @@ Ready to try
 ## ⏳ Future Implementations
 
 ### Bookings
+
 Bookings will supplement the Spots feature with functionality. Guests will be able to make, modify, and delete a reservation for a Spot, while Hosts will be able to view and manage any reservations for their own listings.
+<br>
+<br>
+<img src="assets/gifs/martin-what-can-i-say.gif" alt="Martin Satisfied GIF" width="250">
 
 ### Images
+
 Images feature will bring life to both Spots and Reviews. Hosts will have the ability to add, modify, and delete images for their Spot listings, and Guests will be able to do the same for any reviews they've written.
+<br>
+<br>
+<img src="assets/gifs/daphne-victory.gif" alt="Daphne Victorious GIF" width="250">
 
 ## 📚 Languages and Libraries Used
 
