@@ -4,23 +4,21 @@ _An AirBnB Clone_
 
 Contents
 
-- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#welcome-to-seattle" alt="Description of CraneBnB API">Description</a>
-- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#overview" alt="Overview of CraneBnB API">Features</a>
-- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#get-started" alt="Download CraneBnB API">Download</a>
-- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#future-implementations" alt="Download CraneBnB API">Upcoming</a>
-- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#languages-and-libraries-used" alt="Download CraneBnB API">Tech Stack</a>
-- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#visit-the-site" alt="Download CraneBnB API">Demo</a>
-- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#im-listening" alt="Download CraneBnB API">Connect</a>
+- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-welcome-to-seattle" alt="Description of CraneBnB API">Description</a>
+- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-overview" alt="Overview of CraneBnB API">Features</a>
+- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-get-started" alt="Download CraneBnB API">Download</a>
+- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-future-implementations" alt="Download CraneBnB API">Upcoming</a>
+- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-languages-and-libraries-used" alt="Download CraneBnB API">Tech Stack</a>
+- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-visit-the-site" alt="Download CraneBnB API">Demo</a>
+- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-im-listening" alt="Download CraneBnB API">Connect</a>
 
 ---
 
 ## 🌊 Welcome to Seattle
 
-... And welcome to CraneBnB, a virtual meeting spot that connects visitors, and the like, to the finest guest maisonettes in the Greater Seattle Area. Inspired by <a href="https://www.airbnb.com/" alt="AirBnB website">AirBnB</a>, CraneBnB allows its members the ability host visitors in their own homes, or become guests in other members' places.
+... And welcome to CraneBnB, a virtual meeting place that connects visitors, and the like, to the finest _guest maisonettes_ in the Greater Seattle Area. Inspired by <a href="https://www.airbnb.com/" alt="AirBnB website">AirBnB</a>, CraneBnB allows its members the ability host visitors in their own homes, or become guests in others' spaces.
 
-Don't miss this truly one in a lifetime opportunity to experience what Seattle has to offer. Where else can you see an ocean wave, a fish fly, a mountain peak, and the world's largest needle?
-
-Come to Seattle...
+Don't miss this truly one in a lifetime opportunity to experience what Seattle has to offer. _Where else can you see an ocean wave, a fish fly, a mountain peak, and the world's largest needle?_
 
 ## 👀 Overview
 
@@ -63,3 +61,5 @@ Come to Seattle...
 ## 💙 I'm Listening...
 
 <a href="https://github.com/kevinlongboy"><img vertical-align="middle" alt="Developer's GitHub Page" width="45px" src="assets/social-media-branding/github-logo.png"/></a> <a href="https://www.linkedin.com/in/kevinlongboy/"><img vertical-align="middle" alt="Developer's LinkedIn Page" width="45px" src="assets/social-media-branding/linkedin-logo.png"/></a>
+<br>
+<img src="assets/gifs/fraiser-im-listening.gif" alt="Fraiser I'm Listening GIF" width="150" height="150">
