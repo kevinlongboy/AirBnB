@@ -20,6 +20,7 @@ Contents
 
 Don't miss this truly one in a lifetime opportunity to experience what Seattle has to offer. _Where else can you see an ocean wave, a fish fly, a mountain peak, and the world's largest needle?_
 <br>
+<br>
 <img src="assets/gifs/frasier-niles-toast.gif" alt="Frasier and Niles Toasting GIF" width="250">
 
 ## 👀 Overview
