@@ -7,10 +7,10 @@ _An AirBnB Clone_
 - <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#welcome-to-seattle" alt="Description of CraneBnB API">Description</a>
 - <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#overview" alt="Overview of CraneBnB API">Features</a>
 - <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#get-started" alt="Download CraneBnB API">Download</a>
-- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#upcoming-features" alt="Download CraneBnB API">Upcoming</a>
+- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#future-implementations" alt="Download CraneBnB API">Upcoming</a>
 - <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#languages-and-libraries-used" alt="Download CraneBnB API">Tech Stack</a>
-- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#demo-the-site" alt="Download CraneBnB API">Demo</a>
-- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#connect" alt="Download CraneBnB API">Connect</a>
+- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#visit-the-site" alt="Download CraneBnB API">Demo</a>
+- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#im-listening" alt="Download CraneBnB API">Connect</a>
 
 ---
 
