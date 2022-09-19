@@ -62,4 +62,5 @@ Don't miss this truly one in a lifetime opportunity to experience what Seattle h
 
 <a href="https://github.com/kevinlongboy"><img vertical-align="middle" alt="Developer's GitHub Page" width="45px" src="assets/social-media-branding/github-logo.png"/></a> <a href="https://www.linkedin.com/in/kevinlongboy/"><img vertical-align="middle" alt="Developer's LinkedIn Page" width="45px" src="assets/social-media-branding/linkedin-logo.png"/></a>
 <br>
-<img src="assets/gifs/fraiser-im-listening.gif" alt="Fraiser I'm Listening GIF" width="150" height="150">
+<br>
+<img src="assets/gifs/fraiser-im-listening.gif" alt="Fraiser I'm Listening GIF" width="480" height="260">
