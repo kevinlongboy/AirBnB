@@ -25,13 +25,13 @@ _An AirBnB Clone_
 ## Languages and Libraries Used
 
 Framework:
-- JavaScript
-- HTML
-- CSS
--
+<a href="https://www.javascript.com/"><img alt="JavaScript" width="45px" src="assets/tech-stack/javascript-logo.png"/></a> <a href="https://html.spec.whatwg.org/"><img alt="HTML" width="45px" src="assets/tech-stack/html-logo.png"/></a> <a href="https://www.w3.org/TR/CSS/#css"><img alt="CSS" width="45px" src="assets/tech-stack/css-logo.png"/></a> <a href="https://nodejs.org/en/"><img alt="Node.JS" width="45px" src="assets/tech-stack/nodejs-logo.svg"/></a>
 
-Database:
--
+Backend:
+<a href="https://sqlite.org/index.html"><img alt="SQLite" width="45px" src="assets/tech-stack/sqlite-logo.svg"/></a> <a href="https://sequelize.org/"><img alt="Sequelize" width="45px" src="assets/tech-stack/sequelize-logo.png"/></a> <a href="https://expressjs.com/"><img alt="Express" width="45px" src="assets/tech-stack/express-logo.png"/></a> <a href="https://www.postgresql.org/"><img alt="PostgreSQL" width="45px" src="assets/tech-stack/postgresql-logo.png"/></a>
+
+Frontend:
+<a href="https://reactjs.org/"><img alt="React" width="45px" src="assets/tech-stack/react-logo.png"/></a> <a href="https://redux.js.org/"><img alt="Redux" width="45px" src="assets/tech-stack/redux-logo.png"/></a>
 
 ## Visit the Site
 
@@ -39,4 +39,4 @@ Database:
 
 ## I'm Listening
 
-<a href="https://github.com/kevinlongboy"><img vertical-align="middle" alt="Developer's GitHub Page" width="45px" src="assets/social-media-branding/github-logo.png"/></a>  <a href="https://www.linkedin.com/in/kevinlongboy/"><img vertical-align="middle" alt="Developer's LinkedIn Page" width="45px" src="assets/social-media-branding/linkedin-logo.png"/></a>
+<a href="https://github.com/kevinlongboy"><img vertical-align="middle" alt="Developer's GitHub Page" width="45px" src="assets/social-media-branding/github-logo.png"/></a> <a href="https://www.linkedin.com/in/kevinlongboy/"><img vertical-align="middle" alt="Developer's LinkedIn Page" width="45px" src="assets/social-media-branding/linkedin-logo.png"/></a>
