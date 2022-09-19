@@ -20,7 +20,7 @@ _An AirBnB Clone_
 
 ## Get Started
 
-## Planned Features
+## Upcoming Features
 
 ## Languages and Libraries Used
 
