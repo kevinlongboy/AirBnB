@@ -53,13 +53,13 @@ Users can also modify and delete any reviews they've previously posted.
 
 Ready to try CraneBnB? Follow the instructions below:
 
-1. Navigate to the Github<a href="https://github.com/kevinlongboy/AirBnB" alt="CraneBnB GitHub repository link">GitHub repository</a>.
-
+1. Navigate to the <a href="https://github.com/kevinlongboy/AirBnB" alt="CraneBnB GitHub repository link">GitHub repository page</a>.
+   <br>
 2. Click on the 'Code' button:
-   <img src="assets/instructions/github-repository-page.png" alt="CraneBnB repository page"/>
-
+   <img src="assets/instructions/github-repository-page.png" alt="CraneBnB repository page" width="250"/>
+   <br>
 3. Select 'Download ZIP' from the dropdown menu:
-   <img src="assets/instructions/download-zip.png" alt="Download ZIP button on CraneBnB repository page"/>
+   <img src="assets/instructions/download-zip.png" alt="Download ZIP button on CraneBnB repository page" width="250"/>
 
 ## ⏳ Future Implementations
 
