@@ -32,7 +32,6 @@ When navigating the site, users have the option to choose between the role of a 
 _The main feature of CraneBnB_
 
 As a Host, users are able to list their home on the site and highlight its best qualities in the listing. Hosts should give a brief description of their home, henceforth known as a "Spot", then choose a befitting rate for a nightly stay.
-
 As a Guest, users are able to peruse through CraneBnB to find the perfect place for their stay in Seattle.
 <br>
 <br>
@@ -43,7 +42,6 @@ As a Guest, users are able to peruse through CraneBnB to find the perfect place 
 _Hear the peoples' voice_
 
 CraneBnB gives its members the ability voice their opinions and share their experiences from previous stays.
-
 Users can also modify and delete any reviews they've previously posted.
 <br>
 <br>
@@ -51,7 +49,7 @@ Users can also modify and delete any reviews they've previously posted.
 
 ## 🖱 Get Started
 
-Ready to try CraneBnB? Follow the instructions below:
+Ready to install CraneBnB? Follow the instructions below:
 
 1. Navigate to the <a href="https://github.com/kevinlongboy/AirBnB" alt="CraneBnB GitHub repository link">GitHub repository page</a>.
    <br>
