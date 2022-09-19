@@ -40,7 +40,7 @@ As a Guest, users are able to peruse through CraneBnB to find the perfect place 
 
 ### Reviews
 
-_Hear the peoples' voice_
+_Hear the people's voice_
 
 CraneBnB gives its members the ability voice their opinions and share their experiences from previous stays.
 
