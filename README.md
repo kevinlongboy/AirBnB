@@ -20,5 +20,4 @@ An AirBnB Clone
 
 ![LinkedIn](https://github.com/kevinlongboy/AirBnB/blob/main/assets/social-media-branding/linkedin-logo.png?raw=true)
 
-[<img align="center" alt="GitHub" width="30px" src="assets/social-media-branding/github-logo.png"/>][link]
-[link](https://github.com/kevinlongboy)
+<a href="https://github.com/kevinlongboy"><img align="center" alt="GitHub" width="30px" src="assets/social-media-branding/github-logo.png"/></a>
