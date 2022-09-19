@@ -5,7 +5,7 @@ _An AirBnB Clone_
 Contents
 
 - <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-welcome-to-seattle" alt="Description of CraneBnB API">Description</a>
-- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-overview" alt="Overview of CraneBnB API">Features</a>
+- <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-api-overview" alt="Overview of CraneBnB API">Features</a>
 - <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-get-started" alt="Download CraneBnB API">Download</a>
 - <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-future-implementations" alt="Download CraneBnB API">Upcoming</a>
 - <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-languages-and-libraries-used" alt="Download CraneBnB API">Tech Stack</a>
@@ -91,7 +91,9 @@ Images feature will bring life to both Spots and Reviews. Hosts will have the ab
 
 ## 🧑‍💻 Visit the Site
 
-Come and give the CraneBnB a test drive. Click the icon below to follow a link to Heroku, where the fullstack API is being hosted:
+Check out CraneBnB for yourself. Click the icon below to follow a link to Heroku, where the fullstack API is being hosted:
+<br>
+<br>
 <a href="https://kl-airbnb.herokuapp.com/"><img vertical-align="middle" alt="CraneBnB Live Site hosted via Heroku" width="45px" src="assets/social-media-branding/heroku-logo.jpg"/></a>
 
 ## 💙 I'm Listening...
