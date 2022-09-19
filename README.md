@@ -2,6 +2,17 @@
 
 An AirBnB Clone
 
+## Contents
+* Description
+* Overview
+* Download
+* Features
+* Tech
+* Demo
+* Connect
+
+***
+
 ## Welcome to Seattle
 
 ## Overview
@@ -12,7 +23,12 @@ An AirBnB Clone
 
 ## Technologies Used
 
-## Demo
+Framework:
+
+Database:
+
+## Demo the Site
+
 <a href="https://kl-airbnb.herokuapp.com/"><img vertical-align="middle" alt="CraneBnB Live Site hosted via Heroku" width="45px" src="assets/social-media-branding/heroku-logo.jpg"/></a>
 
 ## Connect
