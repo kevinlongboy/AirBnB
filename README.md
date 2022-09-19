@@ -14,23 +14,25 @@ _An AirBnB Clone_
 
 ---
 
-## Welcome to Seattle
+## 🌊 Welcome to Seattle
 
-## Overview
+... and welcome to CraneBnB, a
+
+## 👀 Overview
 
 ### Spots
 
 ### Reviews
 
-## Get Started
+## 🖱 Get Started
 
-## Future Implementations
+## ⏳ Future Implementations
 
 ### Bookings
 
 ### Images
 
-## Languages and Libraries Used
+## 📚 Languages and Libraries Used
 
 ### Framework:
 
@@ -50,10 +52,10 @@ _An AirBnB Clone_
 <a href="https://reactjs.org/"><img alt="React" width="45px" src="assets/tech-stack/react-logo.png"/></a> <a href="https://redux.js.org/"><img alt="Redux" width="45px" src="assets/tech-stack/redux-logo.png"/></a>
 <br>
 
-## Visit the Site
+## 🧑‍💻 Visit the Site
 
 <a href="https://kl-airbnb.herokuapp.com/"><img vertical-align="middle" alt="CraneBnB Live Site hosted via Heroku" width="45px" src="assets/social-media-branding/heroku-logo.jpg"/></a>
 
-## I'm Listening
+## 💙 I'm Listening...
 
 <a href="https://github.com/kevinlongboy"><img vertical-align="middle" alt="Developer's GitHub Page" width="45px" src="assets/social-media-branding/github-logo.png"/></a> <a href="https://www.linkedin.com/in/kevinlongboy/"><img vertical-align="middle" alt="Developer's LinkedIn Page" width="45px" src="assets/social-media-branding/linkedin-logo.png"/></a>
