@@ -51,7 +51,15 @@ Users can also modify and delete any reviews they've previously posted.
 
 ## 🖱 Get Started
 
-Ready to try
+Ready to try CraneBnB? Follow the instructions below:
+
+1. Navigate to the Github<a href="https://github.com/kevinlongboy/AirBnB" alt="CraneBnB GitHub repository link">GitHub repository</a>.
+
+2. Click on the 'Code' button:
+   <img src="assets/instructions/github-repository-page.png" alt="CraneBnB repository page"/>
+
+3. Select 'Download ZIP' from the dropdown menu:
+   <img src="assets/instructions/download-zip.png" alt="Download ZIP button on CraneBnB repository page"/>
 
 ## ⏳ Future Implementations
 
@@ -92,6 +100,7 @@ Images feature will bring life to both Spots and Reviews. Hosts will have the ab
 ## 🧑‍💻 Visit the Site
 
 Check out CraneBnB for yourself. Click the icon below to follow a link to Heroku, where the fullstack API is being hosted:
+<br>
 <br>
 <a href="https://kl-airbnb.herokuapp.com/"><img vertical-align="middle" alt="CraneBnB Live Site hosted via Heroku" width="45px" src="assets/social-media-branding/heroku-logo.jpg"/></a>
 
