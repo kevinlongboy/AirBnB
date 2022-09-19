@@ -16,9 +16,11 @@ Contents
 
 ## 🌊 Welcome to Seattle
 
-... And welcome to CraneBnB, a virtual guest maisonette to the finest spots in the Greater Seattle Area. Inspired by <a href="https://www.airbnb.com/" alt="AirBnB website">AirBnB</a>,
+... And welcome to CraneBnB, a virtual meeting spot that connects visitors, and the like, to the finest guest maisonettes in the Greater Seattle Area. Inspired by <a href="https://www.airbnb.com/" alt="AirBnB website">AirBnB</a>, CraneBnB allows its members the ability host visitors in their own homes, or become guests in other members' places.
 
+Don't miss this truly one in a lifetime opportunity to experience what Seattle has to offer. Where else can you see an ocean wave, a fish fly, a mountain peak, and the world's largest needle?
 
+Come to Seattle...
 
 ## 👀 Overview
 
