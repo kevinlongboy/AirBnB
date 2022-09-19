@@ -57,7 +57,7 @@ Ready to try CraneBnB? Follow the instructions below:
    <br>
 2. Click on the 'Code' button:
    <br>
-   <img src="assets/instructions/github-repository-page.png" alt="CraneBnB repository page" width="250"/>
+   <img src="assets/instructions/github-repository-page.png" alt="CraneBnB repository page" width="500"/>
    <br>
 3. Select 'Download ZIP' from the dropdown menu:
    <br>
