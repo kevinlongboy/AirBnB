@@ -15,9 +15,5 @@ An AirBnB Clone
 ## Live Site
 
 ## Contact
-
-![GitHub](https://github.com/kevinlongboy/AirBnB/blob/main/assets/social-media-branding/github-logo.png?raw=true)
-
-![LinkedIn](https://github.com/kevinlongboy/AirBnB/blob/main/assets/social-media-branding/linkedin-logo.png?raw=true)
-
-<a href="https://github.com/kevinlongboy"><img align="center" alt="GitHub" width="30px" src="assets/social-media-branding/github-logo.png"/></a>
+<a href="https://github.com/kevinlongboy"><img align="center" alt="GitHub" width="60px" src="assets/social-media-branding/github-logo.png"/></a>
+<a href="https://www.linkedin.com/in/kevinlongboy/"><img align="center" alt="GitHub" width="60px" src="assets/social-media-branding/linkedin-logo.png"/></a>
