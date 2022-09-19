@@ -19,6 +19,8 @@ Contents
 ... And welcome to CraneBnB, a virtual meeting place that connects visitors, and the like, to the finest _guest maisonettes_ in the Greater Seattle Area. Inspired by <a href="https://www.airbnb.com/" alt="AirBnB website">AirBnB</a>, CraneBnB allows its members the ability host visitors in their own homes, or become guests in others' spaces.
 
 Don't miss this truly one in a lifetime opportunity to experience what Seattle has to offer. _Where else can you see an ocean wave, a fish fly, a mountain peak, and the world's largest needle?_
+<br>
+<img src="assets/gifs/frasier-niles-toast.gif" alt="Frasier and Niles Toasting GIF" width="250">
 
 ## 👀 Overview
 
@@ -63,4 +65,4 @@ Don't miss this truly one in a lifetime opportunity to experience what Seattle h
 <a href="https://github.com/kevinlongboy"><img vertical-align="middle" alt="Developer's GitHub Page" width="45px" src="assets/social-media-branding/github-logo.png"/></a> <a href="https://www.linkedin.com/in/kevinlongboy/"><img vertical-align="middle" alt="Developer's LinkedIn Page" width="45px" src="assets/social-media-branding/linkedin-logo.png"/></a>
 <br>
 <br>
-<img src="assets/gifs/fraiser-im-listening.gif" alt="Fraiser I'm Listening GIF" width="480">
+<img src="assets/gifs/frasier-im-listening.gif" alt="Frasier I'm Listening GIF" width="480">
