@@ -1,32 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { actionRead, thunkRead } from "../../store/spots";
 import './Spots.css';
 
 
 export function Spots() {
 
     const spots = useSelector(state => state.spots)
-    const { spotId } = useParams();
     const dispatch = useDispatch();
+    const { spotId } = useParams();
+
+    useEffect(() => {
+        dispatch(thunkRead());
+    }, [])
+
+    // console.log("THIS IS SPOTS: " + spots);
+    let spotsArr = Object.values(spots)
+    // console.log("THIS IS SPOTSARR: " + spotsArr[0].name);
 
     return (
-        <div className="spot-card">
-            {spots}
+        <div className="spots">
 
-            {/* {spots.map((spots) => (
-                <Link
-                key={`${spots.id}`}
-                to={`/spots/${spots.id}`}>
-                {spots.name}
-                </Link>
-            ))} */}
+            {spotsArr.map((spot) => (
+                <div className="spot-card">
+                    <Link
+                    key={`${spot.id}`}
+                    to={`/spots/${spot.id}`}
+                    >
+                        <div>
+                            <div className="spot-name">{spot.name}</div>
+                            <div>{spot.description}</div>
+                            <div>{`$${spot.price} night`}</div>
+                        </div>
+                    </Link>
+                </div>
+            ))}
 
-            {/* <img></img>
-            <div className="spotName">{spots}</div>
-            <div className="spotRating">3.5</div>
-            <div className="spotDescription">Eclectic</div>
-            <div className="spotPrice">{`$250 night`}</div> */}
         </div>
     )
 }

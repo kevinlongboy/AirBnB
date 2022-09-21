@@ -1,5 +1,18 @@
-div {
+.spots {
+    display: flex;
+}
+
+.spot-card {
     border: 1px solid red;
+    width: 150px;
+    min-height: 225px;
+
+    margin: 10px;
+    padding: 4px;
+}
+
+.spot-name:visited {
+    color: black
 }
 
 div > img {
