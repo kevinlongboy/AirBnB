@@ -81,6 +81,9 @@ const spotsReducer = (state = initialState, action) => {
         case DELETE:
             delete newState[spot.id]
             return newState
+
+        default:
+            return state
     }
 }
 

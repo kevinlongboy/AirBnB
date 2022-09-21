@@ -59,6 +59,8 @@ export const thunkDelete = (reviewId) => async (dispatch) => {
 const initialState = {
     reviews: []
 }
+
+
 /************************* REDUCER *************************/
 const reviewsReducer = (state = initialState, action) => {
 
@@ -81,6 +83,9 @@ const reviewsReducer = (state = initialState, action) => {
         case DELETE:
             delete newState[review.id]
             return newState
+
+        default:
+            return state
     }
 }
 
