@@ -16,7 +16,7 @@ export function Spots() {
     }, [])
 
     let spotsArr = Object.values(spots)
-    console.log("SPOT AT INDEX 0: ", spotsArr[0])
+    // console.log("SPOT AT INDEX 0: ", spotsArr[0])
 
     return (
         <div className="spots">
@@ -32,7 +32,7 @@ export function Spots() {
                         <div className="spot-text">
                             <div className="spot-name" style={{color:"black", fontWeight:"900"}}>{spot.name}</div>
                             {/* <div className="spot-rating">{spot.avgRating = spot.avgRating === undefined ? 0 : `★${spot.avgRating}`}</div> */}
-                            <div className="spot-description" style={{color:"#717171",  fontWeight:"100"}}>{spot.description}</div>
+                            <div className="spot-description" style={{color:"#717171",  fontWeight:"100"}}>{`${spot.city}, ${spot.state}`}</div>
                             <div className="spot-price" style={{color:"black", fontWeight:"900"}}>{`$${spot.price} night`}</div>
                         </div>
                     </Link>
