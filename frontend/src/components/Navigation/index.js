@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
+import * as cranebnbLogo from "../../assets/branding/cranebnb-logo-kollektif.png";
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
@@ -25,13 +26,12 @@ function Navigation({ isLoaded }){
   }
 
   return (
-    <div className="nav-bar">
-        <NavLink exact to="/">
-          Home
+    <div>
+        <NavLink exact to="/">Home
         </NavLink>
-
         {isLoaded && sessionLinks}
     </div>
+
   );
 }
 
