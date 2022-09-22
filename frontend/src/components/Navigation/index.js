@@ -10,27 +10,29 @@ function Navigation({ isLoaded }){
 
   const sessionUser = useSelector(state => state.session.user);
 
-  let sessionLinks;
+  // let sessionLinks;
 
-  if (sessionUser) {
-    sessionLinks = (
-      <ProfileButton user={sessionUser} />
-    );
-  } else {
-    sessionLinks = (
-      <>
-        <NavLink to="/signup">Sign Up</NavLink>
-        <LoginFormModal />
-      </>
-    );
-  }
+  // if (sessionUser) {
+  //   sessionLinks = (
+  //     <ProfileButton user={sessionUser} />
+  //   );
+  // }
+  // else {
+  //   sessionLinks = (
+  //     <>
+  //       <NavLink to="/signup">Sign Up</NavLink>
+  //       <LoginFormModal />
+  //     </>
+  //   );
+  // }
 
   return (
     <div className="nav-bar">
         <NavLink exact to="/">
           <img className="logo" src={cranebnbLogo}></img>
         </NavLink>
-        {isLoaded && sessionLinks}
+        {/* {isLoaded && sessionLinks} */}
+        <LoginFormModal />
     </div>
 
   );

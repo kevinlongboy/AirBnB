@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import './LoginForm.css';
@@ -8,6 +9,7 @@ function LoginForm() {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,11 +68,29 @@ function LoginForm() {
         className="login-button"
         type="submit"
       >
-      Log In
+      Continue
       </button>
 
       <div className="or">or</div>
-      <div></div>
+
+
+      <NavLink to="/signup">
+      <button
+        className="signup-button"
+        type="submit"
+        onClick={() => setShowModal(false)}
+      >
+        Continue to Sign Up
+      </button>
+      </NavLink>
+
+      <button
+        className="signup-button"
+        type="submit"
+      >
+        Continue as Demo User
+      </button>
+
     </form>
   );
 }
