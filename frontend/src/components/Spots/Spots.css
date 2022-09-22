@@ -1,3 +1,7 @@
+/* navlink:visited {
+    text-decoration: none;
+} */
+
 .spots {
     display: flex;
 }
@@ -11,10 +15,12 @@
     padding: 4px;
 }
 
-.spot-name:visited {
-    color: black
+.spot-image {
+    border-radius: 8px;
+    max-width: 100%;
+    min-height: 100%;
 }
 
-div > img {
-    width: 500px;
+.spot-name:visited {
+    color: black
 }

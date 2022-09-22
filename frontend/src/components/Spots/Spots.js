@@ -16,20 +16,24 @@ export function Spots() {
     }, [])
 
     let spotsArr = Object.values(spots)
+    console.log("SPOT AT INDEX 0: ", spotsArr[0])
 
     return (
         <div className="spots">
-
             {spotsArr.map((spot) => (
                     <Link
                     className="spot-card"
                     key={`${spot.id}`}
+                    id={spot.id}
                     to={`/spots/${spot.id}`}
+                    style={{textDecoration:"none"}}
                     >
-                        <div><img></img></div>
-                        <div className="spot-name">{spot.name}</div>
-                        <div>{spot.description}</div>
-                        <div>{`$${spot.price} night`}</div>
+                        <div><img className="spot-image" src={spot.previewImage}></img></div>
+                        <div className="spot-text">
+                            <div className="spot-name" style={{color:"black"}}>{spot.name}</div>
+                            <div className="spot-description" style={{color:"#717171",  fontWeight:"lighter"}}>{spot.description}</div>
+                            <div className="spot-price" style={{color:"black"}}>{`$${spot.price} night`}</div>
+                        </div>
                     </Link>
             ))}
 
