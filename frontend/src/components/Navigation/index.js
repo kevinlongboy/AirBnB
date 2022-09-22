@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
-import cranebnbLogo from "../../assets/branding/cranebnb-logo-kollektif.png";
+import cranebnbLogo from "../../assets/branding/cranebnb-logo-3.png";
 import './Navigation.css';
 
 function Navigation({ isLoaded }){

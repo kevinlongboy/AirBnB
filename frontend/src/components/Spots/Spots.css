@@ -1,9 +1,9 @@
 .spots {
     display: flex;
-    align-items: stretch;
+    justify-content: space-between;
+    align-items: center;
     padding-left: 50px;
     padding-right: 50px;
-    position: relative;
 }
 
 .spot-card {
@@ -13,8 +13,8 @@
 
     margin-top: 25px;
     margin-bottom: 10px;
-    padding-left: 12.5px;
-    padding-right: 12.5px;
+    padding-left: clamp(12.5px, 12.5px, 12.5px);
+    padding-right: clamp(12.5px, 12.5px, 12.5px);
 }
 
 .spot-image {
