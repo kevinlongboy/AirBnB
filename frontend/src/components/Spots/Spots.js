@@ -30,10 +30,10 @@ export function Spots() {
                     >
                         <div><img className="spot-image" src={spot.previewImage}></img></div>
                         <div className="spot-text">
-                            <div className="spot-name" style={{color:"black"}}>{spot.name}</div>
-                            <div className="spot-rating">{spot.avgRating}</div>
-                            <div className="spot-description" style={{color:"#717171",  fontWeight:"lighter"}}>{spot.description}</div>
-                            <div className="spot-price" style={{color:"black"}}>{`$${spot.price} night`}</div>
+                            <div className="spot-name" style={{color:"black", fontWeight:"900"}}>{spot.name}</div>
+                            {/* <div className="spot-rating">{spot.avgRating = spot.avgRating === undefined ? 0 : `★${spot.avgRating}`}</div> */}
+                            <div className="spot-description" style={{color:"#717171",  fontWeight:"100"}}>{spot.description}</div>
+                            <div className="spot-price" style={{color:"black", fontWeight:"900"}}>{`$${spot.price} night`}</div>
                         </div>
                     </Link>
             ))}

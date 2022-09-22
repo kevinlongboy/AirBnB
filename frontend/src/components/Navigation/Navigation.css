@@ -1,7 +1,18 @@
 .nav-bar {
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+    align-items: center;
     height: 80px;
     width: 100%;
-    margin: none;
+    padding-left: 50px;
+    padding-right: 50px;
     border-bottom: 2px solid #f6f6f6;
     padding: none;
+}
+
+.logo {
+    max-height: 55px;
+    margin: none;
+    border: none;
 }
