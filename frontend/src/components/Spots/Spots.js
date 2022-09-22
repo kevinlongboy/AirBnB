@@ -26,7 +26,7 @@ export function Spots() {
                     key={`${spot.id}`}
                     id={spot.id}
                     to={`/spots/${spot.id}`}
-                    style={{textDecoration:"none"}}
+                    style={{textDecoration:"none"}} //?
                     >
                         <div><img className="spot-image" src={spot.previewImage}></img></div>
                         <div className="spot-text">

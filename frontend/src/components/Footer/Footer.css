@@ -7,6 +7,7 @@
     height: 50px;
     display: flex;
     align-items: center;
+    z-index: unset;
 }
 
 .footer-contents {

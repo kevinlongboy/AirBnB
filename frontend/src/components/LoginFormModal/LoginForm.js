@@ -30,8 +30,12 @@ function LoginForm() {
         ))}
       </ul>
 
+      {/* <div className="login-banner">
+        <div className="fa-regular fa-x"></div>
+      </div> */}
+      
       <div className="login-query">Log in or sign up</div>
-      <div className="login-welcome">Welcome to Cranebnb</div>
+      <div className="login-welcome" style={{textAlign:"left"}}>Welcome to Cranebnb</div>
 
       <div>
         <label>
