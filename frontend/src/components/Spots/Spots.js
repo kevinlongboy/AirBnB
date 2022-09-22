@@ -15,26 +15,22 @@ export function Spots() {
         dispatch(thunkRead());
     }, [])
 
-    // console.log("THIS IS SPOTS: " + spots);
     let spotsArr = Object.values(spots)
-    // console.log("THIS IS SPOTSARR: " + spotsArr[0].name);
 
     return (
         <div className="spots">
 
             {spotsArr.map((spot) => (
-                <div className="spot-card">
                     <Link
+                    className="spot-card"
                     key={`${spot.id}`}
                     to={`/spots/${spot.id}`}
                     >
-                        <div>
-                            <div className="spot-name">{spot.name}</div>
-                            <div>{spot.description}</div>
-                            <div>{`$${spot.price} night`}</div>
-                        </div>
+                        <div><img></img></div>
+                        <div className="spot-name">{spot.name}</div>
+                        <div>{spot.description}</div>
+                        <div>{`$${spot.price} night`}</div>
                     </Link>
-                </div>
             ))}
 
         </div>
