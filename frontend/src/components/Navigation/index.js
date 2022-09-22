@@ -32,7 +32,7 @@ function Navigation({ isLoaded }){
           <img className="logo" src={cranebnbLogo}></img>
         </NavLink>
         {/* {isLoaded && sessionLinks} */}
-        <LoginFormModal />
+        <LoginFormModal exact to="/spots"/>
     </div>
 
   );

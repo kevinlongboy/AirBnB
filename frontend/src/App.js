@@ -17,12 +17,12 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+    <Navigation isLoaded={isLoaded} path="/"/>
 
       {isLoaded && (
         <Switch>
 
-          <Route path="/">
+          <Route exact path="/">
             <Spots />
           </Route>
 

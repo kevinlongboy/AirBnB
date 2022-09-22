@@ -24,7 +24,7 @@ function SpotPage() {
 
     return (
         <div className="spot-page">
-            <h1>{spot.name}</h1>
+            <h1>Name</h1>
         </div>
     )
 }
