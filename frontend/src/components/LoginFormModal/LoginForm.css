@@ -1,0 +1,86 @@
+.login-form {
+    display: inline-block;
+    justify-items: center;
+    margin: 0 auto;
+
+}
+
+.login-query {
+    height: 60px;
+    border-bottom: 2px solid #f6f6f6;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bolder;
+    margin: 0 auto;
+
+}
+
+.login-welcome {
+    height: 60px;
+    font-size: 25px;
+    font-weight: bolder;
+    padding-top: 30px;
+}
+
+.username-field {
+    width: 520px;
+    height: 60px;
+    border: 1px solid #afafaf;
+    border-bottom: none;
+    border-radius: 8px 8px 0px 0px;
+    margin: 0 auto;
+}
+
+/* ::placeholder {
+    text-align: center;
+} */
+
+.password-field {
+    width: 520px;
+    height: 60px;
+    border: 1px solid #afafaf;
+    border-radius: 0px 0px 8px 8px;
+
+}
+
+.disclaimer {
+    width: 520px;
+    height: 60px;
+    font-size: small;
+    font-weight: 100;
+    color: black;
+    padding-top: 10px;
+}
+
+.disclaimer :link {
+    width: 520px;
+    height: 60px;
+    font-size: small;
+    font-weight: 100;
+    color: black;
+    padding-top: 10px;
+}
+
+.disclaimer :visited {
+    width: 520px;
+    height: 60px;
+    font-size: small;
+    font-weight: 100;
+    color: black;
+    padding-top: 10px;
+}
+
+.login-button {
+    width: 530px;
+    height: 60px;
+    color: white;
+    background-color: #f4574c;
+    border: none;
+    border-radius: 8px;
+}
+
+.or {
+    text-align: center;
+    font-size: small;
+    font-weight: 100;
+}
