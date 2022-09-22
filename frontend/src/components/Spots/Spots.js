@@ -31,6 +31,7 @@ export function Spots() {
                         <div><img className="spot-image" src={spot.previewImage}></img></div>
                         <div className="spot-text">
                             <div className="spot-name" style={{color:"black"}}>{spot.name}</div>
+                            <div className="spot-rating">{spot.avgRating}</div>
                             <div className="spot-description" style={{color:"#717171",  fontWeight:"lighter"}}>{spot.description}</div>
                             <div className="spot-price" style={{color:"black"}}>{`$${spot.price} night`}</div>
                         </div>

@@ -4,12 +4,13 @@
 
 .spots {
     display: flex;
+    align-items: stretch;
 }
 
 .spot-card {
     border: 1px solid red;
-    width: 150px;
-    min-height: 225px;
+    width: 250px;
+    min-height: 325px;
 
     margin: 10px;
     padding: 4px;
@@ -18,9 +19,9 @@
 .spot-image {
     border-radius: 8px;
     max-width: 100%;
-    min-height: 100%;
+    min-height: 250px;
 }
 
-.spot-name:visited {
-    color: black
+.spot-text {
+    align-self: end;
 }
