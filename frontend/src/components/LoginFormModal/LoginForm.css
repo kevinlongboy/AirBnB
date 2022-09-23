@@ -4,6 +4,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+
     border: 1.5px solid #dbdbdb;
     border-radius: 32px;
     background-color: white;
@@ -14,7 +15,7 @@
     cursor: pointer;
 }
 
-#menu-bar {
+#menu-icon {
     max-width: 16px;
     /* max-height: 15px; */
     padding-right: 2.5px;

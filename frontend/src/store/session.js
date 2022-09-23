@@ -30,6 +30,7 @@ export const signup = (user) => async (dispatch) => {
       }),
     });
     const data = await response.json();
+    console.log("DATA FROM DB AFTER LOGIN: ", data)
     dispatch(setUser(data.user));
     return response;
   };
