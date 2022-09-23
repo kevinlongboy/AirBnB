@@ -26,26 +26,34 @@ function SpotPage() {
 
     return (
         <div className="spot-page">
-            <h1 className="spotName">{spot.name}</h1>
+            <h1 className="spot-page-name">{spot.name}</h1>
 
-            <div className="spotOverview">
+            <div className="spot-page-overview">
                 {/* <p className="fa-solid fa-star"> 4.97</p> */}
-                <p className="spotRating">{`✭ ${spot.avgRatings}`}</p>
-                <p className="spotReviewCount"> · 2 Reviews </p>
-                <p className="spotLocation"> {`· ${spot.city}, ${spot.state}, ${spot.country}`}</p>
+                <p className="spot-page-rating">{`★ ${spot.avgRatings}`}</p>
+                <p> · </p>
+                <p className="spot-page-review-count">2 Reviews</p>
+                <p> · </p>
+                <p className="spot-page-location"> {`${spot.city}, ${spot.state}, ${spot.country}`}</p>
             </div>
 
 
 
-            <div className="spotImages">
+            <div className="spot-page-images-cover">
+                <img className="img1" src="https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_2.jpg"></img>
+                <img className="img2" src="https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_5_2.jpg"></img>
+                <img className="img3" src="https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_11_2.jpg"></img>
+                <img className="img4" src="https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_14_2.jpg"></img>
+                <img className="img5" src="https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_17_2.jpg"></img>
+
             </div>
 
-        <h2 className="spotOwner">{`Hosted by ${spot.ownerId}`}</h2>
+        <h2 className="spot-page-owner">{`Hosted by ${spot.ownerId}`}</h2>
             <div>
                 <p>{`${spot.description}`}</p>
             </div>
 
-            <h2>{`✭ ${spot.avgRatings} · 2 Reviews`}</h2>
+            <h2>{`★ ${spot.avgRatings} · 2 Reviews`}</h2>
             <div>
                 <div>Loop through reviews</div>
                 <div>First Name</div>
