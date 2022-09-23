@@ -7,7 +7,8 @@
     height: 50px;
     display: flex;
     align-items: center;
-    z-index: unset;
+    background-color: white;
+    /* z-index: unset; */
 }
 
 .footer-contents {

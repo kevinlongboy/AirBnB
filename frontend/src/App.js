@@ -7,6 +7,9 @@ import Navigation from "./components/Navigation";
 import { Spots } from "./components/Spots/Spots";
 import SpotPage from "./components/SpotPage/SpotPage";
 import Footer from "./components/Footer/Footer.js"
+import Host from "./components/Host/Host";
+import CreateSpot from "./components/CreateSpot/CreateSpot";
+import Listings from "./components/Listings/Listings";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,27 +25,35 @@ function App() {
       {isLoaded && (
         <Switch>
 
-          <Route exact path="/">
-            <Spots />
-          </Route>
-
-          <Route path={'/spots/:spotId'}>
-            <SpotPage />
-          </Route>
-
-          {/* <Route path={'/hosting'}>
-            <Host />
-          </Route> */}
-
           <Route path="/signup">
             <SignupFormPage />
           </Route>
 
-          <Spots />
-          <Footer />
+          <Route exact path="/">
+            <Spots />
+          </Route>
+
+
+          <Route exact path={'/spots/:spotId'}>
+            <SpotPage />
+          </Route>
+
+          <Route exact path={'/hosting'}>
+            <Host />
+          </Route>
+
+          <Route exact path={'/hosting/create'}>
+            <CreateSpot />
+          </Route>
+
+          <Route exact path={'/hosting/listings'}>
+            <Listings />
+          </Route>
+
         </Switch>
       )}
 
+      {/* <Footer /> */}
     </>
   );
 }

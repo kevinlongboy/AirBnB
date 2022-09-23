@@ -48,7 +48,7 @@ function SpotPage() {
 
             <div className="spot-page-host-info">
                 <h2 className="spot-page-host-name">{`Hosted by ${spot.ownerId}`}</h2>
-                <p className="spot-page-host-creation-date">Since date</p>
+                <p className="spot-page-host-creation-date">Since {spot.createdAt}</p>
             </div>
 
             <div className="spot-page-description">

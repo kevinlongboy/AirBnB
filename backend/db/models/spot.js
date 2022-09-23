@@ -81,6 +81,7 @@ module.exports = (sequelize, DataTypes) => {
     lat: {
       type: DataTypes.FLOAT,
       allowNull: false,
+      defaultValue: 47.6038321,
       validate: {
         // isDecimal: true
       },
@@ -88,6 +89,7 @@ module.exports = (sequelize, DataTypes) => {
     lng: {
       type: DataTypes.FLOAT,
       allowNull: false,
+      defaultValue: -122.330062,
       validate: {
         // isDecimal: true
       },
