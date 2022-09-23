@@ -48,17 +48,20 @@ function SpotPage() {
 
             </div>
 
-        <h2 className="spot-page-owner">{`Hosted by ${spot.ownerId}`}</h2>
-            <div>
+            <div className="spot-page-host-info">
+                <h2 className="spot-page-host-name">{`Hosted by ${spot.ownerId}`}</h2>
+                <p className="spot-page-host-date">Since date</p>
+            </div>
+
+            <div className="spot-page-description">
                 <p>{`${spot.description}`}</p>
             </div>
 
-            <h2>{`★ ${spot.avgRatings} · 2 Reviews`}</h2>
-            <div>
-                <div>Loop through reviews</div>
-                <div>First Name</div>
-                <div>Date</div>
-                <div>Review</div>
+            <div className="reviews">
+                <h2 className="review-data">{`★ ${spot.avgRatings} · 2 Reviews`}</h2>
+                <div className="review-username">First Name</div>
+                <div className="review-date">Date</div>
+                <div className="review-content">Review</div>
 
             </div>
 

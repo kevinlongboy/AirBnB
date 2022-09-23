@@ -42,8 +42,6 @@
     min-height: 45vw;
     /* max-height: 425px; */
     border-radius: 25px;
-    z-index: 1;
-    margin-bottom: 25px;
 }
 
 .spot-page-images-cover > img {
@@ -82,4 +80,40 @@
     grid-row: 2 / 3;
     grid-column: 4 / 5;
     border-bottom-right-radius: 14px;
+}
+
+.spot-page-host-info {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #f6f6f6;
+}
+
+.spot-page-description {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-bottom: 2px solid #f6f6f6;
+}
+
+.reviews {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.review-data {
+    padding-bottom: 20px;
+}
+
+.review-username {
+    font-weight: 900;
+}
+
+.review-date {
+    color: #717171;
+    font-weight: 100;
+    font-size: 15px;
+    padding-bottom: 20px;
+}
+
+.review-content {
+    font-weight: 100;
 }
