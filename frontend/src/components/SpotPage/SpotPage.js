@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { actionRead, thunkRead } from "../../store/spots";
+
+import { actionSpotsRead, thunkSpotsRead } from "../../store/spots";
+// import  {actionUsersRead, thunkUsersRead} from "../../store/users"
 import './SpotPage.css';
 
 
@@ -11,18 +13,14 @@ function SpotPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(thunkRead());
+        dispatch(thunkSpotsRead());
     }, [])
 
-    const { spotId } = useParams();
+    let { spotId } = useParams();
+    spotId = Number.parseInt(spotId)
+
     let spotsArr = Object.values(spots)
-    // console.log("IN SPOTPAGE.JS - ALL SPOTS: ", spotsArr)
-    // console.log(typeof spotsArr[0].id)
-    const spot = spotsArr.find((spot) => spot.id == spotId); // use loose equality for mismatching type comparison
-
-    console.log("IN SPOTPAGE.JS - SPOT: ", spot)
-    // console.log("IN SPOTPAGE.JS - SPOT AT INDEX 0: ", spotsArr[0])
-
+    const spot = spotsArr.find((spot) => spot.id == spotId);
 
     return (
         <div className="spot-page">
@@ -50,7 +48,7 @@ function SpotPage() {
 
             <div className="spot-page-host-info">
                 <h2 className="spot-page-host-name">{`Hosted by ${spot.ownerId}`}</h2>
-                <p className="spot-page-host-date">Since date</p>
+                <p className="spot-page-host-creation-date">Since date</p>
             </div>
 
             <div className="spot-page-description">

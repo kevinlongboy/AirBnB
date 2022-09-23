@@ -7,6 +7,8 @@ import './SignupForm.css';
 function SignupFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,14 +19,17 @@ function SignupFormPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (password === confirmPassword) {
       setErrors([]);
-      return dispatch(sessionActions.signup({ email, username, password }))
+
+      return dispatch(sessionActions.signup({firstName, lastName, email, username, password }))
         .catch(async (res) => {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
         });
     }
+
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
@@ -33,6 +38,27 @@ function SignupFormPage() {
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
+
+      <label>
+        First name
+        <input
+          type="text"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          required
+        />
+      </label>
+
+      <label>
+        Last name
+        <input
+          type="text"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          required
+        />
+      </label>
+
       <label>
         Email
         <input
@@ -42,6 +68,7 @@ function SignupFormPage() {
           required
         />
       </label>
+
       <label>
         Username
         <input
@@ -51,6 +78,7 @@ function SignupFormPage() {
           required
         />
       </label>
+
       <label>
         Password
         <input
@@ -60,6 +88,7 @@ function SignupFormPage() {
           required
         />
       </label>
+
       <label>
         Confirm Password
         <input
@@ -69,6 +98,7 @@ function SignupFormPage() {
           required
         />
       </label>
+
       <button type="submit">Sign Up</button>
     </form>
   );

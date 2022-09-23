@@ -1,12 +1,12 @@
 /************************* TYPES *************************/
-const READ = 'spots/READ';
-const CREATE = 'spots/CREATE';
-const DELETE = 'spots/DELETE';
+const SPOTS_READ = 'spots/READ';
+const SPOTS_CREATE = 'spots/CREATE';
+const SPOTS_DELETE = 'spots/DELETE';
 
 
 /************************* ACTION CREATORS *************************/
-export const actionRead = (spots) => ({
-    type: READ,
+export const actionSpotsRead = (spots) => ({
+    type: SPOTS_READ,
     payload: spots // Spots: [array of objects]
 });
 
@@ -22,14 +22,14 @@ export const actionRead = (spots) => ({
 
 
 /************************* THUNKS (API) *************************/
-export const thunkRead = () => async (dispatch) => {
+export const thunkSpotsRead = () => async (dispatch) => {
 
-    const response = await fetch(`api/spots`);
+    const response = await fetch(`/api/spots`);
 
     if (response.ok) {
         const spots = await response.json();
         console.log("this is spots: ", spots)
-        dispatch(actionRead(spots))
+        dispatch(actionSpotsRead(spots))
     }
 }
 
@@ -58,7 +58,7 @@ export const thunkRead = () => async (dispatch) => {
 // }
 
 const initialState = {
-    spots: []
+    allSpots: [],
 }
 /************************* REDUCER *************************/
 const spotsReducer = (state = initialState, action) => {
@@ -67,7 +67,7 @@ const spotsReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case READ:
+        case SPOTS_READ:
             const normalize = {}; // object of objects >> {1: {object}, 2: {object}}
             action.payload.Spots.forEach(obj => {
                 normalize[obj.id] = obj

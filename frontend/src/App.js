@@ -30,6 +30,10 @@ function App() {
             <SpotPage />
           </Route>
 
+          {/* <Route path={'/hosting'}>
+            <Host />
+          </Route> */}
+
           <Route path="/signup">
             <SignupFormPage />
           </Route>

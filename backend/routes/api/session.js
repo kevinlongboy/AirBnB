@@ -82,11 +82,10 @@ router.get('/', restoreUser, (req, res) => {
             printUser.lastName = user.lastName;
             printUser.email = user.email;
             printUser.username = user.username;
-            res.json(printUser)
 
             return res
                 .status(200)
-                .json(user)
+                .json(printUser)
 
         } else return res.json({});
 

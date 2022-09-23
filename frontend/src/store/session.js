@@ -18,10 +18,12 @@ const removeUser = () => {
 
 // Phase 2: Signup action
 export const signup = (user) => async (dispatch) => {
-    const { username, email, password } = user;
+    const { firstName, lastName, username, email, password } = user;
     const response = await csrfFetch("/api/users", {
       method: "POST",
       body: JSON.stringify({
+        firstName,
+        lastName,
         username,
         email,
         password,
@@ -66,16 +68,21 @@ export const logout = () => async (dispatch) => {
 const initialState = { user: null };
 
 const sessionReducer = (state = initialState, action) => {
+
   let newState;
+
   switch (action.type) {
+
     case SET_USER:
       newState = Object.assign({}, state);
       newState.user = action.payload;
       return newState;
+
     case REMOVE_USER:
       newState = Object.assign({}, state);
       newState.user = null;
       return newState;
+
     default:
       return state;
   }

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink , Link  } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+
 import './LoginForm.css';
 
 function LoginForm() {
@@ -23,11 +24,12 @@ function LoginForm() {
   };
 
   return (
+    <div>
     <form className="login-form" onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => (
           <li key={idx}>{error}</li>
-        ))}
+          ))}
       </ul>
 
       {/* <div className="login-banner">
@@ -71,19 +73,18 @@ function LoginForm() {
       <button
         className="login-button"
         type="submit"
-      >
+        >
       Continue
       </button>
 
       <div className="or">or</div>
 
 
-      <NavLink to="/signup">
+      <NavLink to={"/signup"}>
       <button
         className="signup-button"
         type="submit"
-        onClick={() => setShowModal(false)}
-      >
+        >
         Continue to Sign Up
       </button>
       </NavLink>
@@ -91,11 +92,12 @@ function LoginForm() {
       <button
         className="signup-button"
         type="submit"
-      >
+        >
         Continue as Demo User
       </button>
 
     </form>
+    </div>
   );
 }
 

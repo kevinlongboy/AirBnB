@@ -1,92 +1,93 @@
-// /************************* TYPES *************************/
-// const READ = 'reviews/READ';
-// const CREATE = 'reviews/CREATE';
-// const DELETE = 'reviews/DELETE';
+/************************* TYPES *************************/
+const REVIEWS_READ = 'reviews/READ';
+const REVIEWS_CREATE = 'reviews/CREATE';
 
 
-// /************************* ACTION CREATORS *************************/
-// export const actionRead = (reviews) => ({
-//     type: READ,
-//     payload: reviews
-// });
+/************************* ACTION CREATORS *************************/
+export const actionReviewsRead = (reviews) => ({
+    type: REVIEWS_READ,
+    payload: reviews // Users: [array of objects]
+});
 
 // export const actionCreate = () => ({
 //     type: CREATE,
-//     payload: newReview
+//     payload: newSpot
 // })
 
-// export const actionDelete = (review) => ({
+// export const actionDelete = (spot) => ({
 //     type: DELETE,
-//     payload: review
+//     payload: spot
 // });
 
 
-// /************************* THUNKS (API) *************************/
-// export const thunkRead = () => async (dispatch) => {
+/************************* THUNKS (API) *************************/
+export const thunkReviewsRead = () => async (dispatch) => {
 
-//     const response = await fetch(`api/reviews`);
+    const response = await fetch(`api/reviews`);
 
-//     if (response.ok) {
-//         const reviews = await response.json();
-//         dispatch(actionRead(reviews))
-//     }
-// }
+    if (response.ok) {
+        const reviews = await response.json();
+        console.log("FROM STORE/REVIEWS.JS, THIS IS REVIEWS: ", reviews)
+        dispatch(actionReviewsRead(reviews))
+    }
+}
 
 // export const thunkCreate = (data) => async (dispatch) => {
 
-//     const response = await fetch(`api/reviews`, {
+//     const response = await fetch(`api/spots`, {
 //         method: 'POST',
 //         headers: { 'Content-Type': 'application/json'} ,
 //         body: JSON.stringify(data)
 //     });
 
 //     if (response.ok) {
-//         const newReview = await response.json();
-//         dispatch(actionCreate(newReview));
+//         const newSpot = await response.json();
+//         dispatch(actionCreate(newSpot));
 //     }
 // }
 
-// export const thunkDelete = (reviewId) => async (dispatch) => {
+// export const thunkDelete = (spotId) => async (dispatch) => {
 
-//     const response = await fetch(`api/reviews/${reviewId}`);
+//     const response = await fetch(`api/spots/${spotId}`);
 
 //     if (response.ok) {
-//         const review = await response.json();
-//         dispatch(actionDelete(review))
+//         const spot = await response.json();
+//         dispatch(actionDelete(spot))
 //     }
 // }
 
-// const initialState = {
-//     reviews: []
-// }
+const initialState = {
+    reviews: []
+}
+/************************* REDUCER *************************/
+const reviewsReducer = (state = initialState, action) => {
 
+    const newState = {...state};
 
-// /************************* REDUCER *************************/
-// const reviewsReducer = (state = initialState, action) => {
+    switch (action.type) {
 
-//     const newState = {...state};
+        case REVIEWS_READ:
+            const normalize = {}; // object of objects >> {1: {object}, 2: {object}}
+            action.payload.Reviews.forEach(obj => {
+                normalize[obj.id] = obj
+            });
 
-//     switch (action.type) {
+            // action.payload.
+            return normalize
 
-//         case READ:
-//             return {
-//                 ...state,
-//                 reviews: action.payload
-//             }
+        // case CREATE:
+        //     return {
+        //         ...state,
+        //         spots: action.payload
+        //     }
 
-//         case CREATE:
-//             return {
-//                 ...state,
-//                 reviews: action.payload
-//             }
+        // case DELETE:
+        //     delete newState[spot.id]
+        //     return newState
 
-//         case DELETE:
-//             delete newState[review.id]
-//             return newState
+        default:
+            return state
+    }
+}
 
-//         default:
-//             return state
-//     }
-// }
-
-// export default reviewsReducer;
+export default reviewsReducer;

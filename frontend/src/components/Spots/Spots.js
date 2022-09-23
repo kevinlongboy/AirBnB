@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { actionRead, thunkRead } from "../../store/spots";
+import { actionSpotsRead, thunkSpotsRead } from "../../store/spots";
 import './Spots.css';
 
 
@@ -12,11 +12,10 @@ export function Spots() {
     const { spotId } = useParams();
 
     useEffect(() => {
-        dispatch(thunkRead());
+        dispatch(thunkSpotsRead());
     }, [])
 
     let spotsArr = Object.values(spots)
-    // console.log("SPOT AT INDEX 0: ", spotsArr[0])
 
     return (
         <div className="spots">
