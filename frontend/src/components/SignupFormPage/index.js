@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './SignupForm.css';
@@ -15,6 +15,7 @@ function SignupFormPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
+
   if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
@@ -23,9 +24,12 @@ function SignupFormPage() {
     if (password === confirmPassword) {
       setErrors([]);
 
-      return dispatch(sessionActions.signup({firstName, lastName, email, username, password }))
+      let user = {firstName, lastName, username, password, email }
+
+      let signUp = dispatch(sessionActions.signup(user))
         .catch(async (res) => {
           const data = await res.json();
+
           if (data && data.errors) setErrors(data.errors);
         });
     }

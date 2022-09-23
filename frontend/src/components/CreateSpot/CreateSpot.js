@@ -1,11 +1,18 @@
 import React, {useState, useEffect} from "react";
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { actionSpotsCreate, thunkSpotsCreate } from "../../store/spots";
+
 
 
 const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CZ', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'];
 
 
 function CreateSpot() {
+
+    const spots = useSelector(state => state.spots);
+    const dispatch = useDispatch();
+
     const history = useHistory();
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
@@ -62,9 +69,14 @@ function CreateSpot() {
 
 
       const submitHandler = (e) => {
-        e.preventDefault()
-        // console.log({name, age, color})
-        history.push('/')
+        e.preventDefault();
+        let createSpotData = {address, city, state, country, name, price}
+        console.log("createSpotData: ", createSpotData)
+
+        let newSpot = dispatch(thunkSpotsCreate(createSpotData));
+        console.log("NEW SPOT: ", newSpot)
+        console.log(newSpot)
+        history.push(`/spots/`)
       }
 
     return (

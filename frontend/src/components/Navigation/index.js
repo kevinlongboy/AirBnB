@@ -23,7 +23,7 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <>
         {/* remove afterward - not originally part of else statement */}
-        {/* <ProfileButton user={sessionUser} /> */}
+        <ProfileButton user={sessionUser} />
 
         {/* <NavLink to="/signup">Sign Up</NavLink> */}
         <LoginFormModal />

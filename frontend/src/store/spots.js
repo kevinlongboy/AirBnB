@@ -10,10 +10,10 @@ export const actionSpotsRead = (spots) => ({
     payload: spots // Spots: [array of objects]
 });
 
-// export const actionCreate = () => ({
-//     type: CREATE,
-//     payload: newSpot
-// })
+export const actionSpotsCreate = (newSpot) => ({
+    type: SPOTS_CREATE,
+    payload: newSpot
+})
 
 // export const actionDelete = (spot) => ({
 //     type: DELETE,
@@ -28,24 +28,23 @@ export const thunkSpotsRead = () => async (dispatch) => {
 
     if (response.ok) {
         const spots = await response.json();
-        console.log("this is spots: ", spots)
         dispatch(actionSpotsRead(spots))
     }
 }
 
-// export const thunkCreate = (data) => async (dispatch) => {
+export const thunkSpotsCreate = (data) => async (dispatch) => {
 
-//     const response = await fetch(`api/spots`, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json'} ,
-//         body: JSON.stringify(data)
-//     });
+    const response = await fetch(`api/spots`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'} ,
+        body: JSON.stringify(data)
+    });
 
-//     if (response.ok) {
-//         const newSpot = await response.json();
-//         dispatch(actionCreate(newSpot));
-//     }
-// }
+    if (response.ok) {
+        const newSpot = await response.json();
+        dispatch(actionSpotsCreate(newSpot));
+    }
+}
 
 // export const thunkDelete = (spotId) => async (dispatch) => {
 
@@ -76,11 +75,11 @@ const spotsReducer = (state = initialState, action) => {
             // action.payload.
             return normalize
 
-        // case CREATE:
-        //     return {
-        //         ...state,
-        //         spots: action.payload
-        //     }
+        case SPOTS_CREATE:
+            return {
+                ...state,
+                spots: action.payload
+            }
 
         // case DELETE:
         //     delete newState[spot.id]

@@ -66,6 +66,13 @@ const demoUsers = [
     hashedPassword: bcrypt.hashSync('passwordI'),
     email: 'bbriscoe@yahoo.com',
   },
+  {
+    firstName: 'Demo',
+    lastName: 'User',
+    username: 'Demo',
+    hashedPassword: bcrypt.hashSync('demo'),
+    email: 'demo@email.com',
+  },
 ]
 
 let usernames = [];

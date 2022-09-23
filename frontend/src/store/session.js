@@ -18,7 +18,7 @@ const removeUser = () => {
 
 // Phase 2: Signup action
 export const signup = (user) => async (dispatch) => {
-    const { firstName, lastName, username, email, password } = user;
+    const { firstName, lastName, username, password, email } = user;
     const response = await csrfFetch("/api/users", {
       method: "POST",
       body: JSON.stringify({
@@ -30,22 +30,22 @@ export const signup = (user) => async (dispatch) => {
       }),
     });
     const data = await response.json();
-    console.log("DATA FROM DB AFTER LOGIN: ", data)
-    dispatch(setUser(data.user));
+    dispatch(setUser(data));
     return response;
   };
 
-export const login = (user) => async (dispatch) => {
-  const { credential, password } = user;
-  const response = await csrfFetch('/api/session', {
-    method: 'POST',
-    body: JSON.stringify({
-      credential,
-      password,
-    }),
-  });
-  const data = await response.json();
-  dispatch(setUser(data.user));
+  export const login = (user) => async (dispatch) => {
+    const { credential, password } = user;
+    const response = await csrfFetch('/api/session', {
+      method: 'POST',
+      body: JSON.stringify({
+        credential,
+        password,
+      }),
+    });
+    const data = await response.json();
+    console.log("DATA FROM DB AFTER LOGIN: ", data)
+    dispatch(setUser(data));
   return response;
 };
 
@@ -53,7 +53,7 @@ export const login = (user) => async (dispatch) => {
 export const restoreUser = () => async dispatch => {
     const response = await csrfFetch('/api/session');
     const data = await response.json();
-    dispatch(setUser(data.user));
+    dispatch(setUser(data));
     return response;
   };
 

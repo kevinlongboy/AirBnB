@@ -24,6 +24,15 @@ function LoginForm() {
     );
   };
 
+  // create separate function for login demo
+  // yeet preventdefault
+
+  const handleSubmitDemoUser = (e) => {
+    e.preventDefault();
+
+    return dispatch(sessionActions.login({ credential: 'demo@email.com', password: 'demo' })
+  )};
+
   return (
     <div>
 
@@ -90,6 +99,7 @@ function LoginForm() {
         <button
           className="signup-button"
           type="submit"
+          onClick={handleSubmitDemoUser}
           >
           Continue as Demo User
         </button>

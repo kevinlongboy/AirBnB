@@ -26,12 +26,12 @@ module.exports = {
       },
       lat: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 47.6038321,
       },
       lng: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
         defaultValue: -122.330062,
       },
       name: {
