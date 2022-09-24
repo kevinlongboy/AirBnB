@@ -68,6 +68,7 @@ let spotsState = {
   // to delete:
     // grab spot.id/key
     // send as part of route param in fetch request
+    // ... but how?
 
 function Spots() {
 

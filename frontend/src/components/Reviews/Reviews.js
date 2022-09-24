@@ -67,6 +67,11 @@ let reviewsState = {
 
 let reviews = reviewsState.AllReviewsByUserId;
 
+ // to delete:
+    // grab spot.id/key
+    // send as part of route param in fetch request
+    // ... but how?
+
 function convertDate(iso) {
 
     let year = iso.slice(0, 4);
@@ -139,6 +144,7 @@ function Reviews() {
                                     <p>Review for {review.Spot.name}</p>
                                     <p>{review.review}</p>
                                     <p>{convertDate(review.createdAt)}</p>
+                                    <button>Delete review</button>
                                 </td>
                             </tr>
                         ))
