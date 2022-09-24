@@ -86,7 +86,7 @@ function SpotCreate() {
     let newSpot = dispatch(thunkSpotsCreate(createSpotData));
     console.log("NEW SPOT: ", newSpot)
 
-    history.push(`/spots`)
+    history.push(`/spots`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
     }
 
 
