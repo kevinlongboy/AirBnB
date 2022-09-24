@@ -26,7 +26,7 @@ function LoginForm() {
   const handleSubmitDemoUser = (e) => {
     e.preventDefault();
     dispatch(sessionActions.login({ credential: 'demo@email.com', password: 'demo' }))
-    history.push('/');
+    // history.push('/');
   };
 
   return (

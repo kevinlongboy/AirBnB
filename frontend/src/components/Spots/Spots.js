@@ -73,7 +73,9 @@ function Spots() {
                     <tbody>
                     {
                         spots.map(spot => (
+
                             <tr key={spot.id}>
+                                <NavLink to={`/spots/${spot.id}`}>
                                 <td>{spot.name}</td>
                                 <td>
                                     <NavLink to={`/spots/${spot.id}/edit`}>
@@ -83,7 +85,9 @@ function Spots() {
                                     <button>delete</button>
                                 </td>
                                 <td>{spot.city}, {spot.state}</td>
+                            </NavLink>
                             </tr>
+
                         ))
                     }
                     </tbody>
