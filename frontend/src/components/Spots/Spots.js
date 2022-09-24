@@ -1,42 +1,14 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { actionSpotsRead, thunkSpotsRead } from "../../store/spots";
-import './Spots.css';
+import React from "react";
+import './Spots.css'
 
-
-export function Spots() {
-
-    const spots = useSelector(state => state.spots)
-    const dispatch = useDispatch();
-    const { spotId } = useParams();
-
-    useEffect(() => {
-        dispatch(thunkSpotsRead());
-    }, [])
-
-    let spotsArr = Object.values(spots)
+function Spots() {
 
     return (
-        <div className="spots">
-            {spotsArr.map((spot) => (
-                    <Link
-                    className="spot-card"
-                    key={`${spot.id}`}
-                    id={spot.id}
-                    to={`/spots/${spot.id}`}
-                    style={{textDecoration:"none"}} //?
-                    >
-                        <div><img className="spot-image" src={spot.previewImage}></img></div>
-                        <div className="spot-text">
-                            <div className="spot-name" style={{color:"black", fontWeight:"900"}}>{spot.name}</div>
-                            {/* <div className="spot-rating">{spot.avgRating = spot.avgRating === undefined ? 0 : `★${spot.avgRating}`}</div> */}
-                            <div className="spot-description" style={{color:"#717171",  fontWeight:"100"}}>{`${spot.city}, ${spot.state}`}</div>
-                            <div className="spot-price" style={{color:"black", fontWeight:"900"}}>{`$${spot.price} night`}</div>
-                        </div>
-                    </Link>
-            ))}
+        <div>
+            <h1>Manage Listings</h1>
 
         </div>
     )
 }
+
+export default Spots

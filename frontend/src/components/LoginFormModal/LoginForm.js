@@ -2,16 +2,13 @@ import React, { useState } from "react";
 import { NavLink , Link  } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
-
-import HostingButton from "./HostingButton";
-import './LoginForm.css';
+import './LoginFormModal.css';
 
 function LoginForm() {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-  const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,9 +20,6 @@ function LoginForm() {
       }
     );
   };
-
-  // create separate function for login demo
-  // yeet preventdefault
 
   const handleSubmitDemoUser = (e) => {
     e.preventDefault();
@@ -87,14 +81,14 @@ function LoginForm() {
         <div className="or">or</div>
 
 
-        <NavLink to={"/signup"}>
+        {/* <NavLink to={"/signup"}> */}
         <button
           className="signup-button"
           type="submit"
           >
           Continue to Sign Up
         </button>
-        </NavLink>
+        {/* </NavLink> */}
 
         <button
           className="signup-button"

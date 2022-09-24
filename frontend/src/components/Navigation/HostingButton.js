@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import './HostingButton.css';
+import './Navigation.css';
 
 function HostingButton() {
     return (
@@ -9,7 +9,7 @@ function HostingButton() {
         <div style={{justifyContent:"end"}}>
             <NavLink to={"/hosting"}>
                 <button className="hosting-button" type="submit">
-                    Switch to Hosting
+                    Become a Host
                 </button>
             </NavLink>
         </div>

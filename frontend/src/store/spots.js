@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 /************************* TYPES *************************/
 const SPOTS_READ = 'spots/READ';
+const SPOTS_READ_DETAILS = 'spots/READ_DETAILS'
 const SPOTS_CREATE = 'spots/CREATE';
 const SPOTS_DELETE = 'spots/DELETE';
 
@@ -11,6 +12,11 @@ export const actionSpotsRead = (spots) => ({
     type: SPOTS_READ,
     payload: spots // Spots: [array of objects]
 });
+
+export const actionSpotsReadDetails = (spotDetails) => ({
+    type: SPOTS_READ_DETAILS,
+    payload: spotDetails
+})
 
 export const actionSpotsCreate = (newSpot) => ({
     type: SPOTS_CREATE,
@@ -33,6 +39,19 @@ export const thunkSpotsRead = () => async (dispatch) => {
         dispatch(actionSpotsRead(spots))
     }
 }
+
+export const thunkSpotsReadDetails = (spotId) => async (dispatch) => {
+
+    const response = await fetch(`/api/spots/${spotId}`)
+    console.log("REACH")
+
+    if (response.ok) {
+        const spotDetails = await response.json();
+        dispatch(actionSpotsReadDetails(spotDetails))
+    }
+}
+
+
 
 export const thunkSpotsCreate = (data) => async (dispatch) => {
 
@@ -65,31 +84,36 @@ export const thunkSpotsCreate = (data) => async (dispatch) => {
 // {1: {1: ...}, 2: {2: ...}, 3: {3: ...}}
 
 function normalizeArray(arr) {
-    let newObj = {};
-    arr.forEach(el => newObj[el.id] = el);
-    return newObj;
+    let obj = {}
+    arr.forEach(el => obj[el.id] = el);
+    return obj;
   };
 
 
-// const initialState = {
-//     allSpots: [],
-// }
+const initialState = {
+    allSpots: [],
+    singleSpotDetails: []
+}
 
 
 /************************* REDUCER *************************/
 const spotsReducer = (state = {}, action) => {
 
+    let newState = {...state}
+
     switch (action.type) {
 
         case SPOTS_READ:
-            let allSpots = normalizeArray(action.payload.Spots)
-            return allSpots
+            let spots = normalizeArray(action.payload.Spots)
+            return newState.allSpots = spots
+
+        case SPOTS_READ_DETAILS:
+            console.log("ACTION IN REDUCER: ", action)
+            newState.singleSpotDetails = action.payload
+            return newState
+
 
         case SPOTS_CREATE:
-            console.log("ACTION IN REDUCER: ", action)
-            console.log("STATE IN REDUCER: ", state)
-            console.log("payload IN REDUCER: ", action.payload)
-
             const newSpot = {...state};
             newSpot[action.payload.id] = action.payload;
             return newSpot

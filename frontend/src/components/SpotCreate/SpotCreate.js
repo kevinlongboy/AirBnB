@@ -3,12 +3,14 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { actionSpotsCreate, thunkSpotsCreate } from "../../store/spots";
 
+import './SpotCreate.css'
+
 
 
 const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CZ', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'];
 
 
-function CreateSpot() {
+function SpotCreate() {
 
     const spots = useSelector(state => state.spots);
     const dispatch = useDispatch();
@@ -192,4 +194,4 @@ function CreateSpot() {
     )
 }
 
-export default CreateSpot
+export default SpotCreate

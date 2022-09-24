@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/SignupFormPage";
+import SignupFormPage from "./components/LoginFormModal/SignupForm";
+
 import * as sessionActions from "./store/session";
-import Navigation from "./components/Navigation";
-import { Spots } from "./components/Spots/Spots";
+import Main from "./components/Main/Main";
+import Spots from "./components/Spots/Spots";
 import SpotPage from "./components/SpotPage/SpotPage";
-import Footer from "./components/Footer/Footer.js"
+import SpotEdit from "./components/SpotEdit/SpotEdit";
+import SpotCreate from "./components/SpotCreate/SpotCreate";
+import Reviews from "./components/Reviews/Reviews"
+import ReviewEdit from "./components/ReviewEdit/ReviewEdit";
+
+import Navigation from "./components/Navigation";
 import Host from "./components/Host/Host";
-import CreateSpot from "./components/CreateSpot/CreateSpot";
-import Listings from "./components/Listings/Listings";
+import Footer from "./components/Footer/Footer.js"
 
 function App() {
   const dispatch = useDispatch();
@@ -25,30 +30,42 @@ function App() {
       {isLoaded && (
         <Switch>
 
-          <Route path="/signup">
-            <SignupFormPage />
+          <Route exact path={'/'}>
+            <Main />
           </Route>
 
-          <Route exact path="/">
+          <Route exact path={'/spots'}>
             <Spots />
           </Route>
-
 
           <Route exact path={'/spots/:spotId'}>
             <SpotPage />
           </Route>
 
+          <Route exact path={'/spots/:spotId/edit'}>
+            <SpotEdit />
+          </Route>
+
           <Route exact path={'/hosting'}>
+            <SpotCreate />
+          </Route>
+
+          <Route exact path={'/reviews'}>
+            <Reviews />
+          </Route>
+
+          <Route exact path={'/reviews/:reviewId/edit'}>
+            <ReviewEdit />
+          </Route>
+
+
+          {/* <Route exact path={'/legacy/host'}>
             <Host />
           </Route>
 
-          <Route exact path={'/hosting/create'}>
-            <CreateSpot />
-          </Route>
-
-          <Route exact path={'/hosting/listings'}>
-            <Listings />
-          </Route>
+         <Route exact path={"/legacy/signup"}>
+            <SignupFormPage />
+          </Route> */}
 
         </Switch>
       )}

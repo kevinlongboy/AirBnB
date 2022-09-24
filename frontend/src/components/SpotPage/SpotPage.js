@@ -2,22 +2,29 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { actionSpotsRead, thunkSpotsRead } from "../../store/spots";
-// import  {actionUsersRead, thunkUsersRead} from "../../store/users"
+import { actionSpotsRead, thunkSpotsRead, thunkSpotsReadDetails } from "../../store/spots";
 import './SpotPage.css';
 
+
+// TEST DATA
+// FROM ROUTE
 
 
 function SpotPage() {
     const spots = useSelector(state => state.spots)
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(thunkSpotsRead());
-    }, [])
-
     let { spotId } = useParams();
     spotId = Number.parseInt(spotId)
+
+    useEffect(() => {
+        dispatch(thunkSpotsReadDetails(spotId));
+    }, [])
+
+
+    let spotDetails = spots.singleSpotDetails
+    console.log("SPOT DETAILS: ", spotDetails)
+
 
     let spotsArr = Object.values(spots)
     const spot = spotsArr.find((spot) => spot.id == spotId);

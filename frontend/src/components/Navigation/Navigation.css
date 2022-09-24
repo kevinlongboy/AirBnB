@@ -19,12 +19,33 @@
     background-color: white;
 }
 
+
 /******************* LOGO HOME BUTTON *******************/
 .logo {
     max-height: 55px;
     margin: none;
     border: none;
 }
+
+
+/******************* 'BECOME A HOST' BUTTON *******************/
+
+.hosting-button {
+    width: 145px;
+    height: 48px;
+    margin-right: 12px;
+    border: none;
+    border-radius: 32px;
+    background-color: white;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.hosting-button:hover {
+    background-color: #f7f7f7;
+    cursor: pointer;
+}
+
 
 /******************* ACCOUNT BUTTON *******************/
 .account-button {

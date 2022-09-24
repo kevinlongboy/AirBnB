@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import ProfileButton from './ProfileButton';
-import HostingButton from '../LoginFormModal/HostingButton';
-import LoginFormModal from '../LoginFormModal';
+import HostingButton from './HostingButton';
+import LoginFormModal from '../LoginFormModal/index.js';
 import cranebnbLogo from "../../assets/branding/cranebnb-logo-3.png";
 import './Navigation.css';
 
@@ -16,7 +16,10 @@ function Navigation({ isLoaded }){
 
   if (sessionUser) {
     sessionLinks = (
-      <ProfileButton user={sessionUser} />
+      <>
+        <HostingButton />
+        <ProfileButton user={sessionUser} />
+      </>
     );
   }
 
@@ -34,8 +37,6 @@ function Navigation({ isLoaded }){
         <NavLink exact to="/">
           <img className="logo" src={cranebnbLogo}></img>
         </NavLink>
-
-        <HostingButton />
 
         {isLoaded && sessionLinks}
 

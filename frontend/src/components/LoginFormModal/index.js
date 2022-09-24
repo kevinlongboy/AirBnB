@@ -5,7 +5,8 @@ import ProfileButton from '../Navigation/ProfileButton';
 import LoginForm from './LoginForm';
 import menuBars from '../../assets/fontawesome/bars-solid.png'
 import userIcon from '../../assets/fontawesome/circle-user-solid.png'
-import './LoginForm.css';
+import './LoginFormModal.css';
+import SignupFormPage from './SignupForm';
 
 function LoginFormModal() {
   const [showModal, setShowModal] = useState(false);
@@ -22,6 +23,7 @@ function LoginFormModal() {
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <LoginForm />
+          {/* <SignupFormPage /> */}
         </Modal>
       )}
     </>
