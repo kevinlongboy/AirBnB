@@ -8,7 +8,7 @@ import './Spots.css'
 // * Method: GET
 // * URL: /api/spots/current
 
-let data = {
+let spotsState = {
     "AllSpotsByUser": [
       {
         "id": 1,
@@ -47,7 +47,7 @@ let data = {
     ]
   }
 
-  let spots = data.AllSpotsByUser
+  let spots = spotsState.AllSpotsByUser
 
 function Spots() {
 
@@ -79,7 +79,7 @@ function Spots() {
                                     <NavLink to={`/spots/${spot.id}/edit`}>
                                     <button>edit</button>
                                     </NavLink>
-                                    
+
                                     <button>delete</button>
                                 </td>
                                 <td>{spot.city}, {spot.state}</td>
