@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { NavLink, Redirect, useHistory} from "react-router-dom";
 import { useDispatch } from 'react-redux';
 
 import * as sessionActions from '../../store/session';
@@ -31,9 +32,11 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+  let history = useHistory();
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    history.push('/')
   };
 
   return (
@@ -45,9 +48,17 @@ function ProfileButton({ user }) {
 
       {showMenu && (
         <div className="account-dropdown-menu">
-          <p>Manage Listings (change to NavLink = '/spots')</p>
-          <p>Manage Reviews (change to NavLink = './reviews')</p>
-          <button id="logout-button" onClick={logout}>Log out</button>
+          <div>
+            <NavLink to='/spots'>Manage Listings</NavLink>
+          </div>
+          <div>
+            <NavLink to='/reviews'>Manage Reviews</NavLink>
+          </div>
+          <div>
+
+              <button id="logout-button" onClick={logout}>Log out</button>
+
+          </div>
         </div>
       )}
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink , Link  } from "react-router-dom";
+import { NavLink , Link, useHistory  } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import './LoginFormModal.css';
@@ -21,11 +21,13 @@ function LoginForm() {
     );
   };
 
+  const history = useHistory();
+
   const handleSubmitDemoUser = (e) => {
     e.preventDefault();
-
-    return dispatch(sessionActions.login({ credential: 'demo@email.com', password: 'demo' })
-  )};
+    dispatch(sessionActions.login({ credential: 'demo@email.com', password: 'demo' }))
+    history.push('/');
+  };
 
   return (
     <div>
