@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 import { Modal } from '../../context/Modal';
+import ProfileButton from '../Navigation/ProfileButton';
 import LoginForm from './LoginForm';
 import menuBars from '../../assets/fontawesome/bars-solid.png'
 import userIcon from '../../assets/fontawesome/circle-user-solid.png'
-import HostingButton from './HostingButton';
 import './LoginForm.css';
 
 function LoginFormModal() {
@@ -13,8 +13,7 @@ function LoginFormModal() {
   return (
     <>
     <div style={{display:"flex"}}>
-      <HostingButton />
-      <button className='login-icon' onClick={() => setShowModal(true)}>
+      <button className='account-button' onClick={() => setShowModal(true)}>
         <img id='menu-icon' src={menuBars}></img>
         <img id='user-icon' src={userIcon}></img>
       </button>

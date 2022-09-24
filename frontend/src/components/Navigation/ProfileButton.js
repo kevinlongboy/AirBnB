@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
+
 import * as sessionActions from '../../store/session';
+import { Modal } from '../../context/Modal';
+
+import './Navigation.css'
+import menuBars from '../../assets/fontawesome/bars-solid.png'
+import userIcon from '../../assets/fontawesome/circle-user-solid.png'
+
 
 function ProfileButton({ user }) {
+
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -30,18 +38,19 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <button className='account-button' onClick={openMenu}>
+        <img id='menu-icon' src={menuBars}></img>
+        <img id='user-icon' src={userIcon}></img>
       </button>
+
       {showMenu && (
-        <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>
+        <div className="account-dropdown-menu">
+          <p>Manage Listings (change to NavLink = '/spots')</p>
+          <p>Manage Reviews (change to NavLink = './reviews')</p>
+          <button id="logout-button" onClick={logout}>Log out</button>
+        </div>
       )}
+
     </>
   );
 }

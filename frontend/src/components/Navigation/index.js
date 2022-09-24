@@ -19,13 +19,10 @@ function Navigation({ isLoaded }){
       <ProfileButton user={sessionUser} />
     );
   }
+
   else {
     sessionLinks = (
       <>
-        {/* remove afterward - not originally part of else statement */}
-        <ProfileButton user={sessionUser} />
-
-        {/* <NavLink to="/signup">Sign Up</NavLink> */}
         <LoginFormModal />
       </>
     );
@@ -33,12 +30,16 @@ function Navigation({ isLoaded }){
 
   return (
     <div className="nav-bar">
+
         <NavLink exact to="/">
           <img className="logo" src={cranebnbLogo}></img>
         </NavLink>
-        {isLoaded && sessionLinks}
-    </div>
 
+        <HostingButton />
+
+        {isLoaded && sessionLinks}
+
+    </div>
   );
 }
 

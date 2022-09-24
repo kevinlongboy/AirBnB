@@ -27,21 +27,21 @@ const validateSpot = [
         .exists({ checkFalsy: true })
         .isLength({ min: 2 })
         .withMessage("Country is required"),
-    check('lat')
-        .exists({ checkFalsy: true })
-        .withMessage("Latitude is not valid"),
-    check('lng')
-        .exists({ checkFalsy: true })
-        .isDecimal()
-        .withMessage("Longitude is not valid"),
+    // check('lat')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage("Latitude is not valid"),
+    // check('lng')
+    //     .exists({ checkFalsy: true })
+    //     .isDecimal()
+    //     .withMessage("Longitude is not valid"),
     check('name')
         .exists({ checkFalsy: true })
         .isLength({ max: 50 })
         .withMessage("Name must be less than 50 characters"),
-    check('description')
-        .exists({ checkFalsy: true })
-        .isLength({ min: 5 })
-        .withMessage("Description is required"),
+    // check('description')
+    //     .exists({ checkFalsy: true })
+    //     .isLength({ min: 5 })
+    //     .withMessage("Description is required"),
     check('price')
         .exists({ checkFalsy: true })
         .withMessage("Price per day is required"),
@@ -55,18 +55,18 @@ const validateQuery = [
     check('size')
         .exists({ checkFalsy: true })
         .withMessage("Size must be greater than or equal to 0"),
-    check('maxLat')
-        .exists({ checkFalsy: true })
-        .withMessage("Maximum latitude is invalid"),
-    check('minLat')
-        .exists({ checkFalsy: true })
-        .withMessage("Minimum latitude is invalid"),
-    check('maxLng')
-        .exists({ checkFalsy: true })
-        .withMessage("Maximum longitude is invalid"),
-    check('minLng')
-        .exists({ checkFalsy: true })
-        .withMessage("Minimum longitude is invalid"),
+    // check('maxLat')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage("Maximum latitude is invalid"),
+    // check('minLat')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage("Minimum latitude is invalid"),
+    // check('maxLng')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage("Maximum longitude is invalid"),
+    // check('minLng')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage("Minimum longitude is invalid"),
     check('maxPrice')
         .exists({ checkFalsy: true })
         .withMessage("Maximum price must be greater than or equal to 0"),
@@ -733,7 +733,7 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
     let error = {};
 
     try {
-        let { address, city, state, country, lat, lng, name, description, price } = req.body;
+        let { address, city, state, country, name, description, price } = req.body;
 
         // if (!address) {
         //     err.message = "Validation Error";
@@ -796,8 +796,6 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
             city: city,
             state: state,
             country: country,
-            lat: lat,
-            lng: lng,
             name: name,
             description: description,
             price: price,

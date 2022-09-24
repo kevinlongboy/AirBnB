@@ -70,13 +70,14 @@ function CreateSpot() {
 
       const submitHandler = (e) => {
         e.preventDefault();
-        let createSpotData = {address, city, state, country, name, price}
+
+        let createSpotData = {address, city, state, country, name, description, price}
         console.log("createSpotData: ", createSpotData)
 
         let newSpot = dispatch(thunkSpotsCreate(createSpotData));
         console.log("NEW SPOT: ", newSpot)
-        console.log(newSpot)
-        history.push(`/spots/`)
+
+        history.push(`/spots`)
       }
 
     return (

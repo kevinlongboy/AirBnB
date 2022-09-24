@@ -81,18 +81,18 @@ module.exports = (sequelize, DataTypes) => {
     lat: {
       type: DataTypes.FLOAT,
       allowNull: true,
-      defaultValue: 47.6038321,
-      validate: {
-        // isDecimal: true
-      },
+      defaultValue: 47,
+      // validate: {
+      //   isDecimal: true
+      // },
     },
     lng: {
       type: DataTypes.FLOAT,
       allowNull: true,
-      defaultValue: -122.330062,
-      validate: {
-        // isDecimal: true
-      },
+      defaultValue: -122,
+      // validate: {
+      //   isDecimal: true
+      // },
     },
     name: {
       type: DataTypes.STRING,

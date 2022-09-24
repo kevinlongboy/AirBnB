@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 /************************* TYPES *************************/
 const SPOTS_READ = 'spots/READ';
 const SPOTS_CREATE = 'spots/CREATE';
@@ -34,15 +36,17 @@ export const thunkSpotsRead = () => async (dispatch) => {
 
 export const thunkSpotsCreate = (data) => async (dispatch) => {
 
-    const response = await fetch(`api/spots`, {
+    const response = await csrfFetch(`/api/spots`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json'} ,
+        headers: { 'Content-Type': 'application/json' } ,
         body: JSON.stringify(data)
     });
+
 
     if (response.ok) {
         const newSpot = await response.json();
         dispatch(actionSpotsCreate(newSpot));
+        return newSpot
     }
 }
 
@@ -56,38 +60,46 @@ export const thunkSpotsCreate = (data) => async (dispatch) => {
 //     }
 // }
 
-const initialState = {
-    allSpots: [],
-}
-/************************* REDUCER *************************/
-const spotsReducer = (state = initialState, action) => {
+/************************ HELPER FUNCTIONS ************************/
+// normalize functions to turn array or object into object with contents:
+// {1: {1: ...}, 2: {2: ...}, 3: {3: ...}}
 
-    const newState = {...state};
+function normalizeArray(arr) {
+    let newObj = {};
+    arr.forEach(el => newObj[el.id] = el);
+    return newObj;
+  };
+
+
+// const initialState = {
+//     allSpots: [],
+// }
+
+
+/************************* REDUCER *************************/
+const spotsReducer = (state = {}, action) => {
 
     switch (action.type) {
 
         case SPOTS_READ:
-            const normalize = {}; // object of objects >> {1: {object}, 2: {object}}
-            action.payload.Spots.forEach(obj => {
-                normalize[obj.id] = obj
-            });
-
-            // action.payload.
-            return normalize
+            let allSpots = normalizeArray(action.payload.Spots)
+            return allSpots
 
         case SPOTS_CREATE:
-            return {
-                ...state,
-                spots: action.payload
-            }
+            console.log("ACTION IN REDUCER: ", action)
+            console.log("STATE IN REDUCER: ", state)
+            console.log("payload IN REDUCER: ", action.payload)
 
-        // case DELETE:
-        //     delete newState[spot.id]
-        //     return newState
+            const newSpot = {...state};
+            newSpot[action.payload.id] = action.payload;
+            return newSpot
 
         default:
             return state
     }
 }
+
+
+
 
 export default spotsReducer;
