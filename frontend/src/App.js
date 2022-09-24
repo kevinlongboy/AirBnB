@@ -13,8 +13,9 @@ import Reviews from "./components/Reviews/Reviews"
 import ReviewEdit from "./components/ReviewEdit/ReviewEdit";
 
 import Navigation from "./components/Navigation";
-import Host from "./components/Host/Host";
 import Footer from "./components/Footer/Footer.js"
+
+import Host from "./components/Host/Host"; // yeet
 
 function App() {
   const dispatch = useDispatch();
