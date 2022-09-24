@@ -6,7 +6,6 @@ import { actionSpotsCreate, thunkSpotsCreate } from "../../store/spots";
 import './SpotCreate.css'
 
 
-
 const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CZ', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'];
 
 
@@ -22,8 +21,16 @@ function SpotCreate() {
     const [country, setCountry] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
+    const [price, setPrice] = useState(10);
     const [validationErrors, setValidationErrors] = useState([]);
+
+    let incrementCounter = () => {
+        if (price < 10000) setPrice(price + 1);
+    }
+    let decrementCounter = () => {
+        if (price >10) setPrice(price - 1);
+    }
+
 
     useEffect(() => {
         const errors = [];
@@ -70,21 +77,22 @@ function SpotCreate() {
       }, [address, city, state, country, name, description, price])
 
 
-      const submitHandler = (e) => {
-        e.preventDefault();
+    const submitHandler = (e) => {
+    e.preventDefault();
 
-        let createSpotData = {address, city, state, country, name, description, price}
-        console.log("createSpotData: ", createSpotData)
+    let createSpotData = {address, city, state, country, name, description, price}
+    console.log("createSpotData: ", createSpotData)
 
-        let newSpot = dispatch(thunkSpotsCreate(createSpotData));
-        console.log("NEW SPOT: ", newSpot)
+    let newSpot = dispatch(thunkSpotsCreate(createSpotData));
+    console.log("NEW SPOT: ", newSpot)
 
-        history.push(`/spots`)
-      }
+    history.push(`/spots`)
+    }
+
 
     return (
-        <div>
 
+        <div>
             <form
                 className="create-spot-form"
                 onSubmit={submitHandler}
@@ -169,8 +177,8 @@ function SpotCreate() {
             />
             </label>
 
-            <label>
-                <output>${price}</output>
+            {/* <label>
+                <output placeholder="0">${price}</output>
                 <input
                 type="range"
                 name="price"
@@ -180,6 +188,28 @@ function SpotCreate() {
                 value={price}
                 />
                 per night
+            </label> */}
+
+            <label>
+                <button
+                    type="button"
+                    name="price"
+                    min="10000"
+                    onClick={incrementCounter}
+                >
+                up
+                </button>
+
+                <output>${`${price}`}</output>
+
+                <button
+                    type="button"
+                    name="price"
+                    min="10"
+                    onClick={decrementCounter}
+                >
+                down
+                </button>
             </label>
 
             <button
