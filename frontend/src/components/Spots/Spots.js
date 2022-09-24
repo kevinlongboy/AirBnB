@@ -3,6 +3,22 @@ import { NavLink } from "react-router-dom";
 
 import './Spots.css'
 
+
+// will need to retrieve session.user.id in order to make fetch request for spots/current
+let sessionState = {
+    session: {
+
+        user: {
+            email: "demo@email.com",
+            firstName: "Demo",
+            id: 10,
+            lastName: "User",
+            token: "eyJhbGciOiJIUzI1NiIw",
+            username: "Demo"
+        }
+    },
+}
+
 // YEET THIS:
 // Demo data from: Get all Spots owned by the Current User
 // * Method: GET
@@ -47,20 +63,24 @@ let spotsState = {
     ]
   }
 
-  let spots = spotsState.AllSpotsByUser
+  let spots = spotsState.AllSpotsByUser;
+
+  // to delete:
+    // grab spot.id/key
+    // send as part of route param in fetch request
 
 function Spots() {
 
     return (
         <div>
-            <div className="spots-header">
+            <div className="spots-page-header">
                 <h1># Listings</h1>
                 <NavLink to={'/hosting'}>+ Create listing</NavLink>
 
 
             </div>
 
-            <div className="spots-body">
+            <div className="spots-page-body">
                 <table>
                     <thead>
                         <tr>
