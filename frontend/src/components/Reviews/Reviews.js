@@ -1,5 +1,6 @@
 import React from "react";
 import './Reviews.css'
+import chevronRight from '../../assets/fontawesome/chevron-right.svg'
 
 
 // will need to retrieve session.user.id in order to make fetch request for reviews/current
@@ -61,7 +62,45 @@ let reviewsState = {
             }
           ]
 
-        }
+        },
+        {
+
+            "id": 1,
+            "userId": 1,
+            "spotId": 1,
+            "review": "This was an awesome spot!",
+            "stars": 5,
+            "createdAt": "2021-11-19 20:39:36",
+            "updatedAt": "2021-11-19 20:39:36" ,
+
+            "User": {
+              "id": 1,
+              "firstName": "John",
+              "lastName": "Smith"
+            },
+
+            "Spot": {
+              "id": 1,
+              "ownerId": 1,
+              "address": "123 Disney Lane",
+              "city": "San Francisco",
+              "state": "California",
+              "country": "United States of America",
+              "lat": 37.7645358,
+              "lng": -122.4730327,
+              "name": "App Academy",
+              "price": 123,
+              "previewImage": "image url"
+            },
+
+            "ReviewImages": [
+              {
+                "id": 1,
+                "url": "image url"
+              }
+            ]
+
+          }
     ]
 }
 
@@ -109,42 +148,56 @@ function convertDate(iso) {
 function Reviews() {
 
     return(
-        <div>
+        <div className="review-page">
 
             <div className="review-page-header">
                 <div>
-                    <p>Profile arrow Reviews</p>
+                    <p className="review-page-navigation">Profile <img id="review-chevron-right" src={chevronRight} style={{maxHeight:'10px', paddingLeft:'8px', paddingRight:'8px'}}></img> Reviews</p>
                 </div>
 
                 <div>
-                    <h1>Reviews by you</h1>
+                    <h1 id="reviews-title">Reviews by you</h1>
                 </div>
 
-                <div>
+                <div id="reviews-subtitle">
                     <p>Reviews by you</p>
-
                 </div>
             </div>
 
             <div className="review-page-body">
 
-            <table>
-                    <thead>
+            <table id="review-table">
+                    <thead id='review-table-head'>
+                        <tr>
+                            <th>Reviews to write</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id='review-table-body'>
+                        <tr>
+                            <td id="review-table-head-data">Nobody to review right now. Looks like it’s time for another trip!</td>
+                        </tr>
+                    </tbody>
+
+            </table>
+
+            <table id="review-table">
+                    <thead id='review-table-head'>
                         <tr>
                             <th>Past reviews you've written</th>
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody id='review-table-body'>
                     {
                         reviews.map(review => (
 
                             <tr key={review.id}>
                                 <td>
-                                    <p>Review for {review.Spot.name}</p>
-                                    <p>{review.review}</p>
-                                    <p>{convertDate(review.createdAt)}</p>
-                                    <button>Delete review</button>
+                                    <p id="review-table-body-title">Review for {review.Spot.name}</p>
+                                    <p id="review-table-body-data">{review.review}</p>
+                                    <p id="review-table-body-date-created">{convertDate(review.createdAt)}</p>
+                                    <button id="review-table-button">Delete</button>
                                 </td>
                             </tr>
                         ))
