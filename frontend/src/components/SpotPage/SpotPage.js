@@ -3,7 +3,10 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { actionSpotsRead, thunkSpotsRead, thunkSpotsReadDetails } from "../../store/spots";
+import ReviewCreate from "../ReviewCreate/ReviewCreate";
 import './SpotPage.css';
+
+
 
 
 // YEET THIS:
@@ -30,31 +33,31 @@ let spotsState = {
         "numReviews": 5,
         "avgStarRating": 4.5,
         "SpotImages": [
-        {
-            "id": 1,
-            "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_2.jpg",
-            "preview": true
-        },
-        {
-            "id": 2,
-            "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_5_2.jpg",
-            "preview": false
-        },
-        {
-            "id": 3,
-            "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_11_2.jpg",
-            "preview": true
-        },
-        {
-            "id": 4,
-            "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_14_2.jpg",
-            "preview": true
-        },
-        {
-            "id": 5,
-            "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_17_2.jpg",
-            "preview": true
-        },
+        // {
+        //     "id": 1,
+        //     "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_2.jpg",
+        //     "preview": true
+        // },
+        // {
+        //     "id": 2,
+        //     "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_5_2.jpg",
+        //     "preview": false
+        // },
+        // {
+        //     "id": 3,
+        //     "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_11_2.jpg",
+        //     "preview": true
+        // },
+        // {
+        //     "id": 4,
+        //     "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_14_2.jpg",
+        //     "preview": true
+        // },
+        // {
+        //     "id": 5,
+        //     "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_17_2.jpg",
+        //     "preview": true
+        // },
         ],
         "Owner": {
             "id": 1,
@@ -92,7 +95,61 @@ let reviewsState = {
         ],
       }
     ]
-  }
+}
+
+
+/**************************** CONDITIONAL COMPONENTS ****************************/
+
+// Render component conditionally, to manage access to review/POST
+let sessionState = {
+    user: {
+        email: "demo@email.com",
+        firstName: "Demo",
+        id: 10,
+        lastName: "User",
+        token: "eyJhbGciOiJIUzI1NiIw",
+        username: "Demo"
+    }
+}
+
+let sessionUserId = sessionState.user.id
+let spotOwnerId = spotsState.SingleSpotDetails.ownerId
+
+console.log("sessionUserId: ",  sessionUserId)
+console.log("spotOwnerId: ", spotOwnerId)
+let reviewComponent
+if ((sessionUserId >= 1) && (sessionUserId != spotOwnerId)) {
+    reviewComponent = (
+        <>
+            <ReviewCreate />
+        </>
+    )
+} else {
+    reviewComponent = (
+        <>
+        </>
+    )
+}
+
+/**************************** HELPER FUNCTIONS ***************************/
+
+function addPlaceholderImages(arr) {
+
+    let placeholderArr = [
+        "https://cdn1.vox-cdn.com/uploads/chorus_image/image/47552879/Pike_Place_Market_Entrance.0.0.jpg",
+        "http://sparkcreativeseattle.com/wp-content/uploads/2018/12/space-needle-fog.jpg",
+        "https://cdn.vox-cdn.com/thumbor/XIhmt3AT6oZpXGechlpqiWeMkxU=/0x0:5000x3333/1200x800/filters:focal(2100x1267:2900x2067)/cdn.vox-cdn.com/uploads/chorus_image/image/64758319/StarbucksPETA.0.jpg",
+        "https://www.worldatlas.com/upload/b7/0d/7c/shutterstock-474626185.jpg",
+        "https://wallpapercave.com/wp/wp3120731.jpg"
+    ]
+
+    for (let i = 0; arr.length < 5; i++) {
+        arr.push(placeholderArr[i])
+    }
+
+    return arr
+}
+
 
 function convertDate(iso) {
 
@@ -129,6 +186,19 @@ function convertDate(iso) {
 }
 
 
+/**************************** EXTRACTED ELEMENTS FROM STATE ****************************/
+
+let spotImagesRaw = spotsState.SingleSpotDetails.SpotImages
+
+let spotImagesArr = []
+spotImagesRaw.forEach((img) => spotImagesArr.push(img.url))
+
+if (spotImagesArr.length < 5 ) {
+    addPlaceholderImages(spotImagesArr)
+}
+
+/**************************** HELPER FUNCTIONS ****************************/
+
 function SpotPage() {
     // const spotsState = useSelector(state => state.spots)
     // const dispatch = useDispatch();
@@ -142,7 +212,6 @@ function SpotPage() {
 
 
     let spotDetails = spotsState.SingleSpotDetails
-    let spotImages = spotDetails.SpotImages
     let listingStartDate = convertDate(spotDetails.createdAt)
 
     let allSpotReviewsArr = reviewsState.AllReviewsForSpot
@@ -165,8 +234,8 @@ function SpotPage() {
 
             <div className="spot-page-images-cover">
                 {
-                    spotImages.map((spotImage, index) => (
-                        <img key={spotImage.id} className={`img${index + 1}`} src={spotImage.url}></img>
+                    spotImagesArr.map((spotImage, index) => (
+                        <img key={index + 1} className={`img${index + 1}`} src={spotImage}></img>
                     ))
                 }
             </div>
@@ -194,7 +263,7 @@ function SpotPage() {
                     ))
                 }
 
-
+            {reviewComponent}
 
 
             </div>

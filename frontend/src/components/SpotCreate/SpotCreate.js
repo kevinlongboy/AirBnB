@@ -148,7 +148,7 @@ function SpotCreate() {
                 value={country}
                 >
                     <option>Country</option>
-                    <option>United States of America</option>
+                    <option>United States</option>
                 </select>
             </label>
 
@@ -165,7 +165,7 @@ function SpotCreate() {
 
             <label>
                 Create your description
-                <input
+                <textarea
                 type="textarea"
                 name="description"
                 minLength={5}
