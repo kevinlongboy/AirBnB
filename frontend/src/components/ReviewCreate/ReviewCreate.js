@@ -1,58 +1,46 @@
 import React, {useState, useEffect} from "react";
-import {useHistory} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 
 function ReviewCreate() {
 
     const history = useHistory();
     const [review, setReview] = useState("");
-    const [stars, setStars] = useState("");
+    const [stars, setStars] = useState(0);
     const [validationErrors, setValidationErrors] = useState([]);
 
-    let star
-    let showStars = () => {
-        if (stars == 1) {
-            star = <i class="fa-solid fa-star"></i>
-        } else if (stars == 2) {
-            star = <>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            </>
-        } else if (stars == 3) {
-            star = <>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            </>
-        } else if (stars == 4) {
-            star = <>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            </>
-        } else if (stars == 5) {
-            star = <>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            </>
-        }
-        return star
+    let incrementCounter = () => {
+        if (stars < 5) setStars(stars + 1);
+    }
+    let decrementCounter = () => {
+        if (stars > 1) setStars(stars - 1);
     }
 
+    useEffect(() => {
+        const errors = [];
 
+        if (review.length < 5) {
+            errors.push("Please enter a longer review")
+        }
+
+        if (stars < 1 || stars > 5) {
+          errors.push("Please enter a rating")
+        }
+
+        setValidationErrors(errors)
+      }, [review, stars])
+
+
+
+    const { spotId } = useParams()
     const submitHandler = (e) => {
+
         e.preventDefault();
 
-        // let createSpotData = {address, city, state, country, name, description, price}
-        // console.log("createSpotData: ", createSpotData)
+        // let createReview = {review, stars}
 
-        // let newSpot = dispatch(thunkSpotsCreate(createSpotData));
-        // console.log("NEW SPOT: ", newSpot)
+        // let newSpot = dispatch(thunkReviewsCreate(createReview));
 
-        history.push(`/reviews`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
+        history.push(`/spots/${spotId}`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
     }
 
     return (
@@ -84,24 +72,34 @@ function ReviewCreate() {
                     <h2>Rating</h2>
                     <p>Share your overall rating</p>
                 </div>
-                <output>{star}</output>
-                <input
-                    type="range"
+
+                <button
+                    type="button"
                     name="stars"
-                    min={1}
-                    max={5}
-                    onChange={(e) => setStars(e.target.value)}
-                    value={stars}
+                    min="1"
+                    onClick={decrementCounter}
                 >
-                </input>
+                -
+                </button>
+
+                <output>{` ★ ${stars} `}</output>
+
+                <button
+                    type="button"
+                    name="stars"
+                    max="5"
+                    onClick={incrementCounter}
+                >
+                +
+                </button>
             </label>
 
 
-            <ul className="errors">
-            {validationErrors.length > 0 &&
-            validationErrors.map((error) =>
-            <p key={error}>{error}</p>)}
-            </ul>
+            <div className="errors">
+                {validationErrors.length > 0 &&
+                validationErrors.map((error) =>
+                <p key={error}>{error}</p>)}
+            </div>
 
             <button
             type="submit"

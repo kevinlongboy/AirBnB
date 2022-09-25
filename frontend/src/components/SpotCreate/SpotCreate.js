@@ -21,14 +21,14 @@ function SpotCreate() {
     const [country, setCountry] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [price, setPrice] = useState(10);
+    const [price, setPrice] = useState(150);
     const [validationErrors, setValidationErrors] = useState([]);
 
     let incrementCounter = () => {
         if (price < 10000) setPrice(price + 1);
     }
     let decrementCounter = () => {
-        if (price >10) setPrice(price - 1);
+        if (price > 10) setPrice(price - 1);
     }
 
 
@@ -100,11 +100,11 @@ function SpotCreate() {
 
             <h1>Create a New Listing</h1>
 
-            <ul className="errors">
-            {validationErrors.length > 0 &&
-            validationErrors.map((error) =>
-            <p key={error}>{error}</p>)}
-            </ul>
+            <div className="errors">
+                {validationErrors.length > 0 &&
+                validationErrors.map((error) =>
+                <p key={error}>{error}</p>)}
+            </div>
 
             <label>
                 <input
@@ -191,16 +191,6 @@ function SpotCreate() {
             </label> */}
 
             <label>
-                <button
-                    type="button"
-                    name="price"
-                    min="10000"
-                    onClick={incrementCounter}
-                >
-                up
-                </button>
-
-                <output>${`${price}`}</output>
 
                 <button
                     type="button"
@@ -210,6 +200,18 @@ function SpotCreate() {
                 >
                 down
                 </button>
+
+                <output>${`${price}`}</output>
+
+                <button
+                    type="button"
+                    name="price"
+                    max="10000"
+                    onClick={incrementCounter}
+                >
+                up
+                </button>
+
             </label>
 
             <button
