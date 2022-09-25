@@ -78,7 +78,7 @@ let reviewsState = {
         "id": 1,
         "userId": 1,
         "spotId": 1,
-        "review": "This was an awesome spot!",
+        "review": "This was an awesome spot! fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill fill ",
         "stars": 5,
         "createdAt": "2021-11-19 20:39:36",
         "updatedAt": "2021-11-19 20:39:36" ,
@@ -98,7 +98,7 @@ let reviewsState = {
         "id": 1,
         "userId": 1,
         "spotId": 1,
-        "review": "This was an awesome spot!",
+        "review": "This was an awesome spot! fill ",
         "stars": 5,
         "createdAt": "2021-11-19 20:39:36",
         "updatedAt": "2021-11-19 20:39:36" ,
@@ -339,7 +339,7 @@ function SpotPage() {
         <div className="window">
 
             <div className="spot-page">
-                <h1 className="spot-page-name">{spotDetails.name}</h1>
+                <h1 id="spot-page-name">{spotDetails.name}</h1>
 
                 <div className="spot-page-overview">
                     {/* <p className="fa-solid fa-star"> 4.97</p> */}
@@ -359,9 +359,9 @@ function SpotPage() {
                 </div>
 
 
-                <div className="lower-half">
+                <div className="spot-page-middle">
 
-                    <div className="lower-half-left">
+                    <div className="spot-page-middle-left">
                         <div className="spot-page-host-info">
                             <h2 className="spot-page-host-name">{`Hosted by ${spotDetails.Owner.firstName}`}</h2>
                             <p className="spot-page-host-creation-date">Since {listingStartDate}</p>
@@ -372,8 +372,10 @@ function SpotPage() {
                         </div>
                     </div>
 
-                    <div className="lower-half-right">
+                    <div className="spot-page-middle-right">
+                      <div>
                         {reviewComponent}
+                      </div>
                     </div>
                 </div>
 

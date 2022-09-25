@@ -39,6 +39,10 @@
     margin: 0 auto;
     text-indent: 10px;
 }
+.username-field::placeholder {
+    font-size: 15px;
+    font-weight: 100;
+}
 
 .password-field {
     width: 520px;
@@ -47,6 +51,12 @@
     border-radius: 0px 0px 8px 8px;
     text-indent: 10px;
 }
+
+.password-field::placeholder {
+    font-size: 15px;
+    font-weight: 100;
+}
+
 
 .disclaimer {
     width: 520px;

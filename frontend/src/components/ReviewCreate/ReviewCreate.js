@@ -6,14 +6,14 @@ function ReviewCreate() {
 
     const history = useHistory();
     const [review, setReview] = useState("");
-    const [stars, setStars] = useState(0);
+    const [stars, setStars] = useState("★");
     const [validationErrors, setValidationErrors] = useState([]);
 
     let incrementCounter = () => {
-        if (stars < 5) setStars(stars + 1);
+        if (stars.length < 5) setStars(stars.concat("★"));
     }
     let decrementCounter = () => {
-        if (stars > 1) setStars(stars - 1);
+        if (stars.length > 1) setStars(stars.slice(0, stars.length-1));
     }
 
     useEffect(() => {
@@ -53,7 +53,7 @@ function ReviewCreate() {
 
         e.preventDefault();
 
-        // let createReview = {review, stars}
+        // let createReview = {review, stars.length} //MAKE SURE TO SUBMIT STARS.length!!!
         // let newSpot = dispatch(thunkReviewsCreate(createReview));
 
 
@@ -72,8 +72,8 @@ function ReviewCreate() {
 
             <label>
                 <div>
-                    <h2>Leave a public review</h2>
-                    <p>Write a fair, honest review about your stay so future hosts know what to expect.</p>
+                    <h2 className="review-create-prompt">Leave a public review</h2>
+                    <p className="review-create-subtitle">Write a fair, honest review about your stay so future hosts know what to expect.</p>
                 </div>
                 <textarea
                     className="textarea-field"
@@ -88,41 +88,53 @@ function ReviewCreate() {
             </label>
 
 
-            <label>
                 <div>
-                    <h2>Rating</h2>
-                    <p>Share your overall rating</p>
+                    <h2 className="review-create-prompt">Rating</h2>
+                    <p className="review-create-subtitle">Share your overall rating</p>
                 </div>
+            <label>
 
-                <button
-                    type="button"
-                    name="stars"
-                    min="1"
-                    onClick={decrementCounter}
-                >
-                -
-                </button>
+                <div className="stars">
+                    <div>
+                        <button
+                            id="stars-button"
+                            type="button"
+                            name="stars"
+                            min="1"
+                            onClick={decrementCounter}
+                            >
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
 
-                <output>{` ★ ${stars} `}</output>
+                    <div className="output-field-stars">
+                        <output>{stars}</output>
+                    </div>
 
-                <button
-                    type="button"
-                    name="stars"
-                    max="5"
-                    onClick={incrementCounter}
-                >
-                +
-                </button>
+                    <div>
+
+                        <button
+                            id="stars-button"
+                            type="button"
+                            name="stars"
+                            max="5"
+                            onClick={incrementCounter}
+                            >
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
             </label>
 
 
            { <div className="errors">
                 {validationErrors.length > 0 &&
                 validationErrors.map((error) =>
-                <p key={error}>{error}</p>)}
+                <p className="error-item" key={error}>{error}</p>)}
             </div>}
 
             <button
+            id="review-submit-button"
             type="submit"
             disabled={!!validationErrors.length}
             >
