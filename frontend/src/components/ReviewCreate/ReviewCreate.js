@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useHistory, useParams} from 'react-router-dom';
+import './ReviewCreate.css'
 
 function ReviewCreate() {
 
@@ -26,6 +27,22 @@ function ReviewCreate() {
           errors.push("Please enter a rating")
         }
 
+        let displayErrors;
+        if (errors.length) {
+            displayErrors = (
+                <div className="errors">
+                {validationErrors.length > 0 &&
+                validationErrors.map((error) =>
+                <p key={error}>{error}</p>)}
+                </div>
+            )
+        } else {
+            displayErrors = (
+                <div className="errors">
+                </div>
+            )
+        }
+
         setValidationErrors(errors)
       }, [review, stars])
 
@@ -37,14 +54,17 @@ function ReviewCreate() {
         e.preventDefault();
 
         // let createReview = {review, stars}
-
         // let newSpot = dispatch(thunkReviewsCreate(createReview));
+
+
+
+
 
         history.push(`/spots/${spotId}`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
     }
 
     return (
-        <div>
+        <div className="review-create-panel">
             <form
                 className="create-review-form"
                 onSubmit={submitHandler}
@@ -56,6 +76,7 @@ function ReviewCreate() {
                     <p>Write a fair, honest review about your stay so future hosts know what to expect.</p>
                 </div>
                 <textarea
+                    className="textarea-field"
                     type="textarea"
                     name="review"
                     minLength={5}
@@ -95,11 +116,11 @@ function ReviewCreate() {
             </label>
 
 
-            <div className="errors">
+           { <div className="errors">
                 {validationErrors.length > 0 &&
                 validationErrors.map((error) =>
                 <p key={error}>{error}</p>)}
-            </div>
+            </div>}
 
             <button
             type="submit"

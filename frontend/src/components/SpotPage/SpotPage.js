@@ -93,7 +93,126 @@ let reviewsState = {
             "url": "image url"
           }
         ],
-      }
+      },
+      {
+        "id": 1,
+        "userId": 1,
+        "spotId": 1,
+        "review": "This was an awesome spot!",
+        "stars": 5,
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36" ,
+        "User": {
+          "id": 1,
+          "firstName": "John",
+          "lastName": "Smith"
+        },
+        "ReviewImages": [
+          {
+            "id": 1,
+            "url": "image url"
+          }
+        ],
+      },
+      {
+        "id": 1,
+        "userId": 1,
+        "spotId": 1,
+        "review": "This was an awesome spot!",
+        "stars": 5,
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36" ,
+        "User": {
+          "id": 1,
+          "firstName": "John",
+          "lastName": "Smith"
+        },
+        "ReviewImages": [
+          {
+            "id": 1,
+            "url": "image url"
+          }
+        ],
+      },
+      {
+        "id": 1,
+        "userId": 1,
+        "spotId": 1,
+        "review": "This was an awesome spot!",
+        "stars": 5,
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36" ,
+        "User": {
+          "id": 1,
+          "firstName": "John",
+          "lastName": "Smith"
+        },
+        "ReviewImages": [
+          {
+            "id": 1,
+            "url": "image url"
+          }
+        ],
+      },{
+        "id": 1,
+        "userId": 1,
+        "spotId": 1,
+        "review": "This was an awesome spot!",
+        "stars": 5,
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36" ,
+        "User": {
+          "id": 1,
+          "firstName": "John",
+          "lastName": "Smith"
+        },
+        "ReviewImages": [
+          {
+            "id": 1,
+            "url": "image url"
+          }
+        ],
+      },
+      {
+        "id": 1,
+        "userId": 1,
+        "spotId": 1,
+        "review": "This was an awesome spot!",
+        "stars": 5,
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36" ,
+        "User": {
+          "id": 1,
+          "firstName": "John",
+          "lastName": "Smith"
+        },
+        "ReviewImages": [
+          {
+            "id": 1,
+            "url": "image url"
+          }
+        ],
+      },
+      {
+        "id": 1,
+        "userId": 1,
+        "spotId": 1,
+        "review": "This was an awesome spot!",
+        "stars": 5,
+        "createdAt": "2021-11-19 20:39:36",
+        "updatedAt": "2021-11-19 20:39:36" ,
+        "User": {
+          "id": 1,
+          "firstName": "John",
+          "lastName": "Smith"
+        },
+        "ReviewImages": [
+          {
+            "id": 1,
+            "url": "image url"
+          }
+        ],
+      },
     ]
 }
 
@@ -120,9 +239,8 @@ console.log("spotOwnerId: ", spotOwnerId)
 let reviewComponent
 if ((sessionUserId >= 1) && (sessionUserId != spotOwnerId)) {
     reviewComponent = (
-        <>
+
             <ReviewCreate />
-        </>
     )
 } else {
     reviewComponent = (
@@ -218,56 +336,60 @@ function SpotPage() {
     // let reviewDate = convertDate(spotDetails.createdAt)
 
     return (
-        <div className="spot-page">
-            <h1 className="spot-page-name">{spotDetails.name}</h1>
+        <div className="window">
 
-            <div className="spot-page-overview">
-                {/* <p className="fa-solid fa-star"> 4.97</p> */}
-                <p className="spot-page-rating">{`★ ${spotDetails.avgStarRating}`}</p>
-                <p> · </p>
-                <p className="spot-page-review-count">2 Reviews</p>
-                <p> · </p>
-                <p className="spot-page-location"> {`${spotDetails.city}, ${spotDetails.state}, ${spotDetails.country}`}</p>
-            </div>
+            <div className="spot-page">
+                <h1 className="spot-page-name">{spotDetails.name}</h1>
+
+                <div className="spot-page-overview">
+                    {/* <p className="fa-solid fa-star"> 4.97</p> */}
+                    <p className="spot-page-rating">{`★ ${spotDetails.avgStarRating}`}</p>
+                    <p> · </p>
+                    <p className="spot-page-review-count">2 Reviews</p>
+                    <p> · </p>
+                    <p className="spot-page-location"> {`${spotDetails.city}, ${spotDetails.state}, ${spotDetails.country}`}</p>
+                </div>
+
+                <div className="spot-page-images-cover">
+                    {
+                        spotImagesArr.map((spotImage, index) => (
+                            <img key={index + 1} className={`img${index + 1}`} src={spotImage}></img>
+                            ))
+                        }
+                </div>
 
 
+                <div className="lower-half">
 
-            <div className="spot-page-images-cover">
-                {
-                    spotImagesArr.map((spotImage, index) => (
-                        <img key={index + 1} className={`img${index + 1}`} src={spotImage}></img>
-                    ))
-                }
-            </div>
-
-            <div className="spot-page-host-info">
-                <h2 className="spot-page-host-name">{`Hosted by ${spotDetails.Owner.firstName}`}</h2>
-                <p className="spot-page-host-creation-date">Since {listingStartDate}</p>
-            </div>
-
-            <div className="spot-page-description">
-                <p>{`${spotDetails.description}`}</p>
-            </div>
-
-            <div className="reviews">
-                <h2 className="review-data">{`★ ${spotDetails.avgStarRating} · ${allSpotReviewsArr.length} Reviews`}</h2>
-
-                {
-                    allSpotReviewsArr.map((spotReview, index) => (
-                        <div>
-                            <div className="review-username">{spotReview.User.firstName}</div>
-                            <div className="review-date">{convertDate(spotReview.createdAt)}</div>
-                            <div className="review-content">{spotReview.review}</div>
+                    <div className="lower-half-left">
+                        <div className="spot-page-host-info">
+                            <h2 className="spot-page-host-name">{`Hosted by ${spotDetails.Owner.firstName}`}</h2>
+                            <p className="spot-page-host-creation-date">Since {listingStartDate}</p>
                         </div>
 
-                    ))
-                }
+                        <div className="spot-page-description">
+                            <p>{`${spotDetails.description}`}</p>
+                        </div>
+                    </div>
 
-            {reviewComponent}
+                    <div className="lower-half-right">
+                        {reviewComponent}
+                    </div>
+                </div>
 
+                <div className="reviews">
+                            <h2 className="review-data">{`★ ${spotDetails.avgStarRating} · ${allSpotReviewsArr.length} Reviews`}</h2>
+
+                            {allSpotReviewsArr.map((spotReview, index) => (
+                                <div>
+                                    <div className="review-username">{spotReview.User.firstName}</div>
+                                    <div className="review-date">{convertDate(spotReview.createdAt)}</div>
+                                    <div className="review-content">{spotReview.review}</div>
+                                </div>
+                            ))}
+                </div>
 
             </div>
-
         </div>
     )
 }

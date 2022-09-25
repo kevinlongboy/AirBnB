@@ -16,18 +16,18 @@ function Navigation({ isLoaded }){
 
   if (sessionUser) {
     sessionLinks = (
-      <>
+      <div className="nav-bar-right">
         <HostingButton />
         <ProfileButton user={sessionUser} />
-      </>
+      </div>
     );
   }
 
   else {
     sessionLinks = (
-      <>
+      <div className="nav-bar-right">
         <LoginFormModal />
-      </>
+        </div>
     );
   }
 
@@ -35,7 +35,7 @@ function Navigation({ isLoaded }){
     <div className="nav-bar">
 
         <NavLink exact to="/">
-          <img className="logo" src={cranebnbLogo}></img>
+          <img className="nav-bar-left" id="crainbnb-logo" src={cranebnbLogo}></img>
         </NavLink>
 
         {isLoaded && sessionLinks}

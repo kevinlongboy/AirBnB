@@ -3,40 +3,50 @@
 /******************* NAV BAR ITSELF *******************/
 .nav-bar {
     display: flex;
+    box-sizing: border-box;
     flex-direction: row;
-    /* flex-wrap: wrap; */
     justify-content: space-between;
     align-items: center;
-    height: 80px;
-    padding-left: 50px;
-    padding-right: 50px;
-    border-bottom: 2px solid #f6f6f6;
-    padding: none;
 
     position: sticky;
     top: 0;
-    left: 0;
     background-color: white;
+    z-index: 0;
+
+    margin: none;
+    border-bottom: 2px solid #f6f6f6;
+    /* border-bottom: 2px solid red; */
+    padding: 0px 50px;
+
+    height: 80px;
+}
+
+.nav-bar-right {
+    display: flex;
 }
 
 
+
 /******************* LOGO HOME BUTTON *******************/
-.logo {
+#crainbnb-logo {
     max-height: 55px;
-    margin: none;
-    border: none;
+    margin: 0;
+    border: 0;
+    padding: 0;
 }
 
 
 /******************* 'BECOME A HOST' BUTTON *******************/
-
 .hosting-button {
-    width: 145px;
-    height: 48px;
-    margin-right: 12px;
-    border: none;
+    margin: 0px 5px;
+    border: 0;
     border-radius: 32px;
     background-color: white;
+
+    width: 145px;
+    height: 48px;
+    left: 0;
+
     font-size: 15px;
     font-weight: 900;
 }
@@ -49,8 +59,6 @@
 
 /******************* ACCOUNT BUTTON *******************/
 .account-button {
-    width: 88px;
-    height: 48px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -58,6 +66,9 @@
     border: 1.5px solid #dbdbdb;
     border-radius: 32px;
     background-color: white;
+
+    width: 88px;
+    height: 48px;
 }
 
 .account-button:hover {
@@ -66,36 +77,70 @@
 }
 
 #menu-icon {
-    max-width: 16px;
-    /* max-height: 15px; */
     padding-right: 2.5px;
+    max-width: 16px;
 }
 
 #user-icon {
-    max-width: 35px;
-    max-height: 35px;
     padding-left: 2.5px;
+    max-width: 35px;
 }
 
 
 /******************* DROPDOWN MENU (IE: CONTENTS WITHING ACCOUNT BUTTON) *******************/
 .account-dropdown-menu {
-    position: fixed;
-    top: 70px;
-    right: 45px;
-    width: 270px;
+    display: relative;
+    flex-direction: column;
+    align-items: center;
 
-    background-color: yellow;
+    position: fixed;
+    top: 80px;
+    right: 50px;
+
     border-radius: 15px;
+    background-color: white;
+
+    height: 190px;
+    width: 270px;
+    font-size: 15px;
+    box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+
 }
 
-#logout-button {
+.account-dropdown-menu > div {
+    height: 40px;
+    padding-top: 5px;
+    padding-left: 15px;
+}
+
+.account-dropdown-menu > div:hover {
+    background-color: #f7f7f7;
+}
+
+#account-listings-button {
+    margin-top: 10px;
+    padding-top: 15px;
+}
+
+#account-reviews-button {
+    margin-bottom: 8px;
+    padding-top: 15px;
+    border-bottom: 1px solid #dadada;
+}
+
+
+#account-logout-button {
     border: none;
     background: none;
-    font-size: 30px
+    margin: 0;
+    border: 0;
+    padding: 0%;
+    width: 270px;
+    font-size: 15px;
+    align-self: left;
 }
 
-#logout-button:hover {
+#account-logout-button:hover {
     border: none;
-    background: red;
+    cursor: pointer;
 }

@@ -48,17 +48,24 @@ function ProfileButton({ user }) {
 
       {showMenu && (
         <div className="account-dropdown-menu">
-          <div>
-            <NavLink to='/spots'>Manage Listings</NavLink>
-          </div>
-          <div>
-            <NavLink to='/reviews'>Manage Reviews</NavLink>
-          </div>
-          <div>
 
-              <button id="logout-button" onClick={logout}>Log out</button>
-
+          <div id="account-listings-button">
+            <NavLink to='/spots' style={{textDecoration:"none", color:"black", fontWeight:"900"}}>
+                Manage Listings
+            </NavLink>
           </div>
+
+          <div id="account-reviews-button">
+            <NavLink to='/reviews' style={{textDecoration:"none", color:"black", fontWeight:"900"}}>
+                Manage Reviews
+            </NavLink>
+          </div>
+
+
+          <div>
+            <button id="account-logout-button" style={{textAlign:"left", fontWeight:"0", paddingTop:"7px"}} onClick={logout}>Log out</button>
+          </div>
+
         </div>
       )}
 
