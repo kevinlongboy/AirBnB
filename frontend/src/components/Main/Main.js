@@ -19,6 +19,7 @@ function Main() {
 
     return (
         <div className="spots">
+
             {spotsArr.map((spot) => (
                     <Link
                     className="spot-card"
@@ -27,13 +28,19 @@ function Main() {
                     to={`/spots/${spot.id}`}
                     style={{textDecoration:"none"}} //?
                     >
-                        <div><img className="spot-image" src={spot.previewImage}></img></div>
+
+                        <div className="spot-image-container">
+                            <img className="spot-image" src={spot.previewImage}></img>
+                        </div>
+
                         <div className="spot-text">
+
                             <div className="spot-name" style={{color:"black", fontWeight:"900"}}>{spot.name}</div>
                             {/* <div className="spot-rating">{spot.avgRating = spot.avgRating === undefined ? 0 : `★${spot.avgRating}`}</div> */}
                             <div className="spot-description" style={{color:"#717171",  fontWeight:"100"}}>{`${spot.city}, ${spot.state}`}</div>
                             <div className="spot-price" style={{color:"black", fontWeight:"900"}}>{`$${spot.price} night`}</div>
                         </div>
+
                     </Link>
             ))}
 

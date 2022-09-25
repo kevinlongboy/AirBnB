@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
+import plusIcon from '../../assets/fontawesome/plus-solid.svg'
 import './Spots.css'
 
 
@@ -73,10 +73,15 @@ let spotsState = {
 function Spots() {
 
     return (
-        <div>
+        <div className="spots-page">
             <div className="spots-page-header">
-                <h1># Listings</h1>
-                <NavLink to={'/hosting'}>+ Create listing</NavLink>
+                <h1>{spots.length} Listings</h1>
+                <div className="spots-create-listing-button" style={{display:"flex", justifyContent:"space-evenly", verticalAlign:"center", alignContent:'center', alignItems:'center'}}>
+                        <img src={plusIcon} style={{width:"15px"}}></img>
+                    <NavLink to={'/hosting'} style={{textDecoration:"none", color:"black", fontWeight:"900",verticalAlign:'start' }}>
+                        Create listing
+                    </NavLink>
+                </div>
 
 
             </div>
@@ -84,26 +89,37 @@ function Spots() {
             <div className="spots-page-body">
                 <table>
                     <thead>
-                        <tr>
+                        <tr style={{display:'flex', justifyContent:"space-around"}}>
                             <th>LISTING</th>
                             <th>TO DO</th>
-                            <th>LOCATION</th>
+                            <th sty>LOCATION</th>
                         </tr>
                     </thead>
+
+
+
+
 
                     <tbody>
                     {
                         spots.map(spot => (
 
-                            <tr key={spot.id}>
-                                <NavLink to={`/spots/${spot.id}`}>
+                            <tr key={spot.id} className="spot-listing-row">
+
+                                <NavLink
+                                    to={`/spots/${spot.id}`}
+                                    style={{textDecoration:"none", color:"#484848",display:'flex', justifyContent:'space-around', paddingTop:'20px' }}>
                                 <td>{spot.name}</td>
                                 <td>
-                                    <NavLink to={`/spots/${spot.id}/edit`}>
-                                    <button>edit</button>
+                                    <NavLink
+                                    to={`/spots/${spot.id}/edit`}
+                                    style={{paddingRight:"15px"}}>
+                                        <button className="spot-table-button">
+                                        Edit
+                                        </button>
                                     </NavLink>
 
-                                    <button>delete</button>
+                                    <button className="spot-table-button">Delete</button>
                                 </td>
                                 <td>{spot.city}, {spot.state}</td>
                             </NavLink>
