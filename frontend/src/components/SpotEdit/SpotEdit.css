@@ -1,0 +1,16 @@
+/* #spot-edit-input-field-textarea-placeholder {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-indent: 10px;
+    align-content:flex-start;
+    text-align:start;
+    vertical-align:text-top;
+}
+
+#spot-edit-input-field-textarea-placeholder::placeholder {
+    text-indent: 10px;
+    align-content: start;
+    text-align:start;
+    vertical-align:text-top;
+} */

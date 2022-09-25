@@ -26,7 +26,7 @@ function SpotEdit() {
     const [country, setCountry] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [price, setPrice] = useState(10);
+    const [price, setPrice] = useState(125);
     const [validationErrors, setValidationErrors] = useState([]);
 
     let incrementCounter = () => {
@@ -97,22 +97,19 @@ function SpotEdit() {
 
     return (
 
-        <div>
+        <div className="spot-create-page">
+            <div className="banner">
+                <h1 className="spot-create-title">Update your listing</h1>
+            </div>
+
             <form
                 className="create-spot-form"
                 onSubmit={submitHandler}
                 >
 
-            <h1>Create a New Listing</h1>
-
-            <ul className="errors">
-            {validationErrors.length > 0 &&
-            validationErrors.map((error) =>
-            <p key={error}>{error}</p>)}
-            </ul>
-
             <label>
                 <input
+                className="input-field"
                 type="text"
                 name="address"
                 placeholder="Address"
@@ -123,6 +120,7 @@ function SpotEdit() {
 
             <label>
                 <input
+                className="input-field"
                 type="text"
                 name="city"
                 placeholder="City"
@@ -133,7 +131,7 @@ function SpotEdit() {
 
 
             <label>
-                <select
+                <select className="input-field-select"
                 onChange={(e) => setState(e.target.value)}
                 value={state}
                 >
@@ -148,7 +146,7 @@ function SpotEdit() {
             </label>
 
             <label>
-                <select
+                <select className="input-field-select"
                 onChange={(e) => setCountry(e.target.value)}
                 value={country}
                 >
@@ -158,8 +156,9 @@ function SpotEdit() {
             </label>
 
             <label>
-                Create your title
+                <p className="input-field-text-prompt">Change your title</p>
                 <input
+                className="input-field"
                 type="text"
                 name="name"
                 placeholder="Lovely space in Seattle"
@@ -169,14 +168,21 @@ function SpotEdit() {
             </label>
 
             <label>
-                Create your description
+                <p className="input-field-text-prompt">Change your description</p>
                 <input
+                className="input-field-textarea"
+                id="spot-edit-input-field-textarea-placeholder"
+                style={{
+                    textIndent:"10px",
+                    alignContent:"start",
+                    textAlign:"start",
+                    verticalAlign:"start"
+                }}
                 type="textarea"
                 name="description"
                 minLength={5}
+
                 placeholder="You'll have a great time at this comfortable place to stay."
-                // rows="5"
-                // cols="20"
                 onChange={(e) => setDescription(e.target.value)}
                 value={description}
             />
@@ -196,28 +202,47 @@ function SpotEdit() {
             </label> */}
 
             <label>
-                <button
-                    type="button"
-                    name="price"
-                    min="10000"
-                    onClick={incrementCounter}
-                >
-                up
-                </button>
+                <div className="price">
 
-                <output>${`${price}`}</output>
+                    <div>
+                        <button
+                            id="price-button"
+                            type="button"
+                            name="price"
+                            min="10"
+                            onClick={decrementCounter}
+                            >
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
 
-                <button
-                    type="button"
-                    name="price"
-                    min="10"
-                    onClick={decrementCounter}
-                >
-                down
-                </button>
+
+                    <div className="output-field-price" style={{color:"black"}}>
+                        <output className="output-display-price">${`${price}`}</output>
+                    </div>
+
+                    <div>
+                        <button
+                            id="price-button"
+                            type="button"
+                            name="price"
+                            max="10000"
+                            onClick={incrementCounter}
+                            >
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
             </label>
 
+            <div className="errors">
+                {validationErrors.length > 0 &&
+                validationErrors.map((error) =>
+                <p className="error-item" key={error}>{error}</p>)}
+            </div>
+
             <button
+            className="spot-submit-button"
             type="submit"
             disabled={!!validationErrors.length}
             >

@@ -94,7 +94,7 @@ function SpotCreate() {
 
         <div className="spot-create-page">
             <div className="banner">
-                <h1 className="spot-create-title">Create a New Listing</h1>
+                <h1 className="spot-create-title">Create a new listing</h1>
             </div>
 
             <form
@@ -130,7 +130,7 @@ function SpotCreate() {
                 onChange={(e) => setState(e.target.value)}
                 value={state}
                 >
-                    <option >State</option>
+                    <option>State</option>
                     {states.map(state => (
                     <option key={state} required="true"
                     >
@@ -222,7 +222,6 @@ function SpotCreate() {
                         </button>
                     </div>
                 </div>
-
             </label>
 
             <div className="errors">
