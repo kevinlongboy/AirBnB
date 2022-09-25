@@ -1,9 +1,9 @@
 .full-page {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(1, 1fr);
-    min-height: 100vw;
-    min-width: 100vw;
+    grid-template-rows: 1;
+    /* min-height: 100vw;
+    min-width: 100vw; */
     gap: 0;
 }
 

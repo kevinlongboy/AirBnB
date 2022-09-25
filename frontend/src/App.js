@@ -60,13 +60,13 @@ function App() {
           </Route>
 
 
-          {/* <Route exact path={'/legacy/host'}>
+          <Route exact path={'/legacy/host'}>
             <Host />
           </Route>
 
          <Route exact path={"/legacy/signup"}>
             <SignupFormPage />
-          </Route> */}
+          </Route>
 
         </Switch>
       )}
