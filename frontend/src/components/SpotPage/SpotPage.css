@@ -4,8 +4,9 @@
     justify-content: space-between;
     /* align-content: space-between; */
     align-items: left;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: min(50px);
+    padding-right: max(50px);
+    /* max-width: 200px; */
 }
 
 #spot-page-name {
@@ -33,6 +34,8 @@
 .spot-page-location {
     text-decoration: underline;
 }
+
+/****************** IMAGES GRID ******************/
 
 .spot-page-images-cover {
     display: grid;

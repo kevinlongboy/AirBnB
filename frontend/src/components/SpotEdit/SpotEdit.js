@@ -172,12 +172,12 @@ function SpotEdit() {
                 <input
                 className="input-field-textarea"
                 id="spot-edit-input-field-textarea-placeholder"
-                style={{
-                    textIndent:"10px",
-                    alignContent:"start",
-                    textAlign:"start",
-                    verticalAlign:"start"
-                }}
+                // style={{
+                //     textIndent:"10px",
+                //     alignContent:"start",
+                //     textAlign:"start",
+                //     verticalAlign:"start"
+                // }}
                 type="textarea"
                 name="description"
                 minLength={5}

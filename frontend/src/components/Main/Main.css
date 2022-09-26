@@ -1,10 +1,11 @@
 .spots {
     /* display: inline-block; */
-    display: inline-block;
+    display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border: 5px solid red;
+    /* flex-grow: 3; */
+    justify-content: center;
+    align-items: left;
     padding-left: 50px;
     padding-right: 50px;
 }
@@ -14,19 +15,17 @@
     /* display: flex; */
     /* flex-direction: column; */
     /* border: 1px solid red; */
-    max-width: 330px;
-    max-height: 415px;
-
-    border: 3px solid blue;
-    margin-top: 25px;
-    margin-bottom: 10px;
-
-    padding-left: clamp(12.5px, 12.5px, 12.5px);
-    padding-right: clamp(12.5px, 12.5px, 12.5px);
+    /* min-width: 330px; */
+    max-width: 370px;
+    min-height: 370px;
+    max-height: 475px;
+    margin: 25px 17px 10px 17px;
 }
 
 .spot-image-container {
-    border: 2px solid yellow;
+    height: 300px;
+    width: 300px
+    /* max-height: 385px; */
 }
 .spot-image {
     border-radius: 12px;
@@ -37,14 +36,25 @@
 
 .spot-text {
     align-self: end;
-    display: grid;
+    display: inline;
     margin-top: 15px;
 }
 
-.spot-name {
-    margin-bottom: 5px
+.spot-text-line-1 {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
-.spot-description {
-    margin-bottom: 12px
+.spot-location {
+    margin-top: 0px;
+}
+
+#main-page-spot-rating {
+    color: black;
+}
+
+.spot-price {
+    margin-top: 10px;
+
 }

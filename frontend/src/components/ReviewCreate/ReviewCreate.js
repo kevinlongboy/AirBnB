@@ -6,7 +6,7 @@ function ReviewCreate() {
 
     const history = useHistory();
     const [review, setReview] = useState("");
-    const [stars, setStars] = useState("★");
+    const [stars, setStars] = useState("★★★★★");
     const [validationErrors, setValidationErrors] = useState([]);
 
     let incrementCounter = () => {

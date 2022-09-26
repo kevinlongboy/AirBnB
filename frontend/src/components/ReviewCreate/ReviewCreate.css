@@ -3,9 +3,9 @@
 }
 
 .review-create-panel {
-    /* position: sticky; */
-    /* display: flex; */
-    /* top: 0px; */
+    /* position: sticky;
+    display: flex;
+    top: 0px; */
 
     min-width: 220px;
     max-width: 400px;
