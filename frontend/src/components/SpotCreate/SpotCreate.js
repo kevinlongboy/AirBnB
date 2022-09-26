@@ -24,6 +24,7 @@ function SpotCreate() {
     const [price, setPrice] = useState(125);
     const [validationErrors, setValidationErrors] = useState([]);
 
+
     let incrementCounter = () => {
         if (price < 10000) setPrice(price + 1);
     }
@@ -80,13 +81,16 @@ function SpotCreate() {
     const submitHandler = (e) => {
     e.preventDefault();
 
-    let createSpotData = {address, city, state, country, name, description, price}
-    console.log("createSpotData: ", createSpotData)
+    // OG code
+    // let createSpotData = {address, city, state, country, name, description, price}
+    // console.log("createSpotData: ", createSpotData)
 
-    let newSpot = dispatch(thunkSpotsCreate(createSpotData));
-    console.log("NEW SPOT: ", newSpot)
+    // let newSpot = dispatch(thunkSpotsCreate(createSpotData));
+    // console.log("NEW SPOT: ", newSpot)
 
-    history.push(`/spots`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
+    // history.push(`/spots`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
+
+
     }
 
 
@@ -225,9 +229,15 @@ function SpotCreate() {
             </label>
 
             <div className="errors">
-                {validationErrors.length > 0 &&
+
+                {validationErrors.length &&
                 validationErrors.map((error) =>
                 <p className="error-item" key={error}>{error}</p>)}
+
+                {/* {errors.map((error, idx) => (
+                    <p className="error-item" key={idx}>{error}</p>
+                ))} */}
+
             </div>
 
             <button

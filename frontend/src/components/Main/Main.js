@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { actionSpotsRead, thunkSpotsRead } from "../../store/spots";
+import { thunkSpotsRead } from "../../store/spots";
 import './Main.css';
 
 
@@ -9,13 +9,12 @@ function Main() {
 
     const spots = useSelector(state => state.spots)
     const dispatch = useDispatch();
-    const { spotId } = useParams();
 
     useEffect(() => {
         dispatch(thunkSpotsRead());
     }, [])
 
-    let spotsArr = Object.values(spots)
+    let spotsArr = Object.values(spots) // removes keys from original object
 
     return (
         <div className="spots">
@@ -37,7 +36,7 @@ function Main() {
 
                             <div className="spot-text-line-1">
                                 <div className="spot-name" style={{color:"black", fontWeight:"900"}}>{spot.name}</div>
-                                <div id="main-page-spot-rating">★</div>
+                                <div id="main-page-spot-rating">★ {spot.avgRatings}</div>
                             </div>
                             <div className="spot-location" style={{color:"#717171",  fontWeight:"100"}}>{`${spot.city}, ${spot.state}`}</div>
                             <div className="spot-price" style={{color:"black", fontWeight:"900"}}>{`$${spot.price} night`}</div>

@@ -92,13 +92,9 @@ function Spots() {
                         <tr style={{display:'flex', justifyContent:"space-around"}}>
                             <th>LISTING</th>
                             <th>TO DO</th>
-                            <th sty>LOCATION</th>
+                            <th>LOCATION</th>
                         </tr>
                     </thead>
-
-
-
-
 
                     <tbody>
                     {

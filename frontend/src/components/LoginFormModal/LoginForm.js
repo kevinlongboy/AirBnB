@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink , Link, useHistory  } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { Modal } from '../../context/Modal';
-import SignupFormPage from "./SignupForm";
+import SignupFormPage from "./SignupFormPage";
 import '../../context/Modal.css'
 import './LoginFormModal.css';
 
@@ -14,10 +14,34 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [validationErrors, setValidationErrors] = useState([])
+
+  useEffect(() => {
+
+    const errors = [];
+
+    if (!credential) {
+      errors.push("Please enter your username or email")
+    } else if (credential.length < 5) {
+      errors.push("Please enter your username or email")
+    }
+    if (!password) {
+      errors.push("Please enter your password")
+    } else if (password.length < 5) {
+      errors.push("Please enter your username or email")
+    }
+
+    setValidationErrors(errors)
+  }, [credential, password])
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
+
+    // create custom error handlers
+
     return dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
         const data = await res.json();
@@ -79,6 +103,7 @@ function LoginForm() {
           className="submit-button"
           id="login-button"
           type="submit"
+          disabled={!!validationErrors.length}
           onSubmit={handleSubmit}
           >
         Continue
@@ -113,7 +138,7 @@ function LoginForm() {
           type="button"
           // onClick={handleSubmitRedirect}
           >
-          <a style={{textDecoration:"none", color:"black"}} to="https://github.com/kevinlongboy">
+          <a style={{textDecoration:"none", color:"black"}} href="https://github.com/kevinlongboy">
           Continue with GitHub
           </a>
         </button>
@@ -129,6 +154,9 @@ function LoginForm() {
         <div className="errors">
           {errors.map((error, idx) => (
             <p className="error-item" key={idx}>{error}</p>
+            ))}
+          {validationErrors.map((validationError, idx) => (
+            <p className="error-item" key={idx}>{validationError}</p>
             ))}
         </div>
 

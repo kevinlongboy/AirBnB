@@ -43,10 +43,14 @@ router.post('/', validateLogin, async (req, res, next) => {
             return res.json(error);
         }
 
-        let token = await setTokenCookie(res, user);
+        const token = await setTokenCookie(res, user);
 
-        let printUser = await User.findByPk(user.id, { raw: true });
-        printUser.email = credential;
+        // const printUser = await User.findByPk(user.id, { raw: true });
+        // printUser.email = credential;
+        // printUser.token = token;
+        // return res.json(printUser)
+
+        const printUser = user.toJSON();
         printUser.token = token;
 
         return res.json(printUser)

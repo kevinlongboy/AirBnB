@@ -234,8 +234,6 @@ let sessionState = {
 let sessionUserId = sessionState.user.id
 let spotOwnerId = spotsState.SingleSpotDetails.ownerId
 
-console.log("sessionUserId: ",  sessionUserId)
-console.log("spotOwnerId: ", spotOwnerId)
 let reviewComponent
 if ((sessionUserId >= 1) && (sessionUserId != spotOwnerId)) {
     reviewComponent = (

@@ -36,17 +36,16 @@ export const thunkSpotsRead = () => async (dispatch) => {
 
     if (response.ok) {
         const spots = await response.json();
-        dispatch(actionSpotsRead(spots))
+        dispatch(actionSpotsRead(spots.Spots))
     }
 }
 
 export const thunkSpotsReadDetails = (spotId) => async (dispatch) => {
 
     const response = await fetch(`/api/spots/${spotId}`)
-    console.log("REACH")
 
     if (response.ok) {
-        const spotDetails = await response.json();
+        const spotDetails = await response.json(); // .json() === JSON -> POJO
         dispatch(actionSpotsReadDetails(spotDetails))
     }
 }
@@ -91,8 +90,7 @@ function normalizeArray(arr) {
 
 
 const initialState = {
-    allSpots: [],
-    singleSpotDetails: []
+    spots: [],
 }
 
 
@@ -104,11 +102,10 @@ const spotsReducer = (state = {}, action) => {
     switch (action.type) {
 
         case SPOTS_READ:
-            let spots = normalizeArray(action.payload.Spots)
-            return newState.allSpots = spots
+            let spots = normalizeArray(action.payload)
+            return newState.allSpots = spots // returns normalized object of spot-objects
 
         case SPOTS_READ_DETAILS:
-            console.log("ACTION IN REDUCER: ", action)
             newState.singleSpotDetails = action.payload
             return newState
 
