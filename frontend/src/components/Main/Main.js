@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkSpotsRead } from "../../store/spots";
+import { thunkReadAllSpots } from "../../store/spots";
 import './Main.css';
 
 
@@ -11,7 +11,7 @@ function Main() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(thunkSpotsRead());
+        dispatch(thunkReadAllSpots());
     }, [])
 
     let spotsArr = Object.values(spots) // removes keys from original object

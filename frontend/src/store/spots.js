@@ -2,20 +2,20 @@ import { csrfFetch } from "./csrf";
 
 /************************* TYPES *************************/
 const SPOTS_READ = 'spots/READ';
-const SPOTS_READ_DETAILS = 'spots/READ_DETAILS'
+const SPOTS_READ_SINGLE_SPOT_DETAILS = 'spots/READ_SINGLE_SPOT_DETAILS'
 const SPOTS_CREATE = 'spots/CREATE';
 const SPOTS_DELETE = 'spots/DELETE';
 
 
 /************************* ACTION CREATORS *************************/
-export const actionSpotsRead = (spots) => ({
+export const actionReadAllSpots = (spots) => ({
     type: SPOTS_READ,
     payload: spots // Spots: [array of objects]
 });
 
-export const actionSpotsReadDetails = (spotDetails) => ({
-    type: SPOTS_READ_DETAILS,
-    payload: spotDetails
+export const actionReadSingleSpotDetails = (singleSpotDetails) => ({
+    type: SPOTS_READ_SINGLE_SPOT_DETAILS,
+    payload: singleSpotDetails
 })
 
 export const actionSpotsCreate = (newSpot) => ({
@@ -30,23 +30,23 @@ export const actionSpotsCreate = (newSpot) => ({
 
 
 /************************* THUNKS (API) *************************/
-export const thunkSpotsRead = () => async (dispatch) => {
+export const thunkReadAllSpots = () => async (dispatch) => {
 
     const response = await fetch(`/api/spots`);
 
     if (response.ok) {
         const spots = await response.json();
-        dispatch(actionSpotsRead(spots.Spots))
+        dispatch(actionReadAllSpots(spots.Spots))
     }
 }
 
-export const thunkSpotsReadDetails = (spotId) => async (dispatch) => {
+export const thunkReadSingleSpotDetails = (spotId) => async (dispatch) => {
 
     const response = await fetch(`/api/spots/${spotId}`)
 
     if (response.ok) {
-        const spotDetails = await response.json(); // .json() === JSON -> POJO
-        dispatch(actionSpotsReadDetails(spotDetails))
+        const singleSpotDetails = await response.json(); // .json() === JSON -> POJO
+        dispatch(actionReadSingleSpotDetails(singleSpotDetails))
     }
 }
 
@@ -90,12 +90,13 @@ function normalizeArray(arr) {
 
 
 const initialState = {
-    spots: [],
+    allSpots: [],
+    singleSpot: {}
 }
 
 
 /************************* REDUCER *************************/
-const spotsReducer = (state = {}, action) => {
+const spotsReducer = (state = initialState, action) => {
 
     let newState = {...state}
 
@@ -105,8 +106,9 @@ const spotsReducer = (state = {}, action) => {
             let spots = normalizeArray(action.payload)
             return newState.allSpots = spots // returns normalized object of spot-objects
 
-        case SPOTS_READ_DETAILS:
-            newState.singleSpotDetails = action.payload
+        case SPOTS_READ_SINGLE_SPOT_DETAILS:
+            // newState.allSpots = [...state.allSpots]
+            newState.singleSpot = action.payload
             return newState
 
 

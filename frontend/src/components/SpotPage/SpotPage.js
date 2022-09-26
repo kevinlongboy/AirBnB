@@ -2,70 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { actionSpotsRead, thunkSpotsRead, thunkSpotsReadDetails } from "../../store/spots";
+import { thunkReadSingleSpotDetails } from "../../store/spots";
 import ReviewCreate from "../ReviewCreate/ReviewCreate";
 import './SpotPage.css';
 
-
-
-
-// YEET THIS:
-// Demo data from: Get details of a Spot from an id
-// * Method: GET
-// * URL: /api/spots/:spotId
-
-
-let spotsState = {
-    'SingleSpotDetails': {
-        "id": 1,
-        "ownerId": 1,
-        "address": "123 Disney Lane",
-        "city": "San Francisco",
-        "state": "California",
-        "country": "United States of America",
-        "lat": 37.7645358,
-        "lng": -122.4730327,
-        "name": "App Academy",
-        "description": "Place where web developers are created",
-        "price": 123,
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36" ,
-        "numReviews": 5,
-        "avgStarRating": 4.5,
-        "SpotImages": [
-        // {
-        //     "id": 1,
-        //     "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_2.jpg",
-        //     "preview": true
-        // },
-        // {
-        //     "id": 2,
-        //     "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_5_2.jpg",
-        //     "preview": false
-        // },
-        // {
-        //     "id": 3,
-        //     "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_11_2.jpg",
-        //     "preview": true
-        // },
-        // {
-        //     "id": 4,
-        //     "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_14_2.jpg",
-        //     "preview": true
-        // },
-        // {
-        //     "id": 5,
-        //     "url": "https://ssl.cdn-redfin.com/photo/1/bigphoto/415/1394415_17_2.jpg",
-        //     "preview": true
-        // },
-        ],
-        "Owner": {
-            "id": 1,
-            "firstName": "John",
-            "lastName": "Smith"
-        }
-    }
-}
 
 
 // Demo data from: Get all Reviews by a Spot's id
@@ -216,37 +156,6 @@ let reviewsState = {
     ]
 }
 
-
-/**************************** CONDITIONAL COMPONENTS ****************************/
-
-// Render component conditionally, to manage access to review/POST
-let sessionState = {
-    user: {
-        email: "demo@email.com",
-        firstName: "Demo",
-        id: 10,
-        lastName: "User",
-        token: "eyJhbGciOiJIUzI1NiIw",
-        username: "Demo"
-    }
-}
-
-let sessionUserId = sessionState.user.id
-let spotOwnerId = spotsState.SingleSpotDetails.ownerId
-
-let reviewComponent
-if ((sessionUserId >= 1) && (sessionUserId != spotOwnerId)) {
-    reviewComponent = (
-
-            <ReviewCreate />
-    )
-} else {
-    reviewComponent = (
-        <>
-        </>
-    )
-}
-
 /**************************** HELPER FUNCTIONS ***************************/
 
 function addPlaceholderImages(arr) {
@@ -302,36 +211,67 @@ function convertDate(iso) {
 }
 
 
-/**************************** EXTRACTED ELEMENTS FROM STATE ****************************/
-
-let spotImagesRaw = spotsState.SingleSpotDetails.SpotImages
-
-let spotImagesArr = []
-spotImagesRaw.forEach((img) => spotImagesArr.push(img.url))
-
-if (spotImagesArr.length < 5 ) {
-    addPlaceholderImages(spotImagesArr)
-}
-
 /**************************** HELPER FUNCTIONS ****************************/
 
 function SpotPage() {
-    // const spotsState = useSelector(state => state.spots)
-    // const dispatch = useDispatch();
 
-    // let { spotId } = useParams();
-    // spotId = Number.parseInt(spotId)
+  const spotsStateTrue = useSelector(state => state.spots)
+  const dispatch = useDispatch();
+  const spotIdObj = useParams()
 
-    // useEffect(() => {
-    //     dispatch(thunkSpotsReadDetails(spotId));
-    // }, [])
+  const spotId = spotIdObj.spotId
+
+  useEffect(() => {
+    dispatch(thunkReadSingleSpotDetails(spotId))
+  }, [spotId])
 
 
-    let spotDetails = spotsState.SingleSpotDetails
+    let spotDetails = spotsStateTrue.singleSpot
     let listingStartDate = convertDate(spotDetails.createdAt)
+
+    /**************************** EXTRACTED ELEMENTS FROM STATE ****************************/
+
+    let spotImagesRaw = spotDetails.SpotImages
+
+    let spotImagesArr = []
+    spotImagesRaw.forEach((img) => spotImagesArr.push(img.url))
+
+    if (spotImagesArr.length < 5 ) {
+        addPlaceholderImages(spotImagesArr)
+    }
 
     let allSpotReviewsArr = reviewsState.AllReviewsForSpot
     // let reviewDate = convertDate(spotDetails.createdAt)
+
+    /**************************** CONDITIONAL COMPONENTS ****************************/
+
+    // Render component conditionally, to manage access to review/POST
+    let sessionState = {
+      user: {
+          email: "demo@email.com",
+          firstName: "Demo",
+          id: 10,
+          lastName: "User",
+          token: "eyJhbGciOiJIUzI1NiIw",
+          username: "Demo"
+      }
+    }
+
+    let sessionUserId = sessionState.user.id
+    let spotOwnerId = spotsStateTrue.singleSpot.ownerId
+
+    let reviewComponent
+    if ((sessionUserId >= 1) && (sessionUserId != spotOwnerId)) {
+      reviewComponent = (
+
+              <ReviewCreate />
+      )
+    } else {
+      reviewComponent = (
+          <>
+          </>
+      )
+    }
 
     return (
         <div className="window">
