@@ -86,17 +86,11 @@ function normalizeArray(arr) {
     let obj = {}
     arr.forEach(el => obj[el.id] = el);
     return obj;
-  };
-
-
-const initialState = {
-    allSpots: [],
-    singleSpot: {}
-}
+};
 
 
 /************************* REDUCER *************************/
-const spotsReducer = (state = initialState, action) => {
+const spotsReducer = (state = {}, action) => {
 
     let newState = {...state}
 
@@ -108,7 +102,7 @@ const spotsReducer = (state = initialState, action) => {
 
         case SPOTS_READ_SINGLE_SPOT_DETAILS:
             // newState.allSpots = [...state.allSpots]
-            newState.singleSpot = action.payload
+            newState[action.singleSpotDetails.id] = action.singleSpotDetails
             return newState
 
 
