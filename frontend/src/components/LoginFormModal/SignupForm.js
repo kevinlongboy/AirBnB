@@ -2,14 +2,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
-// import { Modal } from '../../context/Modal'; // SETUP MODAL
 import '../../context/Modal.css'
 
 
 function SignupFormPage() {
-
-  // const [showModal, setShowModal] = useState(false); // SETUP MODAL
-
 
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
@@ -44,17 +40,19 @@ function SignupFormPage() {
   };
 
   return (
-    // <Modal onClose={() => setShowModal(false)}> // SETUP MODAL
 
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
+    <div>
+
+      <form className="signup-form">
+
+        <div className="modal-subtitle">Finish signing up</div>
 
         <label>
-          First name
           <input
+            className="half-field-top"
+            style={{marginTop:"20px"}}
             type="text"
+            placeholder="First name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
@@ -62,29 +60,41 @@ function SignupFormPage() {
         </label>
 
         <label>
-          Last name
           <input
+            className="half-field-bottom"
             type="text"
+            placeholder="Last name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
             />
         </label>
+        <div
+          style={{marginTop:"5px"}}
+          className="input-guide-text">Make sure it matches the name on your government ID.</div>
 
         <label>
-          Email
           <input
+            className="whole-field"
+            style={{marginTop:"20px"}}
             type="text"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
             />
         </label>
+        <div
+          style={{marginTop:"5px"}}
+          className="input-guide-text">We'll email you trip confirmations and receipts.</div>
+
 
         <label>
-          Username
           <input
+            className="whole-field"
+            style={{marginTop:"20px"}}
             type="text"
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
@@ -92,9 +102,11 @@ function SignupFormPage() {
         </label>
 
         <label>
-          Password
           <input
+            className="whole-field"
+            style={{marginTop:"20px"}}
             type="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -102,19 +114,38 @@ function SignupFormPage() {
         </label>
 
         <label>
-          Confirm Password
           <input
+            className="whole-field"
+            style={{marginTop:"20px"}}
             type="password"
+            placeholder="Confirm password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
             />
         </label>
 
-        <button type="submit">Sign Up</button>
-      </form>
+        <div className="disclaimer">
+        {/* By selecting <p style={{fontWeight:"900"}}>Agree and continue</p>, I agree to Cranebnb's <a id="signup-disclaimer" href="https://www.airbnb.com/terms?source=tos">Terms of Service</a>, <a id="signup-disclaimer" href="https://www.airbnb.com/terms/payments_terms?source=tos">Payments Terms of Service</a>, and <a id="signup-disclaimer" href="https://www.airbnb.com/terms/nondiscrimination_policy?source=tos">Nondiscrimination Policy</a> and acknowledge the <a id="signup-disclaimer" href="https://www.airbnb.com/terms/privacy_policy?source=tos"> Privacy Policy</a>. */}
+        By selecting Agree and continue, I agree to Cranebnb's Terms of Service, Payments Terms of Service, and Nondiscrimination Policy and acknowledge the Privacy Policy.
+        </div>
 
-    // </Modal>
+        <div className="errors">
+          {errors.map((error, idx) => (
+            <p className="error-item" key={idx}>{error}</p>
+            ))}
+        </div>
+
+        <button
+          type="submit"
+          className="submit-button"
+          onClick={handleSubmit}
+        >
+          Agree and continue
+        </button>
+
+      </form>
+    </div>
   );
 }
 
