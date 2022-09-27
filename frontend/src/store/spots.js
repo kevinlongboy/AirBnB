@@ -43,6 +43,7 @@ export const thunkReadAllSpots = () => async (dispatch) => {
 export const thunkReadSingleSpotDetails = (spotId) => async (dispatch) => {
 
     const response = await csrfFetch(`/api/spots/${spotId}`)
+    console.log(response)
 
     if (response.ok) {
         const singleSpotDetails = await response.json(); // .json() === JSON -> POJO

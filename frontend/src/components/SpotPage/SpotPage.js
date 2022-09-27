@@ -4,8 +4,9 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // local files
-import ReviewCreate from "../ReviewCreate/ReviewCreate.js";
 import { thunkReadSingleSpotDetails } from "../../store/spots";
+import ReviewCreate from "../ReviewCreate/ReviewCreate.js";
+import { convertDate, addPlaceholderImages } from "../../component-resources";
 import './SpotPage.css';
 
 function SpotPage() {
@@ -21,23 +22,20 @@ function SpotPage() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(thunkReadSingleSpotDetails(spotId));
-  }, []);
-  useEffect(() => {
-    dispatch(thunkReadSingleSpotDetails(spotId));
-  }, [dispatch, spotId]);
+  }, [spotId]);
 
   /********************** key into pertinent values ***********************/
   const userId = sessionState.user.id;
   const spot = spotsState.singleSpotDetails;
 
-  const spotImagesRaw = spot.SpotImages // array of objects
-  const spotImagesArr = []
-  spotImagesRaw.map((img) => spotImagesArr.push(img.url))
-  console.log(spotImagesArr)
+  // const spotImagesRaw = spot.SpotImages // array of objects
+  // const spotImagesArr = []
+  // spotImagesRaw.forEach((img) => spotImagesArr.push(img.url))
+  // spotImagesArr = addPlaceholderImages(spotImagesArr) // add filler images, if min not met
 
   /*********************** conditional components *************************/
   let reviewComponent
-  if ((userId >= 1) && (userId != spot.OwnerID)) {
+  if ((userId >= 1) && (userId != spot.OwnerId)) {
     reviewComponent = (
     <ReviewCreate />
     )
@@ -72,7 +70,7 @@ function SpotPage() {
           <div className="spot-page-middle-left">
             <div className="spot-page-host-info">
               <h2 className="spot-page-host-name">{`Hosted by ${spot.Owner.firstName}`}</h2>
-              {/* <p className="spot-page-host-creation-date">Since {listingStartDate}</p> */}
+              <p className="spot-page-host-creation-date">Since {convertDate(spot.createdAt)}</p>
             </div>
 
             <div className="spot-page-description">
