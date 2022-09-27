@@ -32,7 +32,7 @@ export const actionSpotsCreate = (newSpot) => ({
 /************************* THUNKS (API) *************************/
 export const thunkReadAllSpots = () => async (dispatch) => {
 
-    const response = await fetch(`/api/spots`);
+    const response = await csrfFetch(`/api/spots`);
 
     if (response.ok) {
         const spots = await response.json();
@@ -42,7 +42,7 @@ export const thunkReadAllSpots = () => async (dispatch) => {
 
 export const thunkReadSingleSpotDetails = (spotId) => async (dispatch) => {
 
-    const response = await fetch(`/api/spots/${spotId}`)
+    const response = await csrfFetch(`/api/spots/${spotId}`)
 
     if (response.ok) {
         const singleSpotDetails = await response.json(); // .json() === JSON -> POJO
@@ -86,30 +86,32 @@ function normalizeArray(arr) {
     let obj = {}
     arr.forEach(el => obj[el.id] = el);
     return obj;
-};
+  };
 
+
+const initialState = {
+    allSpots: {},
+    singleSpotDetails: {},
+    singleSpotReviews: {},
+}
 
 /************************* REDUCER *************************/
-const spotsReducer = (state = {}, action) => {
+const spotsReducer = (state = initialState, action) => {
 
-    let newState = {...state}
+    let newState = {...state};
 
     switch (action.type) {
 
         case SPOTS_READ:
-            let spots = normalizeArray(action.payload)
-            return newState.allSpots = spots // returns normalized object of spot-objects
-
-        case SPOTS_READ_SINGLE_SPOT_DETAILS:
-            // newState.allSpots = [...state.allSpots]
-            newState[action.singleSpotDetails.id] = action.singleSpotDetails
+            let normalizedSpots = normalizeArray(action.payload)
+            newState.allSpots = normalizedSpots // returns normalized object of spot-objects
+            newState.singleSpotDetails = {...state.singleSpotDetails}
+            newState.singleSpotReviews = {...state.singleSpotReviews}
             return newState
 
-
-        case SPOTS_CREATE:
-            const newSpot = {...state};
-            newSpot[action.payload.id] = action.payload;
-            return newSpot
+        case SPOTS_READ_SINGLE_SPOT_DETAILS:
+            newState.singleSpotDetails = {...action.payload}
+            return newState
 
         default:
             return state

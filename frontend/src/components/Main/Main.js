@@ -7,19 +7,20 @@ import './Main.css';
 
 function Main() {
 
-    const spots = useSelector(state => state.spots)
-    const dispatch = useDispatch();
+    const spotsState = useSelector(state => state.spots)
 
+    const dispatch = useDispatch();
     useEffect(() => {
         dispatch(thunkReadAllSpots());
     }, [])
 
-    let spotsArr = Object.values(spots) // removes keys from original object
+    const allSpots = spotsState.allSpots
+    let allSpotsArr = Object.values(allSpots) // removes keys from original object
 
     return (
         <div className="spots">
 
-            {spotsArr.map((spot) => (
+            {allSpotsArr.map((spot) => (
                     <Link
                     className="spot-card"
                     key={`${spot.id}`}
