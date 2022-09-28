@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // local files
-import { thunkReadSingleSpotDetails } from "../../store/spots";
+import { thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../store/spots";
 import ReviewCreate from "../ReviewCreate/ReviewCreate.js";
 import { convertDate, addPlaceholderImages } from "../../component-resources";
 import './SpotPage.css';
@@ -20,13 +20,22 @@ function SpotPage() {
 
   /********************** reducer/API communication ***********************/
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(thunkReadSingleSpotDetails(spotId));
-  }, [spotId]);
+  }, [dispatch, spotId]);
+
+  useEffect(() => {
+    dispatch(thunkReadSingleSpotReviews(spotId));
+  }, [dispatch, spotId]);
 
   /********************** key into pertinent values ***********************/
   const userId = sessionState.user.id;
   const spot = spotsState.singleSpotDetails;
+  const spotReviews = spotsState.singleSpotReviews;
+  const reviews = Object.values(spotReviews)
+  const spotImgs = spotsState.singleSpotDetails.SpotImages
+  const images = Object.values(spotImgs)
 
   // const spotImagesRaw = spot.SpotImages // array of objects
   // const spotImagesArr = []
@@ -46,6 +55,12 @@ function SpotPage() {
     )
   }
 
+  if (images.length < 5) {
+    addPlaceholderImages(images)
+  } else if (images.length > 5) {
+    images.splice(5, images.length - 1)
+  }
+
   /*************************** render component ****************************/
   return (
 
@@ -63,6 +78,12 @@ function SpotPage() {
 
         <div className="spot-page-images-cover">
 
+          {
+
+          images.map((image, index) => (
+          <img key={index + 1} className={`img${index + 1}`} src={image.url}></img>
+          ))
+          }
         </div>
 
         <div className="spot-page-middle">
@@ -70,7 +91,7 @@ function SpotPage() {
           <div className="spot-page-middle-left">
             <div className="spot-page-host-info">
               <h2 className="spot-page-host-name">{`Hosted by ${spot.Owner.firstName}`}</h2>
-              <p className="spot-page-host-creation-date">Since {convertDate(spot.createdAt)}</p>
+              {/* <p className="spot-page-host-creation-date">Since {convertDate(spot.createdAt)}</p> */}
             </div>
 
             <div className="spot-page-description">
@@ -86,6 +107,21 @@ function SpotPage() {
           </div>
 
         </div>
+
+        <div className="reviews">
+          <h2 className="review-data">{`★ ${spot.avgStarRating} · ${spot.numReviews} Reviews`}</h2>
+
+          {reviews.map((review, index) => (
+            <div>
+              <div className="review-username">{review.User.firstName}</div>
+                <div className="review-date">{convertDate(review.createdAt)}</div>
+                <div className="review-content">{review.review}</div>
+              </div>
+          ))}
+
+
+        </div>
+
 
     </div>
   )

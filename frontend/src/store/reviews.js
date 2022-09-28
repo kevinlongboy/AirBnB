@@ -1,4 +1,8 @@
-/************************* TYPES *************************/
+import { csrfFetch } from "./csrf";
+
+
+
+/****************************** TYPES ******************************/
 const REVIEWS_READ = 'reviews/READ';
 const REVIEWS_CREATE = 'reviews/CREATE';
 
@@ -20,7 +24,7 @@ export const actionReviewsRead = (reviews) => ({
 // });
 
 
-/************************* THUNKS (API) *************************/
+/*************************** THUNKS (API) ***************************/
 export const thunkReviewsRead = () => async (dispatch) => {
 
     const response = await fetch(`api/reviews`);
@@ -59,7 +63,8 @@ export const thunkReviewsRead = () => async (dispatch) => {
 const initialState = {
     reviews: []
 }
-/************************* REDUCER *************************/
+
+/***************************** REDUCER ******************************/
 const reviewsReducer = (state = initialState, action) => {
 
     const newState = {...state};

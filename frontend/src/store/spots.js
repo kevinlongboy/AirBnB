@@ -1,8 +1,11 @@
 import { csrfFetch } from "./csrf";
+import { normalizeArray } from "../../src/component-resources/index";
 
-/************************* TYPES *************************/
+
+/****************************** TYPES ******************************/
 const SPOTS_READ = 'spots/READ';
-const SPOTS_READ_SINGLE_SPOT_DETAILS = 'spots/READ_SINGLE_SPOT_DETAILS'
+const SPOTS_READ_SINGLE_SPOT_DETAILS = 'spots/READ_SINGLE_SPOT_DETAILS';
+const SPOTS_READ_SINGLE_SPOT_REVIEWS = 'spots/READ_SINGLE_SPOT_REVIEWS';
 const SPOTS_CREATE = 'spots/CREATE';
 const SPOTS_DELETE = 'spots/DELETE';
 
@@ -18,6 +21,12 @@ export const actionReadSingleSpotDetails = (singleSpotDetails) => ({
     payload: singleSpotDetails
 })
 
+export const actionReadSingleSpotReviews = (singleSpotReviews) => ({
+    type: SPOTS_READ_SINGLE_SPOT_REVIEWS,
+    payload: singleSpotReviews
+})
+
+
 export const actionSpotsCreate = (newSpot) => ({
     type: SPOTS_CREATE,
     payload: newSpot
@@ -29,7 +38,7 @@ export const actionSpotsCreate = (newSpot) => ({
 // });
 
 
-/************************* THUNKS (API) *************************/
+/*************************** THUNKS (API) ***************************/
 export const thunkReadAllSpots = () => async (dispatch) => {
 
     const response = await csrfFetch(`/api/spots`);
@@ -42,8 +51,7 @@ export const thunkReadAllSpots = () => async (dispatch) => {
 
 export const thunkReadSingleSpotDetails = (spotId) => async (dispatch) => {
 
-    const response = await csrfFetch(`/api/spots/${spotId}`)
-    console.log(response)
+    const response = await csrfFetch(`/api/spots/${spotId}`);
 
     if (response.ok) {
         const singleSpotDetails = await response.json(); // .json() === JSON -> POJO
@@ -51,17 +59,24 @@ export const thunkReadSingleSpotDetails = (spotId) => async (dispatch) => {
     }
 }
 
+export const thunkReadSingleSpotReviews = (spotId) => async (dispatch) => {
+
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
+
+    if (response.ok) {
+        const singleSpotReviews = await response.json();
+        dispatch(actionReadSingleSpotReviews(singleSpotReviews.Reviews)) // sends array of objects to payload
+    }
+}
+
 
 
 export const thunkSpotsCreate = (data) => async (dispatch) => {
-
     const response = await csrfFetch(`/api/spots`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' } ,
         body: JSON.stringify(data)
     });
-
-
     if (response.ok) {
         const newSpot = await response.json();
         dispatch(actionSpotsCreate(newSpot));
@@ -70,33 +85,25 @@ export const thunkSpotsCreate = (data) => async (dispatch) => {
 }
 
 // export const thunkDelete = (spotId) => async (dispatch) => {
-
 //     const response = await fetch(`api/spots/${spotId}`);
-
 //     if (response.ok) {
 //         const spot = await response.json();
 //         dispatch(actionDelete(spot))
 //     }
 // }
 
-/************************ HELPER FUNCTIONS ************************/
-// normalize functions to turn array or object into object with contents:
-// {1: {1: ...}, 2: {2: ...}, 3: {3: ...}}
-
-function normalizeArray(arr) {
-    let obj = {}
-    arr.forEach(el => obj[el.id] = el);
-    return obj;
-  };
-
-
+/*************************** STATE SHAPE ****************************/
 const initialState = {
     allSpots: {},
-    singleSpotDetails: {},
+    singleSpotDetails: {
+        SpotImages: [],
+        Owner: {}
+    },
     singleSpotReviews: {},
 }
 
-/************************* REDUCER *************************/
+
+/***************************** REDUCER ******************************/
 const spotsReducer = (state = initialState, action) => {
 
     let newState = {...state};
@@ -111,7 +118,29 @@ const spotsReducer = (state = initialState, action) => {
             return newState
 
         case SPOTS_READ_SINGLE_SPOT_DETAILS:
-            newState.singleSpotDetails = {...action.payload}
+            newState.singleSpotDetails = {...action.payload};
+            newState.singleSpotDetails.Owner = {...action.payload.Owner}
+            // create shallow copies of nested structures
+            let singleSpotImages = [];
+            action.payload.SpotImages.forEach(obj => singleSpotImages.push({...obj}));
+            newState.singleSpotDetails.SpotImages = singleSpotImages;
+            return newState
+
+        case SPOTS_READ_SINGLE_SPOT_REVIEWS:
+            // // first: create shallow copies of nested structures
+            // // STILL ARRAY OF OBJECTS ATM, NOT OBJECT OF OBJECTS
+            // newState.singleSpotReviews.forEach((obj, index) => obj.User = {...action.payload[index].User})
+            // let singleSpotReviewImages = [];
+            // action.payload.ReviewImages.forEach(obj => singleSpotReviewImages.push({...obj}));
+            // newState.singleSpotReviews.ReviewImages = singleSpotReviewImages;
+            // // second: normalize object
+
+            newState.singleSpotReviews = normalizeArray(action.payload);
+
+            // for (const obj of newState.singleSpotReviews) {
+            //     console.log(obj)
+            // }
+            // console.log(newState)
             return newState
 
         default:

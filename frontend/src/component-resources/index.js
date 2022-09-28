@@ -1,3 +1,19 @@
+// normalize functions to turn array or object into object with contents:
+// uses "id" specifically as key
+// {1: {1: ...}, 2: {2: ...}, 3: {3: ...}}
+export function normalizeArray(arr) {
+    let obj = {}
+    arr.forEach(el => obj[el.id] = el);
+    return obj;
+  };
+
+
+const initialState = {
+    allSpots: {},
+    singleSpotDetails: {},
+    singleSpotReviews: {},
+}
+
 // convert ISO string to "Month Year"
 export function convertDate(iso) {
 
@@ -36,7 +52,7 @@ export function convertDate(iso) {
 
 export function addPlaceholderImages(arr) {
 
-    let placeholderArr = [
+    let img = [
         "https://cdn1.vox-cdn.com/uploads/chorus_image/image/47552879/Pike_Place_Market_Entrance.0.0.jpg",
         "http://sparkcreativeseattle.com/wp-content/uploads/2018/12/space-needle-fog.jpg",
         "https://cdn.vox-cdn.com/thumbor/XIhmt3AT6oZpXGechlpqiWeMkxU=/0x0:5000x3333/1200x800/filters:focal(2100x1267:2900x2067)/cdn.vox-cdn.com/uploads/chorus_image/image/64758319/StarbucksPETA.0.jpg",
@@ -45,7 +61,9 @@ export function addPlaceholderImages(arr) {
     ]
 
     for (let i = 0; arr.length < 5; i++) {
-        arr.push(placeholderArr[i])
+        let placeholder = {}
+        placeholder.url = img[i]
+        arr.push(placeholder)
     }
 
     return arr
