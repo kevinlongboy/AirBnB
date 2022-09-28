@@ -1,5 +1,6 @@
+/***************************** IMPORTS *****************************/
 import { csrfFetch } from "./csrf";
-
+import { normalizeArray } from "../../src/component-resources/index";
 
 
 /****************************** TYPES ******************************/
@@ -8,7 +9,7 @@ const REVIEWS_CREATE = 'reviews/CREATE';
 
 
 /************************* ACTION CREATORS *************************/
-export const actionReviewsRead = (reviews) => ({
+export const actionReadUserReviews = (reviews) => ({
     type: REVIEWS_READ,
     payload: reviews // Users: [array of objects]
 });
@@ -25,14 +26,13 @@ export const actionReviewsRead = (reviews) => ({
 
 
 /*************************** THUNKS (API) ***************************/
-export const thunkReviewsRead = () => async (dispatch) => {
+export const thunkReadUserReviews = () => async (dispatch) => {
 
-    const response = await fetch(`api/reviews`);
+    const response = await csrfFetch(`api/reviews`);
 
     if (response.ok) {
         const reviews = await response.json();
-        console.log("FROM STORE/REVIEWS.JS, THIS IS REVIEWS: ", reviews)
-        dispatch(actionReviewsRead(reviews))
+        dispatch(actionReadUserReviews(reviews.Reviews))
     }
 }
 
@@ -60,25 +60,23 @@ export const thunkReviewsRead = () => async (dispatch) => {
 //     }
 // }
 
+
+/*************************** STATE SHAPE ****************************/
 const initialState = {
-    reviews: []
+    reviews: {}
 }
+
 
 /***************************** REDUCER ******************************/
 const reviewsReducer = (state = initialState, action) => {
 
-    const newState = {...state};
+    let newState = {...state};
 
     switch (action.type) {
 
         case REVIEWS_READ:
-            const normalize = {}; // object of objects >> {1: {object}, 2: {object}}
-            action.payload.Reviews.forEach(obj => {
-                normalize[obj.id] = obj
-            });
-
-            // action.payload.
-            return normalize
+            newState.reviews = normalizeArray(action.payload)
+            return newState
 
         // case CREATE:
         //     return {
@@ -95,4 +93,6 @@ const reviewsReducer = (state = initialState, action) => {
     }
 }
 
+
+/***************************** EXPORTS *****************************/
 export default reviewsReducer;

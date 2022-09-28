@@ -1,13 +1,13 @@
 // libraries
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
 // local files
-import { thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../store/spots";
 import ReviewCreate from "../ReviewCreate/ReviewCreate.js";
+import { thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../store/spots";
 import { convertDate, addPlaceholderImages } from "../../component-resources";
 import './SpotPage.css';
+
 
 function SpotPage() {
 

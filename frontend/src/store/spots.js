@@ -1,3 +1,4 @@
+/***************************** IMPORTS *****************************/
 import { csrfFetch } from "./csrf";
 import { normalizeArray } from "../../src/component-resources/index";
 
@@ -56,6 +57,7 @@ export const thunkReadSingleSpotDetails = (spotId) => async (dispatch) => {
     if (response.ok) {
         const singleSpotDetails = await response.json(); // .json() === JSON -> POJO
         dispatch(actionReadSingleSpotDetails(singleSpotDetails))
+        return response; // ?
     }
 }
 
@@ -66,6 +68,7 @@ export const thunkReadSingleSpotReviews = (spotId) => async (dispatch) => {
     if (response.ok) {
         const singleSpotReviews = await response.json();
         dispatch(actionReadSingleSpotReviews(singleSpotReviews.Reviews)) // sends array of objects to payload
+        return response; // ?
     }
 }
 
@@ -111,11 +114,10 @@ const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case SPOTS_READ:
-            let normalizedSpots = normalizeArray(action.payload)
-            newState.allSpots = normalizedSpots // returns normalized object of spot-objects
+            newState.allSpots = normalizeArray(action.payload)
             newState.singleSpotDetails = {...state.singleSpotDetails}
             newState.singleSpotReviews = {...state.singleSpotReviews}
-            return newState
+            return newState // does it return the variable along with what its pointing to
 
         case SPOTS_READ_SINGLE_SPOT_DETAILS:
             newState.singleSpotDetails = {...action.payload};
@@ -149,6 +151,5 @@ const spotsReducer = (state = initialState, action) => {
 }
 
 
-
-
+/***************************** EXPORTS *****************************/
 export default spotsReducer;
