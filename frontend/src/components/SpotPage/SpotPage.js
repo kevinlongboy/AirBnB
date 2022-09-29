@@ -125,8 +125,6 @@ function SpotPage() {
 
     </div>
   )
-
-
 }
 
 export default SpotPage

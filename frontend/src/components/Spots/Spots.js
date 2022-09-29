@@ -110,12 +110,12 @@ function Spots() {
                                     <NavLink
                                     to={`/spots/${spot.id}/edit`}
                                     style={{paddingRight:"15px"}}>
-                                        <button className="spot-table-button">
+                                        <button className="table-button">
                                         Edit
                                         </button>
                                     </NavLink>
 
-                                    <button className="spot-table-button">Delete</button>
+                                    <button className="table-button">Delete</button>
                                 </td>
                                 <td>{spot.city}, {spot.state}</td>
                             </NavLink>

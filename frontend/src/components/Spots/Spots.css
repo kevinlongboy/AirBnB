@@ -51,7 +51,7 @@ td {
     width: 100%;
 }
 
-.spot-table-button {
+.table-button {
     width: 70px;
     height: 40px;
     border: 1.5px solid #222222;
@@ -61,6 +61,6 @@ td {
     background: none;
 }
 
-.spot-table-button:hover {
+.table-button:hover {
     cursor: pointer;
 }

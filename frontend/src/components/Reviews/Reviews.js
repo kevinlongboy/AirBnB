@@ -7,6 +7,7 @@ import chevronRight from '../../assets/fontawesome/chevron-right.svg'
 import './Reviews.css'
 import { thunkReadUserReviews } from "../../store/reviews";
 
+
 function Reviews() {
 
     /******************************** state ********************************/
@@ -18,12 +19,12 @@ function Reviews() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(thunkReadUserReviews(sessionState.user.id))
-    }, [dispatch, sessionState.user.id]);
+        dispatch(thunkReadUserReviews())
+    }, [dispatch]);
 
     /********************** key into pertinent values ***********************/
     const reviews = Object.values(reviewsState)
-
+    console.log(reviews)
 
     /*********************** conditional components *************************/
     let reviewComponent
@@ -50,7 +51,6 @@ function Reviews() {
             ))
         )
     }
-
 
     /*************************** render component ****************************/
     return(

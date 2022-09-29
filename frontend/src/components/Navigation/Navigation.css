@@ -100,7 +100,7 @@
     border-radius: 15px;
     background-color: white;
 
-    height: 190px;
+    height: 265px;
     width: 270px;
     font-size: 15px;
     box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
@@ -110,6 +110,7 @@
 .account-dropdown-menu > div {
     height: 40px;
     padding-top: 5px;
+    margin-bottom: 5px;
     padding-left: 15px;
 }
 
@@ -117,14 +118,31 @@
     background-color: #f7f7f7;
 }
 
-#account-listings-button {
+#welcome-user {
     margin-top: 10px;
+    padding-top: 15px;
+    border-bottom: 1px solid #dadada;
+}
+
+#welcome-user:hover {
+    background-color: white;
+}
+
+
+#account-listings-button {
+    margin-top: 8px;
     padding-top: 15px;
 }
 
 #account-reviews-button {
     margin-bottom: 8px;
     padding-top: 15px;
+}
+
+#line-break {
+    height: 0;
+    margin-bottom: 8px;
+    padding: 0;
     border-bottom: 1px solid #dadada;
 }
 

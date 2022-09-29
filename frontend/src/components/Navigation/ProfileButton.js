@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, Redirect, useHistory} from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import * as sessionActions from '../../store/session';
 import { Modal } from '../../context/Modal';
@@ -11,6 +11,9 @@ import userIcon from '../../assets/fontawesome/circle-user-solid.png'
 
 
 function ProfileButton({ user }) {
+
+  const sessionState = useSelector(state => state.session)
+  console.log("sessionState", sessionState)
 
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
@@ -49,18 +52,24 @@ function ProfileButton({ user }) {
       {showMenu && (
         <div className="account-dropdown-menu">
 
+          <div id="welcome-user" style={{textDecoration:"none", color:"black", fontWeight:"900"}}>
+            Welcome, {sessionState.user.firstName}
+          </div>
+
           <div id="account-listings-button">
-            <NavLink to='/spots' style={{textDecoration:"none", color:"black", fontWeight:"900"}}>
+            <NavLink to='/spots' style={{textDecoration:"none", color:"black", fontWeight:"100"}}>
                 Manage Listings
             </NavLink>
           </div>
 
           <div id="account-reviews-button">
-            <NavLink to='/reviews' style={{textDecoration:"none", color:"black", fontWeight:"900"}}>
+            <NavLink to='/reviews' style={{textDecoration:"none", color:"black", fontWeight:"100"}}>
                 Manage Reviews
             </NavLink>
           </div>
 
+          <div id="line-break">
+          </div>
 
           <div>
             <button id="account-logout-button" style={{textAlign:"left", fontWeight:"0", paddingTop:"7px"}} onClick={logout}>Log out</button>
