@@ -462,9 +462,9 @@ router.get('/current', requireAuth, async (req, res, next) => {
                     sumStars += currReview.stars
                 }
                 let aveStars = sumStars / currSpotReviews.length
-                currSpot.dataValues.avgRatings = aveStars
+                currSpot.dataValues.avgRatings = aveStars.toFixed(1)
 
-                /******************** add avgRating-key ********************/
+                /******************* add previewImage-key *******************/
                 let prevImg = await SpotImage.findOne({ // returns array of current spot's images
                     where: { spotId: currSpot.id, preview: true },
                     attributes: {
@@ -526,8 +526,8 @@ router.get('/:spotId', async (req, res, next) => {
         })
 
         let starAvg = starSum / reviewCount;
-        if (!starAvg) starAvg = 0
-        getSpot.dataValues.avgStarRating = starAvg;
+        if (!starAvg) starAvg = 0.0
+        getSpot.dataValues.avgStarRating = starAvg.toFixed(1);
 
         /******************** add SpotImages-key ********************/
         let spotImgs = await SpotImage.findAll({
@@ -686,9 +686,9 @@ router.get('/', async (req, res, next) => {
                     sumStars += currReview.stars
                 }
                 let aveStars = sumStars / currSpotReviews.length
-                currSpot.dataValues.avgRatings = aveStars
+                currSpot.dataValues.avgRatings = aveStars.toFixed(1)
 
-                /**************************** add avgRating-key ****************************/
+                /*************************** add previewImage-key ***************************/
                 let prevImg = await SpotImage.findOne({ // returns array of current spot's images
                     where: { spotId: currSpot.id, preview: true },
                     attributes: {
