@@ -23,6 +23,7 @@ function Reviews() {
 
     /********************** key into pertinent values ***********************/
     let reviewsArr = Object.values(reviewsState)
+    console.log("reviewsArr", reviewsArr)
 
     /*********************** conditional components *************************/
     let reviewComponent
@@ -37,8 +38,7 @@ function Reviews() {
             </>
         )
     } else {
-        reviewComponent = (
-
+        reviewComponent =
             reviewsArr.map(review => (
                 <tr key={review.id}>
                     <td>
@@ -48,7 +48,7 @@ function Reviews() {
                         <button id="review-table-button">Delete</button>
                     </td>
                 </tr>
-            ))
+            )
         )
     }
 

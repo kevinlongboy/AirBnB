@@ -29,6 +29,7 @@ export const actionReadUserReviews = (reviews) => ({
 export const thunkReadUserReviews = () => async (dispatch) => {
 
     const response = await csrfFetch(`/api/reviews/current`);
+    console.log("REACH")
 
     if (response.ok) {
         const reviews = await response.json();
@@ -76,6 +77,7 @@ const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case REVIEWS_READ:
+            console.log("reach")
             newState = {... normalizeArray(action.payload)}
             return newState
 
