@@ -44,7 +44,7 @@ function SpotPage() {
 
   /*********************** conditional components *************************/
   let reviewComponent
-  if ((userId >= 1) && (userId != spot.OwnerId)) {
+  if ((userId) && (userId != spot.ownerId)) {
     reviewComponent = (
     <ReviewCreate />
     )
