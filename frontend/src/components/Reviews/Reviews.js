@@ -14,7 +14,6 @@ function Reviews() {
     const sessionState = useSelector(state => state.session);
     const reviewsState = useSelector(state => state.reviews);
 
-
     /********************** reducer/API communication ***********************/
     const dispatch = useDispatch();
 
@@ -23,14 +22,14 @@ function Reviews() {
     }, [dispatch]);
 
     /********************** key into pertinent values ***********************/
-    const reviews = Object.values(reviewsState)
-    console.log(reviews)
+    let reviewsArr = Object.values(reviewsState)
 
     /*********************** conditional components *************************/
     let reviewComponent
-    if (!!reviews.length) {
+    if (!reviewsArr.length) {
         reviewComponent = (
             <>
+
                 <tr>
                     <td>
                     </td>
@@ -39,7 +38,8 @@ function Reviews() {
         )
     } else {
         reviewComponent = (
-            reviews.map(review => (
+
+            reviewsArr.map(review => (
                 <tr key={review.id}>
                     <td>
                         <p id="review-table-body-title">Review for {review.Spot.name}</p>

@@ -104,7 +104,7 @@ function LoginForm() {
           id="login-button"
           type="submit"
           disabled={!!validationErrors.length}
-          onSubmit={handleSubmit}
+          onClick={handleSubmit}
           >
         Continue
         </button>

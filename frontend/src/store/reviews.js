@@ -76,9 +76,7 @@ const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case REVIEWS_READ:
-            console.log("reviews by current session: ", action.payload)
-            console.log("typeof action.payload: ", typeof action.payload)
-            newState.reviews = normalizeArray(action.payload)
+            newState = {... normalizeArray(action.payload)}
             return newState
 
         // case CREATE:

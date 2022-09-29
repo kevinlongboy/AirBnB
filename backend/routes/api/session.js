@@ -28,11 +28,15 @@ const validateLogin = [
 // README, line 74
 router.post('/', validateLogin, async (req, res, next) => {
 
+    console.log("REACH from from backend/routes/api/session")
     const { credential, password } = req.body;
     let error = {};
 
+
+
     try {
         const user = await User.login({ credential, password });
+        console.log("user from backend/routes/api/session", user)
 
         if (!user) {
             // const err = new Error('Login failed');
