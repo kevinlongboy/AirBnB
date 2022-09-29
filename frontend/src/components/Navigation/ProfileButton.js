@@ -13,7 +13,6 @@ import userIcon from '../../assets/fontawesome/circle-user-solid.png'
 function ProfileButton({ user }) {
 
   const sessionState = useSelector(state => state.session)
-  console.log("sessionState", sessionState)
 
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);

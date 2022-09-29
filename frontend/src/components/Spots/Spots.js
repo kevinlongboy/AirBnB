@@ -1,90 +1,64 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+// libraries
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink, useHistory } from "react-router-dom";
+// local files
+import { thunkDeleteSingleSpot, thunkReadAllSpots } from "../../store/spots";
 import plusIcon from '../../assets/fontawesome/plus-solid.svg'
 import './Spots.css'
 
 
-// will need to retrieve session.user.id in order to make fetch request for spots/current
-let sessionState = {
-    session: {
 
-        user: {
-            email: "demo@email.com",
-            firstName: "Demo",
-            id: 10,
-            lastName: "User",
-            token: "eyJhbGciOiJIUzI1NiIw",
-            username: "Demo"
-        }
-    },
-}
 
-// YEET THIS:
-// Demo data from: Get all Spots owned by the Current User
-// * Method: GET
-// * URL: /api/spots/current
+// states:
+    // user
+    // spots
 
-let spotsState = {
-    "AllSpotsByUser": [
-      {
-        "id": 1,
-        "ownerId": 1,
-        "address": "123 Disney Lane",
-        "city": "San Francisco",
-        "state": "CA",
-        "country": "United States of America",
-        "lat": 37.7645358,
-        "lng": -122.4730327,
-        "name": "App Academy",
-        "description": "Place where web developers are created",
-        "price": 123,
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36",
-        "avgRating": 4.5,
-        "previewImage": "image url"
-      },
-      {
-        "id": 2,
-        "ownerId": 1,
-        "address": "722 E Pike St",
-        "city": "Seattle",
-        "state": "WA",
-        "country": "United States of America",
-        "lat": 37.7645358,
-        "lng": -122.4730327,
-        "name": "App Academy",
-        "description": "Place where web developers are created",
-        "price": 123,
-        "createdAt": "2021-11-19 20:39:36",
-        "updatedAt": "2021-11-19 20:39:36",
-        "avgRating": 4.5,
-        "previewImage": "image url"
-      },
-    ]
-  }
+// use Params
+// thunks
+    // all spots >> filter by ownerId
+    // create delete thunk
 
-  let spots = spotsState.AllSpotsByUser;
-
-  // to delete:
-    // grab spot.id/key
-    // send as part of route param in fetch request
-    // ... but how?
 
 function Spots() {
 
+    /******************************** state ********************************/
+    const sessionState = useSelector(state => state.session);
+    const spotsState = useSelector(state => state.spots.allSpots);
+
+    /********************** reducer/API communication ***********************/
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(thunkReadAllSpots());
+    }, [dispatch])
+
+    /********************** key into pertinent values ***********************/
+    const userId = sessionState.user.id;
+    const allSpotsArr = Object.values (spotsState)
+    const allSpotsByUser = allSpotsArr.filter(obj => obj.ownerId == userId)
+
+    /*********************** conditional components *************************/
+
+    const handleDelete = (spotId) => {
+        dispatch(thunkDeleteSingleSpot(spotId))
+    }
+
+
+    /*************************** render component ****************************/
     return (
         <div className="spots-page">
+
             <div className="spots-page-header">
-                <h1>{spots.length} Listings</h1>
+                <h1>{allSpotsByUser.length} Listings</h1>
                 <div className="spots-create-listing-button" style={{display:"flex", justifyContent:"space-evenly", verticalAlign:"center", alignContent:'center', alignItems:'center'}}>
                         <img src={plusIcon} style={{width:"15px"}}></img>
                     <NavLink to={'/hosting'} style={{textDecoration:"none", color:"black", fontWeight:"900",verticalAlign:'start' }}>
                         Create listing
                     </NavLink>
                 </div>
-
-
             </div>
+
 
             <div className="spots-page-body">
                 <table>
@@ -98,7 +72,7 @@ function Spots() {
 
                     <tbody>
                     {
-                        spots.map(spot => (
+                        allSpotsByUser.map(spot => (
 
                             <tr key={spot.id} className="spot-listing-row">
 
@@ -106,6 +80,7 @@ function Spots() {
                                     to={`/spots/${spot.id}`}
                                     style={{textDecoration:"none", color:"#484848",display:'flex', justifyContent:'space-around', paddingTop:'20px' }}>
                                 <td>{spot.name}</td>
+                                </NavLink>
                                 <td>
                                     <NavLink
                                     to={`/spots/${spot.id}/edit`}
@@ -115,19 +90,17 @@ function Spots() {
                                         </button>
                                     </NavLink>
 
-                                    <button className="table-button">Delete</button>
+                                    <button className="table-button" type="button" onClick={handleDelete(spot.id)}>Delete</button>
                                 </td>
                                 <td>{spot.city}, {spot.state}</td>
-                            </NavLink>
                             </tr>
 
                         ))
                     }
                     </tbody>
-
                 </table>
-
             </div>
+
         </div>
     )
 }

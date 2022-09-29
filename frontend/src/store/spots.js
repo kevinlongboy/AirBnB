@@ -33,17 +33,15 @@ export const actionSpotsCreate = (newSpot) => ({
     payload: newSpot
 })
 
-// export const actionDelete = (spot) => ({
-//     type: DELETE,
-//     payload: spot
-// });
+export const actionDeleteSingleSpot = (spotId) => ({
+    type: SPOTS_DELETE,
+    payload: spotId
+});
 
 
 /*************************** THUNKS (API) ***************************/
 export const thunkReadAllSpots = () => async (dispatch) => {
-
     const response = await csrfFetch(`/api/spots`);
-
     if (response.ok) {
         const spots = await response.json();
         dispatch(actionReadAllSpots(spots.Spots))
@@ -51,9 +49,7 @@ export const thunkReadAllSpots = () => async (dispatch) => {
 }
 
 export const thunkReadSingleSpotDetails = (spotId) => async (dispatch) => {
-
     const response = await csrfFetch(`/api/spots/${spotId}`);
-
     if (response.ok) {
         const singleSpotDetails = await response.json(); // .json() === JSON -> POJO
         dispatch(actionReadSingleSpotDetails(singleSpotDetails))
@@ -62,9 +58,7 @@ export const thunkReadSingleSpotDetails = (spotId) => async (dispatch) => {
 }
 
 export const thunkReadSingleSpotReviews = (spotId) => async (dispatch) => {
-
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
-
     if (response.ok) {
         const singleSpotReviews = await response.json();
         dispatch(actionReadSingleSpotReviews(singleSpotReviews.Reviews)) // sends array of objects to payload
@@ -72,8 +66,16 @@ export const thunkReadSingleSpotReviews = (spotId) => async (dispatch) => {
     }
 }
 
+export const thunkDeleteSingleSpot = (spotId) => async (dispatch) => {
+    const response = await csrfFetch(`api/spots/${spotId}`, {
+        method: 'delete',
+    });
+    if (response.ok) {
+        dispatch(actionDeleteSingleSpot(spotId))
+    }
+}
 
-
+// REFACTOR THIS ↴
 export const thunkSpotsCreate = (data) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`, {
         method: 'POST',
@@ -86,14 +88,6 @@ export const thunkSpotsCreate = (data) => async (dispatch) => {
         return newSpot
     }
 }
-
-// export const thunkDelete = (spotId) => async (dispatch) => {
-//     const response = await fetch(`api/spots/${spotId}`);
-//     if (response.ok) {
-//         const spot = await response.json();
-//         dispatch(actionDelete(spot))
-//     }
-// }
 
 /*************************** STATE SHAPE ****************************/
 const initialState = {
@@ -136,13 +130,19 @@ const spotsReducer = (state = initialState, action) => {
             // action.payload.ReviewImages.forEach(obj => singleSpotReviewImages.push({...obj}));
             // newState.singleSpotReviews.ReviewImages = singleSpotReviewImages;
             // // second: normalize object
-
             newState.singleSpotReviews = normalizeArray(action.payload);
-
             // for (const obj of newState.singleSpotReviews) {
             //     console.log(obj)
             // }
             // console.log(newState)
+            return newState
+
+
+        case SPOTS_DELETE:
+            newState.allSpots = normalizeArray(action.payload)
+            newState.singleSpotDetails = {...state.singleSpotDetails}
+            newState.singleSpotReviews = {...state.singleSpotReviews}
+            delete newState.allSpots.spotId
             return newState
 
         default:
