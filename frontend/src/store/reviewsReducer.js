@@ -4,38 +4,29 @@ import { normalizeArray } from "../component-resources/index";
 
 
 /****************************** TYPES ******************************/
-const REVIEWS_READ = 'reviews/READ';
 const REVIEWS_CREATE = 'reviews/CREATE';
+const REVIEWS_READ_USER_REVIEWS = 'reviews/READ_USER_REVIEWS';
+const REVIEWS_DELETE_SINGLE_REVIEW = 'reviews/DELETE_SINGLE_REVIEW';
 
 
 /************************* ACTION CREATORS *************************/
-export const actionReadUserReviews = (reviews) => ({
-    type: REVIEWS_READ,
-    payload: reviews // Users: [array of objects]
-});
-
 // export const actionCreate = () => ({
 //     type: CREATE,
 //     payload: newSpot
 // })
 
-// export const actionDelete = (spot) => ({
-//     type: DELETE,
-//     payload: spot
-// });
+export const actionReadUserReviews = (reviews) => ({
+    type: REVIEWS_READ_USER_REVIEWS,
+    payload: reviews // Users: [array of objects]
+});
+
+export const actionDeleteSingleReview = (reviewId) => ({
+    type: REVIEWS_DELETE_SINGLE_REVIEW,
+    payload: reviewId
+});
 
 
 /*************************** THUNKS (API) ***************************/
-export const thunkReadUserReviews = () => async (dispatch) => {
-
-    const response = await csrfFetch(`/api/reviews/current`);
-    if (response.ok) {
-        const reviews = await response.json();
-        dispatch(actionReadUserReviews(reviews.Reviews))
-        return response;
-    }
-}
-
 // export const thunkCreate = (data) => async (dispatch) => {
 
 //     const response = await fetch(`api/spots`, {
@@ -50,15 +41,28 @@ export const thunkReadUserReviews = () => async (dispatch) => {
 //     }
 // }
 
-// export const thunkDelete = (spotId) => async (dispatch) => {
+export const thunkReadUserReviews = () => async (dispatch) => {
 
-//     const response = await fetch(`api/spots/${spotId}`);
+    const response = await csrfFetch(`/api/reviews/current`);
+    if (response.ok) {
+        const reviews = await response.json();
+        dispatch(actionReadUserReviews(reviews.Reviews))
+        return response;
+    }
+}
 
-//     if (response.ok) {
-//         const spot = await response.json();
-//         dispatch(actionDelete(spot))
-//     }
-// }
+
+export const thunkDeleteSingleReview = (reviewId) => async (dispatch) => {
+
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'delete',
+    });
+
+    if (response.ok) {
+        dispatch(actionDeleteSingleReview(reviewId))
+        return
+    }
+}
 
 
 /*************************** STATE SHAPE ****************************/
@@ -74,20 +78,30 @@ const reviewsReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case REVIEWS_READ:
-            console.log("reach")
-            newState = {... normalizeArray(action.payload)}
-            return newState
-
         // case CREATE:
         //     return {
         //         ...state,
         //         spots: action.payload
         //     }
 
-        // case DELETE:
-        //     delete newState[spot.id]
-        //     return newState
+        case REVIEWS_READ_USER_REVIEWS:
+            let reviewsRaw = action.payload
+            reviewsRaw.forEach(reviewObj => {
+                    reviewObj.User = { ...reviewObj.User };
+                    reviewObj.Spot = { ...reviewObj.Spot };
+                    const images = []
+                    reviewObj.ReviewImages.forEach(obj => images.push({...obj}))
+                    reviewObj.ReviewImages = images
+            })
+            newState = normalizeArray(reviewsRaw)
+            console.log("newState", newState)
+            return newState
+
+        case REVIEWS_DELETE_SINGLE_REVIEW:
+            // copy nested structures??
+            console.log("newState from reviews delete reducer", newState)
+            delete newState.reviews.reviewId
+            return newState
 
         default:
             return state

@@ -26,7 +26,7 @@ function Spots() {
     const allSpotsArr = Object.values (spotsState)
     const allSpotsByUser = allSpotsArr.filter(obj => obj.ownerId === userId)
 
-    /*********************** conditional components *************************/
+    /******************************* events ********************************/
 
     const handleDelete = (spotId) => {
         dispatch(thunkDeleteSingleSpot(spotId))

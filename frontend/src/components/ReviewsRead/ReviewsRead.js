@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import { thunkReadUserReviews } from "../../store/reviewsReducer";
+import { thunkDeleteSingleReview, thunkReadUserReviews } from "../../store/reviewsReducer";
 import { convertDate } from "../../component-resources";
 import chevronRight from '../../assets/fontawesome/chevron-right.svg'
 import './ReviewsRead.css'
@@ -27,6 +27,12 @@ function Reviews() {
     let reviewsArr = Object.values(reviewsState)
     console.log("reviewsArr", reviewsArr)
 
+    /******************************* events ********************************/
+    const handleDelete = (reviewId) => {
+        console.log("reviewId", reviewId)
+        dispatch(thunkDeleteSingleReview(reviewId))
+    }
+
     /*********************** conditional components *************************/
     let reviewComponent
     if (!reviewsArr.length) {
@@ -46,7 +52,7 @@ function Reviews() {
                         {/* <p id="review-table-body-title">Review for {review.Spot.name}</p> */}
                         <p id="review-table-body-data">{review.review}</p>
                         {/* <p id="review-table-body-date-created">{convertDate(review.createdAt)}</p> */}
-                        <button id="review-table-button">Delete</button>
+                        <button id="review-table-button" type="submit" onClick={(e) => handleDelete(review.id)}>Delete</button>
                     </td>
                 </tr>
             )
