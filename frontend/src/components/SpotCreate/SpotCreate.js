@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { thunkCreateSingleSpot } from "../../store/spotsReducer";
 // local files
+import { thunkCreateSingleSpot } from "../../store/spotsReducer";
 import { states } from "../../component-resources";
 import './SpotCreate.css'
 
@@ -85,9 +85,11 @@ function SpotCreate() {
         setValidationErrors(errors)
     }, [address, city, state, country, name, description, price])
 
+    /******************************* events *********************************/
     // submit form
     const history = useHistory();
     const handleSubmit = (e) => {
+
         e.preventDefault();
 
         let createSpotData = {
@@ -99,10 +101,8 @@ function SpotCreate() {
             description: description,
             price: price
         }
-        console.log("createSpotData: ", createSpotData)
 
         dispatch(thunkCreateSingleSpot(createSpotData));
-        // console.log("spotsState", spotsState)
         // history.push(`/spots/${spotsState.singleSpotDetails.id}`)
     }
 

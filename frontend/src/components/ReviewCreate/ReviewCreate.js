@@ -1,14 +1,28 @@
-import React, {useState, useEffect} from "react";
-import {useHistory, useParams} from 'react-router-dom';
+// libraries
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+// local files
+import { thunkCreateSingleReview } from "../../store/reviewsReducer";
 import './ReviewCreate.css'
+
 
 function ReviewCreate() {
 
-    const history = useHistory();
+    /******************************** state ********************************/
+    const sessionState = useSelector(state => state.session);
+    const reviewsState = useSelector(state => state.reviews);
+
+    /********************** reducer/API communication ***********************/
+    const dispatch = useDispatch();
+
+    /********************** key into pertinent values ***********************/
     const [review, setReview] = useState("");
     const [stars, setStars] = useState("★★★★★");
     const [validationErrors, setValidationErrors] = useState([]);
 
+    /*********************** conditional components *************************/
+    // change star-value
     let incrementCounter = () => {
         if (stars.length < 5) setStars(stars.concat("★"));
     }
@@ -16,6 +30,7 @@ function ReviewCreate() {
         if (stars.length > 1) setStars(stars.slice(0, stars.length-1));
     }
 
+    // render errors
     useEffect(() => {
         const errors = [];
 
@@ -46,28 +61,32 @@ function ReviewCreate() {
         setValidationErrors(errors)
       }, [review, stars])
 
-
-
+    /******************************** events *********************************/
+    const history = useHistory();
     const { spotId } = useParams()
-    const submitHandler = (e) => {
+    const handleSubmit = (e) => {
 
         e.preventDefault();
 
-        // let createReview = {review, stars.length} //MAKE SURE TO SUBMIT STARS.length!!!
+        let createReviewData = {
+            review: review,
+            stars: stars.length
+        }
+
+        dispatch(thunkCreateSingleReview(parseInt(spotId), createReviewData));
         // let newSpot = dispatch(thunkReviewsCreate(createReview));
 
-
-
-
-
-        history.push(`/spots/${spotId}`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
+        // history.push(`/spots/${parseInt(spotId)}`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
     }
 
+
+    /*************************** render component ****************************/
     return (
+
         <div className="review-create-panel">
             <form
                 className="create-review-form"
-                onSubmit={submitHandler}
+                onSubmit={handleSubmit}
             >
 
             <label>
@@ -87,13 +106,12 @@ function ReviewCreate() {
                 </textarea>
             </label>
 
-
                 <div>
                     <h2 className="review-create-prompt">Rating</h2>
                     <p className="review-create-subtitle">Share your overall rating</p>
                 </div>
-            <label>
 
+            <label>
                 <div className="stars">
                     <div>
                         <button
@@ -127,11 +145,15 @@ function ReviewCreate() {
             </label>
 
 
-           { <div className="errors">
+           {/* { <div className="errors">
                 {validationErrors.length > 0 &&
                 validationErrors.map((error) =>
                 <p className="error-item" key={error}>{error}</p>)}
-            </div>}
+            </div>} */}
+
+            {validationErrors.map((error, idx) => (
+                <p className="error-item" key={idx}>{error}</p>
+            ))}
 
             <button
             id="review-submit-button"
@@ -140,7 +162,6 @@ function ReviewCreate() {
             >
             Submit review
             </button>
-
 
             </form>
         </div>

@@ -10,7 +10,7 @@ const SPOTS_READ_ALL_SPOTS = 'spots/READ_ALL_SPOTS';
 const SPOTS_READ_SINGLE_SPOT_DETAILS = 'spots/READ_SINGLE_SPOT_DETAILS';
 const SPOTS_READ_SINGLE_SPOT_REVIEWS = 'spots/READ_SINGLE_SPOT_REVIEWS';
 const SPOTS_UPDATE_SINGLE_SPOT = 'spots/UPDATE_SINGLE_SPOT'
-const SPOTS_DELETE = 'spots/DELETE';
+const SPOTS_DELETE_SINGLE_SPOT = 'spots/DELETE_SINGLE_SPOT';
 
 
 /************************* ACTION CREATORS *************************/
@@ -40,7 +40,7 @@ export const actionUpdateSingleSpot = (updateSpot) => ({
 })
 
 export const actionDeleteSingleSpot = (spotId) => ({
-    type: SPOTS_DELETE,
+    type: SPOTS_DELETE_SINGLE_SPOT,
     payload: spotId
 });
 
@@ -54,6 +54,7 @@ export const thunkCreateSingleSpot = (data) => async (dispatch) => {
     });
     if (response.ok) {
         const newSpot = await response.json();
+        // okay to dispatch read all spots instead?
         dispatch(actionCreateSingleSpot(newSpot));
         // dispatch(thunkReadSingleSpotDetails(newSpot.id))
         // dispatch(thunkReadAllSpots())
@@ -198,7 +199,7 @@ const spotsReducer = (state = initialState, action) => {
             newState.singleSpotReviews = {...state.singleSpotReviews}
             return newState
 
-        case SPOTS_DELETE:
+        case SPOTS_DELETE_SINGLE_SPOT:
             newState.allSpots = {...state.allSpots}
             newState.singleSpotDetails = {...state.singleSpotDetails}
                 // create shallow copies of nested structures

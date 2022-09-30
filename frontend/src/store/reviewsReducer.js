@@ -4,16 +4,16 @@ import { normalizeArray } from "../component-resources/index";
 
 
 /****************************** TYPES ******************************/
-const REVIEWS_CREATE = 'reviews/CREATE';
+const REVIEWS_CREATE_SINGLE_REVIEW = 'reviews/CREATE_SINGLE_REVIEW';
 const REVIEWS_READ_USER_REVIEWS = 'reviews/READ_USER_REVIEWS';
 const REVIEWS_DELETE_SINGLE_REVIEW = 'reviews/DELETE_SINGLE_REVIEW';
 
 
 /************************* ACTION CREATORS *************************/
-// export const actionCreate = () => ({
-//     type: CREATE,
-//     payload: newSpot
-// })
+export const actionCreateSingleReview = (newReview) => ({
+    type: REVIEWS_CREATE_SINGLE_REVIEW,
+    payload: newReview
+})
 
 export const actionReadUserReviews = (reviews) => ({
     type: REVIEWS_READ_USER_REVIEWS,
@@ -27,19 +27,19 @@ export const actionDeleteSingleReview = (reviewId) => ({
 
 
 /*************************** THUNKS (API) ***************************/
-// export const thunkCreate = (data) => async (dispatch) => {
+export const thunkCreateSingleReview = (spotId, data) => async (dispatch) => {
 
-//     const response = await fetch(`api/spots`, {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json'} ,
-//         body: JSON.stringify(data)
-//     });
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json'} ,
+        body: JSON.stringify(data)
+    });
 
-//     if (response.ok) {
-//         const newSpot = await response.json();
-//         dispatch(actionCreate(newSpot));
-//     }
-// }
+    if (response.ok) {
+        const newReview = await response.json();
+        dispatch(actionCreateSingleReview(newReview));
+    }
+}
 
 export const thunkReadUserReviews = () => async (dispatch) => {
 
@@ -50,7 +50,6 @@ export const thunkReadUserReviews = () => async (dispatch) => {
         return response;
     }
 }
-
 
 export const thunkDeleteSingleReview = (reviewId) => async (dispatch) => {
 
@@ -78,11 +77,9 @@ const reviewsReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        // case CREATE:
-        //     return {
-        //         ...state,
-        //         spots: action.payload
-        //     }
+        case REVIEWS_CREATE_SINGLE_REVIEW:
+            newState[action.payload.id] = {...action.payload.id}
+            return newState
 
         case REVIEWS_READ_USER_REVIEWS:
             let reviewsRaw = action.payload
@@ -94,12 +91,10 @@ const reviewsReducer = (state = initialState, action) => {
                     reviewObj.ReviewImages = images
             })
             newState = normalizeArray(reviewsRaw)
-            console.log("newState", newState)
             return newState
 
         case REVIEWS_DELETE_SINGLE_REVIEW:
             // copy nested structures??
-            console.log("newState from reviews delete reducer", newState)
             delete newState.reviews.reviewId
             return newState
 
