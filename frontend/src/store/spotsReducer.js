@@ -1,6 +1,7 @@
 /***************************** IMPORTS *****************************/
 import { csrfFetch } from "./csrf";
 import { normalizeArray } from "../component-resources/index";
+import { img, addPlaceholderImages } from "../component-resources/index";
 
 
 /****************************** TYPES ******************************/
@@ -45,7 +46,6 @@ export const actionDeleteSingleSpot = (spotId) => ({
 
 
 /*************************** THUNKS (API) ***************************/
-// REFACTOR THIS ↴
 export const thunkCreateSingleSpot = (data) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`, {
         method: 'post',
@@ -55,6 +55,8 @@ export const thunkCreateSingleSpot = (data) => async (dispatch) => {
     if (response.ok) {
         const newSpot = await response.json();
         dispatch(actionCreateSingleSpot(newSpot));
+        // dispatch(thunkReadSingleSpotDetails(newSpot.id))
+        // dispatch(thunkReadAllSpots())
         return newSpot
     }
 }
@@ -131,13 +133,16 @@ const spotsReducer = (state = initialState, action) => {
         case SPOTS_CREATE_SINGLE_SPOT:
             newState.allSpots = {...state.allSpots}
             newState.allSpots[action.payload.id] = {...action.payload}
+            newState.allSpots[action.payload.id].previewImage = "https://cdn1.vox-cdn.com/uploads/chorus_image/image/47552879/Pike_Place_Market_Entrance.0.0.jpg"
             // newState.singleSpotDetails = {...state.singleSpotDetails}
                 // create shallow copies of nested structures
                 // newState.singleSpotDetails.SpotImages = [...state.singleSpotDetails.SpotImages]
                 // newState.singleSpotDetails.Owner = {...state.singleSpotDetails.Owner}
             // override existing data with newly created spot; use this branch from slice of state to redirect to new spot page
             newState.singleSpotDetails = {...action.payload}
-            newState.singleSpotDetails.SpotImages = []
+            let images = []
+            newState.singleSpotDetails.SpotImages = addPlaceholderImages(images)
+            newState.singleSpotDetails.Owner = {}
             newState.singleSpotReviews = {...state.singleSpotReviews}
             return newState
 

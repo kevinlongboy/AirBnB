@@ -103,7 +103,7 @@ function SpotCreate() {
 
         dispatch(thunkCreateSingleSpot(createSpotData));
         // console.log("spotsState", spotsState)
-        history.push(`/spots/${spotsState.singleSpotDetails.id}`)
+        // history.push(`/spots/${spotsState.singleSpotDetails.id}`)
     }
 
 
