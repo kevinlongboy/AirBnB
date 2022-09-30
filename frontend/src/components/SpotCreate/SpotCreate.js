@@ -1,20 +1,27 @@
-import React, {useState, useEffect} from "react";
+// libraries
+import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { actionSpotsCreate, thunkSpotsCreate } from "../../store/spots";
-
+import { thunkCreateSingleSpot } from "../../store/spotsReducer";
+// local files
+import { states } from "../../component-resources";
 import './SpotCreate.css'
-
-
-const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CZ', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'];
 
 
 function SpotCreate() {
 
-    const spots = useSelector(state => state.spots);
+    /******************************** state ********************************/
+    const sessionState = useSelector(state => state.session);
+    const spotsState = useSelector(state => state.spots);
+
+    /********************** reducer/API communication ***********************/
     const dispatch = useDispatch();
 
-    const history = useHistory();
+    // useEffect(() => {
+    //     dispatch(thunkCreateSingleSpot());
+    // }, [dispatch])
+
+    /********************** key into pertinent values ***********************/
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
@@ -24,7 +31,8 @@ function SpotCreate() {
     const [price, setPrice] = useState(125);
     const [validationErrors, setValidationErrors] = useState([]);
 
-
+    /*********************** conditional components *************************/
+    // change price
     let incrementCounter = () => {
         if (price < 10000) setPrice(price + 1);
     }
@@ -32,7 +40,7 @@ function SpotCreate() {
         if (price > 10) setPrice(price - 1);
     }
 
-
+    // render errors
     useEffect(() => {
         const errors = [];
 
@@ -57,9 +65,9 @@ function SpotCreate() {
         }
 
         if (name.length < 2) {
-          errors.push("Title is required")
+            errors.push("Title is required")
         } else if (name.length > 50) {
-          errors.push("Please create a shorter title")
+            errors.push("Please create a shorter title")
         }
 
         if (description.length === 0) {
@@ -75,25 +83,31 @@ function SpotCreate() {
         }
 
         setValidationErrors(errors)
-      }, [address, city, state, country, name, description, price])
+    }, [address, city, state, country, name, description, price])
 
+    // submit form
+    const history = useHistory();
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    const submitHandler = (e) => {
-    e.preventDefault();
+        let createSpotData = {
+            address: address,
+            city: city,
+            state: state,
+            country: country,
+            name: name,
+            description: description,
+            price: price
+        }
+        console.log("createSpotData: ", createSpotData)
 
-    // OG code
-    // let createSpotData = {address, city, state, country, name, description, price}
-    // console.log("createSpotData: ", createSpotData)
-
-    // let newSpot = dispatch(thunkSpotsCreate(createSpotData));
-    // console.log("NEW SPOT: ", newSpot)
-
-    // history.push(`/spots`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
-
-
+        dispatch(thunkCreateSingleSpot(createSpotData));
+        // console.log("spotsState", spotsState)
+        history.push(`/spots/${spotsState.singleSpotDetails.id}`)
     }
 
 
+    /*************************** render component ****************************/
     return (
 
         <div className="spot-create-page">
@@ -103,7 +117,7 @@ function SpotCreate() {
 
             <form
                 className="create-spot-form"
-                onSubmit={submitHandler}
+                onSubmit={handleSubmit}
                 >
 
             <label>
@@ -181,19 +195,6 @@ function SpotCreate() {
             />
             </label>
 
-            {/* <label>
-                <output placeholder="0">${price}</output>
-                <input
-                type="range"
-                name="price"
-                min="10"
-                max="10000"
-                onChange={(e) => setPrice(e.target.value)}
-                value={price}
-                />
-                per night
-            </label> */}
-
             <label>
                 <div className="price">
 
@@ -230,19 +231,20 @@ function SpotCreate() {
 
             <div className="errors">
 
-                {validationErrors.length &&
+                {/* {validationErrors.length &&
                 validationErrors.map((error) =>
-                <p className="error-item" key={error}>{error}</p>)}
+                <p className="error-item" key={error}>{error}</p>)} */}
 
-                {/* {errors.map((error, idx) => (
+                {validationErrors.map((error, idx) => (
                     <p className="error-item" key={idx}>{error}</p>
-                ))} */}
+                ))}
 
             </div>
 
             <button
             className="spot-submit-button"
             type="submit"
+            // onSubmit={handleSubmit}
             disabled={!!validationErrors.length}
             >
             Looks good

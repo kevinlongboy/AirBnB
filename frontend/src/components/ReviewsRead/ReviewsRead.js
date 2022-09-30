@@ -2,10 +2,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // local files
+import { thunkReadUserReviews } from "../../store/reviewsReducer";
 import { convertDate } from "../../component-resources";
 import chevronRight from '../../assets/fontawesome/chevron-right.svg'
-import './Reviews.css'
-import { thunkReadUserReviews } from "../../store/reviews";
+import './ReviewsRead.css'
 
 
 function Reviews() {
@@ -19,9 +19,11 @@ function Reviews() {
 
     useEffect(() => {
         dispatch(thunkReadUserReviews())
-    }, [dispatch]);
+    }, []);
 
     /********************** key into pertinent values ***********************/
+    console.log("reviewsState", reviewsState)
+
     let reviewsArr = Object.values(reviewsState)
     console.log("reviewsArr", reviewsArr)
 
@@ -30,7 +32,6 @@ function Reviews() {
     if (!reviewsArr.length) {
         reviewComponent = (
             <>
-
                 <tr>
                     <td>
                     </td>
@@ -42,9 +43,9 @@ function Reviews() {
             reviewsArr.map(review => (
                 <tr key={review.id}>
                     <td>
-                        <p id="review-table-body-title">Review for {review.Spot.name}</p>
+                        {/* <p id="review-table-body-title">Review for {review.Spot.name}</p> */}
                         <p id="review-table-body-data">{review.review}</p>
-                        <p id="review-table-body-date-created">{convertDate(review.createdAt)}</p>
+                        {/* <p id="review-table-body-date-created">{convertDate(review.createdAt)}</p> */}
                         <button id="review-table-button">Delete</button>
                     </td>
                 </tr>

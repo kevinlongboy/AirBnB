@@ -1,10 +1,10 @@
 // libraries
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // local files
 import ReviewCreate from "../ReviewCreate/ReviewCreate.js";
-import { thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../store/spots";
+import { thunkReadAllSpots, thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../store/spotsReducer";
 import { convertDate, addPlaceholderImages } from "../../component-resources";
 import './SpotPage.css';
 
@@ -20,6 +20,10 @@ function SpotPage() {
 
   /********************** reducer/API communication ***********************/
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(thunkReadAllSpots());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(thunkReadSingleSpotDetails(spotId));

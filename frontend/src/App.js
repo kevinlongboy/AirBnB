@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/LoginFormModal/SignupFormPage";
 
-import * as sessionActions from "./store/session";
+import * as sessionActions from "./store/sessionReducer";
 import Main from "./components/Main/Main";
 import Spots from "./components/Spots/Spots";
 import SpotPage from "./components/SpotPage/SpotPage";
 import SpotEdit from "./components/SpotEdit/SpotEdit";
 import SpotCreate from "./components/SpotCreate/SpotCreate";
-import Reviews from "./components/Reviews/Reviews"
+import Reviews from "./components/ReviewsRead/ReviewsRead"
 import ReviewEdit from "./components/ReviewEdit/ReviewEdit";
 
 import Navigation from "./components/Navigation";

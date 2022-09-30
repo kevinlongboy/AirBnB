@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, Redirect, useHistory} from "react-router-dom";
+import { NavLink, useHistory} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as sessionActions from '../../store/session';
-import { Modal } from '../../context/Modal';
+import * as sessionActions from '../../store/sessionReducer';
 
 import './Navigation.css'
 import menuBars from '../../assets/fontawesome/bars-solid.png'
@@ -44,8 +43,8 @@ function ProfileButton({ user }) {
   return (
     <>
       <button className='account-button' onClick={openMenu}>
-        <img id='menu-icon' src={menuBars}></img>
-        <img id='user-icon' src={userIcon}></img>
+        <img id='menu-icon' src={menuBars} alt="menu icon"></img>
+        <img id='user-icon' src={userIcon} alt = "user icon"></img>
       </button>
 
       {showMenu && (

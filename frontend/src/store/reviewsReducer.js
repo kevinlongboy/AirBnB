@@ -1,6 +1,6 @@
 /***************************** IMPORTS *****************************/
 import { csrfFetch } from "./csrf";
-import { normalizeArray } from "../../src/component-resources/index";
+import { normalizeArray } from "../component-resources/index";
 
 
 /****************************** TYPES ******************************/
@@ -29,8 +29,6 @@ export const actionReadUserReviews = (reviews) => ({
 export const thunkReadUserReviews = () => async (dispatch) => {
 
     const response = await csrfFetch(`/api/reviews/current`);
-    console.log("REACH")
-
     if (response.ok) {
         const reviews = await response.json();
         dispatch(actionReadUserReviews(reviews.Reviews))

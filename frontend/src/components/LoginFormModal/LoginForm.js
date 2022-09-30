@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink , Link, useHistory  } from "react-router-dom";
-import * as sessionActions from "../../store/session";
+import * as sessionActions from "../../store/sessionReducer";
 import { useDispatch } from "react-redux";
 import { Modal } from '../../context/Modal';
 import SignupFormPage from "./SignupFormPage";
@@ -49,8 +48,6 @@ function LoginForm() {
       }
     );
   };
-
-  const history = useHistory();
 
   const handleSubmitDemoUser = (e) => {
     e.preventDefault();

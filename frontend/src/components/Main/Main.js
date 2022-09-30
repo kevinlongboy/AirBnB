@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { thunkReadAllSpots } from "../../store/spots";
+import { thunkReadAllSpots } from "../../store/spotsReducer";
 import './Main.css';
 
 
@@ -12,7 +12,7 @@ function Main() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(thunkReadAllSpots());
-    }, [])
+    }, [dispatch])
 
     const allSpots = spotsState.allSpots
     let allSpotsArr = Object.values(allSpots) // removes keys from original object
@@ -30,7 +30,7 @@ function Main() {
                     >
 
                         <div className="spot-image-container">
-                            <img className="spot-image" src={spot.previewImage}></img>
+                            <img className="spot-image" src={spot.previewImage} alt={`${spot.name}`}></img>
                         </div>
 
                         <div className="spot-text">

@@ -1,25 +1,28 @@
-import React, {useState, useEffect} from "react";
+// libraries
+import { useEffect, useState} from "react";
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { actionSpotsCreate, thunkSpotsCreate } from "../../store/spots";
-
-import './SpotEdit.css'
-
-
-const states = ['AL', 'AK', 'AZ', 'AR', 'CA', 'CZ', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'];
+import { thunkUpdateSingleSpot } from "../../store/spotsReducer";
+// local files
+import { states } from '../../component-resources/index.js';
+import './SpotEdit.css';
 
 
 function SpotEdit() {
 
-    // util use params to send spotId in POST API request in thunk
-    // let { spotId } = useParams();
-    // spotId = Number.parseInt(spotId)
+    /******************************** state ********************************/
+    const spotsState = useSelector(state => state.spots);
 
+    /******************************** params ********************************/
+    const { spotId } = useParams()
 
-    const spots = useSelector(state => state.spots);
+    /********************** reducer/API communication ***********************/
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(thunkUpdateSingleSpot())
+    }, [dispatch]);
 
-    const history = useHistory();
+    /********************** key into pertinent values ***********************/
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
@@ -29,14 +32,16 @@ function SpotEdit() {
     const [price, setPrice] = useState(125);
     const [validationErrors, setValidationErrors] = useState([]);
 
+    /*********************** conditional components *************************/
+    // change price
     let incrementCounter = () => {
         if (price < 10000) setPrice(price + 1);
     }
     let decrementCounter = () => {
-        if (price >10) setPrice(price - 1);
+        if (price > 10) setPrice(price - 1);
     }
 
-
+    // render errors
     useEffect(() => {
         const errors = [];
 
@@ -79,22 +84,25 @@ function SpotEdit() {
         }
 
         setValidationErrors(errors)
-      }, [address, city, state, country, name, description, price])
+    }, [address, city, state, country, name, description, price])
 
-
+    // submit form
+    const history = useHistory();
     const submitHandler = (e) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    let createSpotData = {address, city, state, country, name, description, price}
-    console.log("createSpotData: ", createSpotData)
+        let updateSpotData = {address, city, state, country, name, description, price}
+        console.log("updateSpotData: ", updateSpotData)
 
-    let newSpot = dispatch(thunkSpotsCreate(createSpotData));
-    console.log("NEW SPOT: ", newSpot)
+        dispatch(thunkUpdateSingleSpot(parseInt(spotId), updateSpotData));
 
-    history.push(`/spots`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
+        // let newSpot = dispatch(thunkSpotsCreate(createSpotData));
+        // console.log("NEW SPOT: ", newSpot)
+
+        history.push(`/spots/${spotId}`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
     }
 
-
+    /*************************** render component ****************************/
     return (
 
         <div className="spot-create-page">
@@ -187,19 +195,6 @@ function SpotEdit() {
                 value={description}
             />
             </label>
-
-            {/* <label>
-                <output placeholder="0">${price}</output>
-                <input
-                type="range"
-                name="price"
-                min="10"
-                max="10000"
-                onChange={(e) => setPrice(e.target.value)}
-                value={price}
-                />
-                per night
-            </label> */}
 
             <label>
                 <div className="price">

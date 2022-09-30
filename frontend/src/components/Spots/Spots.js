@@ -1,23 +1,11 @@
 // libraries
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 // local files
-import { thunkDeleteSingleSpot, thunkReadAllSpots } from "../../store/spots";
+import { thunkDeleteSingleSpot, thunkReadAllSpots } from "../../store/spotsReducer";
 import plusIcon from '../../assets/fontawesome/plus-solid.svg'
 import './Spots.css'
-
-
-
-
-// states:
-    // user
-    // spots
-
-// use Params
-// thunks
-    // all spots >> filter by ownerId
-    // create delete thunk
 
 
 function Spots() {
@@ -36,7 +24,7 @@ function Spots() {
     /********************** key into pertinent values ***********************/
     const userId = sessionState.user.id;
     const allSpotsArr = Object.values (spotsState)
-    const allSpotsByUser = allSpotsArr.filter(obj => obj.ownerId == userId)
+    const allSpotsByUser = allSpotsArr.filter(obj => obj.ownerId === userId)
 
     /*********************** conditional components *************************/
 
@@ -90,7 +78,7 @@ function Spots() {
                                         </button>
                                     </NavLink>
 
-                                    <button className="table-button" type="button" onClick={handleDelete(spot.id)}>Delete</button>
+                                    <button className="table-button" type="button" onClick={(e) => handleDelete(spot.id)}>Delete</button>
                                 </td>
                                 <td>{spot.city}, {spot.state}</td>
                             </tr>

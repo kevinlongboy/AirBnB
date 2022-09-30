@@ -12,36 +12,30 @@ const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../d
 
 const validateSpot = [
     check('address')
-        .exists({ checkFalsy: true })
         .isLength({ min: 2 })
         .withMessage("Street address is required"),
     check('city')
-        .exists({ checkFalsy: true })
         .isLength({ min: 2 })
         .withMessage("City is required"),
     check('state')
-        .exists({ checkFalsy: true })
         .isLength({ min: 2 })
         .withMessage("State is required"),
     check('country')
-        .exists({ checkFalsy: true })
         .isLength({ min: 2 })
         .withMessage("Country is required"),
     // check('lat')
-    //     .exists({ checkFalsy: true })
+    //     .isLatLong()
     //     .withMessage("Latitude is not valid"),
     // check('lng')
-    //     .exists({ checkFalsy: true })
+    //     .isLatLong()
     //     .isDecimal()
     //     .withMessage("Longitude is not valid"),
     check('name')
-        .exists({ checkFalsy: true })
         .isLength({ max: 50 })
         .withMessage("Name must be less than 50 characters"),
-    // check('description')
-    //     .exists({ checkFalsy: true })
-    //     .isLength({ min: 5 })
-    //     .withMessage("Description is required"),
+    check('description')
+        .isLength({ min: 5 })
+        .withMessage("Description is required"),
     check('price')
         .exists({ checkFalsy: true })
         .withMessage("Price per day is required"),
@@ -462,7 +456,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
                     sumStars += currReview.stars
                 }
                 let aveStars = sumStars / currSpotReviews.length
-                currSpot.dataValues.avgRatings = aveStars.toFixed(1)
+                currSpot.dataValues.avgRatings = aveStars.toFixed(2)
 
                 /******************* add previewImage-key *******************/
                 let prevImg = await SpotImage.findOne({ // returns array of current spot's images
@@ -527,7 +521,7 @@ router.get('/:spotId', async (req, res, next) => {
 
         let starAvg = starSum / reviewCount;
         if (!starAvg) starAvg = 0.0
-        getSpot.dataValues.avgStarRating = starAvg.toFixed(1);
+        getSpot.dataValues.avgStarRating = starAvg.toFixed(2);
 
         /******************** add SpotImages-key ********************/
         let spotImgs = await SpotImage.findAll({
@@ -686,7 +680,7 @@ router.get('/', async (req, res, next) => {
                     sumStars += currReview.stars
                 }
                 let aveStars = sumStars / currSpotReviews.length
-                currSpot.dataValues.avgRatings = aveStars.toFixed(1)
+                currSpot.dataValues.avgRatings = aveStars.toFixed(2)
 
                 /*************************** add previewImage-key ***************************/
                 let prevImg = await SpotImage.findOne({ // returns array of current spot's images
@@ -726,7 +720,8 @@ router.get('/', async (req, res, next) => {
 
 // Postman 7: "Create a Spot"
 // README, line 380
-router.post('/', requireAuth, validateSpot, async (req, res) => {
+router.post('/', requireAuth, validateSpot, async (req, res) => { // removed validations
+// router.post('/', requireAuth, async (req, res) => {
 
     let currentUser = req.user
     let currentUserId = req.user.id
