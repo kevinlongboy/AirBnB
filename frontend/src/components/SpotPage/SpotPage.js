@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 // local files
 import ReviewCreate from "../ReviewCreate/ReviewCreate.js";
 import { thunkReadAllSpots, thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../store/spotsReducer";
+import { thunkCreateSingleReview } from "../../store/reviewsReducer.js";
 import { convertDate, addPlaceholderImages } from "../../component-resources";
 import './SpotPage.css';
 
@@ -33,11 +34,16 @@ function SpotPage() {
     dispatch(thunkReadSingleSpotReviews(spotId));
   }, [dispatch, spotId]);
 
+  useEffect(() => {
+    dispatch(thunkCreateSingleReview());
+  }, [dispatch]);
+
   /********************** key into pertinent values ***********************/
   const userId = sessionState.user.id;
   const spot = spotsState.singleSpotDetails;
   const spotReviews = spotsState.singleSpotReviews;
   const reviews = Object.values(spotReviews)
+  console.log("reviews", reviews)
   const spotImgs = spotsState.singleSpotDetails.SpotImages
   const images = Object.values(spotImgs)
 

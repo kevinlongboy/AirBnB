@@ -67,6 +67,13 @@ const demoUsers = [
     email: 'bbriscoe@yahoo.com',
   },
   {
+    firstName: 'Gertrude',
+    lastName: 'Moon',
+    username: 'gmoon',
+    hashedPassword: bcrypt.hashSync('passwordJ'),
+    email: 'gmoon@yahoo.co.uk',
+  },
+  {
     firstName: 'Demo',
     lastName: 'User',
     username: 'Demo',

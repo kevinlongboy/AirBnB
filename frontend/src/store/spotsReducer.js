@@ -141,8 +141,8 @@ const spotsReducer = (state = initialState, action) => {
                 // newState.singleSpotDetails.Owner = {...state.singleSpotDetails.Owner}
             // override existing data with newly created spot; use this branch from slice of state to redirect to new spot page
             newState.singleSpotDetails = {...action.payload}
-            let images = []
-            newState.singleSpotDetails.SpotImages = addPlaceholderImages(images)
+            let singleSpotImages = []
+            newState.singleSpotDetails.SpotImages = addPlaceholderImages(singleSpotImages)
             newState.singleSpotDetails.Owner = {}
             newState.singleSpotReviews = {...state.singleSpotReviews}
             return newState
@@ -161,18 +161,20 @@ const spotsReducer = (state = initialState, action) => {
             newState.allSpots = {...state.allSpots}
             newState.singleSpotDetails = {...action.payload};
                 // create shallow copies of nested structures
-                let singleSpotImages = [];
-                action.payload.SpotImages.forEach(obj => singleSpotImages.push({...obj}));
-                newState.singleSpotDetails.SpotImages = singleSpotImages;
+                let singleSpotDetailsImages = [];
+                action.payload.SpotImages.forEach(obj => singleSpotDetailsImages.push({...obj}));
+                newState.singleSpotDetails.SpotImages = singleSpotDetailsImages;
                 newState.singleSpotDetails.Owner = {...action.payload.Owner}
             newState.singleSpotReviews = {...state.singleSpotReviews}
             return newState
 
         case SPOTS_READ_SINGLE_SPOT_REVIEWS:
             newState.allSpots = {...state.allSpots}
-            newState.singleSpotDetails = {...state.singleSpotDetails}
+            newState.singleSpotDetails = {...state.singleSpotDetails};
                 // create shallow copies of nested structures
-                newState.singleSpotDetails.SpotImages = [...state.singleSpotDetails.SpotImages]
+                let singleSpotReviewImages = [];
+                newState.singleSpotDetails.SpotImages.forEach(obj => singleSpotReviewImages.push({...obj}))
+                newState.singleSpotDetails.SpotImages = singleSpotReviewImages;
                 newState.singleSpotDetails.Owner = {...state.singleSpotDetails.Owner}
             // // first: create shallow copies of nested structures
             // // STILL ARRAY OF OBJECTS ATM, NOT OBJECT OF OBJECTS
@@ -181,7 +183,14 @@ const spotsReducer = (state = initialState, action) => {
             // action.payload.ReviewImages.forEach(obj => singleSpotReviewImages.push({...obj}));
             // newState.singleSpotReviews.ReviewImages = singleSpotReviewImages;
             // // second: normalize object
-            newState.singleSpotReviews = normalizeArray(action.payload);
+            console.log("action.payload", action.payload)
+            action.payload.Reviews.forEach(obj => {
+                obj.User = {...obj.User};
+                let reviewImages = []
+                obj.ReviewImages.forEach(imgObj => reviewImages.push({...imgObj}))
+                obj.ReviewImages = reviewImages
+            })
+            newState.singleSpotReviews = normalizeArray(action.payload.Reviews);
             // for (const obj of newState.singleSpotReviews) {
             //     console.log(obj)
             // }
