@@ -58,7 +58,7 @@ const demoReviews = [
   { // Gertrude reviews Niles'
     spotId: 2,
     userId: 10,
-    review: "Don't bother wasting yer money 'ere.",
+    review: "Don't bother wasting yer money 'ere. The hosts are couple of stuck-up ",
     stars: 2,
   },
   { // Frasier reviews Lilith's
@@ -77,19 +77,19 @@ const demoReviews = [
     spotId: 7,
     userId: 1,
     review: 'Placeholder text: Frasier reviews Gil',
-    stars: 5,
+    stars: 4.5,
   },
   { // Frasier reviews Noel's
     spotId: 8,
     userId: 1,
     review: 'Placeholder text: Frasier reviews Noel',
-    stars: 4.5,
+    stars: 3,
   },
   { // Frasier reviews Bulldog's
     spotId: 9,
     userId: 1,
     review: 'Placeholder text: Frasier reviews Bulldog',
-    stars: 2.5,
+    stars: 2,
   },
   { // Daphne reviews Gertrude's
     spotId: 10,
