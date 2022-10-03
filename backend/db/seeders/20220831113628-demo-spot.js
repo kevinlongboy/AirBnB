@@ -3,7 +3,7 @@
 const demoSpots = [
   {
     ownerId: 1, // Frasier
-    address: '210 8th Ave N',
+    address: '159 S Jackson St #600',
     city: 'Seattle',
     state: 'WA',
     country: 'United States of America',

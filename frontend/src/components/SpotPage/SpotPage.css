@@ -45,13 +45,13 @@
     gap: 10px;
     max-width: 100vw;
     min-height: 45vw;
-    /* max-height: 425px; */
+    max-height: 425px;
     border-radius: 25px;
 }
 
 .spot-page-images-cover > img {
     background-size: cover;
-    object-fit: cover;
+    object-fit:cover;
     max-width: 100%;
     height: 100%;
     overflow: hidden;
