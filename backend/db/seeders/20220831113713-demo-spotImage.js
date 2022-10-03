@@ -249,7 +249,7 @@ const demoSpotImages = [
     preview: false,
   },
 
-  /*********************** Gil's Capitol Hill Flat ***********************/
+  /*********************** Gil's Capitol Hill Bungalow ***********************/
   {
     // id: 35,
     spotId: 7,
@@ -278,6 +278,102 @@ const demoSpotImages = [
     // id: 39,
     spotId: 7,
     url: 'https://avalonbay-avalon-communities-prod.cdn.arcpublishing.com/resizer/oNDXfn4UjaHl2OYptp2J27Vnq3g=/1440x810/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/avalonbay/WGGL6MG6CRJENIC6CNVRLQDOTA.jpg',
+    preview: false,
+  },
+
+  /*********************** Noel's Chinatown-International Room ***********************/
+  {
+    // id: 40,
+    spotId: 8,
+    url: 'https://images1.forrent.com/i2/NYSGF5NxBIPJC3CJ6d2f0cz8AO-CmgL2-A5dSmWuXOA/112/image.jpg',
+    preview: true,
+  },
+  {
+    // id: 41,
+    spotId: 8,
+    url: 'https://images1.forrent.com/i2/FoSLRNUmnLU9gQ0GzQG3UWdpgvutc2nhg7Xez02EU7E/112/image.jpg',
+    preview: false,
+  },
+  {
+    // id: 42,
+    spotId: 8,
+    url: 'https://images1.forrent.com/i2/wgtHsH0lmfjXTbIcRJE7t7CziFq1dRDhm4rIS5uf3Do/112/image.jpg',
+    preview: false,
+  },
+  {
+    // id: 43,
+    spotId: 8,
+    url: 'https://images1.forrent.com/i2/nxirw9P2n2JeANa9UBJvXpWnrdHUB7C279StSNei1zA/112/image.jpg',
+    preview: false,
+  },
+  {
+    // id: 44,
+    spotId: 8,
+    url: 'https://images1.forrent.com/i2/TNZAtF7lZP72LSKKDE2nqcdbltdYV6aQcNhkKnSpUsU/112/image.jpg',
+    preview: false,
+  },
+
+  /*********************** Bulldog's SoDo Shared Space ***********************/
+  {
+    // id: 45,
+    spotId: 9,
+    url: 'https://www.belljacksonstreet.com/wp-content/uploads/sites/87/2022/05/Bell-Jackson-St_Living-Room1_HighRes-April2022-2000x1333.jpg',
+    preview: true,
+  },
+  {
+    // id: 46,
+    spotId: 9,
+    url: 'https://www.belljacksonstreet.com/wp-content/uploads/sites/87/2022/05/Bell-Jackson-St_Kitchen1_HighRes-April2022-2000x1333.jpg',
+    preview: false,
+  },
+  {
+    // id: 47,
+    spotId: 9,
+    url: 'https://www.belljacksonstreet.com/wp-content/uploads/sites/87/2022/05/Bell-Jackson-St_Living-Room2_HighRes-April2022-2000x1333.jpg',
+    preview: false,
+  },
+  {
+    // id: 48,
+    spotId: 9,
+    url: 'https://www.belljacksonstreet.com/wp-content/uploads/sites/87/2021/02/BellJacksonStreet_Clubhouse-Interior-13.jpg',
+    preview: false,
+  },
+  {
+    // id: 49,
+    spotId: 9,
+    url: 'https://www.belljacksonstreet.com/wp-content/uploads/sites/87/2021/02/BellJacksonStreet_Fitness-Center-2.jpg',
+    preview: false,
+  },
+
+  /*********************** Gertrude's Eastlake Flat ***********************/
+  {
+    // id: 50,
+    spotId: 10,
+    url: 'https://images1.apartmenthomeliving.com/i2/nxFrbY6spo25OgKdLgQYNyGD69-5sfhonYDCLq2sP6A/114/image.jpg?p=1',
+    preview: true,
+  },
+  {
+    // id: 51,
+    spotId: 10,
+    url: 'https://images1.apartmenthomeliving.com/i2/UTk4fayknZDvHUoebWExpJSRa_oIQiUtLqaT_qZ1lX0/114/image.jpg?p=1',
+    preview: false,
+  },
+  {
+    // id: 52,
+    spotId: 10,
+    url: 'https://images1.apartmenthomeliving.com/i2/n-3QbTvH6gyK3bO1eZzc64QiYcMp737himzVnKH2FHc/114/image.jpg?p=1',
+    preview: false,
+  },
+  {
+    // id: 53,
+    spotId: 10,
+    url: 'https://images1.apartmenthomeliving.com/i2/uQEvxEjKK7XYhCp_DLymtNPChX6iM5HROVGOOjqEgc0/114/image.jpg?p=1',
+    preview: false,
+  },
+  {
+    // id: 54,
+    spotId: 10,
+    url: 'https://images1.apartmenthomeliving.com/i2/lF1Hi2ccyPHc4kND_LDPb0TuzqcmCzMhZm7lMgvRnZE/114/image.jpg?p=1',
     preview: false,
   },
 ]

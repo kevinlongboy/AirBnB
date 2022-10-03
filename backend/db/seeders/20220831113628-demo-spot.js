@@ -35,7 +35,7 @@ const demoSpots = [
     lng: -122.352372,
     name: 'Belltown Loft',
     description: 'Stylish with plenty of character',
-    price: 200
+    price: 250
   },
   {
     ownerId: 4, // Roz
@@ -84,6 +84,42 @@ const demoSpots = [
     name: 'Capitol Hill Bungalow',
     description: 'Fabulous with exquisite taste',
     price: 300
+  },
+  {
+    ownerId: 8, // Noel
+    address: '520 Occidental Ave S',
+    city: 'Seattle',
+    state: 'WA',
+    country: 'United States of America',
+    lat: 47.614102,
+    lng: -122.283928,
+    name: 'Chinatown-Intl. Room',
+    description: 'Out of this world',
+    price: 150
+  },
+  {
+    ownerId: 9, // Bulldog
+    address: '1801 S Jackson St',
+    city: 'Seattle',
+    state: 'WA',
+    country: 'United States of America',
+    lat: 47.614102,
+    lng: -122.283928,
+    name: 'SoDo Shared Space',
+    description: 'Rambunctious and unperturbed',
+    price: 100
+  },
+  {
+    ownerId: 10, // Gertrude
+    address: '2371 Franklin Ave E',
+    city: 'Seattle',
+    state: 'WA',
+    country: 'United States of America',
+    lat: 47.614102,
+    lng: -122.283928,
+    name: 'Eastlake Flat',
+    description: 'Insistent and opinionated',
+    price: 200
   },
 ]
 
