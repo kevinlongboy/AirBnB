@@ -81,7 +81,7 @@ function SpotPage() {
         <div className="spot-page-overview">
           <p className="spot-page-rating">{`★ ${spot.avgStarRating}`}</p>
           <p> · </p>
-          <p className="spot-page-review-count">2 Reviews</p>
+          <p className="spot-page-review-count">{`${spot.numReviews} Reviews`}</p>
           <p> · </p>
           <p className="spot-page-location"> {`${spot.city}, ${spot.state}, ${spot.country}`}</p>
         </div>
