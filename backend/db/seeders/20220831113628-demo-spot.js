@@ -71,7 +71,7 @@ const demoSpots = [
     lng: -122.283928,
     name: 'South Lake Union Suite',
     description: 'Smart sophistication',
-    price: 350
+    price: 500
   },
   {
     ownerId: 7, // Gil
@@ -81,9 +81,9 @@ const demoSpots = [
     country: 'United States of America',
     lat: 47.614102,
     lng: -122.283928,
-    name: 'Capitol Hill Bungalow',
+    name: 'Capitol Hill Abode',
     description: 'Fabulous with exquisite taste',
-    price: 300
+    price: 400
   },
   {
     ownerId: 8, // Noel
@@ -107,7 +107,7 @@ const demoSpots = [
     lng: -122.283928,
     name: 'SoDo Shared Space',
     description: 'Rambunctious and unperturbed',
-    price: 100
+    price: 75
   },
   {
     ownerId: 10, // Gertrude
@@ -119,7 +119,7 @@ const demoSpots = [
     lng: -122.283928,
     name: 'Eastlake Flat',
     description: 'Insistent and opinionated',
-    price: 200
+    price: 100
   },
 ]
 
