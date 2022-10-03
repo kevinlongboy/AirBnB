@@ -39,7 +39,7 @@ const demoSpots = [
   },
   {
     ownerId: 4, // Roz
-    address: '2428 NW Market St',
+    address: '4106 Stone Way N',
     city: 'Seattle',
     state: 'WA',
     country: 'United States of America',
