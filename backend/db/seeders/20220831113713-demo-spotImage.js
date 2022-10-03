@@ -216,6 +216,70 @@ const demoSpotImages = [
     // url: '../../../assets/images/spot-images/madrona-house/madrona-spot-7.jpg',
     preview: false,
   },
+
+  /*********************** Lilith's South Lake Union Suite ***********************/
+  {
+    // id: 30,
+    spotId: 6,
+    url: 'https://cache.marriott.com/content/dam/marriott-renditions/SEACD/seacd-king-guestroom-6719-hor-clsc.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1215px:*',
+    preview: true,
+  },
+  {
+    // id: 31,
+    spotId: 6,
+    url: 'https://cache.marriott.com/content/dam/marriott-renditions/SEACD/seacd-king-5889-hor-clsc.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1215px:*',
+    preview: false,
+  },
+  {
+    // id: 32,
+    spotId: 6,
+    url: 'https://cache.marriott.com/content/dam/marriott-renditions/SEACD/seacd-bathroom-6726-hor-clsc.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1215px:*',
+    preview: false,
+  },
+  {
+    // id: 33,
+    spotId: 6,
+    url: 'https://cache.marriott.com/content/dam/marriott-renditions/SEACD/seacd-lobby-0068-hor-clsc.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1215px:*',
+    preview: false,
+  },
+  {
+    // id: 34,
+    spotId: 6,
+    url: 'https://cache.marriott.com/content/dam/marriott-renditions/SEACD/seacd-fitness-4594-hor-clsc.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1215px:*',
+    preview: false,
+  },
+
+  /*********************** Gil's Capitol Hill Flat ***********************/
+  {
+    // id: 35,
+    spotId: 7,
+    url: 'https://avalonbay-avalon-communities-prod.cdn.arcpublishing.com/resizer/-jUT3oMviKWWIdwZ9OfyGKgf2n0=/1440x810/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/avalonbay/R2V2X5TXNJO6ZBTWVT7RALHH2Y.jpg',
+    preview: true,
+  },
+  {
+    // id: 36,
+    spotId: 7,
+    url: 'https://avalonbay-avalon-communities-prod.cdn.arcpublishing.com/resizer/gsMBcnc6nt3YeA8lYqRbLsX-Xow=/1440x810/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/avalonbay/53226WDQZ5M6JHFU4JUAI27OCU.jpg',
+    preview: false,
+  },
+  {
+    // id: 37,
+    spotId: 7,
+    url: 'https://avalonbay-avalon-communities-prod.cdn.arcpublishing.com/resizer/jmgjPTCXWVgQYFEEFMzIGV5oEHs=/1440x810/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/avalonbay/MEBORVKIS5OXRDXU2XDZJAI3YM.jpg',
+    preview: false,
+  },
+  {
+    // id: 38,
+    spotId: 7,
+    url: 'https://avalonbay-avalon-communities-prod.cdn.arcpublishing.com/resizer/9RxAzPE6Wjda4_Dt1tta2NGCQgs=/1440x810/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/avalonbay/MM73QVFBNFMJ5FE3E3ISEAOUXE.jpg',
+    preview: false,
+  },
+  {
+    // id: 39,
+    spotId: 7,
+    url: 'https://avalonbay-avalon-communities-prod.cdn.arcpublishing.com/resizer/oNDXfn4UjaHl2OYptp2J27Vnq3g=/1440x810/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/avalonbay/WGGL6MG6CRJENIC6CNVRLQDOTA.jpg',
+    preview: false,
+  },
 ]
 
 let spotIds = [];

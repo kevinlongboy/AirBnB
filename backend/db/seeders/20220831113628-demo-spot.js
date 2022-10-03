@@ -2,7 +2,7 @@
 
 const demoSpots = [
   {
-    ownerId: 1,
+    ownerId: 1, // Frasier
     address: '210 8th Ave N',
     city: 'Seattle',
     state: 'WA',
@@ -14,7 +14,7 @@ const demoSpots = [
     price: 1000
   },
   {
-    ownerId: 2,
+    ownerId: 2, // Niles
     address: '1632 77th Ave NE',
     city: 'Medina',
     state: 'WA',
@@ -26,7 +26,7 @@ const demoSpots = [
     price: 2500
   },
   {
-    ownerId: 3,
+    ownerId: 3, // Daphne
     address: '62 Cedar St',
     city: 'Seattle',
     state: 'WA',
@@ -38,7 +38,7 @@ const demoSpots = [
     price: 200
   },
   {
-    ownerId: 4,
+    ownerId: 4, // Roz
     address: '2428 NW Market St',
     city: 'Seattle',
     state: 'WA',
@@ -50,7 +50,7 @@ const demoSpots = [
     price: 300
   },
   {
-    ownerId: 5,
+    ownerId: 5, // Martin
     address: '1541 Grand Ave',
     city: 'Seattle',
     state: 'WA',
@@ -60,6 +60,30 @@ const demoSpots = [
     name: 'Madrona House',
     description: 'Classic comfort',
     price: 150
+  },
+  {
+    ownerId: 6, // Lilith
+    address: '925 Westlake Avenue North',
+    city: 'Seattle',
+    state: 'WA',
+    country: 'United States of America',
+    lat: 47.614102,
+    lng: -122.283928,
+    name: 'South Lake Union Suite',
+    description: 'Smart sophistication',
+    price: 350
+  },
+  {
+    ownerId: 7, // Gil
+    address: '1530 Belmont Ave',
+    city: 'Seattle',
+    state: 'WA',
+    country: 'United States of America',
+    lat: 47.614102,
+    lng: -122.283928,
+    name: 'Capitol Hill Bungalow',
+    description: 'Fabulous with exquisite taste',
+    price: 300
   },
 ]
 
