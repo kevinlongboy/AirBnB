@@ -41,7 +41,9 @@ function SpotPage() {
   /********************** key into pertinent values ***********************/
   const userId = sessionState.user.id;
   const spot = spotsState.singleSpotDetails;
+  console.log("spot", spot)
   const spotReviews = spotsState.singleSpotReviews;
+  console.log("spotReviews", spotReviews)
   const reviews = Object.values(spotReviews)
   console.log("reviews", reviews)
   const spotImgs = spotsState.singleSpotDetails.SpotImages

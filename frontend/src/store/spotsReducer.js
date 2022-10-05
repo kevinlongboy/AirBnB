@@ -183,14 +183,16 @@ const spotsReducer = (state = initialState, action) => {
             // action.payload.ReviewImages.forEach(obj => singleSpotReviewImages.push({...obj}));
             // newState.singleSpotReviews.ReviewImages = singleSpotReviewImages;
             // // second: normalize object
-            console.log("action.payload", action.payload)
-            action.payload.Reviews.forEach(obj => {
-                obj.User = {...obj.User};
+            const copyArr = []
+            action.payload.forEach(obj => {
+                const copyObj = {...obj}
+                copyObj.User = {...obj.User};
                 let reviewImages = []
-                obj.ReviewImages.forEach(imgObj => reviewImages.push({...imgObj}))
-                obj.ReviewImages = reviewImages
+                obj.ReviewImages.length && obj.ReviewImages.forEach(imgObj => reviewImages.push({...imgObj}))
+                copyObj.ReviewImages = reviewImages
+                copyArr.push(copyObj)
             })
-            newState.singleSpotReviews = normalizeArray(action.payload.Reviews);
+            newState.singleSpotReviews = normalizeArray(copyArr);
             // for (const obj of newState.singleSpotReviews) {
             //     console.log(obj)
             // }
