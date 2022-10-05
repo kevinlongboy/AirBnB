@@ -19,11 +19,9 @@ function Reviews() {
 
     useEffect(() => {
         dispatch(thunkReadUserReviews())
-    }, []);
+    }, [reviewsState]);
 
     /********************** key into pertinent values ***********************/
-    console.log("reviewsState", reviewsState)
-
     let reviewsArr = Object.values(reviewsState)
     console.log("reviewsArr", reviewsArr)
 
