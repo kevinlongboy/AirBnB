@@ -37,7 +37,9 @@ export const thunkCreateSingleReview = (spotId, data) => async (dispatch) => {
 
     if (response.ok) {
         const newReview = await response.json();
+        console.log("newReview", newReview)
         dispatch(actionCreateSingleReview(newReview));
+        return newReview;
     }
 }
 
@@ -78,7 +80,8 @@ const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case REVIEWS_CREATE_SINGLE_REVIEW:
-            newState[action.payload.id] = {...action.payload.id}
+            newState.reviews = {...state.reviews}
+            newState.reviews[action.payload.id] = {...action.payload}
             return newState
 
         case REVIEWS_READ_USER_REVIEWS:

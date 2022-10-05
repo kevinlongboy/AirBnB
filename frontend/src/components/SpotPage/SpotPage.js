@@ -22,9 +22,9 @@ function SpotPage() {
   /********************** reducer/API communication ***********************/
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(thunkReadAllSpots());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(thunkReadAllSpots());
+  // }, [dispatch]);
 
   useEffect(() => {
     dispatch(thunkReadSingleSpotDetails(spotId));
@@ -32,11 +32,11 @@ function SpotPage() {
 
   useEffect(() => {
     dispatch(thunkReadSingleSpotReviews(spotId));
-  }, [dispatch, spotId]);
+  }, [dispatch, spotsState]);
 
   useEffect(() => {
     dispatch(thunkCreateSingleReview());
-  }, [dispatch]);
+  }, [dispatch, spotsState]);
 
   /********************** key into pertinent values ***********************/
   const userId = sessionState.user.id;
