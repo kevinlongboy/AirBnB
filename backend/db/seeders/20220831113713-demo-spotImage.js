@@ -227,13 +227,13 @@ const demoSpotImages = [
   {
     // id: 31,
     spotId: 6,
-    url: 'https://cache.marriott.com/content/dam/marriott-renditions/SEACD/seacd-king-5889-hor-clsc.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1215px:*',
+    url: 'https://cache.marriott.com/content/dam/marriott-renditions/SEACD/seacd-bathroom-6726-hor-clsc.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1215px:*',
     preview: false,
   },
   {
     // id: 32,
     spotId: 6,
-    url: 'https://cache.marriott.com/content/dam/marriott-renditions/SEACD/seacd-bathroom-6726-hor-clsc.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1215px:*',
+    url: 'https://cache.marriott.com/content/dam/marriott-renditions/SEACD/seacd-king-5889-hor-clsc.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1215px:*',
     preview: false,
   },
   {
@@ -249,7 +249,7 @@ const demoSpotImages = [
     preview: false,
   },
 
-  /*********************** Gil's Capitol Hill Bungalow ***********************/
+  /*********************** Gil's Capitol Hill Abode ***********************/
   {
     // id: 35,
     spotId: 7,

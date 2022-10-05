@@ -87,7 +87,7 @@ const demoSpots = [
   },
   {
     ownerId: 8, // Noel
-    address: '520 Occidental Ave S',
+    address: '1001 Minor Avenue Seattle',
     city: 'Seattle',
     state: 'WA',
     country: 'United States of America',

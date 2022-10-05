@@ -89,7 +89,6 @@ function SpotPage() {
         <div className="spot-page-images-cover">
 
           {
-
           images.map((image, index) => (
           <img key={index + 1} className={`img${index + 1}`} src={image.url}></img>
           ))

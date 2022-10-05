@@ -60,7 +60,7 @@ const demoUsers = [
     email: 'nshempsky@sfi.org',
   },
   {
-    firstName: 'Bob',
+    firstName: 'Bulldog',
     lastName: 'Briscoe',
     username: 'bbriscoe',
     hashedPassword: bcrypt.hashSync('passwordI'),
