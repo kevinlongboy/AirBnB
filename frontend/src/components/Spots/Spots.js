@@ -19,7 +19,7 @@ function Spots() {
 
     useEffect(() => {
         dispatch(thunkReadAllSpots());
-    }, [dispatch, spotsState, thunkDeleteSingleSpot])
+    }, [spotsState])
 
     /********************** key into pertinent values ***********************/
     const userId = sessionState.user.id;
