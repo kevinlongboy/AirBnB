@@ -102,7 +102,7 @@ function SpotPage() {
           <div className="spot-page-middle-left">
             <div className="spot-page-host-info">
               <h2 className="spot-page-host-name">{`Hosted by ${spot.Owner.firstName}`}</h2>
-              {/* <p className="spot-page-host-creation-date">Since {convertDate(spot.createdAt)}</p> */}
+              <p className="spot-page-host-creation-date">Since {spot.createdAt && convertDate(spot.createdAt)}</p>
             </div>
 
             <div className="spot-page-description">
@@ -125,7 +125,7 @@ function SpotPage() {
           {reviews.map((review, index) => (
             <div>
               <div className="review-username">{review.User.firstName}</div>
-                <div className="review-date">{convertDate(review.createdAt)}</div>
+                <div className="review-date">{review.createdAt && convertDate(review.createdAt)}</div>
                 <div className="review-content">{review.review}</div>
               </div>
           ))}

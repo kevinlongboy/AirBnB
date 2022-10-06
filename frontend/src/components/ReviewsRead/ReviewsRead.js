@@ -47,9 +47,9 @@ function Reviews() {
             reviewsArr.map(review => (
                 <tr key={review.id}>
                     <td>
-                        {/* <p id="review-table-body-title">Review for {review.Spot.name}</p> */}
+                        <p id="review-table-body-title">Review for {review.Spot && review.Spot.name}</p>
                         <p id="review-table-body-data">{review.review}</p>
-                        {/* <p id="review-table-body-date-created">{convertDate(review.createdAt)}</p> */}
+                        <p id="review-table-body-date-created">{review.createdAt && convertDate(review.createdAt)}</p>
                         <button id="review-table-button" type="submit" onClick={(e) => handleDelete(review.id)}>Delete</button>
                     </td>
                 </tr>
