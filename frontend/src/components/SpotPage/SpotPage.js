@@ -39,7 +39,8 @@ function SpotPage() {
   }, [dispatch, spotsState]);
 
   /********************** key into pertinent values ***********************/
-  const userId = sessionState.user.id;
+  const userId = sessionState.user.id; // typeof: number
+  // console.log("typeof userId", typeof userId)
   const spot = spotsState.singleSpotDetails;
   console.log("spot", spot)
   const spotReviews = spotsState.singleSpotReviews;
@@ -56,9 +57,18 @@ function SpotPage() {
 
   /*********************** conditional components *************************/
   let reviewComponent
-  if ((userId) && (userId != spot.ownerId)) {
+  const userAlreadyReviewedSpot = reviews.filter(obj => obj.User.id === userId)
+  console.log("userAlreadyReviewedSpot", userAlreadyReviewedSpot)
+  if (userId && (userId !== spot.ownerId)) {
     reviewComponent = (
     <ReviewCreate />
+    )
+  }
+
+  if (userId && (userAlreadyReviewedSpot.length > 0)) {
+    reviewComponent = (
+      <>
+      </>
     )
   } else {
     reviewComponent = (
@@ -66,6 +76,7 @@ function SpotPage() {
     </>
     )
   }
+
 
   if (images.length < 5) {
     addPlaceholderImages(images)
