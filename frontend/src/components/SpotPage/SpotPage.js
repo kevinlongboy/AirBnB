@@ -42,11 +42,11 @@ function SpotPage() {
   const userId = sessionState.user.id; // typeof: number
   // console.log("typeof userId", typeof userId)
   const spot = spotsState.singleSpotDetails;
-  console.log("spot", spot)
+  // console.log("spot", spot)
   const spotReviews = spotsState.singleSpotReviews;
-  console.log("spotReviews", spotReviews)
+  // console.log("spotReviews", spotReviews)
   const reviews = Object.values(spotReviews)
-  console.log("reviews", reviews)
+  // console.log("reviews", reviews)
   const spotImgs = spotsState.singleSpotDetails.SpotImages
   const images = Object.values(spotImgs)
 
@@ -56,24 +56,23 @@ function SpotPage() {
   // spotImagesArr = addPlaceholderImages(spotImagesArr) // add filler images, if min not met
 
   /*********************** conditional components *************************/
-  let reviewComponent
-  const userAlreadyReviewedSpot = reviews.filter(obj => obj.User.id === userId)
-  // console.log("userAlreadyReviewedSpot", userAlreadyReviewedSpot)
+  let reviewComponent = (
+    <></>
+  )
 
   if (userId && (userId !== spot.ownerId)) {
     reviewComponent = (
     <ReviewCreate />
     )
-  // }
-  // if (userId && (userAlreadyReviewedSpot.length > 0)) {
-  //   reviewComponent = (
-  //     <>
-  //     </>
-  //   )
-  } else {
+  }
+
+  const userAlreadyReviewedSpot = reviews.filter(obj => obj.User.id === userId)
+  console.log("userAlreadyReviewedSpot", userAlreadyReviewedSpot)
+
+  if (userAlreadyReviewedSpot.length > 0) {
     reviewComponent = (
-    <>
-    </>
+      <>
+      </>
     )
   }
 
