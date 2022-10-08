@@ -86,6 +86,7 @@ export const thunkReadSingleSpotReviews = (spotId) => async (dispatch) => {
     if (response.ok) {
         const singleSpotReviews = await response.json();
         dispatch(actionReadSingleSpotReviews(singleSpotReviews.Reviews)) // sends array of objects to payload
+        console.log("singleSpotReviews", singleSpotReviews)
         return singleSpotReviews; // ?
     }
 }
@@ -198,6 +199,7 @@ const spotsReducer = (state = initialState, action) => {
             //     console.log(obj)
             // }
             // console.log(newState)
+            console.log("newState", newState)
             return newState
 
         case SPOTS_UPDATE_SINGLE_SPOT:

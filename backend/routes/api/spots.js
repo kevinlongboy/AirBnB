@@ -297,18 +297,19 @@ router.get('/:spotId/reviews', async (req, res) => {
                 raw: true
             })
 
-            let currentUserId = req.user.id;
-            let currentUserData = await User.findByPk(currentUserId, {
-                attributes: {
-                    exclude: ['username', 'hashedPassword', 'email', 'createdAt', 'updatedAt']
-                },
-                raw: true,
-            })
-
             for (let i = 0; i < findAllSpotReviews.length; i++) {
                 let currReview = findAllSpotReviews[i];
 
                 /******************** add User-key ********************/
+                let currentUserId = currReview.userId;
+
+                let currentUserData = await User.findByPk(currentUserId, {
+                    attributes: {
+                        exclude: ['username', 'hashedPassword', 'email', 'createdAt', 'updatedAt']
+                    },
+                    raw: true,
+                })
+
                 currReview.User = currentUserData
 
                 /******************** add ReviewImages-key ********************/
