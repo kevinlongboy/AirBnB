@@ -63,13 +63,12 @@ function SpotPage() {
     reviewComponent = (
     <ReviewCreate />
     )
-  }
-
-  if (userId && (userAlreadyReviewedSpot.length > 0)) {
-    reviewComponent = (
-      <>
-      </>
-    )
+  // }
+  // if (userId && (userAlreadyReviewedSpot.length > 0)) {
+  //   reviewComponent = (
+  //     <>
+  //     </>
+  //   )
   } else {
     reviewComponent = (
     <>

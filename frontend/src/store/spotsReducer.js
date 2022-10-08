@@ -66,6 +66,7 @@ export const thunkReadAllSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`);
     if (response.ok) {
         const spots = await response.json();
+        console.log("spots", spots)
         dispatch(actionReadAllSpots(spots.Spots))
         return spots
     }
