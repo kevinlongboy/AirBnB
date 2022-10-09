@@ -12,26 +12,25 @@ function SpotEdit() {
 
     /******************************** state ********************************/
     const spotsState = useSelector(state => state.spots);
-    const currSpot  = spotsState.singleSpotDetails
 
     /******************************** params ********************************/
     const { spotId } = useParams()
 
     /********************** reducer/API communication ***********************/
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(thunkReadSingleSpotDetails(parseInt(spotId)))
-    }, [currSpot, spotId]);
-    console.log(currSpot)
+    }, [spotsState.singleSpotDetails]);
 
     /********************** key into pertinent values ***********************/
-    const [address, setAddress] = useState(currSpot.address);
-    const [city, setCity] = useState(currSpot.city);
-    const [state, setState] = useState(currSpot.state);
-    const [country, setCountry] = useState(currSpot.country);
-    const [name, setName] = useState(currSpot.name);
-    const [description, setDescription] = useState(currSpot.description);
-    const [price, setPrice] = useState(currSpot.price);
+    const [address, setAddress] = useState(spotsState.singleSpotDetails.address);
+    const [city, setCity] = useState(spotsState.singleSpotDetails.city);
+    const [state, setState] = useState(spotsState.singleSpotDetails.state);
+    const [country, setCountry] = useState(spotsState.singleSpotDetails.country);
+    const [name, setName] = useState(spotsState.singleSpotDetails.name);
+    const [description, setDescription] = useState(spotsState.singleSpotDetails.description);
+    const [price, setPrice] = useState(spotsState.singleSpotDetails.price);
     const [validationErrors, setValidationErrors] = useState([]);
 
     /*********************** conditional components *************************/
@@ -90,12 +89,11 @@ function SpotEdit() {
 
     // submit form
     const history = useHistory();
+
     const submitHandler = (e) => {
         e.preventDefault();
 
         let updateSpotData = {address, city, state, country, name, description, price}
-        console.log("updateSpotData: ", updateSpotData)
-
         dispatch(thunkUpdateSingleSpot(parseInt(spotId), updateSpotData));
 
         history.push(`/spots/${spotId}`)

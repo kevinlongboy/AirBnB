@@ -11,10 +11,12 @@ import './Navigation.css';
 function Navigation({ isLoaded }){
 
   const sessionUser = useSelector(state => state.session.user);
+  let userId
+  if (sessionUser) userId = sessionUser.id
 
   let sessionLinks;
 
-  if (sessionUser) {
+  if (userId) { // prev: if (sessionUser)
     sessionLinks = (
       <div className="nav-bar-right">
         <HostingButton />

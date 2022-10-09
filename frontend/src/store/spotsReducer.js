@@ -69,10 +69,8 @@ export const thunkCreateSingleSpot = (data) => async (dispatch) => {
 
 export const thunkReadAllSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`);
-    console.log("response thunkReadAllSpots body", response)
     if (response.ok) {
         const spots = await response.json();
-        console.log("response thunkReadAllSpots spots", spots)
         dispatch(actionReadAllSpots(spots.Spots))
         return spots
     }
