@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import { thunkCreateSingleSpot } from "../../store/spotsReducer";
+import { thunkCreateSingleSpot, thunkReadAllSpots } from "../../store/spotsReducer";
 import { states } from "../../component-resources";
 import './SpotCreate.css'
 
@@ -13,15 +13,14 @@ function SpotCreate() {
     /******************************** state ********************************/
     const sessionState = useSelector(state => state.session);
     const spotsState = useSelector(state => state.spots);
-    // const singleSpot = spotsState.singleSpotDetails
-    // console.log("singleSpot", singleSpot)
+    const singleSpot = spotsState.singleSpotDetails
 
     /********************** reducer/API communication ***********************/
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(thunkCreateSingleSpot());
-    // }, [singleSpot])
+    useEffect(() => {
+        setSpotId(singleSpot.id)
+    }, [singleSpot])
 
     /********************** key into pertinent values ***********************/
     const [address, setAddress] = useState("");
@@ -32,6 +31,7 @@ function SpotCreate() {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(125);
     const [validationErrors, setValidationErrors] = useState([]);
+    const [spotId, setSpotId] = useState(singleSpot.id)
 
     /*********************** conditional components *************************/
     // change price
@@ -75,9 +75,9 @@ function SpotCreate() {
         if (description.length === 0) {
             errors.push("Description is required")
         } else if (description.length >= 1 && description.length < 5) {
-            errors.push("Please create a longer description")
+            errors.push("Please write a longer description")
         } else if (description.length > 50) {
-            errors.push("Please create a shorter description")
+            errors.push("Please write a shorter description")
         }
 
         if (!price) {
@@ -106,7 +106,8 @@ function SpotCreate() {
 
         dispatch(thunkCreateSingleSpot(createSpotData));
 
-        // history.push(`/spots/${singleSpot.id}`)
+        history.push(`/`)
+        // history.push(`/spots/${spotId}`)
     }
 
 

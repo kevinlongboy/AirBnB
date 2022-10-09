@@ -54,25 +54,31 @@ export const thunkCreateSingleSpot = (data) => async (dispatch) => {
     });
     if (response.ok) {
         const newSpot = await response.json();
+        console.log("newSpot", newSpot)
         // okay to dispatch read all spots instead?
         dispatch(actionCreateSingleSpot(newSpot));
         // dispatch(thunkReadSingleSpotDetails(newSpot.id))
         // dispatch(thunkReadAllSpots())
+        // console.log("newSpot", newSpot)
+
+        // dispatch(actionReadAllSpots())
+        // dispatch(actionReadSingleSpotDetails(newSpot.id))
         return newSpot
     }
 }
 
-export const thunkReadAllSpots = () => async (dispatch) => { // AVG REVIEWS MAIN
+export const thunkReadAllSpots = () => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`);
+    console.log("response thunkReadAllSpots body", response)
     if (response.ok) {
         const spots = await response.json();
-        console.log("spots", spots)
+        console.log("response thunkReadAllSpots spots", spots)
         dispatch(actionReadAllSpots(spots.Spots))
         return spots
     }
 }
 
-export const thunkReadSingleSpotDetails = (spotId) => async (dispatch) => { // AVG REVIEWS SPOTPAGE
+export const thunkReadSingleSpotDetails = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`);
     if (response.ok) {
         const singleSpotDetails = await response.json(); // .json() === JSON -> POJO
@@ -86,7 +92,6 @@ export const thunkReadSingleSpotReviews = (spotId) => async (dispatch) => {
     if (response.ok) {
         const singleSpotReviews = await response.json();
         dispatch(actionReadSingleSpotReviews(singleSpotReviews.Reviews)) // sends array of objects to payload
-        console.log("singleSpotReviews", singleSpotReviews)
         return singleSpotReviews; // ?
     }
 }
@@ -136,7 +141,6 @@ const spotsReducer = (state = initialState, action) => {
         case SPOTS_CREATE_SINGLE_SPOT:
             newState.allSpots = {...state.allSpots}
             newState.allSpots[action.payload.id] = {...action.payload}
-            newState.allSpots[action.payload.id].previewImage = "https://cdn1.vox-cdn.com/uploads/chorus_image/image/47552879/Pike_Place_Market_Entrance.0.0.jpg"
             // newState.singleSpotDetails = {...state.singleSpotDetails}
                 // create shallow copies of nested structures
                 // newState.singleSpotDetails.SpotImages = [...state.singleSpotDetails.SpotImages]
@@ -199,7 +203,6 @@ const spotsReducer = (state = initialState, action) => {
             //     console.log(obj)
             // }
             // console.log(newState)
-            console.log("newState", newState)
             return newState
 
         case SPOTS_UPDATE_SINGLE_SPOT:

@@ -517,7 +517,8 @@ router.get('/:spotId', async (req, res, next) => {
         // });
         // let reviewCount = reviewsArr.length
 
-        getSpot.dataValues.numReviews = reviewCount;
+        if (!reviewCount) getSpot.dataValues.numReviews = 0
+        else getSpot.dataValues.numReviews = reviewCount;
 
         /******************** add avgStarRating-key ********************/
         let starSum = await Review.sum('stars', {
@@ -688,13 +689,12 @@ router.get('/', async (req, res, next) => {
                     let currReview = currSpotReviews[j];
                     sumStars += currReview.stars
                 }
-                console.log("all spots sumStars", sumStars)
                 let aveStars = sumStars / currSpotReviews.length
                 if (!aveStars) aveStars = 0.0
                 currSpot.dataValues.avgRatings = aveStars.toFixed(2)
 
                 /*************************** add previewImage-key ***************************/
-                let prevImg = await SpotImage.findOne({ // returns array of current spot's images
+                let prevImg = await SpotImage.findOne({
                     where: { spotId: currSpot.id, preview: true },
                     attributes: {
                         exclude: ['id', 'spotId', 'preview', 'createdAt', 'updatedAt']
@@ -709,7 +709,10 @@ router.get('/', async (req, res, next) => {
                 //         prevImg = currImage.url
                 //     }
                 // }
-                currSpot.dataValues.previewImage = prevImg.url
+
+                // temporary solution until spotImages feature is implemented:
+                if (!prevImg) currSpot.dataValues.previewImage = "https://cdn1.vox-cdn.com/uploads/chorus_image/image/47552879/Pike_Place_Market_Entrance.0.0.jpg"
+                else currSpot.dataValues.previewImage = prevImg.url
             }
 
             spotHasBeenReviewed.push(currSpot.id)

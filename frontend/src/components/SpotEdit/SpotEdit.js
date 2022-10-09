@@ -2,7 +2,7 @@
 import { useEffect, useState} from "react";
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { thunkUpdateSingleSpot } from "../../store/spotsReducer";
+import { thunkReadSingleSpotDetails, thunkUpdateSingleSpot } from "../../store/spotsReducer";
 // local files
 import { states } from '../../component-resources/index.js';
 import './SpotEdit.css';
@@ -12,24 +12,26 @@ function SpotEdit() {
 
     /******************************** state ********************************/
     const spotsState = useSelector(state => state.spots);
+    const currSpot  = spotsState.singleSpotDetails
 
     /******************************** params ********************************/
     const { spotId } = useParams()
 
     /********************** reducer/API communication ***********************/
     const dispatch = useDispatch();
-    // useEffect(() => {
-    //     dispatch(thunkUpdateSingleSpot())
-    // }, [thunkUpdateSingleSpot]);
+    useEffect(() => {
+        dispatch(thunkReadSingleSpotDetails(parseInt(spotId)))
+    }, [currSpot, spotId]);
+    console.log(currSpot)
 
     /********************** key into pertinent values ***********************/
-    const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [country, setCountry] = useState("");
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState(125);
+    const [address, setAddress] = useState(currSpot.address);
+    const [city, setCity] = useState(currSpot.city);
+    const [state, setState] = useState(currSpot.state);
+    const [country, setCountry] = useState(currSpot.country);
+    const [name, setName] = useState(currSpot.name);
+    const [description, setDescription] = useState(currSpot.description);
+    const [price, setPrice] = useState(currSpot.price);
     const [validationErrors, setValidationErrors] = useState([]);
 
     /*********************** conditional components *************************/
@@ -96,10 +98,7 @@ function SpotEdit() {
 
         dispatch(thunkUpdateSingleSpot(parseInt(spotId), updateSpotData));
 
-        // let newSpot = dispatch(thunkSpotsCreate(createSpotData));
-        // console.log("NEW SPOT: ", newSpot)
-
-        // history.push(`/spots/${spotId}`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
+        history.push(`/spots/${spotId}`)
     }
 
     /*************************** render component ****************************/
