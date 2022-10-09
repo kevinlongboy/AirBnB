@@ -17,13 +17,13 @@ const demoReviews = [
     spotId: 5,
     userId: 4,
     review: 'Placeholder text: Roz reviews Martin',
-    stars: 4.5,
+    stars: 5, // Prev: 4.5
   },
   { // Niles reviews Frasier’s
     spotId: 1,
     userId: 2,
     review: 'Placeholder text: Niles Reviews Frasier',
-    stars: 3.5,
+    stars: 4, // Prev: 3.5
   },
   { // Frasier reviews Niles'
     spotId: 2,
@@ -35,13 +35,13 @@ const demoReviews = [
     spotId: 1,
     userId: 6,
     review: 'Placeholder text: Lilith reviews Frasier',
-    stars: 3.5,
+    stars: 3, // Prev: 3.5
   },
   { // Gil reviews Frasier's
     spotId: 1,
     userId: 7,
     review: 'Placeholder text: Gil reviews Frasier',
-    stars: 3.5,
+    stars: 4, // Prev: 3.5
   },
   { // Noel reviews Roz's
     spotId: 4,
@@ -53,13 +53,13 @@ const demoReviews = [
     spotId: 4,
     userId: 9,
     review: 'Placeholder text: Bulldog reviews Roz',
-    stars: 4.5,
+    stars: 4, // Prev: 4.5
   },
   { // Gertrude reviews Niles'
     spotId: 2,
     userId: 10,
     review: "Don't bother wasting yer money 'ere. The hosts are couple of stuck-up ",
-    stars: 2,
+    stars: 1,
   },
   { // Frasier reviews Lilith's
     spotId: 6,
@@ -77,7 +77,7 @@ const demoReviews = [
     spotId: 7,
     userId: 1,
     review: 'Placeholder text: Frasier reviews Gil',
-    stars: 4.5,
+    stars: 5, // Prev: 4.5
   },
   { // Frasier reviews Noel's
     spotId: 8,

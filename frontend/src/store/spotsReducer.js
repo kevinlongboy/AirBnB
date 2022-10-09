@@ -62,7 +62,7 @@ export const thunkCreateSingleSpot = (data) => async (dispatch) => {
     }
 }
 
-export const thunkReadAllSpots = () => async (dispatch) => {
+export const thunkReadAllSpots = () => async (dispatch) => { // AVG REVIEWS MAIN
     const response = await csrfFetch(`/api/spots`);
     if (response.ok) {
         const spots = await response.json();
@@ -72,7 +72,7 @@ export const thunkReadAllSpots = () => async (dispatch) => {
     }
 }
 
-export const thunkReadSingleSpotDetails = (spotId) => async (dispatch) => {
+export const thunkReadSingleSpotDetails = (spotId) => async (dispatch) => { // AVG REVIEWS SPOTPAGE
     const response = await csrfFetch(`/api/spots/${spotId}`);
     if (response.ok) {
         const singleSpotDetails = await response.json(); // .json() === JSON -> POJO

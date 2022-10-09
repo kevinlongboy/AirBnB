@@ -511,6 +511,12 @@ router.get('/:spotId', async (req, res, next) => {
         let reviewCount = await Review.count({
             where: { spotId: currentSpotId }
         });
+
+        // let reviewsArr = await Review.findAll({
+        //     where: { spotId: currentSpotId }
+        // });
+        // let reviewCount = reviewsArr.length
+
         getSpot.dataValues.numReviews = reviewCount;
 
         /******************** add avgStarRating-key ********************/
@@ -519,6 +525,8 @@ router.get('/:spotId', async (req, res, next) => {
                 spotId: currentSpotId
             }
         })
+        console.log("spot by Id starSum", starSum)
+
 
         let starAvg = starSum / reviewCount;
         if (!starAvg) starAvg = 0.0
@@ -680,7 +688,9 @@ router.get('/', async (req, res, next) => {
                     let currReview = currSpotReviews[j];
                     sumStars += currReview.stars
                 }
+                console.log("all spots sumStars", sumStars)
                 let aveStars = sumStars / currSpotReviews.length
+                if (!aveStars) aveStars = 0.0
                 currSpot.dataValues.avgRatings = aveStars.toFixed(2)
 
                 /*************************** add previewImage-key ***************************/
