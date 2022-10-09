@@ -13,13 +13,15 @@ function SpotCreate() {
     /******************************** state ********************************/
     const sessionState = useSelector(state => state.session);
     const spotsState = useSelector(state => state.spots);
+    // const singleSpot = spotsState.singleSpotDetails
+    // console.log("singleSpot", singleSpot)
 
     /********************** reducer/API communication ***********************/
     const dispatch = useDispatch();
 
     // useEffect(() => {
     //     dispatch(thunkCreateSingleSpot());
-    // }, [dispatch])
+    // }, [singleSpot])
 
     /********************** key into pertinent values ***********************/
     const [address, setAddress] = useState("");
@@ -103,7 +105,8 @@ function SpotCreate() {
         }
 
         dispatch(thunkCreateSingleSpot(createSpotData));
-        // history.push(`/spots/${spotsState.singleSpotDetails.id}`)
+
+        // history.push(`/spots/${singleSpot.id}`)
     }
 
 

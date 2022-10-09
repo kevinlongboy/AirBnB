@@ -92,7 +92,7 @@ export const thunkReadSingleSpotReviews = (spotId) => async (dispatch) => {
 }
 
 export const thunkUpdateSingleSpot = (spotId, updateSpotData) => async (dispatch) => {
-    const response = await csrfFetch(`api/spots/${spotId}`, {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'put',
         headers: { 'Content-Type': 'application/json' } ,
         body: JSON.stringify(updateSpotData)
@@ -105,7 +105,7 @@ export const thunkUpdateSingleSpot = (spotId, updateSpotData) => async (dispatch
 }
 
 export const thunkDeleteSingleSpot = (spotId) => async (dispatch) => {
-    const response = await csrfFetch(`api/spots/${spotId}`, {
+    const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'delete',
     });
     if (response.ok) {

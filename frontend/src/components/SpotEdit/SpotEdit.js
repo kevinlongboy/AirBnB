@@ -18,9 +18,9 @@ function SpotEdit() {
 
     /********************** reducer/API communication ***********************/
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(thunkUpdateSingleSpot())
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(thunkUpdateSingleSpot())
+    // }, [thunkUpdateSingleSpot]);
 
     /********************** key into pertinent values ***********************/
     const [address, setAddress] = useState("");
@@ -99,7 +99,7 @@ function SpotEdit() {
         // let newSpot = dispatch(thunkSpotsCreate(createSpotData));
         // console.log("NEW SPOT: ", newSpot)
 
-        history.push(`/spots/${spotId}`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
+        // history.push(`/spots/${spotId}`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
     }
 
     /*************************** render component ****************************/
