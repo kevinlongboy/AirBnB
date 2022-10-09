@@ -10,7 +10,7 @@ const demoReviews = [
   { // Daphne reviews Roz’s
     spotId: 4,
     userId: 3,
-    review: 'Daphne reviews Roz: I had the loveliest time.',
+    review: "I had the loveliest time at Ballard. The host was so welcoming and made me feel right at home. All the little touches [...] As my Grammy Moon would say [...]",
     stars: 5,
   },
   { // Roz reviews Martin’s
@@ -40,7 +40,7 @@ const demoReviews = [
   { // Gil reviews Frasier's
     spotId: 1,
     userId: 7,
-    review: 'Placeholder text: Gil reviews Frasier',
+    review: 'Placeholder text: Gil reviews Frasier. My,',
     stars: 4, // Prev: 3.5
   },
   { // Noel reviews Roz's
@@ -52,13 +52,13 @@ const demoReviews = [
   { // Bulldog reviews Roz's
     spotId: 4,
     userId: 9,
-    review: 'Placeholder text: Bulldog reviews Roz',
+    review: 'not bad . wouldve given this place another star if the host was willing to make my stay a little more "comfortable" if you get my meaning !',
     stars: 4, // Prev: 4.5
   },
   { // Gertrude reviews Niles'
     spotId: 2,
     userId: 10,
-    review: "Don't bother wasting yer money 'ere. The hosts are couple of stuck-up ",
+    review: "don't bother wasting yer money 'ere. The hosts are couple of stuck up phony art lovers who keep all their good alcohol locked away from their payin' guests. Yer be'er off staying somewhere halfway decent like me flat in Eastlake",
     stars: 1,
   },
   { // Frasier reviews Lilith's
@@ -130,7 +130,7 @@ const demoReviews = [
   { // Roz reviews Bulldog's
     spotId: 9,
     userId: 4,
-    review: 'Placeholder text: Roz reviews Bulldog',
+    review: "Ugh. This place is DISGUSTING. I don't know why I even bothered staying here. The room was a total mess and the host kept hitting on me the entire time I was there. Save yourself the headache and STAY SOMEWHERE ELSE.",
     stars: 1,
   },
 ]

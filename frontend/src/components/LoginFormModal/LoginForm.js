@@ -96,6 +96,15 @@ function LoginForm() {
           <a href="https://www.airbnb.com/help/article/2855/airbnb-privacy" style={{fontWeight:"bolder"}}>Privacy Policy</a>
         </div>
 
+        <div className="errors">
+          {errors.map((error, idx) => (
+            <p className="error-item" key={idx}>{error}</p>
+            ))}
+          {validationErrors.map((validationError, idx) => (
+            <p className="error-item" key={idx}>{validationError}</p>
+            ))}
+        </div>
+
         <button
           className="submit-button"
           id="login-button"
@@ -147,15 +156,6 @@ function LoginForm() {
           >
           Continue as Demo User
         </button>
-
-        <div className="errors">
-          {errors.map((error, idx) => (
-            <p className="error-item" key={idx}>{error}</p>
-            ))}
-          {validationErrors.map((validationError, idx) => (
-            <p className="error-item" key={idx}>{validationError}</p>
-            ))}
-        </div>
 
       </form>
     </div>

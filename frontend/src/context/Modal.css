@@ -22,6 +22,6 @@
     position: absolute;
     background-color:white;
     width: 570px;
-    height: 800px;
+    min-height: 800px;
     border-radius: 12px;
   }
