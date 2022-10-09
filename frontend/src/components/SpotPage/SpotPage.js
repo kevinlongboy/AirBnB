@@ -67,8 +67,7 @@ function SpotPage() {
   }
 
   const userAlreadyReviewedSpot = reviews.filter(obj => obj.User.id === userId)
-  console.log("userAlreadyReviewedSpot", userAlreadyReviewedSpot)
-
+  // console.log("userAlreadyReviewedSpot", userAlreadyReviewedSpot)
   if (userAlreadyReviewedSpot.length > 0) {
     reviewComponent = (
       <>

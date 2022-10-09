@@ -103,6 +103,36 @@ const demoReviews = [
     review: 'What a lovely home this was! And the host was like no other. In fact, the whole experience made me miss the sight of my own doorstep the moment we arrived!',
     stars: 5,
   },
+  { // Gertrude reviews Martin's
+    spotId: 5,
+    userId: 10,
+    review: 'Placeholder text: Gertrude reviews Martin',
+    stars: 5,
+  },
+  { // Roz reviews Daphne's
+    spotId: 3,
+    userId: 4,
+    review: 'Placeholder text: Roz reviews Daphne',
+    stars: 5,
+  },
+  { // Roz reviews Gil's
+    spotId: 7,
+    userId: 4,
+    review: 'Placeholder text: Roz reviews Gil',
+    stars: 4,
+  },
+  { // Roz reviews Noel's
+    spotId: 8,
+    userId: 4,
+    review: 'Placeholder text: Roz reviews Noel',
+    stars: 2,
+  },
+  { // Roz reviews Bulldog's
+    spotId: 9,
+    userId: 4,
+    review: 'Placeholder text: Roz reviews Bulldog',
+    stars: 1,
+  },
 ]
 
 let spotIds = [];

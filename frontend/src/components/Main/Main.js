@@ -37,7 +37,7 @@ function Main() {
 
                             <div className="spot-text-line-1">
                                 <div className="spot-name" style={{color:"black", fontWeight:"900"}}>{spot.name}</div>
-                                <div id="main-page-spot-rating">★ {spot.avgRatings}</div>
+                                <div id="main-page-spot-rating">★ {spot.avgRatings ? spot.avgRatings : 0.00}</div>
                             </div>
                             <div className="spot-location" style={{color:"#717171",  fontWeight:"100"}}>{`${spot.city}, ${spot.state}`}</div>
                             <div className="spot-price" style={{color:"black", fontWeight:"900"}}>{`$${spot.price} night`}</div>
