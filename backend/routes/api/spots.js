@@ -745,58 +745,63 @@ router.post('/', requireAuth, validateSpot, async (req, res) => { // removed val
         let { address, city, state, country, name, description, price } = req.body;
 
         // if (!address) {
-        //     err.message = "Validation Error";
-        //     err.status = 400;
-        //     err.errors = { address: "Street address is required" }
-        //     return res.json(err);
+        //     error.message = "Validation Error";
+        //     error.status = 400;
+        //     error.errors = { address: "Street address is required" }
+        //     return res.status(400).json(error);
         // }
         // if (!city) {
-        //     err.message = "Validation Error";
-        //     err.status = 400;
-        //     err.errors = { city: "City is required" }
-        //     return res.json(err);
+        //     error.message = "Validation Error";
+        //     error.status = 400;
+        //     error.errors = { city: "City is required" }
+        //     return res.status(400).json(error);
         // }
         // if (!state) {
-        //     err.message = "Validation Error";
-        //     err.status = 400;
-        //     err.errors = { state: "State is required" }
-        //     return res.json(err);
+        //     error.message = "Validation Error";
+        //     error.status = 400;
+        //     error.errors = { state: "State is required" }
+        //     return res.status(400).json(error);
         // }
         // if (!country) {
-        //     err.message = "Validation Error";
-        //     err.status = 400;
-        //     err.errors = { country: "Country is required" }
-        //     return res.json(err);
+        //     error.message = "Validation Error";
+        //     error.status = 400;
+        //     error.errors = { country: "Country is required" }
+        //     return res.status(400).json(error);
         // }
         // if (!lat) {
-        //     err.message = "Validation Error";
-        //     err.status = 400;
-        //     err.errors = { lat: "Latitude is not valid" }
-        //     return res.json(err);
+        //     error.message = "Validation Error";
+        //     error.status = 400;
+        //     error.errors = { lat: "Latitude is not valid" }
+        //     return res.status(400).json(error);
         // }
         // if (!lng) {
-        //     err.message = "Validation Error";
-        //     err.status = 400;
-        //     err.errors = { lng: "Longitude is not valid" }
-        //     return res.json(err);
+        //     error.message = "Validation Error";
+        //     error.status = 400;
+        //     error.errors = { lng: "Longitude is not valid" }
+        //     return res.status(400).json(error);
         // }
         // if (!name) {
-        //     err.message = "Validation Error";
-        //     err.status = 400;
-        //     err.errors = { name: "Name must be less than 50 characters" }
-        //     return res.json(err);
+        //     error.message = "Validation Error";
+        //     error.status = 400;
+        //     error.errors = { name: "Name must be less than 50 characters" }
+        //     return res.status(400).json(error);
         // }
         // if (!description) {
-        //     err.message = "Validation Error";
-        //     err.status = 400;
-        //     err.errors = { description: "Description is required" }
-        //     return res.json(err);
+        //     error.message = "Validation Error";
+        //     error.status = 400;
+        //     error.errors = { description: "Description is required" }
+        //     return res.status(400).json(error);
         // }
         // if (!price) {
-        //     err.message = "Validation Error";
-        //     err.status = 400;
-        //     err.errors = { price: "Price per day is required" }
-        //     return res.json(err);
+        //     error.message = "Validation Error";
+        //     error.status = 400;
+        //     error.errors = { price: "Price per day is required" }
+        //     return res.status(400).json(error);
+        // }
+
+        // UNCOMMENT TO RETURN FAILED PROMISE
+        // if (error.message) {
+        //     return res.status(400).json(err)
         // }
 
         let postSpot = await currentUser.createSpot({

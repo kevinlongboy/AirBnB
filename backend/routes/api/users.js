@@ -62,13 +62,13 @@ router.post('/', async (req, res) => {
             error.message = "User already exists";
             error.statusCode = 403;
             error.errors = { email: "User with that email already exists" };
-            res.json(error)
+            res.status(403).json(error)
         }
         if (usernameExists) {
             error.message = "User already exists";
             error.statusCode = 403;
             error.errors = { username: "User with that username already exists" };
-            res.json(error)
+            res.status(403).json(error)
         }
 
         let user = await User.signup({ firstName, lastName, email, username, password });
