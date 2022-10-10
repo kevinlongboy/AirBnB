@@ -51,29 +51,33 @@ router.post('/', validateSignup, async (req, res) => {
 
     // validate signup will rin before try-code block; will return rejected promise if errors
     try {
+
+        // validate unique user credentials
+        const validationErrorMessages = []
+
         let emailExists = await User.findOne({
             where: { email: email },
             raw: true
         })
+        if (emailExists) {
+            error.message = "User already exists";
+            error.statusCode = 403;
+            validationErrorMessages.push("That email is already taken. Please try another." );
+        }
+
         let usernameExists = await User.findOne({
             where: { username: username },
             raw: true
         })
-
-        if (emailExists) {
-            error.message = "User already exists";
-            error.statusCode = 403;
-            error.errors = { email: "User with that email already exists" };
-            // res.status(403).json(error)
-        }
         if (usernameExists) {
             error.message = "User already exists";
             error.statusCode = 403;
-            error.errors = { username: "User with that username already exists" };
-            // res.status(403).json(error)
+            validationErrorMessages.push("That username is already taken. Please try another.");
         }
+
         // consolidate rejected promise to one response
         if (error.message) {
+            error.errors = validationErrorMessages;
             res.status(403).json(error)
         }
 
