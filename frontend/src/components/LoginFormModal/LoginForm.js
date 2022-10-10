@@ -37,17 +37,19 @@ function LoginForm() {
 
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
 
-    // let errors = []
+    let errors = []
+
     setErrors([]);
 
     // create custom error handlers
 
-    return dispatch(sessionActions.login({ credential, password })).catch(
-      async (res) => {
+    return dispatch(sessionActions.login({ credential, password }))
+    .catch(async (res) => {
+
         const data = await res.json();
-        console.log("data", data)
 
         if (data && data.message) {
           errors.push(data.message);

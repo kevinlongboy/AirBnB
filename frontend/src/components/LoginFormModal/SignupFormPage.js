@@ -27,13 +27,12 @@ function SignupFormPage() {
 
     let errors = []
 
-
     if (password !== confirmPassword) {
       errors.push("Those passwords didn't match. Please try again.")
       setErrors(errors);
       return
     }
-    
+
     else if (password === confirmPassword) {
 
       setErrors([]);
@@ -42,13 +41,14 @@ function SignupFormPage() {
 
       let signUp = dispatch(sessionActions.signup(userData))
         .catch(async (res) => {
+
           const data = await res.json();
-          console.log("data", data)
 
           if (data && data.errors) {
             data.errors.forEach(message => errors.push(message))
             setErrors(errors)
           }
+          
           return
         });
     }
