@@ -7,8 +7,9 @@ import '../../context/Modal.css'
 
 function SignupFormPage() {
 
-  const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+
+  const dispatch = useDispatch();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,9 +27,9 @@ function SignupFormPage() {
     if (password === confirmPassword) {
       setErrors([]);
 
-      let user = {firstName, lastName, username, password, email }
+      let userData = {firstName, lastName, username, password, email }
 
-      let signUp = dispatch(sessionActions.signup(user))
+      let signUp = dispatch(sessionActions.signup(userData))
         .catch(async (res) => {
           const data = await res.json();
 
