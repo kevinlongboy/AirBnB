@@ -28,15 +28,12 @@ const validateLogin = [
 // README, line 74
 router.post('/', validateLogin, async (req, res, next) => {
 
-    console.log("REACH from from backend/routes/api/session")
     const { credential, password } = req.body;
     let error = {};
 
 
-
     try {
         const user = await User.login({ credential, password });
-        console.log("user from backend/routes/api/session", user)
 
         if (!user) {
             // const err = new Error('Login failed');
@@ -44,7 +41,7 @@ router.post('/', validateLogin, async (req, res, next) => {
             // err.errors = ['The provided credentials were invalid.'];
             error.message = "Invalid credentials"
             error.statusCode = 401;
-            return res.json(error);
+            return res.status(401).json(error); // chain status to return-response
         }
 
         const token = await setTokenCookie(res, user);
@@ -63,6 +60,23 @@ router.post('/', validateLogin, async (req, res, next) => {
         error.error = err;
         return res.json(error);
     }
+
+    // const user = await User.login({ credential, password });
+
+    // if (!user) {
+    //     error.message = "Invalid credentials"
+    //     error.statusCode = 401;
+    //     return res.status(401).json(error);
+
+    // } else {
+    //     const token = await setTokenCookie(res, user);
+
+    //     const printUser = user.toJSON();
+    //     printUser.token = token;
+
+    //     return res.json(printUser)
+    // }
+
 });
 
 

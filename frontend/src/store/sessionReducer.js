@@ -36,7 +36,6 @@ export const signup = (user) => async (dispatch) => {
 
   export const login = (user) => async (dispatch) => {
     const { credential, password } = user;
-    console.log("REACH FROM LOGIN SESSION")
     const response = await csrfFetch('/api/session', {
       method: 'POST',
       body: JSON.stringify({
@@ -44,8 +43,8 @@ export const signup = (user) => async (dispatch) => {
         password,
       }),
     });
+    console.log("response", response)
     const data = await response.json();
-    console.log("data from session/login:", data)
     dispatch(setUser(data));
   return response;
 };

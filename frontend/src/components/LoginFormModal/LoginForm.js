@@ -8,6 +8,8 @@ import './LoginFormModal.css';
 
 
 function LoginForm() {
+
+
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -16,27 +18,29 @@ function LoginForm() {
   const [validationErrors, setValidationErrors] = useState([])
 
   useEffect(() => {
-
-    const errors = [];
+    let validationErrors = [];
+    setValidationErrors(validationErrors)
 
     if (!credential) {
-      errors.push("Please enter your username or email")
+      validationErrors.push("Please enter your username or email")
     } else if (credential.length < 5) {
-      errors.push("Please enter your username or email")
+      validationErrors.push("Please enter your username or email")
     }
     if (!password) {
-      errors.push("Please enter your password")
+      validationErrors.push("Please enter your password")
     } else if (password.length < 5) {
-      errors.push("Please enter your username or email")
+      validationErrors.push("Please enter your username or email")
     }
 
-    setValidationErrors(errors)
+    setValidationErrors(validationErrors)
   }, [credential, password])
 
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // let errors = []
     setErrors([]);
 
     // create custom error handlers
@@ -44,7 +48,12 @@ function LoginForm() {
     return dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
         const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
+        console.log("data", data)
+
+        if (data && data.message) {
+          errors.push(data.message);
+          setErrors(errors)
+        }
       }
     );
   };
