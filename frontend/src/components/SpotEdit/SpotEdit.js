@@ -11,7 +11,7 @@ import './SpotEdit.css';
 function SpotEdit() {
 
     /******************************** state ********************************/
-    const spotsState = useSelector(state => state.spots);
+    const spotsState = useSelector(state => state.spots.singleSpotDetails);
 
     /******************************** params ********************************/
     const { spotId } = useParams()
@@ -21,16 +21,16 @@ function SpotEdit() {
 
     useEffect(() => {
         dispatch(thunkReadSingleSpotDetails(parseInt(spotId)))
-    }, [spotsState.singleSpotDetails]);
+    }, []);
 
     /********************** key into pertinent values ***********************/
-    const [address, setAddress] = useState(spotsState.singleSpotDetails.address);
-    const [city, setCity] = useState(spotsState.singleSpotDetails.city);
-    const [state, setState] = useState(spotsState.singleSpotDetails.state);
-    const [country, setCountry] = useState(spotsState.singleSpotDetails.country);
-    const [name, setName] = useState(spotsState.singleSpotDetails.name);
-    const [description, setDescription] = useState(spotsState.singleSpotDetails.description);
-    const [price, setPrice] = useState(spotsState.singleSpotDetails.price);
+    const [address, setAddress] = useState(spotsState.address);
+    const [city, setCity] = useState(spotsState.city);
+    const [state, setState] = useState(spotsState.state);
+    const [country, setCountry] = useState(spotsState.country);
+    const [name, setName] = useState(spotsState.name);
+    const [description, setDescription] = useState(spotsState.description);
+    const [price, setPrice] = useState(spotsState.price);
     const [validationErrors, setValidationErrors] = useState([]);
 
     /*********************** conditional components *************************/

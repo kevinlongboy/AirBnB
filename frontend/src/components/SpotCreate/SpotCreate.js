@@ -239,9 +239,10 @@ function SpotCreate() {
                 validationErrors.map((error) =>
                 <p className="error-item" key={error}>{error}</p>)} */}
 
-                {validationErrors.map((error, idx) => (
-                    <p className="error-item" key={idx}>{error}</p>
+                {validationErrors.length > 0 && validationErrors.map((error, idx) => (
+                    <p className="error-item" key={error}>{error}</p>
                 ))}
+
 
             </div>
 
