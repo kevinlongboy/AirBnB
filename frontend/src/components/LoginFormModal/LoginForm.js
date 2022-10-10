@@ -44,10 +44,8 @@ function LoginForm() {
 
     setErrors([]);
 
-    // create custom error handlers
-
-    return dispatch(sessionActions.login({ credential, password }))
-    .catch(async (res) => {
+    return dispatch(sessionActions.login({ credential, password })).catch(
+      async (res) => {
 
         const data = await res.json();
 

@@ -47,41 +47,41 @@ function SpotCreate() {
         const errors = [];
 
         if (address.length < 2) {
-            errors.push("Address is required")
+            errors.push("Address is required.")
         } else if (address.length > 50) {
-            errors.push("Please enter a valid address")
+            errors.push("Please enter a valid address.")
         }
 
         if (city.length < 2) {
-            errors.push("City is required")
+            errors.push("City is required.")
         } else if (city.length > 50) {
-            errors.push("Please enter a valid city")
+            errors.push("Please enter a valid city.")
         }
 
         if (state === "State") {
-            errors.push("State is required")
+            errors.push("State is required.")
         }
 
         if (country === "Country") {
-            errors.push("Country is required")
+            errors.push("Country is required.")
         }
 
         if (name.length < 2) {
-            errors.push("Title is required")
+            errors.push("Title is required.")
         } else if (name.length > 50) {
-            errors.push("Please create a shorter title")
+            errors.push("Please create a shorter title.")
         }
 
         if (description.length === 0) {
-            errors.push("Description is required")
+            errors.push("Description is required.")
         } else if (description.length >= 1 && description.length < 5) {
-            errors.push("Please write a longer description")
+            errors.push("Please write a longer description.")
         } else if (description.length > 50) {
-            errors.push("Please write a shorter description")
+            errors.push("Please write a shorter description.")
         }
 
         if (!price) {
-            errors.push("Price per night is required")
+            errors.push("Price per night is required.")
         }
 
         setValidationErrors(errors)
@@ -94,6 +94,9 @@ function SpotCreate() {
 
         e.preventDefault();
 
+        let errors = [];
+        setValidationErrors(errors);
+
         let createSpotData = {
             address: address,
             city: city,
@@ -104,7 +107,18 @@ function SpotCreate() {
             price: price
         }
 
-        dispatch(thunkCreateSingleSpot(createSpotData));
+        dispatch(thunkCreateSingleSpot(createSpotData)).catch(
+            async (res) => {
+
+                const data = await res.json();
+
+                if (data && data.errors) {
+                    data.errors.forEach(message => errors.push(message));
+                    setValidationErrors(errors);
+                    return
+                }
+
+            });
 
         history.push(`/`)
         // history.push(`/spots/${spotId}`)

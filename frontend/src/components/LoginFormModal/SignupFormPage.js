@@ -39,16 +39,16 @@ function SignupFormPage() {
 
       let userData = {firstName, lastName, username, password, email }
 
-      let signUp = dispatch(sessionActions.signup(userData))
-        .catch(async (res) => {
+      let signUp = dispatch(sessionActions.signup(userData)).catch(
+        async (res) => {
 
           const data = await res.json();
 
           if (data && data.errors) {
-            data.errors.forEach(message => errors.push(message))
-            setErrors(errors)
+            data.errors.forEach(message => errors.push(message));
+            setErrors(errors);
           }
-          
+
           return
         });
     }

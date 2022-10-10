@@ -12,10 +12,12 @@ const router = express.Router();
 
 const validateLogin = [
     check('credential')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
+        .isLength({ min: 3 })
         .withMessage('Please enter your username or email.'),
     check('password')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
+        .isLength({ min: 6 })
         .withMessage('Please enter your password.'),
     handleValidationErrors
 ];

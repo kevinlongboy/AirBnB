@@ -12,19 +12,19 @@ const router = express.Router();
 
 const validateSignup = [
     check('firstName')
-        .exists({ checkFalsy: true }) // return "invalid value" message if falsy
+        // .exists({ checkFalsy: true }) // return "invalid value" message if falsy
         .isLength({ min: 2 })
         .withMessage('Are you sure you entered your first name correctly?'),
     check('lastName')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
         .isLength({ min: 2 })
         .withMessage('Are you sure you entered your last name correctly?'),
     check('email')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
         .isEmail()
         .withMessage('Please provide a valid email.'),
     check('username')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
         .isLength({ min: 4 })
         .withMessage('Please create a username with at 4 or more characters.'),
     check('username')
@@ -32,7 +32,7 @@ const validateSignup = [
         .isEmail()
         .withMessage('Username cannot be an email. Please try again.'),
     check('password')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
         .isLength({ min: 6 })
         .withMessage('Please use 6 or more characters for your password'),
     handleValidationErrors
@@ -77,7 +77,7 @@ router.post('/', validateSignup, async (req, res) => {
         // consolidate rejected promise to one response
         if (error.message) {
             error.errors = validationErrorMessages;
-            res.status(403).json(error)
+            return res.status(403).json(error)
         }
 
 

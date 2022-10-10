@@ -13,16 +13,16 @@ const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../d
 const validateSpot = [
     check('address')
         .isLength({ min: 2 })
-        .withMessage("Street address is required"),
+        .withMessage("Address is required."),
     check('city')
         .isLength({ min: 2 })
-        .withMessage("City is required"),
+        .withMessage("City is required."),
     check('state')
         .isLength({ min: 2 })
-        .withMessage("State is required"),
+        .withMessage("State is required."),
     check('country')
         .isLength({ min: 2 })
-        .withMessage("Country is required"),
+        .withMessage("Country is required."),
     // check('lat')
     //     .isLatLong()
     //     .withMessage("Latitude is not valid"),
@@ -31,14 +31,21 @@ const validateSpot = [
     //     .isDecimal()
     //     .withMessage("Longitude is not valid"),
     check('name')
+        .isLength({ min: 2 })
+        .withMessage("Title is required."),
+    check('name')
         .isLength({ max: 50 })
-        .withMessage("Name must be less than 50 characters"),
+        .withMessage("Please create a shorter title."),
+
     check('description')
         .isLength({ min: 5 })
-        .withMessage("Description is required"),
+        .withMessage("Please write a longer description."),
+    check('description')
+        .isLength({ max: 50 })
+        .withMessage("Please write a shorter description."),
     check('price')
         .exists({ checkFalsy: true })
-        .withMessage("Price per day is required"),
+        .withMessage("Price per night is required."),
     handleValidationErrors
 ];
 
@@ -570,14 +577,72 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
     let error = {};
 
     try {
+
+        const validationErrorMessages = []
+
         let putSpot = await Spot.findByPk(spotId);
         if (!putSpot) {
             error.message = "Spot couldn't be found";
             error.statusCode = 404;
+            validationErrorMessages.push("Spot couldn't be found");
             return res.status(404).json(error);
         }
 
+        if (!address) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("Address is required.")
+        }
+        if (!city) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("City is required.")
+        }
+        if (!state) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("State is required.")
+        }
+        if (!country) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("Country is required.")
+        }
+        // if (!lat) {
+        //     error.message = "Validation Error";
+        //     error.status = 400;
+        //     validationErrorMessages.push("Latitude is not valid")
+        // }
+        // if (!lng) {
+        //     error.message = "Validation Error";
+        //     error.status = 400;
+        //     validationErrorMessages.push("Longitude is not valid")
+        // }
+        if (!name) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("Title is required.")
+        }
+        if (!description) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("Please write a longer description.")
+        }
+        if (!price) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("Price per night is required.")
+        }
+
+        // consolidate rejected promise to one response
+        if (error.message) {
+            error.errors = validationErrorMessages;
+            return res.status(400).json(error)
+        }
+
+
         let { address, city, state, country, lat, lng, name, description, price } = req.body;
+
         if (address) putSpot.set({ address: address });
         if (city) putSpot.set({ city: city });
         if (state) putSpot.set({ state: state });
@@ -742,67 +807,62 @@ router.post('/', requireAuth, validateSpot, async (req, res) => { // removed val
     let error = {};
 
     try {
+
         let { address, city, state, country, name, description, price } = req.body;
 
-        // if (!address) {
-        //     error.message = "Validation Error";
-        //     error.status = 400;
-        //     error.errors = { address: "Street address is required" }
-        //     return res.status(400).json(error);
-        // }
-        // if (!city) {
-        //     error.message = "Validation Error";
-        //     error.status = 400;
-        //     error.errors = { city: "City is required" }
-        //     return res.status(400).json(error);
-        // }
-        // if (!state) {
-        //     error.message = "Validation Error";
-        //     error.status = 400;
-        //     error.errors = { state: "State is required" }
-        //     return res.status(400).json(error);
-        // }
-        // if (!country) {
-        //     error.message = "Validation Error";
-        //     error.status = 400;
-        //     error.errors = { country: "Country is required" }
-        //     return res.status(400).json(error);
-        // }
+        const validationErrorMessages = []
+
+        if (!address) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("Address is required.")
+        }
+        if (!city) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("City is required.")
+        }
+        if (!state) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("State is required.")
+        }
+        if (!country) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("Country is required.")
+        }
         // if (!lat) {
         //     error.message = "Validation Error";
         //     error.status = 400;
-        //     error.errors = { lat: "Latitude is not valid" }
-        //     return res.status(400).json(error);
+        //     validationErrorMessages.push("Latitude is not valid")
         // }
         // if (!lng) {
         //     error.message = "Validation Error";
         //     error.status = 400;
-        //     error.errors = { lng: "Longitude is not valid" }
-        //     return res.status(400).json(error);
+        //     validationErrorMessages.push("Longitude is not valid")
         // }
-        // if (!name) {
-        //     error.message = "Validation Error";
-        //     error.status = 400;
-        //     error.errors = { name: "Name must be less than 50 characters" }
-        //     return res.status(400).json(error);
-        // }
-        // if (!description) {
-        //     error.message = "Validation Error";
-        //     error.status = 400;
-        //     error.errors = { description: "Description is required" }
-        //     return res.status(400).json(error);
-        // }
-        // if (!price) {
-        //     error.message = "Validation Error";
-        //     error.status = 400;
-        //     error.errors = { price: "Price per day is required" }
-        //     return res.status(400).json(error);
-        // }
+        if (!name) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("Title is required.")
+        }
+        if (!description) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("Please write a longer description.")
+        }
+        if (!price) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("Price per night is required.")
+        }
 
-        // UNCOMMENT TO RETURN FAILED PROMISE
-        // if (error.message) {
-        //     return res.status(400).json(err)
-        // }
+        // consolidate rejected promise to one response
+        if (error.message) {
+            error.errors = validationErrorMessages;
+            return res.status(400).json(error)
+        }
 
         let postSpot = await currentUser.createSpot({
             ownerId: currentUserId,
