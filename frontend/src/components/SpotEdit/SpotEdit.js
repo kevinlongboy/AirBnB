@@ -16,22 +16,31 @@ function SpotEdit() {
     /******************************** params ********************************/
     const { spotId } = useParams()
 
+    /********************** key into pertinent values ***********************/
+    const [address, setAddress] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
+    const [country, setCountry] = useState("");
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [price, setPrice] = useState("");
+    const [validationErrors, setValidationErrors] = useState([]);
+
     /********************** reducer/API communication ***********************/
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(thunkReadSingleSpotDetails(parseInt(spotId)))
+        dispatch(thunkReadSingleSpotDetails(parseInt(spotId)));
+        setAddress(spotsState.address)
+        setCity(spotsState.city)
+        setState(spotsState.state)
+        setCountry(spotsState.country)
+        setName(spotsState.name)
+        setDescription(spotsState.description)
+        setPrice(spotsState.price)
     }, []);
 
-    /********************** key into pertinent values ***********************/
-    const [address, setAddress] = useState(spotsState.address);
-    const [city, setCity] = useState(spotsState.city);
-    const [state, setState] = useState(spotsState.state);
-    const [country, setCountry] = useState(spotsState.country);
-    const [name, setName] = useState(spotsState.name);
-    const [description, setDescription] = useState(spotsState.description);
-    const [price, setPrice] = useState(spotsState.price);
-    const [validationErrors, setValidationErrors] = useState([]);
+    console.log("spotsState", spotsState)
 
     /*********************** conditional components *************************/
     // change price

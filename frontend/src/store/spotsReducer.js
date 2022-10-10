@@ -165,10 +165,10 @@ const spotsReducer = (state = initialState, action) => {
             newState.allSpots = {...state.allSpots}
             newState.singleSpotDetails = {...action.payload};
                 // create shallow copies of nested structures
+                newState.singleSpotDetails.Owner = {...action.payload.Owner}
                 let singleSpotDetailsImages = [];
                 action.payload.SpotImages.forEach(obj => singleSpotDetailsImages.push({...obj}));
                 newState.singleSpotDetails.SpotImages = singleSpotDetailsImages;
-                newState.singleSpotDetails.Owner = {...action.payload.Owner}
             newState.singleSpotReviews = {...state.singleSpotReviews}
             return newState
 

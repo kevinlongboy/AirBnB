@@ -574,7 +574,7 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
         if (!putSpot) {
             error.message = "Spot couldn't be found";
             error.statusCode = 404;
-            return res.json(error);
+            return res.status(404).json(error);
         }
 
         let { address, city, state, country, lat, lng, name, description, price } = req.body;
@@ -612,7 +612,7 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
         if (!deleteSpot) {
             error.message = "Spot couldn't be found";
             error.status = 404;
-            return res.json(error);
+            return res.status(404).json(error);
 
         }
 

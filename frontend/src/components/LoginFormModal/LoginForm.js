@@ -143,6 +143,7 @@ function LoginForm() {
           type="button"
           // onClick={handleSubmitRedirect}
           >
+          <i class="fa-brands fa-linkedin"></i>
           <a style={{textDecoration:"none", color:"black"}} href="https://www.linkedin.com/in/kevinlongboy/">
           Continue with LinkedIn
           </a>
@@ -153,6 +154,7 @@ function LoginForm() {
           type="button"
           // onClick={handleSubmitRedirect}
           >
+          <i class="fa-brands fa-github"></i>
           <a style={{textDecoration:"none", color:"black"}} href="https://github.com/kevinlongboy">
           Continue with GitHub
           </a>
