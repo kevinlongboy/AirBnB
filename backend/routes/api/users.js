@@ -62,14 +62,19 @@ router.post('/', async (req, res) => {
             error.message = "User already exists";
             error.statusCode = 403;
             error.errors = { email: "User with that email already exists" };
-            res.status(403).json(error)
+            // res.status(403).json(error)
         }
         if (usernameExists) {
             error.message = "User already exists";
             error.statusCode = 403;
             error.errors = { username: "User with that username already exists" };
+            // res.status(403).json(error)
+        }
+        // consolidate rejected promise to one response
+        if (error.message) {
             res.status(403).json(error)
         }
+
 
         let user = await User.signup({ firstName, lastName, email, username, password });
         let token = await setTokenCookie(res, user);
@@ -88,7 +93,7 @@ router.post('/', async (req, res) => {
             .json(returnUser)
 
     } catch (err) {
-        error.error = error
+        error.error = err
         return res.json(error);
     }
 });
