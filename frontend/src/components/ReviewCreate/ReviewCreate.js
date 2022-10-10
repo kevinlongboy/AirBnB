@@ -35,11 +35,13 @@ function ReviewCreate() {
         const errors = [];
 
         if (review.length < 5) {
-            errors.push("Please enter a longer review")
+            errors.push("Please write a longer review.")
+        } else if (review.length > 500) {
+            errors.push("Please write a shorter review.")
         }
 
         if (stars < 1 || stars > 5) {
-          errors.push("Please enter a rating")
+          errors.push("Please enter a rating.")
         }
 
         let displayErrors;
@@ -68,15 +70,25 @@ function ReviewCreate() {
 
         e.preventDefault();
 
+        let errors = [];
+        setValidationErrors(errors);
+
         let createReviewData = {
             review: review,
             stars: stars.length
         }
 
-        dispatch(thunkCreateSingleReview(parseInt(spotId), createReviewData));
-        // let newSpot = dispatch(thunkReviewsCreate(createReview));
+        dispatch(thunkCreateSingleReview(parseInt(spotId), createReviewData)).catch(
+            async (res) => {
 
-        // history.push(`/spots/${parseInt(spotId)}`) // CHANGE TO REDIRECT TO SPECIFIC SPOT ROUTE!
+                const data = await res.json();
+
+                if (data && data.errors) {
+                    data.errors.forEach(message => errors.push(message));
+                    setValidationErrors(errors);
+                    return
+                }
+            });
     }
 
 

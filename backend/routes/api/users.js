@@ -54,6 +54,7 @@ router.post('/', validateSignup, async (req, res) => {
         // validate unique user credentials
         const validationErrorMessages = []
 
+        // handle error: credentials exist for another user
         let emailExists = await User.findOne({
             where: { email: email },
             raw: true
@@ -73,7 +74,6 @@ router.post('/', validateSignup, async (req, res) => {
             error.statusCode = 403;
             validationErrorMessages.push("That username is already taken. Please try another.");
         }
-
         // consolidate rejected promise to one response
         if (error.message) {
             error.errors = validationErrorMessages;

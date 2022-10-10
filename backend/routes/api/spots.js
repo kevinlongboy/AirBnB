@@ -89,11 +89,16 @@ const validateQuery = [
 
 const validateReview = [
     check('review')
-        .exists({ checkFalsy: true })
-        .withMessage("Review text is required"),
+        // .exists({ checkFalsy: true })
+        .isLength({ min: 5 })
+        .withMessage("Please write a longer review."),
+    check('review')
+        // .exists({ checkFalsy: true })
+        .isLength({ max: 500 })
+        .withMessage("Please write a shorter review."),
     check('stars')
         .exists({ checkFalsy: true })
-        .withMessage("Stars must be an integer from 1 to 5"),
+        .withMessage("Stars must be an integer from 1 to 5."),
     handleValidationErrors
 ]
 
@@ -353,21 +358,45 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
     let error = {};
 
     try {
-        let findSpot = await Spot.findByPk(postSpotId);
 
+        const validationErrorMessages = []
+
+        // handle error: missing spot
+        let findSpot = await Spot.findByPk(postSpotId);
         if (!findSpot) {
-            error.message = "Spot couldn't be found"
-            error.statusCode = 404
-            return res.json(error)
+            error.message = "Spot couldn't be found";
+            error.statusCode = 404;
+            validationErrorMessages.push("Spot couldn't be found");
+            error.errors = validationErrorMessages;
+            return res.status(404).json(error)
+        }
+
+        // handle error: missing fields
+        if (!description) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("Please write a longer review.")
+        }
+        if (!stars) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("Stars must be an integer from 1 to 5.")
+        }
+        if (error.message) {
+            error.errors = validationErrorMessages;
+            return res.status(400).json(error)
         }
 
         let spotReviewExists = await Review.findAll({ // returns array of review for req. spot
             where: { userId: currentUserId, spotId: postSpotId }
         });
+        // handle error: review exits
         if (spotReviewExists.length > 0) {
             error.message = "User already has a review for this spot";
             error.statusCode = 403;
-            return res.json(error)
+            validationErrorMessages.push("User already has a review for this spot");
+            error.errors = validationErrorMessages;
+            return res.status(403).json(error)
 
         } else {
             let { review, stars } = req.body;
@@ -580,14 +609,17 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
 
         const validationErrorMessages = []
 
+        // handle error: missing spot
         let putSpot = await Spot.findByPk(spotId);
         if (!putSpot) {
             error.message = "Spot couldn't be found";
             error.statusCode = 404;
             validationErrorMessages.push("Spot couldn't be found");
+            error.errors = validationErrorMessages;
             return res.status(404).json(error);
         }
 
+        // handle error: missing fields
         if (!address) {
             error.message = "Validation Error";
             error.status = 400;
@@ -633,8 +665,6 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
             error.status = 400;
             validationErrorMessages.push("Price per night is required.")
         }
-
-        // consolidate rejected promise to one response
         if (error.message) {
             error.errors = validationErrorMessages;
             return res.status(400).json(error)
@@ -812,6 +842,7 @@ router.post('/', requireAuth, validateSpot, async (req, res) => { // removed val
 
         const validationErrorMessages = []
 
+        // handle error: missing fields
         if (!address) {
             error.message = "Validation Error";
             error.status = 400;
@@ -857,8 +888,6 @@ router.post('/', requireAuth, validateSpot, async (req, res) => { // removed val
             error.status = 400;
             validationErrorMessages.push("Price per night is required.")
         }
-
-        // consolidate rejected promise to one response
         if (error.message) {
             error.errors = validationErrorMessages;
             return res.status(400).json(error)

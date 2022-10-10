@@ -10,7 +10,7 @@ module.exports = {
       },
       review: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       stars: {
         type: Sequelize.INTEGER,
