@@ -10,44 +10,45 @@ const router = express.Router();
 
 /************************************* global variables *************************************/
 
-// const validateSignup = [
-//     check('firstName')
+const validateSignup = [
+    check('firstName')
 //         .exists({ checkFalsy: true })
-//         .isLength({ min: 2 })
-//         .withMessage('First name must be 2 characters or more.'),
-//     check('lastName')
+        .isLength({ min: 2 })
+        .withMessage('First name must be 2 characters or more.'),
+    check('lastName')
 //         .exists({ checkFalsy: true })
-//         .isLength({ min: 2 })
-//         .withMessage('Last name must be 2 characters or more.'),
-//     check('email')
+        .isLength({ min: 2 })
+        .withMessage('Last name must be 2 characters or more.'),
+    check('email')
 //         .exists({ checkFalsy: true })
-//         .isEmail()
-//         .withMessage('Please provide a valid email.'),
-//     check('username')
+        .isEmail()
+        .withMessage('Please provide a valid email.'),
+    check('username')
 //         .exists({ checkFalsy: true })
-//         .isLength({ min: 4 })
-//         .withMessage('Please provide a username with at least 4 characters.'),
-//     check('username')
-//         .not()
-//         .isEmail()
-//         .withMessage('Username cannot be an email.'),
-//     check('password')
+        .isLength({ min: 4 })
+        .withMessage('Please provide a username with at least 4 characters.'),
+    check('username')
+        .not()
+        .isEmail()
+        .withMessage('Username cannot be an email.'),
+    check('password')
 //         .exists({ checkFalsy: true })
-//         .isLength({ min: 6 })
-//         .withMessage('Password must be 6 characters or more.'),
-//     handleValidationErrors
-// ];
+        .isLength({ min: 6 })
+        .withMessage('Password must be 6 characters or more.'),
+    handleValidationErrors
+];
 
 
 /****************************************** /users ******************************************/
 
 // Postman 2: "Sign up"
 // README, line 141
-router.post('/', async (req, res) => {
+router.post('/', validateSignup, async (req, res) => {
 
     const { firstName, lastName, email, username, password } = req.body;
     let error = {};
 
+    // validate signup will rin before try-code block; will return rejected promise if errors
     try {
         let emailExists = await User.findOne({
             where: { email: email },

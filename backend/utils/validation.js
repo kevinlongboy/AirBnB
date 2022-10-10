@@ -14,7 +14,8 @@ const handleValidationErrors = (req, _res, next) => {
         err.errors = errors;
         err.status = 400;
         err.title = 'Bad request.';
-        next(err);
+        // next(err);
+        return _res.status(400).json(err)
     }
     next();
 };
