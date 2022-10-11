@@ -82,6 +82,7 @@ function ReviewCreate() {
             async (res) => {
 
                 const data = await res.json();
+                console.l0g("datatatatatadatatatatatadatatatatatadatatatatatadatatatatatadatatatatatadatatatatatadatatatatatadatatatatata", data);
 
                 if (data && data.errors) {
                     data.errors.forEach(message => errors.push(message));

@@ -15,6 +15,7 @@ function SpotEdit() {
 
     /******************************** params ********************************/
     const { spotId } = useParams()
+    console.log("spotId",spotId)
 
     /********************** key into pertinent values ***********************/
     const [address, setAddress] = useState("");
@@ -23,7 +24,7 @@ function SpotEdit() {
     const [country, setCountry] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
+    const [price, setPrice] = useState(125);
     const [validationErrors, setValidationErrors] = useState([]);
 
     /********************** reducer/API communication ***********************/
@@ -31,16 +32,8 @@ function SpotEdit() {
 
     useEffect(() => {
         dispatch(thunkReadSingleSpotDetails(parseInt(spotId)));
-        setAddress(spotsState.address)
-        setCity(spotsState.city)
-        setState(spotsState.state)
-        setCountry(spotsState.country)
-        setName(spotsState.name)
-        setDescription(spotsState.description)
-        setPrice(spotsState.price)
     }, []);
 
-    console.log("spotsState", spotsState)
 
     /*********************** conditional components *************************/
     // change price
@@ -54,16 +47,23 @@ function SpotEdit() {
     // render errors
     useEffect(() => {
         const errors = [];
+        // setAddress(spotsState.address)
+        // setCity(spotsState.city)
+        // setState(spotsState.state)
+        // setCountry(spotsState.country)
+        // setName(spotsState.name)
+        // setDescription(spotsState.description)
+        // setPrice(spotsState.price)
 
-        if (address.length < 2) {
+        if (address && address.length < 2) {
             errors.push("Address is required.")
-        } else if (address.length > 50) {
+        } else if (address && address.length > 50) {
             errors.push("Please enter a valid address.")
         }
 
-        if (city.length < 2) {
+        if (city && city.length < 2) {
             errors.push("City is required.")
-        } else if (city.length > 50) {
+        } else if (city &&  city.length > 50) {
             errors.push("Please enter a valid city.")
         }
 
@@ -75,17 +75,17 @@ function SpotEdit() {
             errors.push("Country is required.")
         }
 
-        if (name.length < 2) {
+        if (name && name.length < 2) {
             errors.push("Title is required.")
-        } else if (name.length > 50) {
+        } else if (name && name.length > 50) {
             errors.push("Please create a shorter title.")
         }
 
-        if (description.length === 0) {
+        if (description && description.length === 0) {
             errors.push("Description is required.")
-        } else if (description.length >= 1 && description.length < 5) {
+        } else if (description && description.length >= 1 && description.length < 5) {
             errors.push("Please write a longer description.")
-        } else if (description.length > 50) {
+        } else if (description && description.length > 50) {
             errors.push("Please write a shorter description.")
         }
 

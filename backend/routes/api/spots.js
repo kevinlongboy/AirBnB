@@ -358,6 +358,7 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
     let error = {};
 
     try {
+        let { review, stars } = req.body;
 
         const validationErrorMessages = []
 
@@ -372,7 +373,7 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
         }
 
         // handle error: missing fields
-        if (!description) {
+        if (!review) {
             error.message = "Validation Error";
             error.status = 400;
             validationErrorMessages.push("Please write a longer review.")
@@ -399,7 +400,6 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
             return res.status(403).json(error)
 
         } else {
-            let { review, stars } = req.body;
             let postSpotReview = await currentUser.createReview({
                 spotId: parseInt(postSpotId),
                 userId: currentUserId,
@@ -607,6 +607,8 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
 
     try {
 
+        let { address, city, state, country, lat, lng, name, description, price } = req.body;
+
         const validationErrorMessages = []
 
         // handle error: missing spot
@@ -669,9 +671,6 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
             error.errors = validationErrorMessages;
             return res.status(400).json(error)
         }
-
-
-        let { address, city, state, country, lat, lng, name, description, price } = req.body;
 
         if (address) putSpot.set({ address: address });
         if (city) putSpot.set({ city: city });

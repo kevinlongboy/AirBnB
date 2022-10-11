@@ -58,7 +58,7 @@ const demoReviews = [
   { // Gertrude reviews Niles'
     spotId: 2,
     userId: 10,
-    review: "don't bother wasting yer money 'ere. The hosts are couple of stuck up phony art lovers and they keep all their good liquor locked away from their payin' guests. Yer be'er off staying somewhere halfway decent like me flat in Eastlake",
+    review: "don't bother wasting yer money 'ere. The hosts are couple of stuck up phony art lovers who keep all their good liquor locked away from their payin' guests. Yer be'er off staying somewhere halfway decent like me flat in Eastlake",
     stars: 1,
   },
   { // Frasier reviews Lilith's

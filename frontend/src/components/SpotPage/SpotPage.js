@@ -19,25 +19,6 @@ function SpotPage() {
   /******************************** params ********************************/
   const { spotId } = useParams()
 
-  /********************** reducer/API communication ***********************/
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(thunkReadAllSpots());
-  // }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(thunkReadSingleSpotDetails(spotId));
-  }, [dispatch, spotId]);
-
-  useEffect(() => {
-    dispatch(thunkReadSingleSpotReviews(spotId));
-  }, [dispatch, spotsState]);
-
-  useEffect(() => {
-    dispatch(thunkCreateSingleReview());
-  }, [dispatch, spotsState]);
-
   /********************** key into pertinent values ***********************/
   const userId = sessionState.user.id; // typeof: number
   // console.log("typeof userId", typeof userId)
@@ -54,6 +35,29 @@ function SpotPage() {
   // const spotImagesArr = []
   // spotImagesRaw.forEach((img) => spotImagesArr.push(img.url))
   // spotImagesArr = addPlaceholderImages(spotImagesArr) // add filler images, if min not met
+
+  /********************** reducer/API communication ***********************/
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(thunkReadAllSpots());
+  // }, [dispatch]);
+
+//   useEffect(() => {
+//     dispatch(thunkReadAllSpots());
+// }, [spotsState])
+
+  useEffect(() => {
+    dispatch(thunkReadSingleSpotDetails(spotId));
+  }, [dispatch, spotId]);
+
+  useEffect(() => {
+    dispatch(thunkReadSingleSpotReviews(spotId));
+  }, [dispatch, spotsState, spot.numReviews, spotReviews]);
+
+  useEffect(() => {
+    dispatch(thunkCreateSingleReview());
+  }, [dispatch, spotsState, spot.numReviews, spotReviews]);
 
   /*********************** conditional components *************************/
   let reviewComponent = (
@@ -92,7 +96,7 @@ function SpotPage() {
         <div className="spot-page-overview">
           <p className="spot-page-rating">{`★ ${spot.avgStarRating}`}</p>
           <p> · </p>
-          <p className="spot-page-review-count">{`${spot.numReviews} `}Review<span>{spot.numReviews > 1 ? 's' : ''}</span></p>
+          <p className="spot-page-review-count">{spot.numReviews} Review<span>{spot.numReviews === 1 ? '' : 's'}</span></p>
           <p> · </p>
           <p className="spot-page-location"> {`${spot.city}, ${spot.state}, ${spot.country}`}</p>
         </div>
@@ -129,7 +133,7 @@ function SpotPage() {
         </div>
 
         <div className="reviews">
-          <h2 className="review-data">{`★ ${spot.avgStarRating} · ${spot.numReviews} `}Review<span>{spot.numReviews > 1 ? 's' : ''}</span></h2>
+          <h2 className="review-data">★ {spot.avgStarRating} · {spot.numReviews} Review<span>{spot.numReviews === 1 ? '' : 's'}</span></h2>
 
           {reviews.map((review, index) => (
             <div>
