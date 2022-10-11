@@ -92,7 +92,7 @@ function SpotPage() {
         <div className="spot-page-overview">
           <p className="spot-page-rating">{`★ ${spot.avgStarRating}`}</p>
           <p> · </p>
-          <p className="spot-page-review-count">{`${spot.numReviews} Reviews`}</p>
+          <p className="spot-page-review-count">{`${spot.numReviews} `}Review<span>{spot.numReviews > 1 ? 's' : ''}</span></p>
           <p> · </p>
           <p className="spot-page-location"> {`${spot.city}, ${spot.state}, ${spot.country}`}</p>
         </div>
@@ -129,7 +129,7 @@ function SpotPage() {
         </div>
 
         <div className="reviews">
-          <h2 className="review-data">{`★ ${spot.avgStarRating} · ${spot.numReviews} Reviews`}</h2>
+          <h2 className="review-data">{`★ ${spot.avgStarRating} · ${spot.numReviews} `}Review<span>{spot.numReviews > 1 ? 's' : ''}</span></h2>
 
           {reviews.map((review, index) => (
             <div>

@@ -77,7 +77,7 @@ const demoUsers = [
     firstName: 'Demo',
     lastName: 'User',
     username: 'Demo',
-    hashedPassword: bcrypt.hashSync('demo'),
+    hashedPassword: bcrypt.hashSync('demoPassword'),
     email: 'demo@email.com',
   },
 ]

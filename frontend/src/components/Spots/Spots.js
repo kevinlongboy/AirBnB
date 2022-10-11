@@ -38,7 +38,7 @@ function Spots() {
         <div className="spots-page">
 
             <div className="spots-page-header">
-                <h1>{allSpotsByUser.length} Listings</h1>
+                <h1>{allSpotsByUser.length} Listing<span>{allSpotsByUser.length > 1 ? 's' : ''}</span></h1>
                 <div className="spots-create-listing-button" style={{display:"flex", justifyContent:"space-evenly", verticalAlign:"center", alignContent:'center', alignItems:'center'}}>
                         <img src={plusIcon} style={{width:"15px"}}></img>
                     <NavLink to={'/hosting'} style={{textDecoration:"none", color:"black", fontWeight:"900",verticalAlign:'start' }}>

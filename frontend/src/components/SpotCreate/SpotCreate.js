@@ -87,6 +87,7 @@ function SpotCreate() {
         setValidationErrors(errors)
     }, [address, city, state, country, name, description, price])
 
+
     /******************************* events *********************************/
     // submit form
     const history = useHistory();
@@ -97,30 +98,34 @@ function SpotCreate() {
         let errors = [];
         setValidationErrors(errors);
 
-        let createSpotData = {
-            address: address,
-            city: city,
-            state: state,
-            country: country,
-            name: name,
-            description: description,
-            price: price
-        }
 
-        dispatch(thunkCreateSingleSpot(createSpotData)).catch(
-            async (res) => {
+            let createSpotData = {
+                address: address,
+                city: city,
+                state: state,
+                country: country,
+                name: name,
+                description: description,
+                price: price
+            }
 
-                const data = await res.json();
+            dispatch(thunkCreateSingleSpot(createSpotData)).catch(
+                async (res) => {
 
-                if (data && data.errors) {
-                    data.errors.forEach(message => errors.push(message));
-                    setValidationErrors(errors);
-                    return
+                    const data = await res.json();
+
+                    if (data && data.errors) {
+                        data.errors.forEach(message => errors.push(message));
+                        setValidationErrors(errors);
+                        return
+                    }
+
                 }
+            ).then(
+                console.log("then")
+            );
 
-            });
-
-        history.push(`/`)
+        // history.push(`/`)
         // history.push(`/spots/${spotId}`)
     }
 
