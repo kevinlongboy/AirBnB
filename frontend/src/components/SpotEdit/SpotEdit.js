@@ -34,7 +34,6 @@ function SpotEdit() {
         dispatch(thunkReadSingleSpotDetails(parseInt(spotId)));
     }, []);
 
-
     /*********************** conditional components *************************/
     // change price
     let incrementCounter = () => {

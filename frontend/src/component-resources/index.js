@@ -74,9 +74,9 @@ export function convertDate(iso) {
 
 
 /*************************************** FUNCTION TO NORMALIZE ARRAY ***************************************/
-// normalize functions to turn array or object into object with contents:
+// normalize function to turn array of objects into object of objects:
 // uses "id" specifically as key
-// {1: {1: ...}, 2: {2: ...}, 3: {3: ...}}
+// { 1: { id: 1, ...}, 2: { id: 2, ...}, 3: { id: 3 ...}, ... }
 export function normalizeArray(arr) {
     let obj = {}
     arr.forEach(el => obj[el.id] = el);

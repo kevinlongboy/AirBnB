@@ -151,6 +151,19 @@ const spotsReducer = (state = initialState, action) => {
             newState.singleSpotReviews = {...state.singleSpotReviews}
             return newState
 
+            // alt:
+            // return {
+            //     ...state,
+
+            //     allSpots: {...state.allSpots},
+            //     allSpots[action.payload.id]: {...action.payload},
+
+            //     singleSpotDetails: {...action.payload},
+            //     singleSpotDetails.SpotImages = addPlaceholderImages([]),
+            //     singleSpotDetails.Owner = {},
+            //     singleSpotReviews = {...state.singleSpotReviews}
+            // }
+
         case SPOTS_READ_ALL_SPOTS:
             newState.allSpots = {...state.allSpots}
             newState.allSpots = normalizeArray(action.payload)
