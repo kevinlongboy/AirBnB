@@ -49,15 +49,15 @@ function SpotPage() {
 
   useEffect(() => {
     dispatch(thunkReadSingleSpotDetails(spotId));
-  }, [dispatch, spotId]);
+  }, []);
 
   useEffect(() => {
     dispatch(thunkReadSingleSpotReviews(spotId));
-  }, [dispatch, spotsState, spot.numReviews, spotReviews]);
+  }, [spotReviews]);
 
   useEffect(() => {
     dispatch(thunkCreateSingleReview());
-  }, [dispatch, spotsState, spot.numReviews, spotReviews]);
+  }, [spotReviews]);
 
   /*********************** conditional components *************************/
   let reviewComponent = (

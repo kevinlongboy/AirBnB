@@ -18,10 +18,6 @@ function SpotCreate() {
     /********************** reducer/API communication ***********************/
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        setSpotId(singleSpot.id)
-    }, [singleSpot])
-
     /********************** key into pertinent values ***********************/
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
@@ -31,7 +27,6 @@ function SpotCreate() {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(125);
     const [validationErrors, setValidationErrors] = useState([]);
-    const [spotId, setSpotId] = useState(singleSpot.id)
 
     /*********************** conditional components *************************/
     // change price
@@ -46,13 +41,13 @@ function SpotCreate() {
     useEffect(() => {
         const errors = [];
 
-        if (address.length < 2) {
+        if (address.length > 0 && address.length < 2) {
             errors.push("Address is required.")
         } else if (address.length > 50) {
             errors.push("Please enter a valid address.")
         }
 
-        if (city.length < 2) {
+        if (city.length > 0 && city.length < 2) {
             errors.push("City is required.")
         } else if (city.length > 50) {
             errors.push("Please enter a valid city.")
@@ -66,15 +61,16 @@ function SpotCreate() {
             errors.push("Country is required.")
         }
 
-        if (name.length < 2) {
+        if (name.length > 0 && name.length < 2) {
             errors.push("Title is required.")
         } else if (name.length > 50) {
             errors.push("Please create a shorter title.")
         }
 
-        if (description.length === 0) {
-            errors.push("Description is required.")
-        } else if (description.length >= 1 && description.length < 5) {
+        // if (description.length === 0) {
+        //     errors.push("Description is required.")
+        // }
+        if (description.length >= 1 && description.length < 5) {
             errors.push("Please write a longer description.")
         } else if (description.length > 50) {
             errors.push("Please write a shorter description.")
@@ -99,31 +95,32 @@ function SpotCreate() {
         setValidationErrors(errors);
 
 
-            let createSpotData = {
-                address: address,
-                city: city,
-                state: state,
-                country: country,
-                name: name,
-                description: description,
-                price: price
-            }
+        let createSpotData = {
+            address: address,
+            city: city,
+            state: state,
+            country: country,
+            name: name,
+            description: description,
+            price: price
+        }
 
-            dispatch(thunkCreateSingleSpot(createSpotData)).catch(
-                async (res) => {
+        const attempt = dispatch(thunkCreateSingleSpot(createSpotData)).catch(
+            async (res) => {
 
-                    const data = await res.json();
+                const data = await res.json();
 
-                    if (data && data.errors) {
-                        data.errors.forEach(message => errors.push(message));
-                        setValidationErrors(errors);
-                        return
-                    }
-
+                if (data && data.errors) {
+                    data.errors.forEach(message => errors.push(message));
+                    setValidationErrors(errors);
+                    return
                 }
-            ).then(
-                console.log("then")
-            );
+
+            }
+        )
+
+        attempt.then(console.log("hello"))
+
 
         // history.push(`/`)
         // history.push(`/spots/${spotId}`)

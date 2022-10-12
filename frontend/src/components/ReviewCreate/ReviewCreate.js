@@ -34,7 +34,7 @@ function ReviewCreate() {
     useEffect(() => {
         const errors = [];
 
-        if (review.length < 5) {
+        if (review.length > 0 && review.length < 5) {
             errors.push("Please write a longer review.")
         } else if (review.length > 500) {
             errors.push("Please write a shorter review.")
@@ -82,7 +82,6 @@ function ReviewCreate() {
             async (res) => {
 
                 const data = await res.json();
-                console.l0g("datatatatatadatatatatatadatatatatatadatatatatatadatatatatatadatatatatatadatatatatatadatatatatatadatatatatata", data);
 
                 if (data && data.errors) {
                     data.errors.forEach(message => errors.push(message));

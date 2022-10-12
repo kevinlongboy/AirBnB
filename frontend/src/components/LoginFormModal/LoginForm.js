@@ -20,15 +20,12 @@ function LoginForm() {
     let validationErrors = [];
     setValidationErrors(validationErrors)
 
-    if (!credential) {
-      validationErrors.push("Please enter your username or email")
-    } else if (credential.length < 5) {
+    if (credential.length > 0 && credential.length < 5) {
       validationErrors.push("Please enter your username or email")
     }
-    if (!password) {
+
+    if (password.length > 0 && password.length < 5) {
       validationErrors.push("Please enter your password")
-    } else if (password.length < 5) {
-      validationErrors.push("Please enter your username or email")
     }
 
     setValidationErrors(validationErrors)
@@ -49,8 +46,8 @@ function LoginForm() {
 
         const data = await res.json();
 
-        if (data && data.message) {
-          errors.push(data.message);
+        if (data && data.errors) {
+          data.errors.forEach(errorMsg => errors.push(errorMsg))
           setErrors(errors)
         }
       }

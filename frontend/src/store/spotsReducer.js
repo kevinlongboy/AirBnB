@@ -54,7 +54,6 @@ export const thunkCreateSingleSpot = (data) => async (dispatch) => {
     });
     if (response.ok) {
         const newSpot = await response.json();
-        console.log("newSpot", newSpot)
         // okay to dispatch read all spots instead?
         dispatch(actionCreateSingleSpot(newSpot));
         // dispatch(thunkReadSingleSpotDetails(newSpot.id))
