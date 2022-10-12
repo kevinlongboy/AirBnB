@@ -1,4 +1,5 @@
 /***************************** IMPORTS *****************************/
+// local files
 import { csrfFetch } from "./csrf";
 import { normalizeArray } from "../component-resources/index";
 import { addPlaceholderImages } from "../component-resources/index";
@@ -21,7 +22,7 @@ export const actionCreateSingleSpot = (newSpot) => ({
 
 export const actionReadAllSpots = (spots) => ({
     type: SPOTS_READ_ALL_SPOTS,
-    payload: spots // Spots: [array of objects]
+    payload: spots
 });
 
 export const actionReadSingleSpotDetails = (singleSpotDetails) => ({
@@ -54,14 +55,7 @@ export const thunkCreateSingleSpot = (data) => async (dispatch) => {
     });
     if (response.ok) {
         const newSpot = await response.json();
-        // okay to dispatch read all spots instead?
         dispatch(actionCreateSingleSpot(newSpot));
-        // dispatch(thunkReadSingleSpotDetails(newSpot.id))
-        // dispatch(thunkReadAllSpots())
-        // console.log("newSpot", newSpot)
-
-        // dispatch(actionReadAllSpots())
-        // dispatch(actionReadSingleSpotDetails(newSpot.id))
         return newSpot
     }
 }
@@ -78,9 +72,9 @@ export const thunkReadAllSpots = () => async (dispatch) => {
 export const thunkReadSingleSpotDetails = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`);
     if (response.ok) {
-        const singleSpotDetails = await response.json(); // .json() === JSON -> POJO
+        const singleSpotDetails = await response.json();
         dispatch(actionReadSingleSpotDetails(singleSpotDetails))
-        return singleSpotDetails; // ?
+        return singleSpotDetails;
     }
 }
 
@@ -88,15 +82,15 @@ export const thunkReadSingleSpotReviews = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
     if (response.ok) {
         const singleSpotReviews = await response.json();
-        dispatch(actionReadSingleSpotReviews(singleSpotReviews.Reviews)) // sends array of objects to payload
-        return singleSpotReviews; // ?
+        dispatch(actionReadSingleSpotReviews(singleSpotReviews.Reviews))
+        return singleSpotReviews;
     }
 }
 
 export const thunkUpdateSingleSpot = (spotId, updateSpotData) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`, {
         method: 'put',
-        headers: { 'Content-Type': 'application/json' } ,
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updateSpotData)
     });
     if (response.ok) {
@@ -136,17 +130,15 @@ const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case SPOTS_CREATE_SINGLE_SPOT:
+            // copy newState.allSpots
             newState.allSpots = {...state.allSpots}
             newState.allSpots[action.payload.id] = {...action.payload}
-            // newState.singleSpotDetails = {...state.singleSpotDetails}
-                // create shallow copies of nested structures
-                // newState.singleSpotDetails.SpotImages = [...state.singleSpotDetails.SpotImages]
-                // newState.singleSpotDetails.Owner = {...state.singleSpotDetails.Owner}
-            // override existing data with newly created spot; use this branch from slice of state to redirect to new spot page
+            // copy newState.singleSpotDetails
             newState.singleSpotDetails = {...action.payload}
-            let singleSpotImages = []
-            newState.singleSpotDetails.SpotImages = addPlaceholderImages(singleSpotImages)
-            newState.singleSpotDetails.Owner = {}
+                let singleSpotImages = []
+                newState.singleSpotDetails.SpotImages = addPlaceholderImages(singleSpotImages)
+                newState.singleSpotDetails.Owner = {}
+            // copy newState.singleSpotReviews
             newState.singleSpotReviews = {...state.singleSpotReviews}
             return newState
 
@@ -164,74 +156,72 @@ const spotsReducer = (state = initialState, action) => {
             // }
 
         case SPOTS_READ_ALL_SPOTS:
+            // copy newState.allSpots
             newState.allSpots = {...state.allSpots}
             newState.allSpots = normalizeArray(action.payload)
+            // copy newState.singleSpotDetails
             newState.singleSpotDetails = {...state.singleSpotDetails}
-                // create shallow copies of nested structures
                 newState.singleSpotDetails.SpotImages = [...state.singleSpotDetails.SpotImages]
                 newState.singleSpotDetails.Owner = {...state.singleSpotDetails.Owner}
+            // copy newState.singleSpotReviews
             newState.singleSpotReviews = {...state.singleSpotReviews}
-            return newState // does it return the variable along with what its pointing to
+            return newState
 
         case SPOTS_READ_SINGLE_SPOT_DETAILS:
+            // copy newState.allSpots
             newState.allSpots = {...state.allSpots}
+            // copy newState.singleSpotDetails
             newState.singleSpotDetails = {...action.payload};
-                // create shallow copies of nested structures
                 newState.singleSpotDetails.Owner = {...action.payload.Owner}
                 let singleSpotDetailsImages = [];
                 action.payload.SpotImages.forEach(obj => singleSpotDetailsImages.push({...obj}));
                 newState.singleSpotDetails.SpotImages = singleSpotDetailsImages;
+            // copy newState.singleSpotReviews
             newState.singleSpotReviews = {...state.singleSpotReviews}
             return newState
 
         case SPOTS_READ_SINGLE_SPOT_REVIEWS:
+            // copy newState.allSpots
             newState.allSpots = {...state.allSpots}
+            // copy newState.singleSpotDetails
             newState.singleSpotDetails = {...state.singleSpotDetails};
-                // create shallow copies of nested structures
                 let singleSpotReviewImages = [];
                 newState.singleSpotDetails.SpotImages.forEach(obj => singleSpotReviewImages.push({...obj}))
                 newState.singleSpotDetails.SpotImages = singleSpotReviewImages;
                 newState.singleSpotDetails.Owner = {...state.singleSpotDetails.Owner}
-            // // first: create shallow copies of nested structures
-            // // STILL ARRAY OF OBJECTS ATM, NOT OBJECT OF OBJECTS
-            // newState.singleSpotReviews.forEach((obj, index) => obj.User = {...action.payload[index].User})
-            // let singleSpotReviewImages = [];
-            // action.payload.ReviewImages.forEach(obj => singleSpotReviewImages.push({...obj}));
-            // newState.singleSpotReviews.ReviewImages = singleSpotReviewImages;
-            // // second: normalize object
-            const copyArr = []
-            action.payload.forEach(obj => {
-                const copyObj = {...obj}
-                copyObj.User = {...obj.User};
-                let reviewImages = []
-                obj.ReviewImages.length && obj.ReviewImages.forEach(imgObj => reviewImages.push({...imgObj}))
-                copyObj.ReviewImages = reviewImages
-                copyArr.push(copyObj)
-            })
+                const copyArr = []
+                action.payload.forEach(obj => {
+                    const copyObj = {...obj}
+                    copyObj.User = {...obj.User};
+                    let reviewImages = []
+                    obj.ReviewImages.length && obj.ReviewImages.forEach(imgObj => reviewImages.push({...imgObj}))
+                    copyObj.ReviewImages = reviewImages
+                    copyArr.push(copyObj)
+                })
+            // copy newState.singleSpotReviews
             newState.singleSpotReviews = normalizeArray(copyArr);
-            // for (const obj of newState.singleSpotReviews) {
-            //     console.log(obj)
-            // }
-            // console.log(newState)
             return newState
 
         case SPOTS_UPDATE_SINGLE_SPOT:
+            // copy newState.allSpots
             newState.allSpots = {...state.allSpots}
-            // add updated spot to allSpots branch
             newState.allSpots[action.payload.id] = {...action.payload}
+            // copy newState.singleSpotDetails
             newState.singleSpotDetails = {...state.singleSpotDetails}
-                // create shallow copies of nested structures
                 newState.singleSpotDetails.SpotImages = [...state.singleSpotDetails.SpotImages]
                 newState.singleSpotDetails.Owner = {...state.singleSpotDetails.Owner}
+            // copy newState.singleSpotReviews
             newState.singleSpotReviews = {...state.singleSpotReviews}
             return newState
 
         case SPOTS_DELETE_SINGLE_SPOT:
+            // copy newState.allSpots
             newState.allSpots = {...state.allSpots}
+            // copy newState.singleSpotDetails
             newState.singleSpotDetails = {...state.singleSpotDetails}
-                // create shallow copies of nested structures
                 newState.singleSpotDetails.SpotImages = [...state.singleSpotDetails.SpotImages]
                 newState.singleSpotDetails.Owner = {...state.singleSpotDetails.Owner}
+            // copy newState.singleSpotReviews
             newState.singleSpotReviews = {...state.singleSpotReviews}
             delete newState.allSpots.spotId
             return newState

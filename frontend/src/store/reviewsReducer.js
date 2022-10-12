@@ -1,4 +1,5 @@
 /***************************** IMPORTS *****************************/
+// local files
 import { csrfFetch } from "./csrf";
 import { normalizeArray } from "../component-resources/index";
 
@@ -17,7 +18,7 @@ export const actionCreateSingleReview = (newReview) => ({
 
 export const actionReadUserReviews = (reviews) => ({
     type: REVIEWS_READ_USER_REVIEWS,
-    payload: reviews // Users: [array of objects]
+    payload: reviews
 });
 
 export const actionDeleteSingleReview = (reviewId) => ({
@@ -97,7 +98,7 @@ const reviewsReducer = (state = initialState, action) => {
             return newState
 
         case REVIEWS_DELETE_SINGLE_REVIEW:
-            // copy nested structures??
+            newState.reviews = {...state.reviews}
             delete newState.reviews.reviewId
             return newState
 

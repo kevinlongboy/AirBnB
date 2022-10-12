@@ -1,8 +1,13 @@
+/***************************** IMPORTS *****************************/
 import { csrfFetch } from './csrf';
 
+
+/****************************** TYPES ******************************/
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 
+
+/************************* ACTION CREATORS *************************/
 const setUser = (user) => {
   return {
     type: SET_USER,
@@ -16,7 +21,8 @@ const removeUser = () => {
   };
 };
 
-// Phase 2: Signup action
+
+/*************************** THUNKS (API) ***************************/
 export const signup = (user) => async (dispatch) => {
     const { firstName, lastName, username, password, email } = user;
     const response = await csrfFetch("/api/users", {
@@ -49,25 +55,27 @@ export const signup = (user) => async (dispatch) => {
   return response;
 };
 
-// Phase 1: Restore the session user
 export const restoreUser = () => async dispatch => {
     const response = await csrfFetch('/api/session');
     const data = await response.json();
     dispatch(setUser(data));
     return response;
-  };
+};
 
-// Phase 3: Logout action
 export const logout = () => async (dispatch) => {
     const response = await csrfFetch('/api/session', {
       method: 'DELETE',
     });
     dispatch(removeUser());
     return response;
-  };
+};
 
+
+/*************************** STATE SHAPE ****************************/
 const initialState = { user: null };
 
+
+/***************************** REDUCER ******************************/
 const sessionReducer = (state = initialState, action) => {
 
   let newState;
@@ -89,4 +97,6 @@ const sessionReducer = (state = initialState, action) => {
   }
 };
 
+
+/***************************** EXPORTS *****************************/
 export default sessionReducer;
