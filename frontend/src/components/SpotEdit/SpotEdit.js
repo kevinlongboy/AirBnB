@@ -32,7 +32,17 @@ function SpotEdit() {
 
     useEffect(() => {
         dispatch(thunkReadSingleSpotDetails(parseInt(spotId)));
-    }, []);
+    }, [])
+
+    useEffect(() => {
+        setAddress(spotsState.address)
+        setCity(spotsState.city)
+        setState(spotsState.state)
+        setCountry(spotsState.country)
+        setName(spotsState.name)
+        setDescription(spotsState.description)
+        setPrice(spotsState.price)
+    }, [spotsState]);
 
     /*********************** conditional components *************************/
     // change price
@@ -46,13 +56,6 @@ function SpotEdit() {
     // render errors
     useEffect(() => {
         const errors = [];
-        // setAddress(spotsState.address)
-        // setCity(spotsState.city)
-        // setState(spotsState.state)
-        // setCountry(spotsState.country)
-        // setName(spotsState.name)
-        // setDescription(spotsState.description)
-        // setPrice(spotsState.price)
 
         if (address && address.length < 2) {
             errors.push("Address is required.")

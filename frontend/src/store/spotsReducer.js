@@ -1,7 +1,7 @@
 /***************************** IMPORTS *****************************/
 import { csrfFetch } from "./csrf";
 import { normalizeArray } from "../component-resources/index";
-import { img, addPlaceholderImages } from "../component-resources/index";
+import { addPlaceholderImages } from "../component-resources/index";
 
 
 /****************************** TYPES ******************************/
