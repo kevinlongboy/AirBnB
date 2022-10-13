@@ -1,37 +1,39 @@
+/******************************** IMPORTS ********************************/
+// libraries
 import React, { useState, useEffect } from "react";
 import { NavLink, useHistory} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-
+// local files
 import * as sessionActions from '../../store/sessionReducer';
-
 import './Navigation.css'
 import menuBars from '../../assets/fontawesome/bars-solid.png'
 import userIcon from '../../assets/fontawesome/circle-user-solid.png'
 
 
+/******************************* COMPONENT *******************************/
 function ProfileButton({ user }) {
 
+  /****************** access store *******************/
   const sessionState = useSelector(state => state.session)
 
+  /************ reducer/API communication ************/
   const dispatch = useDispatch();
+
+  /****************** manage state *******************/
   const [showMenu, setShowMenu] = useState(false);
 
+  useEffect(() => {
+    if (!showMenu) return;
+    const closeMenu = () => setShowMenu(false);
+    document.addEventListener('click', closeMenu);
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
+
+  /***************** handle events *******************/
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
   };
-
-  useEffect(() => {
-    if (!showMenu) return;
-
-    const closeMenu = () => {
-      setShowMenu(false);
-    };
-
-    document.addEventListener('click', closeMenu);
-
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
 
   let history = useHistory();
   const logout = (e) => {
@@ -40,6 +42,7 @@ function ProfileButton({ user }) {
     history.push('/')
   };
 
+  /**************** render component *****************/
   return (
     <>
       <button className='account-button' onClick={openMenu}>
@@ -80,4 +83,6 @@ function ProfileButton({ user }) {
   );
 }
 
+
+/******************************** EXPORTS ********************************/
 export default ProfileButton;

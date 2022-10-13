@@ -1,14 +1,21 @@
+/******************************** IMPORTS ********************************/
+// libraries
 import React, { useState } from 'react';
-
+// local files
 import { Modal } from '../../context/Modal';
 import LoginForm from './LoginForm';
 import menuBars from '../../assets/fontawesome/bars-solid.png'
 import userIcon from '../../assets/fontawesome/circle-user-solid.png'
 import './LoginFormModal.css';
 
+
+/******************************* COMPONENT *******************************/
 function LoginFormModal() {
+
+  /****************** manage state *******************/
   const [showModal, setShowModal] = useState(false);
 
+  /**************** render component *****************/
   return (
     <>
     <div style={{display:"flex"}}>
@@ -27,4 +34,6 @@ function LoginFormModal() {
   );
 }
 
+
+/******************************** EXPORTS ********************************/
 export default LoginFormModal;

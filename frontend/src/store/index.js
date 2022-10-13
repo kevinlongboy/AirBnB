@@ -1,4 +1,4 @@
-/***************************** IMPORTS *****************************/
+/******************************** IMPORTS ********************************/
 // libraries
 import { legacy_createStore as createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
@@ -8,7 +8,7 @@ import sessionReducer from './sessionReducer';
 import spotsReducer from "./spotsReducer";
 
 
-/***************************** REDUCER ******************************/
+/******************************* REDUCER *********************************/
 const rootReducer = combineReducers({
   session: sessionReducer,
   spots: spotsReducer,
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
 });
 
 
-/********************* CONDITIONAL COMPONENTS ***********************/
+/*********************** CONDITIONAL COMPONENTS **************************/
 let enhancer;
 
 if (process.env.NODE_ENV === "production") {
@@ -33,5 +33,5 @@ const configureStore = (preloadedState) => {
 };
 
 
-/***************************** EXPORTS *****************************/
+/******************************** EXPORTS ********************************/
 export default configureStore;

@@ -1,3 +1,4 @@
+/******************************** IMPORTS ********************************/
 // libraries
 import { useEffect, useState} from "react";
 import { useHistory, useParams } from 'react-router-dom';
@@ -8,16 +9,24 @@ import { states } from '../../component-resources/index.js';
 import './SpotEdit.css';
 
 
+/******************************* COMPONENT *******************************/
 function SpotEdit() {
 
-    /******************************** state ********************************/
+    /****************** access store *******************/
     const spotsState = useSelector(state => state.spots.singleSpotDetails);
 
-    /******************************** params ********************************/
+    /************ key into pertinent values ************/
+    // params
     const { spotId } = useParams()
-    console.log("spotId",spotId)
 
-    /********************** key into pertinent values ***********************/
+    /************ reducer/API communication ************/
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(thunkReadSingleSpotDetails(parseInt(spotId)));
+    }, [])
+
+    /****************** manage state *******************/
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
@@ -27,13 +36,7 @@ function SpotEdit() {
     const [price, setPrice] = useState(125);
     const [validationErrors, setValidationErrors] = useState([]);
 
-    /********************** reducer/API communication ***********************/
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(thunkReadSingleSpotDetails(parseInt(spotId)));
-    }, [])
-
+    // set initial input field values as current spot values
     useEffect(() => {
         setAddress(spotsState.address)
         setCity(spotsState.city)
@@ -44,8 +47,7 @@ function SpotEdit() {
         setPrice(spotsState.price)
     }, [spotsState]);
 
-    /*********************** conditional components *************************/
-    // change price
+    // change price value
     let incrementCounter = () => {
         if (price < 10000) setPrice(price + 1);
     }
@@ -98,6 +100,7 @@ function SpotEdit() {
         setValidationErrors(errors)
     }, [address, city, state, country, name, description, price])
 
+    /***************** handle events *******************/
     // submit form
     const history = useHistory();
 
@@ -133,7 +136,7 @@ function SpotEdit() {
         history.push(`/spots/${spotId}`)
     }
 
-    /*************************** render component ****************************/
+    /**************** render component *****************/
     return (
 
         <div className="spot-create-page">
@@ -280,4 +283,6 @@ function SpotEdit() {
     )
 }
 
+
+/******************************** EXPORTS ********************************/
 export default SpotEdit

@@ -1,9 +1,15 @@
+/******************************** IMPORTS ********************************/
+// libraries
 import React from "react";
 import {NavLink, Link} from "react-router-dom";
+// local files
 import "./Host.css"
 
+
+/******************************* COMPONENT *******************************/
 function Host() {
 
+    /**************** render component *****************/
     return (
         <div className="full-page">
 
@@ -49,4 +55,6 @@ function Host() {
     )
 }
 
+
+/******************************** EXPORTS ********************************/
 export default Host;

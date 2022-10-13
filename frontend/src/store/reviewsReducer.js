@@ -1,16 +1,16 @@
-/***************************** IMPORTS *****************************/
+/******************************** IMPORTS ********************************/
 // local files
 import { csrfFetch } from "./csrf";
 import { normalizeArray } from "../component-resources/index";
 
 
-/****************************** TYPES ******************************/
+/********************************* TYPES *********************************/
 const REVIEWS_CREATE_SINGLE_REVIEW = 'reviews/CREATE_SINGLE_REVIEW';
 const REVIEWS_READ_USER_REVIEWS = 'reviews/READ_USER_REVIEWS';
 const REVIEWS_DELETE_SINGLE_REVIEW = 'reviews/DELETE_SINGLE_REVIEW';
 
 
-/************************* ACTION CREATORS *************************/
+/**************************** ACTION CREATORS ****************************/
 export const actionCreateSingleReview = (newReview) => ({
     type: REVIEWS_CREATE_SINGLE_REVIEW,
     payload: newReview
@@ -27,7 +27,7 @@ export const actionDeleteSingleReview = (reviewId) => ({
 });
 
 
-/*************************** THUNKS (API) ***************************/
+/***************************** THUNKS (API) ******************************/
 export const thunkCreateSingleReview = (spotId, data) => async (dispatch) => {
 
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
@@ -67,13 +67,13 @@ export const thunkDeleteSingleReview = (reviewId) => async (dispatch) => {
 }
 
 
-/*************************** STATE SHAPE ****************************/
+/***************************** STATE SHAPE *******************************/
 const initialState = {
     reviews: {}
 }
 
 
-/***************************** REDUCER ******************************/
+/******************************* REDUCER *********************************/
 const reviewsReducer = (state = initialState, action) => {
 
     let newState = {...state};
@@ -108,5 +108,5 @@ const reviewsReducer = (state = initialState, action) => {
 }
 
 
-/***************************** EXPORTS *****************************/
+/******************************** EXPORTS ********************************/
 export default reviewsReducer;

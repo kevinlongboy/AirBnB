@@ -1,3 +1,4 @@
+/******************************** IMPORTS ********************************/
 // libraries
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,30 +9,24 @@ import chevronRight from '../../assets/fontawesome/chevron-right.svg'
 import './ReviewsRead.css'
 
 
+/******************************* COMPONENT *******************************/
 function Reviews() {
 
-    /******************************** state ********************************/
+    /****************** access store *******************/
     const sessionState = useSelector(state => state.session);
     const reviewsState = useSelector(state => state.reviews);
 
-    /********************** reducer/API communication ***********************/
+    /************ key into pertinent values ************/
+    let reviewsArr = Object.values(reviewsState)
+
+    /************ reducer/API communication ************/
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(thunkReadUserReviews())
     }, [reviewsState]);
 
-    /********************** key into pertinent values ***********************/
-    let reviewsArr = Object.values(reviewsState)
-    console.log("reviewsArr", reviewsArr)
-
-    /******************************* events ********************************/
-    const handleDelete = (reviewId) => {
-        console.log("reviewId", reviewId)
-        dispatch(thunkDeleteSingleReview(reviewId))
-    }
-
-    /*********************** conditional components *************************/
+    /************* conditional components **************/
     let reviewComponent
     if (!reviewsArr.length) {
         reviewComponent = (
@@ -57,7 +52,12 @@ function Reviews() {
         )
     }
 
-    /*************************** render component ****************************/
+    /***************** handle events *******************/
+    const handleDelete = (reviewId) => {
+        dispatch(thunkDeleteSingleReview(reviewId))
+    }
+
+    /**************** render component *****************/
     return(
         <div className="review-page">
 
@@ -105,4 +105,6 @@ function Reviews() {
     )
 }
 
+
+/******************************** EXPORTS ********************************/
 export default Reviews;

@@ -1,3 +1,4 @@
+/******************************** IMPORTS ********************************/
 // libraries
 import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
@@ -8,17 +9,18 @@ import { states } from "../../component-resources";
 import './SpotCreate.css'
 
 
+/******************************* COMPONENT *******************************/
 function SpotCreate() {
 
-    /******************************** state ********************************/
+    /****************** access store *******************/
     const sessionState = useSelector(state => state.session);
     const spotsState = useSelector(state => state.spots);
     const singleSpot = spotsState.singleSpotDetails
 
-    /********************** reducer/API communication ***********************/
+    /************ reducer/API communication ************/
     const dispatch = useDispatch();
 
-    /********************** key into pertinent values ***********************/
+    /****************** manage state *******************/
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
@@ -28,8 +30,7 @@ function SpotCreate() {
     const [price, setPrice] = useState(125);
     const [validationErrors, setValidationErrors] = useState([]);
 
-    /*********************** conditional components *************************/
-    // change price
+    // change price value
     let incrementCounter = () => {
         if (price < 10000) setPrice(price + 1);
     }
@@ -67,9 +68,6 @@ function SpotCreate() {
             errors.push("Please create a shorter title.")
         }
 
-        // if (description.length === 0) {
-        //     errors.push("Description is required.")
-        // }
         if (description.length >= 1 && description.length < 5) {
             errors.push("Please write a longer description.")
         } else if (description.length > 50) {
@@ -83,8 +81,7 @@ function SpotCreate() {
         setValidationErrors(errors)
     }, [address, city, state, country, name, description, price])
 
-
-    /******************************* events *********************************/
+    /***************** handle events *******************/
     // submit form
     const history = useHistory();
     const handleSubmit = (e) => {
@@ -120,14 +117,9 @@ function SpotCreate() {
         )
 
         attempt.then(console.log("hello"))
-
-
-        // history.push(`/`)
-        // history.push(`/spots/${spotId}`)
     }
 
-
-    /*************************** render component ****************************/
+    /**************** render component *****************/
     return (
 
         <div className="spot-create-page">
@@ -276,4 +268,6 @@ function SpotCreate() {
     )
 }
 
+
+/******************************** EXPORTS ********************************/
 export default SpotCreate

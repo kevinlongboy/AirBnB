@@ -1,15 +1,23 @@
+/******************************** IMPORTS ********************************/
+// libraries
 import React, { useState } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { Redirect } from "react-router-dom";
+// local files
 import * as sessionActions from "../../store/sessionReducer";
 import '../../context/Modal.css'
 
 
+/******************************* COMPONENT *******************************/
 function SignupFormPage() {
 
+  /****************** access store *******************/
   const sessionUser = useSelector((state) => state.session.user);
 
+  /************ reducer/API communication ************/
   const dispatch = useDispatch();
+
+  /****************** manage state *******************/
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,8 +27,9 @@ function SignupFormPage() {
   const [errors, setErrors] = useState([]);
 
 
-  // if (sessionUser) return <Redirect to="/" />;
+  if (sessionUser) return <Redirect to="/" />;
 
+  /***************** handle events *******************/
   const handleSubmit = (e) => {
 
     e.preventDefault();
@@ -31,15 +40,14 @@ function SignupFormPage() {
       errors.push("Those passwords didn't match. Please try again.")
       setErrors(errors);
       return
-    }
 
-    else if (password === confirmPassword) {
+    } else if (password === confirmPassword) {
 
       setErrors([]);
 
       let userData = {firstName, lastName, username, password, email }
 
-      let signUp = dispatch(sessionActions.signup(userData)).catch(
+      dispatch(sessionActions.signup(userData)).catch(
         async (res) => {
 
           const data = await res.json();
@@ -54,6 +62,7 @@ function SignupFormPage() {
     }
   };
 
+  /**************** render component *****************/
   return (
 
     <div>
@@ -164,4 +173,6 @@ function SignupFormPage() {
   );
 }
 
+
+/******************************** EXPORTS ********************************/
 export default SignupFormPage;

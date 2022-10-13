@@ -1,21 +1,28 @@
+/******************************** IMPORTS ********************************/
+// libraries
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
+// local files
 import ProfileButton from './ProfileButton';
 import HostingButton from './HostingButton';
 import LoginFormModal from '../LoginFormModal/index.js';
 import cranebnbLogo from "../../assets/branding/cranebnb-logo-3.png";
 import './Navigation.css';
 
+
+/******************************* COMPONENT *******************************/
 function Navigation({ isLoaded }){
 
+  /****************** access store *******************/
   const sessionUser = useSelector(state => state.session.user);
+
+  /************ key into pertinent values ************/
   let userId
   if (sessionUser) userId = sessionUser.id
 
+  /************* conditional components **************/
   let sessionLinks;
-
   if (userId) { // prev: if (sessionUser)
     sessionLinks = (
       <div className="nav-bar-right">
@@ -23,9 +30,7 @@ function Navigation({ isLoaded }){
         <ProfileButton user={sessionUser} />
       </div>
     );
-  }
-
-  else {
+  } else {
     sessionLinks = (
       <div className="nav-bar-right">
         <LoginFormModal />
@@ -33,6 +38,7 @@ function Navigation({ isLoaded }){
     );
   }
 
+  /**************** render component *****************/
   return (
     <div className="nav-bar">
 
@@ -46,4 +52,6 @@ function Navigation({ isLoaded }){
   );
 }
 
+
+/******************************** EXPORTS ********************************/
 export default Navigation;

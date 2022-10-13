@@ -1,4 +1,4 @@
-/************************************ ABBREVIATED STATES FOR FORM INPUT ************************************/
+/******************************* STATE ABBREVIATIONS (FOR CONTROLLED INPUTS) *******************************/
 export const states = [
     'AL', 'AK', 'AZ', 'AR', 'CA',
     'CZ', 'CO', 'CT', 'DE', 'DC',

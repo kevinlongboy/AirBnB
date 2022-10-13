@@ -1,8 +1,14 @@
+/******************************** IMPORTS ********************************/
+// libraries
 import React from "react";
+// local files
 import './Footer.css'
 
+
+/******************************* COMPONENT *******************************/
 function Footer() {
 
+    /**************** render component *****************/
     return (
         <div className="footer">
             <div className="footer-contents">
@@ -12,4 +18,6 @@ function Footer() {
     )
 }
 
+
+/******************************** EXPORTS ********************************/
 export default Footer

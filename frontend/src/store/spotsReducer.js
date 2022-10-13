@@ -1,11 +1,11 @@
-/***************************** IMPORTS *****************************/
+/******************************** IMPORTS ********************************/
 // local files
 import { csrfFetch } from "./csrf";
 import { normalizeArray } from "../component-resources/index";
 import { addPlaceholderImages } from "../component-resources/index";
 
 
-/****************************** TYPES ******************************/
+/********************************* TYPES *********************************/
 const SPOTS_CREATE_SINGLE_SPOT = 'spots/CREATE_SINGLE_SPOT';
 const SPOTS_READ_ALL_SPOTS = 'spots/READ_ALL_SPOTS';
 const SPOTS_READ_SINGLE_SPOT_DETAILS = 'spots/READ_SINGLE_SPOT_DETAILS';
@@ -14,7 +14,7 @@ const SPOTS_UPDATE_SINGLE_SPOT = 'spots/UPDATE_SINGLE_SPOT'
 const SPOTS_DELETE_SINGLE_SPOT = 'spots/DELETE_SINGLE_SPOT';
 
 
-/************************* ACTION CREATORS *************************/
+/**************************** ACTION CREATORS ****************************/
 export const actionCreateSingleSpot = (newSpot) => ({
     type: SPOTS_CREATE_SINGLE_SPOT,
     payload: newSpot
@@ -46,7 +46,7 @@ export const actionDeleteSingleSpot = (spotId) => ({
 });
 
 
-/*************************** THUNKS (API) ***************************/
+/***************************** THUNKS (API) ******************************/
 export const thunkCreateSingleSpot = (data) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`, {
         method: 'post',
@@ -111,7 +111,7 @@ export const thunkDeleteSingleSpot = (spotId) => async (dispatch) => {
 }
 
 
-/*************************** STATE SHAPE ****************************/
+/***************************** STATE SHAPE *******************************/
 const initialState = {
     allSpots: {},
     singleSpotDetails: {
@@ -122,7 +122,7 @@ const initialState = {
 }
 
 
-/***************************** REDUCER ******************************/
+/******************************* REDUCER *********************************/
 const spotsReducer = (state = initialState, action) => {
 
     let newState = {...state};
@@ -232,5 +232,5 @@ const spotsReducer = (state = initialState, action) => {
 }
 
 
-/***************************** EXPORTS *****************************/
+/******************************** EXPORTS ********************************/
 export default spotsReducer;

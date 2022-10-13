@@ -1,13 +1,14 @@
-/***************************** IMPORTS *****************************/
+/******************************** IMPORTS ********************************/
+// local files
 import { csrfFetch } from './csrf';
 
 
-/****************************** TYPES ******************************/
+/********************************* TYPES *********************************/
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 
 
-/************************* ACTION CREATORS *************************/
+/**************************** ACTION CREATORS ****************************/
 const setUser = (user) => {
   return {
     type: SET_USER,
@@ -22,7 +23,7 @@ const removeUser = () => {
 };
 
 
-/*************************** THUNKS (API) ***************************/
+/***************************** THUNKS (API) ******************************/
 export const signup = (user) => async (dispatch) => {
     const { firstName, lastName, username, password, email } = user;
     const response = await csrfFetch("/api/users", {
@@ -71,11 +72,11 @@ export const logout = () => async (dispatch) => {
 };
 
 
-/*************************** STATE SHAPE ****************************/
+/***************************** STATE SHAPE *******************************/
 const initialState = { user: null };
 
 
-/***************************** REDUCER ******************************/
+/******************************* REDUCER *********************************/
 const sessionReducer = (state = initialState, action) => {
 
   let newState;
@@ -98,5 +99,5 @@ const sessionReducer = (state = initialState, action) => {
 };
 
 
-/***************************** EXPORTS *****************************/
+/******************************** EXPORTS ********************************/
 export default sessionReducer;

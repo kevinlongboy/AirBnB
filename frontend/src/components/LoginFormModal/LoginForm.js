@@ -1,15 +1,22 @@
+/******************************** IMPORTS ********************************/
+// libraries
 import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../store/sessionReducer";
 import { useDispatch } from "react-redux";
+// local files
+import '../../context/Modal.css'
 import { Modal } from '../../context/Modal';
 import SignupFormPage from "./SignupFormPage";
-import '../../context/Modal.css'
 import './LoginFormModal.css';
 
 
+/******************************* COMPONENT *******************************/
 function LoginForm() {
 
+  /************ reducer/API communication ************/
   const dispatch = useDispatch();
+
+  /****************** manage state *******************/
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -31,9 +38,8 @@ function LoginForm() {
     setValidationErrors(validationErrors)
   }, [credential, password])
 
-
-
-  const handleSubmit = (e) => {
+  /***************** handle events *******************/
+  const handleSubmitLogin = (e) => {
 
     e.preventDefault();
 
@@ -60,8 +66,7 @@ function LoginForm() {
     // history.push('/');
   };
 
-
-
+  /**************** render component *****************/
   return (
     <div>
 
@@ -115,7 +120,7 @@ function LoginForm() {
           id="login-button"
           type="submit"
           disabled={!!validationErrors.length}
-          onClick={handleSubmit}
+          onClick={handleSubmitLogin}
           >
         Continue
         </button>
@@ -169,4 +174,6 @@ function LoginForm() {
   );
 }
 
+
+/******************************** EXPORTS ********************************/
 export default LoginForm;

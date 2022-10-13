@@ -1,27 +1,28 @@
+/******************************** IMPORTS ********************************/
 // libraries
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 // local files
 import { thunkCreateSingleReview } from "../../store/reviewsReducer";
 import './ReviewCreate.css'
 
 
+/******************************* COMPONENT *******************************/
 function ReviewCreate() {
 
-    /******************************** state ********************************/
+    /****************** access store *******************/
     const sessionState = useSelector(state => state.session);
     const reviewsState = useSelector(state => state.reviews);
 
-    /********************** reducer/API communication ***********************/
+    /************ reducer/API communication ************/
     const dispatch = useDispatch();
 
-    /********************** key into pertinent values ***********************/
+    /****************** manage state *******************/
     const [review, setReview] = useState("");
     const [stars, setStars] = useState("★★★★★");
     const [validationErrors, setValidationErrors] = useState([]);
 
-    /*********************** conditional components *************************/
     // change star-value
     let incrementCounter = () => {
         if (stars.length < 5) setStars(stars.concat("★"));
@@ -63,8 +64,7 @@ function ReviewCreate() {
         setValidationErrors(errors)
       }, [review, stars])
 
-    /******************************** events *********************************/
-    const history = useHistory();
+    /***************** handle events *******************/
     const { spotId } = useParams()
     const handleSubmit = (e) => {
 
@@ -92,7 +92,7 @@ function ReviewCreate() {
     }
 
 
-    /*************************** render component ****************************/
+    /**************** render component *****************/
     return (
 
         <div className="review-create-panel">
@@ -180,4 +180,6 @@ function ReviewCreate() {
     )
 }
 
+
+/******************************** EXPORTS ********************************/
 export default ReviewCreate

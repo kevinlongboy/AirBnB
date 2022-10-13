@@ -1,3 +1,4 @@
+/******************************** IMPORTS ********************************/
 // libraries
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -10,42 +11,29 @@ import { convertDate, addPlaceholderImages } from "../../component-resources";
 import './SpotPage.css';
 
 
+/******************************* COMPONENT *******************************/
 function SpotPage() {
 
-  /******************************** state ********************************/
+  /****************** access store *******************/
   const sessionState = useSelector(state => state.session);
   const spotsState = useSelector(state => state.spots);
 
-  /******************************** params ********************************/
+  /************ key into pertinent values ************/
+  // user
+  const userId = sessionState.user.id;
+  // spots
+  const spot = spotsState.singleSpotDetails;
+  // reviews
+  const spotReviews = spotsState.singleSpotReviews;
+  const reviews = Object.values(spotReviews);
+  // images
+  const spotImgs = spotsState.singleSpotDetails.SpotImages;
+  const images = Object.values(spotImgs);
+  // params
   const { spotId } = useParams()
 
-  /********************** key into pertinent values ***********************/
-  const userId = sessionState.user.id; // typeof: number
-  // console.log("typeof userId", typeof userId)
-  const spot = spotsState.singleSpotDetails;
-  // console.log("spot", spot)
-  const spotReviews = spotsState.singleSpotReviews;
-  // console.log("spotReviews", spotReviews)
-  const reviews = Object.values(spotReviews)
-  // console.log("reviews", reviews)
-  const spotImgs = spotsState.singleSpotDetails.SpotImages
-  const images = Object.values(spotImgs)
-
-  // const spotImagesRaw = spot.SpotImages // array of objects
-  // const spotImagesArr = []
-  // spotImagesRaw.forEach((img) => spotImagesArr.push(img.url))
-  // spotImagesArr = addPlaceholderImages(spotImagesArr) // add filler images, if min not met
-
-  /********************** reducer/API communication ***********************/
+  /************ reducer/API communication ************/
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(thunkReadAllSpots());
-  // }, [dispatch]);
-
-//   useEffect(() => {
-//     dispatch(thunkReadAllSpots());
-// }, [spotsState])
 
   useEffect(() => {
     dispatch(thunkReadSingleSpotDetails(spotId));
@@ -59,11 +47,19 @@ function SpotPage() {
     dispatch(thunkCreateSingleReview());
   }, [spotReviews]);
 
-  /*********************** conditional components *************************/
+  /************* conditional components **************/
+  // images
+  if (images.length < 5) {
+    addPlaceholderImages(images)
+  } else if (images.length > 5) {
+    images.splice(5, images.length - 1)
+  }
+
   let reviewComponent = (
     <></>
   )
 
+  // reviews
   if (userId && (userId !== spot.ownerId)) {
     reviewComponent = (
     <ReviewCreate />
@@ -71,7 +67,6 @@ function SpotPage() {
   }
 
   const userAlreadyReviewedSpot = reviews.filter(obj => obj.User.id === userId)
-  // console.log("userAlreadyReviewedSpot", userAlreadyReviewedSpot)
   if (userAlreadyReviewedSpot.length > 0) {
     reviewComponent = (
       <>
@@ -79,14 +74,7 @@ function SpotPage() {
     )
   }
 
-
-  if (images.length < 5) {
-    addPlaceholderImages(images)
-  } else if (images.length > 5) {
-    images.splice(5, images.length - 1)
-  }
-
-  /*************************** render component ****************************/
+  /**************** render component *****************/
   return (
 
     <div className="spot-page">
@@ -151,4 +139,6 @@ function SpotPage() {
   )
 }
 
+
+/******************************** EXPORTS ********************************/
 export default SpotPage

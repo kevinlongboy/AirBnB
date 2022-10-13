@@ -1,22 +1,31 @@
+/******************************** IMPORTS ********************************/
+// libraries
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+// local files
 import { thunkReadAllSpots } from "../../store/spotsReducer";
 import './Main.css';
 
 
+/******************************* COMPONENT *******************************/
 function Main() {
 
+    /****************** access store *******************/
     const spotsState = useSelector(state => state.spots)
 
+    /************ key into pertinent values ************/
+    const allSpots = spotsState.allSpots
+    let allSpotsArr = Object.values(allSpots) // removes keys from original object
+
+    /************ reducer/API communication ************/
     const dispatch = useDispatch();
+    
     useEffect(() => {
         dispatch(thunkReadAllSpots());
     }, [dispatch])
 
-    const allSpots = spotsState.allSpots
-    let allSpotsArr = Object.values(allSpots) // removes keys from original object
-
+    /**************** render component *****************/
     return (
         <div className="spots">
 
@@ -50,4 +59,6 @@ function Main() {
     )
 }
 
+
+/******************************** EXPORTS ********************************/
 export default Main
