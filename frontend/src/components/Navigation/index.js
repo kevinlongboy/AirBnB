@@ -4,9 +4,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // local files
-import ProfileButton from './ProfileButton';
+import ProfileButton from './Session/ToggleAccountMenu';
 import HostingButton from './HostingButton';
-import LoginFormModal from '../LoginFormModal/index.js';
+import LoginOrSignUpModal from './NoSession/LoginOrSignUpModal/index';
 import cranebnbLogo from "../../assets/branding/cranebnb-logo-3.png";
 import './Navigation.css';
 
@@ -33,7 +33,7 @@ function Navigation({ isLoaded }){
   } else {
     sessionLinks = (
       <div className="nav-bar-right">
-        <LoginFormModal />
+        <LoginOrSignUpModal />
         </div>
     );
   }

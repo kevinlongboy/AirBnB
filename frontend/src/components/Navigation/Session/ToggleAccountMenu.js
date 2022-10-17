@@ -4,14 +4,14 @@ import React, { useState, useEffect } from "react";
 import { NavLink, useHistory} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 // local files
-import * as sessionActions from '../../store/sessionReducer';
-import './Navigation.css'
-import menuBars from '../../assets/fontawesome/bars-solid.png'
-import userIcon from '../../assets/fontawesome/circle-user-solid.png'
+import * as sessionActions from '../../../store/sessionReducer';
+import '../../Navigation/Navigation.css'
+import menuBars from '../../../assets/fontawesome/bars-solid.png'
+import userIcon from '../../../assets/fontawesome/circle-user-solid.png'
 
 
 /******************************* COMPONENT *******************************/
-function ProfileButton({ user }) {
+function ToggleAccountMenu({ user }) {
 
   /****************** access store *******************/
   const sessionState = useSelector(state => state.session)
@@ -85,4 +85,4 @@ function ProfileButton({ user }) {
 
 
 /******************************** EXPORTS ********************************/
-export default ProfileButton;
+export default ToggleAccountMenu;

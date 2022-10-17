@@ -1,13 +1,13 @@
 /******************************** IMPORTS ********************************/
 // libraries
 import React, { useState, useEffect } from "react";
-import * as sessionActions from "../../store/sessionReducer";
+import * as sessionActions from "../../../../store/sessionReducer";
 import { useDispatch } from "react-redux";
 // local files
-import '../../context/Modal.css'
-import { Modal } from '../../context/Modal';
-import SignupFormPage from "./SignupFormPage";
-import './LoginFormModal.css';
+import '../../../../context/Modal.css'
+import { Modal } from '../../../../context/Modal';
+import SignUpForm from "../SignUpForm";
+import '../LoginOrSignUpModal/LoginOrSignUpModal.css';
 
 
 /******************************* COMPONENT *******************************/
@@ -135,7 +135,7 @@ function LoginForm() {
         </button>
             {showModal && (
             <Modal onClose={() => setShowModal(false)}>
-              <SignupFormPage />
+              <SignUpForm />
             </Modal>
             )}
 

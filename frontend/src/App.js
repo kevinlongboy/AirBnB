@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/LoginFormModal/SignupFormPage";
+import SignUpForm from "./components/Navigation/NoSession/SignUpForm";
 
 import * as sessionActions from "./store/sessionReducer";
 import AllSpots from "./components/Spots/AllSpots";
@@ -65,7 +65,7 @@ function App() {
           </Route>
 
          <Route exact path={"/legacy/signup"}>
-            <SignupFormPage />
+            <SignUpForm />
           </Route>
 
         </Switch>

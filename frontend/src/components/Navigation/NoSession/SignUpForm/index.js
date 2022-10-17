@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { Redirect } from "react-router-dom";
 // local files
-import * as sessionActions from "../../store/sessionReducer";
-import '../../context/Modal.css'
+import * as sessionActions from "../../../../store/sessionReducer";
+import '../../../../context/Modal.css'
 
 
 /******************************* COMPONENT *******************************/
-function SignupFormPage() {
+function SignUpForm() {
 
   /****************** access store *******************/
   const sessionUser = useSelector((state) => state.session.user);
@@ -175,4 +175,4 @@ function SignupFormPage() {
 
 
 /******************************** EXPORTS ********************************/
-export default SignupFormPage;
+export default SignUpForm;

@@ -2,15 +2,15 @@
 // libraries
 import React, { useState } from 'react';
 // local files
-import { Modal } from '../../context/Modal';
-import LoginForm from './LoginForm';
-import menuBars from '../../assets/fontawesome/bars-solid.png'
-import userIcon from '../../assets/fontawesome/circle-user-solid.png'
-import './LoginFormModal.css';
+import { Modal } from '../../../../context/Modal';
+import LoginForm from '../LoginForm';
+import menuBars from '../../../../assets/fontawesome/bars-solid.png'
+import userIcon from '../../../../assets/fontawesome/circle-user-solid.png'
+import './LoginOrSignUpModal.css';
 
 
 /******************************* COMPONENT *******************************/
-function LoginFormModal() {
+function LoginOrSignUpModal() {
 
   /****************** manage state *******************/
   const [showModal, setShowModal] = useState(false);
@@ -36,4 +36,4 @@ function LoginFormModal() {
 
 
 /******************************** EXPORTS ********************************/
-export default LoginFormModal;
+export default LoginOrSignUpModal;
