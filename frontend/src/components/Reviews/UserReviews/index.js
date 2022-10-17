@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import { thunkDeleteSingleReview, thunkReadUserReviews } from "../../../store/reviewsReducer";
+import { thunkReadUserReviews } from "../../../store/reviewsReducer";
 import DeleteReview from "../DeleteReview";
 import { convertDate } from "../../../component-resources";
 import chevronRight from '../../../assets/fontawesome/chevron-right.svg'
