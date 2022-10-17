@@ -67,21 +67,3 @@
     font-size: 14px;
     font-weight: 100;
 }
-
-#review-table-button {
-    width: 70px;
-    height: 40px;
-    border: 1.5px solid #767676;
-    border-radius: 8px;
-    font-size: 14.5px;
-    text-align: center;
-    background: none;
-    margin-top: 8px;
-    margin-left: 24px;
-    margin-bottom: 24px;
-    color: #484848;
-}
-
-#review-table-button:hover {
-    cursor: pointer;
-}

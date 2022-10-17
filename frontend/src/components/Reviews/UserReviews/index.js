@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // local files
 import { thunkDeleteSingleReview, thunkReadUserReviews } from "../../../store/reviewsReducer";
+import DeleteReview from "../DeleteReview";
 import { convertDate } from "../../../component-resources";
 import chevronRight from '../../../assets/fontawesome/chevron-right.svg'
 import './UserReviews.css'
@@ -45,16 +46,11 @@ function UserReviews() {
                         <p id="review-table-body-title">Review for {review.Spot && review.Spot.name}</p>
                         <p id="review-table-body-data">{review.review}</p>
                         <p id="review-table-body-date-created">{review.createdAt && convertDate(review.createdAt)}</p>
-                        <button id="review-table-button" type="submit" onClick={(e) => handleDelete(review.id)}>Delete</button>
+                        <DeleteReview id={review.id}/>
                     </td>
                 </tr>
             )
         )
-    }
-
-    /***************** handle events *******************/
-    const handleDelete = (reviewId) => {
-        dispatch(thunkDeleteSingleReview(reviewId))
     }
 
     /**************** render component *****************/

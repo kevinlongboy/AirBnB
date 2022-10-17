@@ -2,27 +2,27 @@
 // libraries
 import { useDispatch } from "react-redux";
 // local files
-import { thunkDeleteSingleSpot } from "../../../store/spotsReducer";
-import './DeleteSpot.css'
+import { thunkDeleteSingleReview } from "../../../store/reviewsReducer";
+import './DeleteReview.css'
 
 
 /******************************* COMPONENT *******************************/
-function DeleteSpot({id}) {
+function DeleteReview({id}) {
 
     /************ reducer/API communication ************/
     const dispatch = useDispatch();
 
     /***************** handle events *******************/
-    const handleDelete = (spotId) => {
-        dispatch(thunkDeleteSingleSpot(spotId))
+    const handleDelete = (reviewId) => {
+        dispatch(thunkDeleteSingleReview(reviewId))
     }
 
     /**************** render component *****************/
     return (
-        <button className="table-button" type="button" onClick={(e) => handleDelete(id)}>Delete</button>
+        <button id="review-table-button" type="submit" onClick={(e) => handleDelete(id)}>Delete</button>
     )
 }
 
 
 /******************************** EXPORTS ********************************/
-export default DeleteSpot
+export default DeleteReview

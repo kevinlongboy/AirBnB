@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import SignUpForm from "./components/Navigation/NoSession/SignUpForm";
 // local files
 import * as sessionActions from "./store/sessionReducer";
 import Navigation from "./components/Navigation";
@@ -15,7 +14,6 @@ import UpdateSpotForm from "./components/Spots/UpdateSpotForm";
 import UserReviews from "./components/Reviews/UserReviews"
 import UpdateReviewForm from "./components/Reviews/UpdateReviewForm";
 import Footer from "./components/Footer/index.js"
-// import Host from "./components/Host/Host"; // yeet
 
 
 /******************************* COMPONENT *******************************/
@@ -34,7 +32,7 @@ function App() {
   /**************** render component *****************/
   return (
     <>
-    <Navigation isLoaded={isLoaded} path="/"/>
+    <Navigation isLoaded={isLoaded} exact path="/"/>
 
       {isLoaded && (
         <Switch>
@@ -66,15 +64,6 @@ function App() {
           <Route exact path={'/reviews/:reviewId/edit'}>
             <UpdateReviewForm />
           </Route>
-
-
-          {/* <Route exact path={'/legacy/host'}>
-            <Host />
-          </Route>
-
-         <Route exact path={"/legacy/signup"}>
-            <SignUpForm />
-          </Route> */}
 
         </Switch>
       )}
