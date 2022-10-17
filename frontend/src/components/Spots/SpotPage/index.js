@@ -4,9 +4,10 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import ReviewCreate from "../../Reviews/CreateReviewForm/index.js";
-import { thunkReadAllSpots, thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../../store/spotsReducer";
+import { thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../../store/spotsReducer";
 import { thunkCreateSingleReview } from "../../../store/reviewsReducer.js";
+import CreateReviewForm from "../../Reviews/CreateReviewForm/index.js";
+import SpotReviews from "../../Reviews/SpotReviews/index.js";
 import { convertDate, addPlaceholderImages } from "../../../component-resources";
 import './SpotPage.css';
 
@@ -37,15 +38,15 @@ function SpotPage() {
 
   useEffect(() => {
     dispatch(thunkReadSingleSpotDetails(spotId));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(thunkReadSingleSpotReviews(spotId));
-  }, [spotReviews]);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(thunkCreateSingleReview());
-  }, [spotReviews]);
+  }, [dispatch]);
 
   /************* conditional components **************/
   // images
@@ -62,7 +63,7 @@ function SpotPage() {
   // reviews
   if (userId && (userId !== spot.ownerId)) {
     reviewComponent = (
-    <ReviewCreate />
+    <CreateReviewForm />
     )
   }
 
@@ -120,20 +121,7 @@ function SpotPage() {
 
         </div>
 
-        <div className="reviews">
-          <h2 className="review-data">★ {spot.avgStarRating} · {spot.numReviews} Review<span>{spot.numReviews === 1 ? '' : 's'}</span></h2>
-
-          {reviews.map((review, index) => (
-            <div>
-              <div className="review-username">{review.User.firstName}</div>
-                <div className="review-date">{review.createdAt && convertDate(review.createdAt)}</div>
-                <div className="review-content">{review.review}</div>
-              </div>
-          ))}
-
-
-        </div>
-
+        <SpotReviews />
 
     </div>
   )
