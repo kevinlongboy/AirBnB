@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 // local files
 import { thunkDeleteSingleSpot, thunkReadAllSpots } from "../../store/spotsReducer";
 import plusIcon from '../../assets/fontawesome/plus-solid.svg'
-import './Spots.css'
+import './UserSpots.css'
 
 
 /******************************* COMPONENT *******************************/
-function Spots() {
+function UserSpots() {
 
     /****************** access store *******************/
     const sessionState = useSelector(state => state.session);
@@ -97,4 +97,4 @@ function Spots() {
 
 
 /******************************** EXPORTS ********************************/
-export default Spots
+export default UserSpots

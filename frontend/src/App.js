@@ -5,7 +5,7 @@ import SignupFormPage from "./components/LoginFormModal/SignupFormPage";
 
 import * as sessionActions from "./store/sessionReducer";
 import Main from "./components/Main/Main";
-import Spots from "./components/Spots/Spots";
+import UserSpots from "./components/UserSpots";
 import SpotPage from "./components/SpotPage/SpotPage";
 import SpotEdit from "./components/SpotEdit/SpotEdit";
 import SpotCreate from "./components/SpotCreate/SpotCreate";
@@ -36,7 +36,7 @@ function App() {
           </Route>
 
           <Route exact path={'/spots'}>
-            <Spots />
+            <UserSpots />
           </Route>
 
           <Route exact path={'/spots/:spotId'}>
