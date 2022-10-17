@@ -4,10 +4,10 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import ReviewCreate from "../ReviewCreate/ReviewCreate.js";
-import { thunkReadAllSpots, thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../store/spotsReducer";
-import { thunkCreateSingleReview } from "../../store/reviewsReducer.js";
-import { convertDate, addPlaceholderImages } from "../../component-resources";
+import ReviewCreate from "../../Reviews/CreateReviewForm/index.js";
+import { thunkReadAllSpots, thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../../store/spotsReducer";
+import { thunkCreateSingleReview } from "../../../store/reviewsReducer.js";
+import { convertDate, addPlaceholderImages } from "../../../component-resources";
 import './SpotPage.css';
 
 

@@ -3,14 +3,14 @@
 import { useEffect, useState} from "react";
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { thunkReadSingleSpotDetails, thunkUpdateSingleSpot } from "../../store/spotsReducer";
+import { thunkReadSingleSpotDetails, thunkUpdateSingleSpot } from "../../../store/spotsReducer";
 // local files
-import { states } from '../../component-resources/index.js';
-import './SpotEdit.css';
+import { states } from '../../../component-resources/index.js';
+import './UpdateSpotForm.css';
 
 
 /******************************* COMPONENT *******************************/
-function SpotEdit() {
+function UpdateSpotForm() {
 
     /****************** access store *******************/
     const spotsState = useSelector(state => state.spots.singleSpotDetails);
@@ -285,4 +285,4 @@ function SpotEdit() {
 
 
 /******************************** EXPORTS ********************************/
-export default SpotEdit
+export default UpdateSpotForm

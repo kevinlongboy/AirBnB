@@ -4,12 +4,12 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import { thunkReadAllSpots } from "../../store/spotsReducer";
-import './Main.css';
+import { thunkReadAllSpots } from "../../../store/spotsReducer";
+import './AllSpots.css';
 
 
 /******************************* COMPONENT *******************************/
-function Main() {
+function AllSpots() {
 
     /****************** access store *******************/
     const spotsState = useSelector(state => state.spots)
@@ -20,7 +20,7 @@ function Main() {
 
     /************ reducer/API communication ************/
     const dispatch = useDispatch();
-    
+
     useEffect(() => {
         dispatch(thunkReadAllSpots());
     }, [dispatch])
@@ -61,4 +61,4 @@ function Main() {
 
 
 /******************************** EXPORTS ********************************/
-export default Main
+export default AllSpots

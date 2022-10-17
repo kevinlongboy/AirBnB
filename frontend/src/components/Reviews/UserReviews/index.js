@@ -3,14 +3,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import { thunkDeleteSingleReview, thunkReadUserReviews } from "../../store/reviewsReducer";
-import { convertDate } from "../../component-resources";
-import chevronRight from '../../assets/fontawesome/chevron-right.svg'
-import './ReviewsRead.css'
+import { thunkDeleteSingleReview, thunkReadUserReviews } from "../../../store/reviewsReducer";
+import { convertDate } from "../../../component-resources";
+import chevronRight from '../../../assets/fontawesome/chevron-right.svg'
+import './UserReviews.css'
 
 
 /******************************* COMPONENT *******************************/
-function Reviews() {
+function UserReviews() {
 
     /****************** access store *******************/
     const sessionState = useSelector(state => state.session);
@@ -107,4 +107,4 @@ function Reviews() {
 
 
 /******************************** EXPORTS ********************************/
-export default Reviews;
+export default UserReviews;

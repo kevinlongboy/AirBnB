@@ -4,16 +4,16 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/LoginFormModal/SignupFormPage";
 
 import * as sessionActions from "./store/sessionReducer";
-import Main from "./components/Main/Main";
+import AllSpots from "./components/Spots/AllSpots";
 import UserSpots from "./components/Spots/UserSpots";
-import SpotPage from "./components/SpotPage/SpotPage";
-import SpotEdit from "./components/SpotEdit/SpotEdit";
+import SpotPage from "./components/Spots/SpotPage";
+import SpotEdit from "./components/Spots/UpdateSpotForm";
 import CreateSpotForm from "./components/Spots/CreateSpotForm";
-import Reviews from "./components/ReviewsRead/ReviewsRead"
-import ReviewEdit from "./components/ReviewEdit/ReviewEdit";
+import Reviews from "./components/Reviews/UserReviews"
+import ReviewEdit from "./components/Reviews/UpdateReviewForm";
 
 import Navigation from "./components/Navigation";
-import Footer from "./components/Footer/Footer.js"
+import Footer from "./components/Footer/index.js"
 
 import Host from "./components/Host/Host"; // yeet
 
@@ -32,7 +32,7 @@ function App() {
         <Switch>
 
           <Route exact path={'/'}>
-            <Main />
+            <AllSpots />
           </Route>
 
           <Route exact path={'/spots'}>

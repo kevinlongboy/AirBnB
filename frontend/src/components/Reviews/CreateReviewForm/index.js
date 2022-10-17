@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import { thunkCreateSingleReview } from "../../store/reviewsReducer";
-import './ReviewCreate.css'
+import { thunkCreateSingleReview } from "../../../store/reviewsReducer";
+import './CreateReviewForm.css'
 
 
 /******************************* COMPONENT *******************************/
-function ReviewCreate() {
+function CreateReviewForm() {
 
     /****************** access store *******************/
     const sessionState = useSelector(state => state.session);
@@ -182,4 +182,4 @@ function ReviewCreate() {
 
 
 /******************************** EXPORTS ********************************/
-export default ReviewCreate
+export default CreateReviewForm

@@ -1,10 +1,10 @@
 /******************************** IMPORTS ********************************/
 // local files
-import './ReviewEdit.css';
+import './UpdateReviewForm.css';
 
 
 /******************************* COMPONENT *******************************/
-function ReviewEdit() {
+function UpdateReviewForm() {
 
     /**************** render component *****************/
     return (
@@ -16,4 +16,4 @@ function ReviewEdit() {
 
 
 /******************************** EXPORTS ********************************/
-export default ReviewEdit;
+export default UpdateReviewForm;
