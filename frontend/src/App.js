@@ -5,10 +5,10 @@ import SignupFormPage from "./components/LoginFormModal/SignupFormPage";
 
 import * as sessionActions from "./store/sessionReducer";
 import Main from "./components/Main/Main";
-import UserSpots from "./components/UserSpots";
+import UserSpots from "./components/Spots/UserSpots";
 import SpotPage from "./components/SpotPage/SpotPage";
 import SpotEdit from "./components/SpotEdit/SpotEdit";
-import SpotCreate from "./components/SpotCreate/SpotCreate";
+import CreateSpotForm from "./components/Spots/CreateSpotForm";
 import Reviews from "./components/ReviewsRead/ReviewsRead"
 import ReviewEdit from "./components/ReviewEdit/ReviewEdit";
 
@@ -48,7 +48,7 @@ function App() {
           </Route>
 
           <Route exact path={'/hosting'}>
-            <SpotCreate />
+            <CreateSpotForm />
           </Route>
 
           <Route exact path={'/reviews'}>

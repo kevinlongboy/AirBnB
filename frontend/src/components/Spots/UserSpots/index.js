@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import { thunkDeleteSingleSpot, thunkReadAllSpots } from "../../store/spotsReducer";
-import plusIcon from '../../assets/fontawesome/plus-solid.svg'
+import { thunkDeleteSingleSpot, thunkReadAllSpots } from "../../../store/spotsReducer";
+import plusIcon from '../../../assets/fontawesome/plus-solid.svg'
 import './UserSpots.css'
 
 

@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import { thunkCreateSingleSpot, thunkReadAllSpots } from "../../store/spotsReducer";
-import { states } from "../../component-resources";
-import './SpotCreate.css'
+import { thunkCreateSingleSpot, thunkReadAllSpots } from "../../../store/spotsReducer";
+import { states } from "../../../component-resources";
+import './CreateSpotForm.css'
 
 
 /******************************* COMPONENT *******************************/
-function SpotCreate() {
+function CreateSpotForm() {
 
     /****************** access store *******************/
     const sessionState = useSelector(state => state.session);
@@ -270,4 +270,4 @@ function SpotCreate() {
 
 
 /******************************** EXPORTS ********************************/
-export default SpotCreate
+export default CreateSpotForm
