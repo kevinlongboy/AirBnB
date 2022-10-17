@@ -1,9 +1,8 @@
 /******************************** IMPORTS ********************************/
 // libraries
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import { thunkDeleteSingleSpot, thunkReadAllSpots } from "../../../store/spotsReducer";
+import { thunkDeleteSingleSpot } from "../../../store/spotsReducer";
 import './DeleteSpot.css'
 
 
@@ -15,10 +14,6 @@ function DeleteSpot({id}) {
 
     /************ reducer/API communication ************/
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(thunkReadAllSpots());
-    }, [spotsState]);
 
     /***************** handle events *******************/
     const handleDelete = (spotId) => {
