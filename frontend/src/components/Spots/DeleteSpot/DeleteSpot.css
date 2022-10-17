@@ -1,0 +1,13 @@
+.table-button {
+    width: 70px;
+    height: 40px;
+    border: 1.5px solid #222222;
+    border-radius: 8px;
+    font-size: 14.5px;
+    text-align: center;
+    background: none;
+}
+
+.table-button:hover {
+    cursor: pointer;
+}

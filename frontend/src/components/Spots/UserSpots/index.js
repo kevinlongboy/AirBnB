@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import { thunkDeleteSingleSpot, thunkReadAllSpots } from "../../../store/spotsReducer";
+import { thunkReadAllSpots } from "../../../store/spotsReducer";
+import DeleteSpot from "../DeleteSpot";
 import plusIcon from '../../../assets/fontawesome/plus-solid.svg'
 import './UserSpots.css'
 
@@ -29,11 +30,6 @@ function UserSpots() {
     useEffect(() => {
         dispatch(thunkReadAllSpots());
     }, [spotsState]);
-
-    /***************** handle events *******************/
-    const handleDelete = (spotId) => {
-        dispatch(thunkDeleteSingleSpot(spotId))
-    }
 
     /**************** render component *****************/
     return (
@@ -80,7 +76,7 @@ function UserSpots() {
                                             </button>
                                         </NavLink>
 
-                                        <button className="table-button" type="button" onClick={(e) => handleDelete(spot.id)}>Delete</button>
+                                        <DeleteSpot id={spot.id}/>
                                     </td>
                                     <td>{spot.city}, {spot.state}</td>
                                 </tr>
