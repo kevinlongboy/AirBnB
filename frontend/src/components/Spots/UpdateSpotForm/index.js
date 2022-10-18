@@ -138,11 +138,9 @@ function UpdateSpotForm() {
     }
 
     /**************** render component *****************/
-    console.log("sessionState.user", sessionState.user)
-    console.log("!!sessionState.user", !!sessionState.user)
-    if (sessionState.user) return <Redirect to="/" />;
+    if (!!sessionState.user) return <Redirect to="/" />;
 
-    else return (
+    return (
 
         <div className="spot-create-page">
             <div className="banner">

@@ -1,7 +1,7 @@
 /******************************** IMPORTS ********************************/
 // libraries
 import { useEffect, useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 // local files
 import { thunkCreateSingleSpot, thunkReadAllSpots } from "../../../store/spotsReducer";
@@ -120,6 +120,8 @@ function CreateSpotForm() {
     }
 
     /**************** render component *****************/
+    if (!!sessionState.user) return <Redirect to="/" />;
+
     return (
 
         <div className="spot-create-page">
