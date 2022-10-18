@@ -42,7 +42,7 @@ function SpotPage() {
 
   useEffect(() => {
     dispatch(thunkReadSingleSpotReviews(spotId));
-  }, [dispatch, spotReviews]);
+  }, [dispatch]);
 
   // useEffect(() => {
   //   dispatch(thunkCreateSingleReview());
