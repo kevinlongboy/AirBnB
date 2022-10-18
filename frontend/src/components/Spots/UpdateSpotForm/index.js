@@ -1,7 +1,7 @@
 /******************************** IMPORTS ********************************/
 // libraries
 import { useEffect, useState} from "react";
-import { useHistory, useParams } from 'react-router-dom';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { thunkReadSingleSpotDetails, thunkUpdateSingleSpot } from "../../../store/spotsReducer";
 // local files
@@ -13,6 +13,7 @@ import './UpdateSpotForm.css';
 function UpdateSpotForm() {
 
     /****************** access store *******************/
+    const sessionState = useSelector((state) => state.session);
     const spotsState = useSelector(state => state.spots.singleSpotDetails);
 
     /************ key into pertinent values ************/
@@ -137,7 +138,11 @@ function UpdateSpotForm() {
     }
 
     /**************** render component *****************/
-    return (
+    console.log("sessionState.user", sessionState.user)
+    console.log("!!sessionState.user", !!sessionState.user)
+    if (sessionState.user) return <Redirect to="/" />;
+
+    else return (
 
         <div className="spot-create-page">
             <div className="banner">

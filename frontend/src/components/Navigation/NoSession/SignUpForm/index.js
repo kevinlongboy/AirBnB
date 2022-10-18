@@ -13,7 +13,7 @@ import './SignUpForm.css'
 function SignUpForm() {
 
   /****************** access store *******************/
-  const sessionState = useSelector((state) => state.session.user);
+  const sessionUser = useSelector((state) => state.session.user);
 
   /************ reducer/API communication ************/
   const dispatch = useDispatch();
@@ -61,7 +61,7 @@ function SignUpForm() {
     };
 
   /**************** render component *****************/
-  if (!!sessionState.user) return <Redirect to="/" />;
+  if (sessionUser) return <Redirect to="/" />;
 
   return (
 
