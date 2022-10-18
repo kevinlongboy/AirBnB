@@ -33,9 +33,9 @@ function UserSpots() {
 
 
     /**************** render component *****************/
-    if (!!sessionState.user) return <Redirect to="/" />;
+    if (!sessionState.user.id) return <Redirect to="/" />;
 
-    return (
+    else return (
             <div className="spots-page">
 
                 <div className="spots-page-header">

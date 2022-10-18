@@ -120,7 +120,7 @@ function CreateSpotForm() {
     }
 
     /**************** render component *****************/
-    if (!!sessionState.user) return <Redirect to="/" />;
+    if (!sessionState.user.id) return <Redirect to="/" />;
 
     return (
 

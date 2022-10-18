@@ -1,6 +1,7 @@
 /******************************** IMPORTS ********************************/
 // libraries
 import { useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
 import { thunkReadUserReviews } from "../../../store/reviewsReducer";
@@ -54,7 +55,9 @@ function UserReviews() {
     }
 
     /**************** render component *****************/
-    return(
+    if (!sessionState.user.id) return <Redirect to="/" />;
+
+    else return(
         <div className="review-page">
 
             <div className="review-page-header">
