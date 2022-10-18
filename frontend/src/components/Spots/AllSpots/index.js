@@ -23,7 +23,7 @@ function AllSpots() {
 
     useEffect(() => {
         dispatch(thunkReadAllSpots());
-    }, [dispatch])
+    }, [])
 
     /**************** render component *****************/
     return (

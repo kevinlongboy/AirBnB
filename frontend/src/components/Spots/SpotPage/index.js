@@ -42,11 +42,11 @@ function SpotPage() {
 
   useEffect(() => {
     dispatch(thunkReadSingleSpotReviews(spotId));
-  }, [dispatch]);
+  }, [dispatch, spotReviews]);
 
-  useEffect(() => {
-    dispatch(thunkCreateSingleReview());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(thunkCreateSingleReview());
+  // }, [dispatch]);
 
   /************* conditional components **************/
   // images
@@ -56,11 +56,11 @@ function SpotPage() {
     images.splice(5, images.length - 1)
   }
 
+  // reviews
   let reviewComponent = (
     <></>
   )
 
-  // reviews
   if (userId && (userId !== spot.ownerId)) {
     reviewComponent = (
     <CreateReviewForm />

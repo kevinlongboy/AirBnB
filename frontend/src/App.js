@@ -61,9 +61,9 @@ function App() {
             <UserReviews />
           </Route>
 
-          <Route exact path={'/reviews/:reviewId/edit'}>
+          {/* <Route exact path={'/reviews/:reviewId/edit'}>
             <UpdateReviewForm />
-          </Route>
+          </Route> */}
 
         </Switch>
       )}
