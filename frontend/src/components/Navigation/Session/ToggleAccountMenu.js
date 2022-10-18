@@ -44,7 +44,7 @@ function ToggleAccountMenu({ user }) {
   /**************** render component *****************/
   return (
     <>
-      <button className='account-button' onClick={openMenu}>
+      <button className='menu-button' onClick={openMenu}>
         <MenuButton />
       </button>
 

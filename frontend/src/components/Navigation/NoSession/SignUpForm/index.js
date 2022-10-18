@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 // local files
 import * as sessionActions from "../../../../store/sessionReducer";
 import '../../../../context/Modal.css'
+import './SignUpForm.css'
 
 
 /******************************* COMPONENT *******************************/

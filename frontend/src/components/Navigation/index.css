@@ -55,23 +55,3 @@
     background-color: #f7f7f7;
     cursor: pointer;
 }
-
-
-/******************* ACCOUNT BUTTON *******************/
-.account-button {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-
-    border: 1.5px solid #dbdbdb;
-    border-radius: 32px;
-    background-color: white;
-
-    width: 88px;
-    height: 48px;
-}
-
-.account-button:hover {
-    box-shadow: 0px 2px 5px 0px #dbdbdb;
-    cursor: pointer;
-}

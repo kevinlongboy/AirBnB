@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import '../../../../context/Modal.css'
 import { Modal } from '../../../../context/Modal';
 import SignUpForm from "../SignUpForm";
-import '../LoginOrSignUpModal/LoginOrSignUpModal.css';
+import './LoginForm.css';
 
 
 /******************************* COMPONENT *******************************/

@@ -8,7 +8,7 @@ import ProfileButton from './Session/ToggleAccountMenu';
 import HostingButton from './HostingButton';
 import LoginOrSignUpModal from './NoSession/LoginOrSignUpModal/index';
 import cranebnbLogo from "../../assets/branding/cranebnb-logo-3.png";
-import './Navigation.css';
+import './index.css';
 
 
 /******************************* COMPONENT *******************************/

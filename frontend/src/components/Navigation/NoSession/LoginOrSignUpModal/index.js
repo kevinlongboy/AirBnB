@@ -3,9 +3,8 @@
 import React, { useState } from 'react';
 // local files
 import { Modal } from '../../../../context/Modal';
+import MenuButton from '../../MenuButton';
 import LoginForm from '../LoginForm';
-import menuBars from '../../../../assets/fontawesome/bars-solid.png'
-import userIcon from '../../../../assets/fontawesome/circle-user-solid.png'
 import './LoginOrSignUpModal.css';
 
 
@@ -19,9 +18,8 @@ function LoginOrSignUpModal() {
   return (
     <>
     <div style={{display:"flex"}}>
-      <button className='account-button' onClick={() => setShowModal(true)}>
-        <img id='menu-icon' src={menuBars}></img>
-        <img id='user-icon' src={userIcon}></img>
+      <button className='menu-button' onClick={() => setShowModal(true)}>
+        <MenuButton />
       </button>
     </div>
 

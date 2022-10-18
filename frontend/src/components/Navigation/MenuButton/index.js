@@ -2,7 +2,7 @@
 // libraries
 import React from "react";
 // local files
-import '../../Navigation/Navigation.css'
+// import '../../Navigation/Navigation.css'
 import menuBars from '../../../assets/fontawesome/bars-solid.png'
 import userIcon from '../../../assets/fontawesome/circle-user-solid.png'
 import './MenuButton.css'

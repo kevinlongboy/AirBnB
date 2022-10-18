@@ -1,3 +1,21 @@
+.menu-button {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    border: 1.5px solid #dbdbdb;
+    border-radius: 32px;
+    background-color: white;
+
+    width: 88px;
+    height: 48px;
+}
+
+.menu-button:hover {
+    box-shadow: 0px 2px 5px 0px #dbdbdb;
+    cursor: pointer;
+}
+
 #menu-icon {
     padding-right: 2.5px;
     max-width: 16px;
