@@ -1,7 +1,7 @@
 /******************************** IMPORTS ********************************/
 // libraries
 import { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
 import { thunkReadAllSpots } from "../../../store/spotsReducer";
@@ -31,7 +31,10 @@ function UserSpots() {
         dispatch(thunkReadAllSpots());
     }, [spotsState]);
 
+
     /**************** render component *****************/
+    if (!!sessionState.user) return <Redirect to="/" />;
+
     return (
             <div className="spots-page">
 

@@ -13,7 +13,7 @@ import './SignUpForm.css'
 function SignUpForm() {
 
   /****************** access store *******************/
-  const sessionUser = useSelector((state) => state.session.user);
+  const sessionState = useSelector((state) => state.session.user);
 
   /************ reducer/API communication ************/
   const dispatch = useDispatch();
@@ -26,9 +26,6 @@ function SignUpForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
-
-
-  if (sessionUser) return <Redirect to="/" />;
 
   /***************** handle events *******************/
   const handleSubmit = (e) => {
@@ -60,10 +57,12 @@ function SignUpForm() {
 
           return
         });
-    }
-  };
+      }
+    };
 
   /**************** render component *****************/
+  if (!!sessionState.user) return <Redirect to="/" />;
+
   return (
 
     <div>
