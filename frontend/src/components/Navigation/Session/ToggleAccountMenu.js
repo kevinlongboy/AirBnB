@@ -8,6 +8,7 @@ import * as sessionActions from '../../../store/sessionReducer';
 import '../../Navigation/Navigation.css'
 import menuBars from '../../../assets/fontawesome/bars-solid.png'
 import userIcon from '../../../assets/fontawesome/circle-user-solid.png'
+import MenuButton from "../MenuButton";
 
 
 /******************************* COMPONENT *******************************/
@@ -46,8 +47,7 @@ function ToggleAccountMenu({ user }) {
   return (
     <>
       <button className='account-button' onClick={openMenu}>
-        <img id='menu-icon' src={menuBars} alt="menu icon"></img>
-        <img id='user-icon' src={userIcon} alt = "user icon"></img>
+        <MenuButton />
       </button>
 
       {showMenu && (
