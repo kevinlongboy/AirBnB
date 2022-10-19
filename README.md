@@ -53,9 +53,10 @@ Users can also delete any reviews they've previously posted, if they so choose.
 
 Ready to install CraneBnB? Follow the instructions below:
 
-### 1. Navigate to 
-* Navigate to the <a href="https://github.com/kevinlongboy/AirBnB" alt="CraneBnB GitHub repository link">GitHub repository page</a>.
-   <br>
+### 1. Navigate to GitHub:
+* Click <a href="https://github.com/kevinlongboy/AirBnB" alt="CraneBnB GitHub repository link">here</a> to be redirected to the CraneBnB page
+<img src="assets/instructions/setup-instructions-step-1.gif" alt="Frasier and Niles Toasting GIF" width="250">
+<br>
 
 ### 2. Download the API: 
 * Click on the 'Code' button
