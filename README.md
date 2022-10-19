@@ -87,10 +87,8 @@ Ready to install CraneBnB? Follow the instructions below:
 ### 6. Launch the app:
 * From the _frontend_ folder, run the command: "npm start"
 * Allow React to open the app in your browswer
+* Welcome to CraneBnB
 <img src="assets/instructions/setup-instructions-step-6.gif" alt="Launch the app GIF" width="600">
-
-### 7. Welcome to CraneBnB
-<img src="assets/instructions/setup-instructions-step-7.gif" alt="Welcome to CraneBnB GIF" width="600">
 
 ## ⏳ Future Implementations
 
