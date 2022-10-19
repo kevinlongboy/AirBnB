@@ -44,9 +44,9 @@ function SpotPage() {
     dispatch(thunkReadSingleSpotReviews(spotId));
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(thunkCreateSingleReview());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(thunkCreateSingleReview());
+  }, [dispatch]);
 
   /************* conditional components **************/
   // images

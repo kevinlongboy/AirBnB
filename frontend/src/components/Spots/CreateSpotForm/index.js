@@ -89,7 +89,7 @@ function CreateSpotForm() {
     /***************** handle events *******************/
     // submit form
     const history = useHistory();
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
@@ -111,7 +111,7 @@ function CreateSpotForm() {
             url: url
         }
 
-        const attempt = dispatch(thunkCreateSingleSpot(createSpotData, createSpotImage)).catch(
+        const newSpot = await dispatch(thunkCreateSingleSpot(createSpotData, createSpotImage)).catch(
             async (res) => {
 
                 const data = await res.json();
@@ -125,7 +125,9 @@ function CreateSpotForm() {
             }
         )
 
-        attempt.then(console.log("hello"))
+        if (newSpot) {
+            history.push(`/spots/${newSpot.id}`)
+        }
     }
 
     /**************** render component *****************/
