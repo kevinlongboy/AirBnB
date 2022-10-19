@@ -140,4 +140,4 @@ Check out CraneBnB for yourself. Click the icon below to be redirected to Heroku
 <a href="https://github.com/kevinlongboy"><img vertical-align="middle" alt="Developer's GitHub Page" width="45px" src="assets/social-media-branding/github-logo.png"/></a> <a href="https://www.linkedin.com/in/kevinlongboy/"><img vertical-align="middle" alt="Developer's LinkedIn Page" width="45px" src="assets/social-media-branding/linkedin-logo.png"/></a>
 <br>
 <br>
-<img src="assets/gifs/frasier-im-listening.gif" alt="Frasier I'm Listening GIF" width="350">
+<img src="assets/gifs/frasier-im-listening.gif" alt="Frasier I'm Listening GIF" width="325">
