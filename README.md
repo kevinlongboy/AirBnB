@@ -44,7 +44,7 @@ _Hear the people's voice_
 
 CraneBnB gives its members the ability voice their opinions and share their experiences from previous stays.
 
-Users can also modify and delete any reviews they've previously posted.
+Users can also delete any reviews they've previously posted, if they so choose.
 <br>
 <br>
 <img src="assets/gifs/roz-why-are-you-telling-her-this.gif" alt="Roz Why are You Telling Her This GIF" width="250">
