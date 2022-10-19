@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Redirect, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import { thunkCreateSingleSpot, thunkReadAllSpots } from "../../../store/spotsReducer";
+import { thunkCreateSingleSpot } from "../../../store/spotsReducer";
 import { states } from "../../../component-resources";
 import './CreateSpotForm.css'
 
@@ -15,7 +15,6 @@ function CreateSpotForm() {
     /****************** access store *******************/
     const sessionState = useSelector(state => state.session);
     const spotsState = useSelector(state => state.spots);
-    const singleSpot = spotsState.singleSpotDetails
 
     /************ reducer/API communication ************/
     const dispatch = useDispatch();
