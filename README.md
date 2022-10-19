@@ -1,8 +1,9 @@
-# CraneBnB
+<p align="center"><img align="justify" src="assets/logo/CraneBnB-logo-large.png" alt="Frasier Alistair Hilarious Chair GIF" width="500"></p>
+<!-- <p align="center">An AirBnB Clone</p> -->
 
-_An AirBnB Clone_
+---
 
-Contents
+## 🔎 Contents
 
 - <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-welcome-to-seattle" alt="Description of CraneBnB API">Description</a>
 - <a href="https://github.com/kevinlongboy/AirBnB/blob/main/README.md#-api-overview" alt="Overview of CraneBnB API">Features</a>
@@ -22,6 +23,8 @@ Don't miss this truly once in a lifetime opportunity to experience what Seattle 
 <br>
 <br>
 <img src="assets/gifs/frasier-niles-toast.gif" alt="Frasier and Niles Toasting GIF" width="250">
+
+---
 
 ## 👀 API Overview
 
@@ -48,6 +51,8 @@ Users can also delete any reviews they've previously posted, if they so choose.
 <br>
 <br>
 <img src="assets/gifs/roz-why-are-you-telling-her-this.gif" alt="Roz Why are You Telling Her This GIF" width="250">
+
+---
 
 ## 🖱 Get Started
 
@@ -108,6 +113,8 @@ Images feature will bring life to both Spots and Reviews. Hosts will have the ab
 <br>
 <img src="assets/gifs/daphne-victory.gif" alt="Daphne Victorious GIF" width="250">
 
+---
+
 ## 📚 Languages and Libraries Used
 
 ### Framework:
@@ -127,6 +134,8 @@ Images feature will bring life to both Spots and Reviews. Hosts will have the ab
 <p>
 <a href="https://reactjs.org/"><img alt="React" width="45px" src="assets/tech-stack/react-logo.png"/></a> <a href="https://redux.js.org/"><img alt="Redux" width="45px" src="assets/tech-stack/redux-logo.png"/></a>
 <br>
+  
+---
 
 ## 🧑‍💻 Visit the Site
 
@@ -135,6 +144,8 @@ Check out CraneBnB for yourself. Click the icon below to be redirected to Heroku
 <p>
 <a href="https://kl-airbnb.herokuapp.com/"><img vertical-align="middle" alt="CraneBnB Live Site hosted via Heroku" width="45px" src="assets/social-media-branding/heroku-logo.jpg"/></a>
 
+---
+  
 ## 💙 I'm Listening...
 
 <a href="https://github.com/kevinlongboy"><img vertical-align="middle" alt="Developer's GitHub Page" width="45px" src="assets/social-media-branding/github-logo.png"/></a> <a href="https://www.linkedin.com/in/kevinlongboy/"><img vertical-align="middle" alt="Developer's LinkedIn Page" width="45px" src="assets/social-media-branding/linkedin-logo.png"/></a>
