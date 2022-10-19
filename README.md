@@ -53,15 +53,43 @@ Users can also delete any reviews they've previously posted, if they so choose.
 
 Ready to install CraneBnB? Follow the instructions below:
 
-1. Navigate to the <a href="https://github.com/kevinlongboy/AirBnB" alt="CraneBnB GitHub repository link">GitHub repository page</a>.
+### 1. Navigate to 
+* Navigate to the <a href="https://github.com/kevinlongboy/AirBnB" alt="CraneBnB GitHub repository link">GitHub repository page</a>.
    <br>
-2. Click on the 'Code' button:
+
+### 2. Download the API: 
+* Click on the 'Code' button
+* Select 'Download ZIP' from the dropdown menu
+* Save the file in your desired location
    <br>
    <img src="assets/instructions/github-repository-page.png" alt="CraneBnB repository page" width="500"/>
    <br>
-3. Select 'Download ZIP' from the dropdown menu:
+
+### 3. Open the repository:
+* Navigate to the location where you previously saved your zipped file
+* Unzip the file by double-clicking or by right-clicking on the file and selecting "Open"
+* This unzipped folder is the repository which contains both the backend and frontend components of the API
    <br>
    <img src="assets/instructions/download-zip.png" alt="Download ZIP button on CraneBnB repository page" width="250"/>
+
+### 4. Initialize the backend: 
+* Open a new terminal
+* Navigate to the _backend_ folder
+* Download dependencies by running the command: "npm install"
+* Initialize your database by running "npx dotenv sequelize db:migrate"
+* Populate your database by running "npx dotenv sequelize db:seed:all"
+* Start the backend server by running the command: "npm start"
+
+### 5. Initialize the frontend: 
+* Open a new terminal
+* Navigate to the _frontend_ folder
+* Download dependencies by running the command: "npm install"
+
+### 6. Launch the app:
+* From the _frontend_ folder, run the command: "npm start"
+* Allow React to open the app in your browswer
+
+### 7. Welcome to CraneBnB
 
 ## ⏳ Future Implementations
 
