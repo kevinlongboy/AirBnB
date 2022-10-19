@@ -47,7 +47,7 @@ export const actionDeleteSingleSpot = (spotId) => ({
 
 
 /***************************** THUNKS (API) ******************************/
-export const thunkCreateSingleSpot = (data) => async (dispatch) => {
+export const thunkCreateSingleSpot = (data, url) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' } ,
@@ -55,7 +55,16 @@ export const thunkCreateSingleSpot = (data) => async (dispatch) => {
     });
     if (response.ok) {
         const newSpot = await response.json();
-        dispatch(actionCreateSingleSpot(newSpot));
+        const response2 = await csrfFetch(`/api/spots/${newSpot.id}/images`, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' } ,
+            body: JSON.stringify(url)
+        });
+        if (response2.ok) {
+            const newSpotImage = await response2.json();
+            dispatch(actionCreateSingleSpot(newSpot));
+            return newSpot
+        }
         return newSpot
     }
 }

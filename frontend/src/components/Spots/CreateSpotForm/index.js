@@ -25,6 +25,7 @@ function CreateSpotForm() {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [country, setCountry] = useState("");
+    const [url, setUrl] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(125);
@@ -62,6 +63,10 @@ function CreateSpotForm() {
             errors.push("Country is required.")
         }
 
+        if (url.length > 0 && url.length < 2) {
+            errors.push("Image is required.")
+        }
+
         if (name.length > 0 && name.length < 2) {
             errors.push("Title is required.")
         } else if (name.length > 50) {
@@ -79,7 +84,7 @@ function CreateSpotForm() {
         }
 
         setValidationErrors(errors)
-    }, [address, city, state, country, name, description, price])
+    }, [address, city, state, country, url, name, description, price])
 
     /***************** handle events *******************/
     // submit form
@@ -102,7 +107,11 @@ function CreateSpotForm() {
             price: price
         }
 
-        const attempt = dispatch(thunkCreateSingleSpot(createSpotData)).catch(
+        let createSpotImage = {
+            url: url
+        }
+
+        const attempt = dispatch(thunkCreateSingleSpot(createSpotData, createSpotImage)).catch(
             async (res) => {
 
                 const data = await res.json();
@@ -135,6 +144,8 @@ function CreateSpotForm() {
                 >
 
             <label>
+                <p className="input-field-text-prompt">Enter your address</p>
+                {/* <p className="input-field-text-subtitle">Make it clear to guests where your place is located. We'll only share your address after they've made a reservation. Learn more</p> */}
                 <input
                 className="input-field"
                 type="text"
@@ -183,7 +194,21 @@ function CreateSpotForm() {
             </label>
 
             <label>
+                <p className="input-field-text-prompt">Add a photo of your place</p>
+                {/* <p className="input-field-text-subtitle">Let's put your best photos first.</p> */}
+                <input
+                className="input-field"
+                type="text"
+                name="url"
+                placeholder="Enter your photo URL here"
+                onChange={(e) => setUrl(e.target.value)}
+                value={url}
+            />
+            </label>
+
+            <label>
                 <p className="input-field-text-prompt">Create your title</p>
+                {/* <p className="input-field-text-subtitle">Your listing title should highlight what makes your place special. Review listing title guidelines.</p> */}
                 <input
                 className="input-field"
                 type="text"
@@ -208,6 +233,8 @@ function CreateSpotForm() {
                 value={description}
             />
             </label>
+
+
 
             <label>
                 <div className="price">
@@ -242,6 +269,8 @@ function CreateSpotForm() {
                     </div>
                 </div>
             </label>
+            <p className="input-field-text-subtitle">per night</p>
+            {/* <p className="input-field-text-prompt">Places like yours in your area usually range from $86 to $144</p> */}
 
             <div className="errors">
 

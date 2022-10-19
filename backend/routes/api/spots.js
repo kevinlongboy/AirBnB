@@ -429,19 +429,34 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     let error = {};
 
     try {
+        let { url, preview } = req.body;
+
         let findSpot = await Spot.findByPk(spotId);
 
+        const validationErrorMessages = []
+
+        // handle error: missing spot
         if (!findSpot) {
-            error.message = "Spot couldn't be found"
-            error.status = 404
-            return res
-                .json(error)
+            error.message = "Spot couldn't be found";
+            error.status = 404;
+            validationErrorMessages.push("Spot couldn't be found");
+            return res.status(404).json(error)
         }
 
-        let { url, preview } = req.body;
+        // handle error: missing fields
+        if (!url) {
+            error.message = "Validation Error";
+            error.status = 400;
+            validationErrorMessages.push("URL is required.")
+        }
+        if (error.message) {
+            error.errors = validationErrorMessages;
+            return res.status(400).json(error)
+        }
+
         let postSpotImage = await findSpot.createSpotImage({
             url: url,
-            preview: preview,
+            // preview: preview,
         });
 
         let printSpotImage = await SpotImage.findByPk(postSpotImage.dataValues.id, {
@@ -449,6 +464,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
                 exclude: ['spotId', 'updatedAt', 'createdAt']
             },
         })
+        
         return res
             .status(200)
             .json(printSpotImage)
@@ -609,10 +625,11 @@ router.put('/:spotId', requireAuth, async (req, res, next) => {
 
         let { address, city, state, country, lat, lng, name, description, price } = req.body;
 
+        let putSpot = await Spot.findByPk(spotId);
+
         const validationErrorMessages = []
 
         // handle error: missing spot
-        let putSpot = await Spot.findByPk(spotId);
         if (!putSpot) {
             error.message = "Spot couldn't be found";
             error.statusCode = 404;

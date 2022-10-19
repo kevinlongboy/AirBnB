@@ -52,7 +52,6 @@
 
 .input-field-select {
     margin: 10px 0px;
-
     width: 505px;
     height: 80px;
     border: 1px solid #afafaf;
@@ -61,7 +60,6 @@
     color: black;
     font-size: 18px;
     font-weight: 100;
-
 }
 
 .input-field-text-prompt {
@@ -70,6 +68,13 @@
     border: 0;
     padding: 0;
     text-indent: 10px;
+    align-self: flex-start;
+}
+
+.input-field-text-subtitle {
+    margin-top: 0px;
+    border: 0px;
+    padding: 0px;
 }
 
 .input-field-textarea {
@@ -85,7 +90,6 @@
     font-weight: 100;
     text-indent: 10px;
     padding-top: 20px;
-
 }
 
 .price {
@@ -132,7 +136,6 @@
     color: #afafaf;
     font-size: 18px;
     font-weight: 100;
-
 }
 
 .spot-submit-button {

@@ -153,6 +153,8 @@ function UpdateSpotForm() {
                 >
 
             <label>
+                <p className="input-field-text-prompt">Change your address</p>
+                {/* <p className="input-field-text-subtitle">Make it clear to guests where your place is located. We'll only share your address after they've made a reservation. Learn more</p> */}
                 <input
                 className="input-field"
                 type="text"
@@ -202,6 +204,7 @@ function UpdateSpotForm() {
 
             <label>
                 <p className="input-field-text-prompt">Change your title</p>
+                {/* <p className="input-field-text-subtitle">Your listing title should highlight what makes your place special. Review listing title guidelines.</p> */}
                 <input
                 className="input-field"
                 type="text"
@@ -266,6 +269,8 @@ function UpdateSpotForm() {
                     </div>
                 </div>
             </label>
+            <p className="input-field-text-subtitle">per night</p>
+            {/* <p className="input-field-text-prompt">Places like yours in your area usually range from $86 to $144</p> */}
 
             <div className="errors">
                 {validationErrors.length > 0 &&
