@@ -50,7 +50,7 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <div className="nav-bar-right">
         <LoginOrSignUpModal />
-        </div>
+      </div>
     );
   }
 

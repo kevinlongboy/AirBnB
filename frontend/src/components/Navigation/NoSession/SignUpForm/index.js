@@ -61,7 +61,7 @@ function SignUpForm() {
     };
 
   /**************** render component *****************/
-  if (sessionUser) return <Redirect to="/" />;
+  // if (sessionUser) return <Redirect to="/" />; // omit: will not render upon refresh otherwise
 
   return (
 
