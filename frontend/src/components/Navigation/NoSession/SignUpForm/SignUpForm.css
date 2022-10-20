@@ -1,0 +1,12 @@
+.signup-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+#signUpErrors {
+    margin-top: 0px;
+    border-top: 0px;
+    padding-top: 0px;
+}

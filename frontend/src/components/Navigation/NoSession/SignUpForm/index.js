@@ -154,7 +154,7 @@ function SignUpForm() {
         By selecting Agree and continue, I agree to Cranebnb's Terms of Service, Payments Terms of Service, and Nondiscrimination Policy and acknowledge the Privacy Policy.
         </div>
 
-        <div className="errors">
+        <div className="errors" id="signUpErrors">
           {errors.map((error, idx) => (
             <p className="error-item" key={idx}>{error}</p>
             ))}

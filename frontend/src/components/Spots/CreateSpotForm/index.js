@@ -54,7 +54,7 @@ function CreateSpotForm() {
             errors.push("Please enter a valid city.")
         }
 
-        if (state === "State") {
+        if (state === "State" ) {
             errors.push("State is required.")
         }
 
@@ -62,7 +62,7 @@ function CreateSpotForm() {
             errors.push("Country is required.")
         }
 
-        if (url.length > 0 && url.length < 2) {
+        if (url.length > 0 && url.length < 5) {
             errors.push("Image is required.")
         }
 
@@ -95,6 +95,13 @@ function CreateSpotForm() {
         let errors = [];
         setValidationErrors(errors);
 
+        if (state === "" ) {
+            errors.push("State is required.")
+        }
+        if (country === "") {
+            errors.push("Country is required.")
+        }
+        setValidationErrors(errors)
 
         let createSpotData = {
             address: address,
@@ -118,9 +125,7 @@ function CreateSpotForm() {
                 if (data && data.errors) {
                     data.errors.forEach(message => errors.push(message));
                     setValidationErrors(errors);
-                    return
                 }
-
             }
         )
 
@@ -274,16 +279,9 @@ function CreateSpotForm() {
             {/* <p className="input-field-text-prompt">Places like yours in your area usually range from $86 to $144</p> */}
 
             <div className="errors">
-
-                {/* {validationErrors.length &&
-                validationErrors.map((error) =>
-                <p className="error-item" key={error}>{error}</p>)} */}
-
-                {validationErrors.length > 0 && validationErrors.map((error, idx) => (
+                {validationErrors.map((error, idx) => (
                     <p className="error-item" key={error}>{error}</p>
                 ))}
-
-
             </div>
 
             <button

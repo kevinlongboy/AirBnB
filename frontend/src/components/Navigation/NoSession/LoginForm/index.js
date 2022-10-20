@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 // local files
 import '../../../../context/Modal.css'
 import { Modal } from '../../../../context/Modal';
-import SignUpForm from "../SignUpForm";
+import SignUpForm from "../SignUpForm/index.js";
 import './LoginForm.css';
 
 
@@ -134,11 +134,12 @@ function LoginForm() {
           >
           Continue to Sign Up
         </button>
-            {showModal && (
-            <Modal onClose={() => setShowModal(false)}>
-              <SignUpForm />
-            </Modal>
-            )}
+
+        {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <SignUpForm />
+        </Modal>
+        )}
 
         <button
           className="continue-button"

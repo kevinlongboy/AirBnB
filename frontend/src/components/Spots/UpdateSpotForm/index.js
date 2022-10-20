@@ -60,33 +60,43 @@ function UpdateSpotForm() {
     useEffect(() => {
         const errors = [];
 
-        if (address && address.length < 2) {
+        if (!address){
+            errors.push("Address is required.")
+        } else if (address && address.length < 2) {
             errors.push("Address is required.")
         } else if (address && address.length > 50) {
             errors.push("Please enter a valid address.")
         }
 
-        if (city && city.length < 2) {
+        if (!city){
+            errors.push("City is required.")
+        } else if (city && city.length < 2) {
             errors.push("City is required.")
         } else if (city &&  city.length > 50) {
             errors.push("Please enter a valid city.")
         }
 
-        if (state === "State") {
+        if (!state){
+            errors.push("State is required.")
+        } else if (state === "State") {
             errors.push("State is required.")
         }
 
-        if (country === "Country") {
+        if (!country){
+            errors.push("Country is required.")
+        } else if (country === "Country") {
             errors.push("Country is required.")
         }
 
-        if (name && name.length < 2) {
+        if (!name){
+            errors.push("Title is required.")
+        } else if (name && name.length < 2) {
             errors.push("Title is required.")
         } else if (name && name.length > 50) {
             errors.push("Please create a shorter title.")
         }
 
-        if (description && description.length === 0) {
+        if (!description) {
             errors.push("Description is required.")
         } else if (description && description.length >= 1 && description.length < 5) {
             errors.push("Please write a longer description.")
@@ -112,6 +122,14 @@ function UpdateSpotForm() {
         let errors = [];
         setValidationErrors(errors);
 
+        if (state === "" ) {
+            errors.push("State is required.")
+        }
+        if (country === "") {
+            errors.push("Country is required.")
+        }
+        setValidationErrors(errors)
+
         let updateSpotData = {
             address: address,
             city: city,
@@ -126,6 +144,7 @@ function UpdateSpotForm() {
             async (res) => {
 
                 const data = await res.json();
+                // console.log("data", data)
 
                 if (data && data.errors) {
                     data.errors.forEach(message => errors.push(message));
