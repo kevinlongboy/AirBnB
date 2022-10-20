@@ -45,7 +45,7 @@ As a Guest, users are able to peruse through CraneBnB to find the perfect place 
 
 _Hear the people's voice_
 
-CraneBnB gives its members the ability voice their opinions and share their experiences from previous stays.
+CraneBnB gives its members the ability to voice their opinions and share their experiences from previous stays.
 
 Users can also delete any reviews they've previously posted, if they so choose.
 <br>
