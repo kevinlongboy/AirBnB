@@ -4,10 +4,12 @@ import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../../../store/sessionReducer";
 import { useDispatch } from "react-redux";
 // local files
-import '../../../../context/Modal.css'
 import { Modal } from '../../../../context/Modal';
+import '../../../../context/Modal.css'
 import SignUpForm from "../SignUpForm/index.js";
 import './LoginForm.css';
+import linkedinLogo from '../../../../assets/social-media-branding/linkedinLogo.png'
+import githubLogo from '../../../../assets/social-media-branding/githubLogo.png'
 
 
 /******************************* COMPONENT *******************************/
@@ -143,33 +145,45 @@ function LoginForm() {
 
         <button
           className="continue-button"
-          type="button"
-          // onClick={handleSubmitRedirect}
-          >
-          <i class="fa-brands fa-linkedin"></i>
-          <a style={{textDecoration:"none", color:"black"}} href="https://www.linkedin.com/in/kevinlongboy/">
-          Continue with LinkedIn
-          </a>
-        </button>
-
-        <button
-          className="continue-button"
-          type="button"
-          // onClick={handleSubmitRedirect}
-          >
-          <i class="fa-brands fa-github"></i>
-          <a style={{textDecoration:"none", color:"black"}} href="https://github.com/kevinlongboy">
-          Continue with GitHub
-          </a>
-        </button>
-
-        <button
-          className="continue-button"
           type="submit"
           onClick={handleSubmitDemoUser}
           >
           Continue as Demo User
         </button>
+
+        <button
+          className="continue-button"
+          type="button"
+          // onClick={handleSubmitRedirect}
+          >
+          {/* <i class="fa-brands fa-linkedin"></i> */}
+          <div className="buttonIcon" style={{align:"left"}}>
+            <img src={linkedinLogo} style={{width:"20px"}}></img>
+          </div>
+
+          <div>
+            <a style={{textDecoration:"none", color:"black"}} href="https://www.linkedin.com/in/kevinlongboy/">
+            Continue with LinkedIn
+            </a>
+          </div>
+        </button>
+
+        <button
+          className="continue-button"
+          type="button"
+          // onClick={handleSubmitRedirect}
+          >
+          {/* <i class="fa-brands fa-github"></i> */}
+          <div className="buttonIcon" style={{align:"left"}}>
+            <img src={githubLogo} style={{width:"20px"}}></img>
+          </div>
+          <div>
+            <a style={{textDecoration:"none", color:"black"}} href="https://github.com/kevinlongboy">
+            Continue with GitHub
+            </a>
+          </div>
+        </button>
+
 
       </form>
     </div>

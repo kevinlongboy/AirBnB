@@ -1,6 +1,6 @@
 /******************************** IMPORTS ********************************/
 // libraries
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // local files
@@ -8,6 +8,7 @@ import ProfileButton from './Session/ToggleAccountMenu';
 import HostingButton from './HostingButton';
 import LoginOrSignUpModal from './NoSession/LoginOrSignUpModal/index';
 import cranebnbLogo from "../../assets/branding/cranebnb-logo-3.png";
+import cranebnbLogoOnly from "../../assets/branding/cranebnb-logo-only/cranebnb-logo-only-3.png";
 import './index.css';
 
 
@@ -20,6 +21,21 @@ function Navigation({ isLoaded }){
   /************ key into pertinent values ************/
   let userId
   if (sessionUser) userId = sessionUser.id
+
+  /****************** manage state *******************/
+  const [desktop, setDesktop] = useState(true);
+
+  const resize = () => {
+    if (window.innerWidth > 1130) {
+      setDesktop(true)
+    } else {
+      setDesktop(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", resize)
+  })
 
   /************* conditional components **************/
   let sessionLinks;
@@ -43,7 +59,7 @@ function Navigation({ isLoaded }){
     <div className="nav-bar">
 
         <NavLink exact to="/">
-          <img className="nav-bar-left" id="crainbnb-logo" src={cranebnbLogo}></img>
+          <img className="nav-bar-left" id={desktop === true ? "cranebnbLogoText" : "cranebnbLogoOnly"} src={desktop === true ? cranebnbLogo : cranebnbLogoOnly }></img>
         </NavLink>
 
         {isLoaded && sessionLinks}
