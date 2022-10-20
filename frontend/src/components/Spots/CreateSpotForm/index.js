@@ -101,7 +101,11 @@ function CreateSpotForm() {
         if (country === "") {
             errors.push("Country is required.")
         }
+        if (url === "") {
+            errors.push("Image is required.")
+        }
         setValidationErrors(errors)
+        if (errors.length) return
 
         let createSpotData = {
             address: address,
