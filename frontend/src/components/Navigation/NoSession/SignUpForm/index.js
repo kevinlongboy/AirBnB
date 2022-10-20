@@ -45,7 +45,7 @@ function SignUpForm() {
 
       let userData = {firstName, lastName, username, password, email }
 
-      dispatch(sessionActions.signup(userData)).catch(
+      return  dispatch(sessionActions.signup(userData)).catch(
         async (res) => {
 
           const data = await res.json();
@@ -54,8 +54,6 @@ function SignUpForm() {
             data.errors.forEach(message => errors.push(message));
             setErrors(errors);
           }
-
-          return
         });
       }
     };

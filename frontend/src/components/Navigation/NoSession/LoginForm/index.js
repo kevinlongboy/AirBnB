@@ -54,9 +54,11 @@ function LoginForm() {
 
         const data = await res.json();
 
-        console.log("data", data)
         if (data && data.message) {
+
+
           errors.push(data.message)
+
           setErrors(errors)
         }
       }

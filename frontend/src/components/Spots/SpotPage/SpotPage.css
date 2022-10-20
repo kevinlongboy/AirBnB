@@ -1,17 +1,12 @@
-body {
-    display: flex;
-    justify-content: center;
-}
-
 .spot-page {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     /* align-content: space-between; */
     align-items: left;
-    padding-left: min(80px);
-    padding-right: min(50px);
-    /* background-color: red; */
+    padding-left: min(50px);
+    padding-right: max(50px);
+    /* max-width: 200px; */
 }
 
 #spot-page-name {
@@ -48,10 +43,9 @@ body {
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-    /* min-width: 100%; */
-    max-width: 1120px;
-    min-height: 100%;
-    max-height: 550px;
+    max-width: 100%;
+    min-height: 45vw;
+    max-height: 425px;
     border-radius: 25px;
 }
 
