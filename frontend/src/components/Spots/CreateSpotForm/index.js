@@ -119,6 +119,7 @@ function CreateSpotForm() {
         setValidationErrors(errors)
         if (errors.length) return
 
+
         let createSpotData = {
             address: address,
             city: city,
@@ -137,12 +138,10 @@ function CreateSpotForm() {
             async (res) => {
 
                 const data = await res.json();
-                console.log("data", data)
 
                 if (data && data.errors) {
                     data.errors.forEach(message => errors.push(message));
-                    setValidationErrors([...errors]);
-                    return
+                    setValidationErrors(errors);
                 }
             }
         )

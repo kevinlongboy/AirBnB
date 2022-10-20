@@ -160,8 +160,7 @@ function UpdateSpotForm() {
 
                 if (data && data.errors) {
                     data.errors.forEach(message => errors.push(message));
-                    setValidationErrors([...errors]);
-                    return
+                    setValidationErrors(errors);
                 }
             });
 
