@@ -63,14 +63,14 @@ Ready to install CraneBnB? Follow the instructions below:
 <img src="assets/instructions/setup-instructions-step-1.gif" alt="Navigate to GitHub GIF" width="400">
 
 ### 2. Download the API: 
-* Click on the 'Code' button
-* Select 'Download ZIP' from the dropdown menu
+* Click the "Code" button
+* Select "Download ZIP" from the dropdown menu
 * Save the file in your desired location
 <img src="assets/instructions/setup-instructions-step-2.gif" alt="Download the API GIF" width="400">
 
 ### 3. Open the repository:
 * Navigate to the location where you previously saved your zipped file
-* Unzip the file by double-clicking or by right-clicking on the file and selecting "Open"
+* Unzip the file by double-clicking on the icon, or by right-clicking on the icon and selecting "Open"
 * This unzipped folder is the repository which contains both the backend and frontend components of the API
 <img src="assets/instructions/setup-instructions-step-3.gif" alt="Open the repository GIF" width="400">
 
@@ -91,7 +91,7 @@ Ready to install CraneBnB? Follow the instructions below:
 
 ### 6. Launch the app:
 * From the _frontend_ folder, run the command: "npm start"
-* Allow React to open the app in your browswer
+* Allow React to open the app in your browser
 * Welcome to CraneBnB
 <img src="assets/instructions/setup-instructions-step-6.gif" alt="Launch the app GIF" width="400">
 
