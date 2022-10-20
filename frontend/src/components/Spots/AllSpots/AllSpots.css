@@ -1,13 +1,20 @@
+@media (max-width: 600px) {
+    body {
+        background-color: red;
+    }
+}
 .spots {
     /* display: inline-block; */
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    /* flex-grow: 3; */
-    justify-content: center;
-    align-items: left;
-    padding-left: 50px;
-    padding-right: 50px;
+    justify-content:start;
+    align-items: flex-start;
+    /* padding-left: 50px; */
+    /* padding-right: 50px; */
+    background-color: aqua;
+    margin: 0px 40px;
+    padding: 0px;
 }
 
 .spot-card {
@@ -16,15 +23,19 @@
     /* flex-direction: column; */
     /* border: 1px solid red; */
     /* min-width: 330px; */
+    flex-grow: 3;
     max-width: 370px;
     min-height: 370px;
     max-height: 475px;
     margin: 25px 17px 10px 17px;
+    background-color: red;
+
 }
 
 .spot-image-container {
-    height: 300px;
-    width: 300px
+    min-height: 370px;
+
+    /* width: 300px */
     /* max-height: 385px; */
 }
 .spot-image {
@@ -32,6 +43,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    overflow-x: hidden;
+    background-color: yellow;
 }
 
 .spot-text {

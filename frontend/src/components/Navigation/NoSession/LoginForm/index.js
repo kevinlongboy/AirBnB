@@ -52,8 +52,9 @@ function LoginForm() {
 
         const data = await res.json();
 
-        if (data && data.errors) {
-          data.errors.forEach(errorMsg => errors.push(errorMsg))
+        console.log("data", data)
+        if (data && data.message) {
+          errors.push(data.message)
           setErrors(errors)
         }
       }
