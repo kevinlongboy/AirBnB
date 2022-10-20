@@ -78,7 +78,7 @@ function CreateReviewForm() {
             stars: stars.length
         }
 
-        dispatch(thunkCreateSingleReview(parseInt(spotId), createReviewData)).catch(
+        return dispatch(thunkCreateSingleReview(parseInt(spotId), createReviewData)).catch(
             async (res) => {
 
                 const data = await res.json();
@@ -86,7 +86,6 @@ function CreateReviewForm() {
                 if (data && data.errors) {
                     data.errors.forEach(message => errors.push(message));
                     setValidationErrors(errors);
-                    return
                 }
             });
     }
