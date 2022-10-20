@@ -161,6 +161,7 @@ function SignUpForm() {
         <button
           type="submit"
           className="submit-button"
+          id="signUpSubmitButton"
           onClick={handleSubmit}
         >
           Agree and continue
