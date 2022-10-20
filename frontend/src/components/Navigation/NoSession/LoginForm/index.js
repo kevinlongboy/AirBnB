@@ -157,9 +157,9 @@ function LoginForm() {
           // onClick={handleSubmitRedirect}
           >
           {/* <i class="fa-brands fa-linkedin"></i> */}
-          <div className="buttonIcon" style={{align:"left"}}>
+          {/* <div className="buttonIcon" style={{align:"left"}}>
             <img src={linkedinLogo} style={{width:"20px"}}></img>
-          </div>
+          </div> */}
 
           <div>
             <a style={{textDecoration:"none", color:"black"}} href="https://www.linkedin.com/in/kevinlongboy/">
@@ -174,9 +174,9 @@ function LoginForm() {
           // onClick={handleSubmitRedirect}
           >
           {/* <i class="fa-brands fa-github"></i> */}
-          <div className="buttonIcon" style={{align:"left"}}>
+          {/* <div className="buttonIcon" style={{align:"left"}}>
             <img src={githubLogo} style={{width:"20px"}}></img>
-          </div>
+          </div> */}
           <div>
             <a style={{textDecoration:"none", color:"black"}} href="https://github.com/kevinlongboy">
             Continue with GitHub

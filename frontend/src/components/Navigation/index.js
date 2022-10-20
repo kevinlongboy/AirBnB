@@ -59,7 +59,13 @@ function Navigation({ isLoaded }){
     <div className="nav-bar">
 
         <NavLink exact to="/">
-          <img className="nav-bar-left" id={desktop === true ? "cranebnbLogoText" : "cranebnbLogoOnly"} src={desktop === true ? cranebnbLogo : cranebnbLogoOnly }></img>
+          <img
+            className="nav-bar-left"
+            id={desktop === true ? "cranebnbLogoText" : "cranebnbLogoOnly"}
+            src={desktop === true ? cranebnbLogo : cranebnbLogoOnly }
+            alt="CraneBnB Logo"
+          >
+          </img>
         </NavLink>
 
         {isLoaded && sessionLinks}

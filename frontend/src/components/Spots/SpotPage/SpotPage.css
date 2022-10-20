@@ -5,7 +5,7 @@
     /* align-content: space-between; */
     align-items: left;
     padding-left: min(50px);
-    padding-right: max(50px);
+    padding-right: min(50px);
     /* max-width: 200px; */
 }
 
