@@ -431,7 +431,7 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
 
 // Postman 8: "Create an Image for a Spot"
 // README, line 454
-router.post('/:spotId/images', requireAuth, async (req, res, next) => {
+router.post('/:spotId/images', requireAuth, validateURL, async (req, res, next) => {
 
     let spotId = parseInt(req.params.spotId);
     let error = {};

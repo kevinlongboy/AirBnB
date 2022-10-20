@@ -63,7 +63,7 @@ function CreateSpotForm() {
         }
 
         if (url.length > 0 && url.length < 5) {
-            errors.push("Image is required.")
+            errors.push("Photo is required.")
         }
 
         if (name.length > 0 && name.length < 2) {
@@ -95,6 +95,12 @@ function CreateSpotForm() {
         let errors = [];
         setValidationErrors(errors);
 
+        if (address === "" ) {
+            errors.push("Address is required.")
+        }
+        if (city === "" ) {
+            errors.push("City is required.")
+        }
         if (state === "" ) {
             errors.push("State is required.")
         }
@@ -102,7 +108,13 @@ function CreateSpotForm() {
             errors.push("Country is required.")
         }
         if (url === "") {
-            errors.push("Image is required.")
+            errors.push("Photo is required.")
+        }
+        if (name === "" ) {
+            errors.push("Title is required.")
+        }
+        if (description === "" ) {
+            errors.push("Description is required.")
         }
         setValidationErrors(errors)
         if (errors.length) return
@@ -125,10 +137,12 @@ function CreateSpotForm() {
             async (res) => {
 
                 const data = await res.json();
+                console.log("data", data)
 
                 if (data && data.errors) {
                     data.errors.forEach(message => errors.push(message));
-                    setValidationErrors(errors);
+                    setValidationErrors([...errors]);
+                    return
                 }
             }
         )

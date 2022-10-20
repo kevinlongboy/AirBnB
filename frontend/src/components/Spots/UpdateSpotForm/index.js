@@ -122,11 +122,23 @@ function UpdateSpotForm() {
         let errors = [];
         setValidationErrors(errors);
 
+        if (address === "" ) {
+            errors.push("Address is required.")
+        }
+        if (city === "" ) {
+            errors.push("City is required.")
+        }
         if (state === "" ) {
             errors.push("State is required.")
         }
         if (country === "") {
             errors.push("Country is required.")
+        }
+        if (name === "" ) {
+            errors.push("Title is required.")
+        }
+        if (description === "" ) {
+            errors.push("Description is required.")
         }
         setValidationErrors(errors)
 
@@ -148,7 +160,8 @@ function UpdateSpotForm() {
 
                 if (data && data.errors) {
                     data.errors.forEach(message => errors.push(message));
-                    setValidationErrors(errors);
+                    setValidationErrors([...errors]);
+                    return
                 }
             });
 
