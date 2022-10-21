@@ -14,11 +14,13 @@ const validateSignup = [
     check('firstName')
         // .exists({ checkFalsy: true }) // return "invalid value" message if falsy
         .isLength({ min: 2 })
-        .withMessage('Are you sure you entered your first name correctly?'),
+        .withMessage('Please enter your your first name.'),
+        // .withMessage('Are you sure you entered your first name correctly?'),
     check('lastName')
         // .exists({ checkFalsy: true })
         .isLength({ min: 2 })
-        .withMessage('Are you sure you entered your last name correctly?'),
+        .withMessage('Please enter your your last name.'),
+        // .withMessage('Are you sure you entered your last name correctly?'),
     check('email')
         // .exists({ checkFalsy: true })
         .isEmail()
@@ -34,7 +36,7 @@ const validateSignup = [
     check('password')
         // .exists({ checkFalsy: true })
         .isLength({ min: 6 })
-        .withMessage('Please use 6 or more characters for your password'),
+        .withMessage('Please use 6 or more characters for your password.'),
     handleValidationErrors
 ];
 

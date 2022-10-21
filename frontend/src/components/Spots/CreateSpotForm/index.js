@@ -52,7 +52,6 @@ function CreateSpotForm() {
         else setPrice(parseInt(e.target.value));
     }
 
-
     // render errors
     useEffect(() => {
         const errors = [];
