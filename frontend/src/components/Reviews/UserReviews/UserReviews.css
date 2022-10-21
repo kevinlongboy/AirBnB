@@ -7,7 +7,7 @@
     font-size: 14px;
 }
 
-#reviews-title {
+#UserReviewsPageTitle {
     color: #484848;
     font-size: 32px;
     font-weight: 900;
@@ -21,11 +21,14 @@
     border-bottom: 1px solid #dce0e0;
 }
 
-#review-table {
+#UserReviewsTable {
     margin-bottom: 30px;
+    gap: 0;
+    border-collapse: collapse;
+    width: 100%;
 }
 
-#review-table-head {
+#UserReviewsTableHead {
     background-color: #edefed;
     border: 1px solid #dce0e0;
     height: 50px;
@@ -46,97 +49,32 @@
     border: 1px solid #dce0e0;
 }
 
-.review-table-body-data {
+#reviewsToWriteTableBodyData {
+    padding-left: 24px;
+    font-size: 16px;
+    font-weight: 100;
+    color: #484848;
+    height: 65px;
+    width: 100%;
+}
+
+#pastReviewsTableBodyData{
+    padding-left: 24px;
     border-bottom: 1px solid #dce0e0;
 }
 
-#review-table-body-title {
-    text-indent: 24px;
+#pastReviewSpotName {
     color: #484848;
     font-size: 20px;
     font-weight: 900;
 }
 
-
-#review-table-body-data {
-    text-indent: 24px;
-    font-size: 16px;
-    font-weight: 100;
+#pastReviewText{
     color: #484848;
 }
 
-#review-table-body-date-created {
+#pastReviewDateCreated {
     color: #767676;
-    text-indent: 24px;
     font-size: 14px;
     font-weight: 100;
 }
-
-/* ********** */
-
-
-/* .spots-page {
-    padding: 0px 50px;
-}
-
-.spots-page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    margin-top: 40px;
-    margin-bottom: 30px;
-}
-
-h1 {
-    color: #494949;
-    font-size: 22px;
-}
-
-.spots-create-listing-button {
-    width: 145px;
-    height: 40px;
-    border: 1.5px solid #222222;
-    border-radius: 8px;
-    font-size: 14.5px;
-    text-align: center;
-}
-
-table {
-    gap: 0;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-thead {
-    border-bottom: 1.5px solid #f6f6f6;
-    color: #717171;
-    font-size: 14px;
-    font-weight: 900;
-}
-
-
-tr {
-    border-collapse: collapse;
-}
-
-td {
-    border-bottom: 1.5px solid #f6f6f6;
-    border-collapse: collapse;
-    height: 65px;
-    width: 100%;
-}
-
-.table-button {
-    width: 70px;
-    height: 40px;
-    border: 1.5px solid #222222;
-    border-radius: 8px;
-    font-size: 14.5px;
-    text-align: center;
-    background: none;
-}
-
-.table-button:hover {
-    cursor: pointer;
-} */

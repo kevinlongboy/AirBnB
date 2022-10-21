@@ -43,10 +43,10 @@ function UserReviews() {
         reviewComponent =
             reviewsArr.map(review => (
                 <tr key={review.id}>
-                    <td className="review-table-body-data">
-                        <p id="review-table-body-title">Review for {review.Spot && review.Spot.name}</p>
-                        <p id="review-table-body-data">{review.review}</p>
-                        <p id="review-table-body-date-created">{review.createdAt && convertDate(review.createdAt)}</p>
+                    <td id="pastReviewsTableBodyData">
+                        <p id="pastReviewSpotName">Review for {review.Spot && review.Spot.name}</p>
+                        <p id="pastReviewText">{review.review}</p>
+                        <p id="pastReviewDateCreated">{review.createdAt && convertDate(review.createdAt)}</p>
                         <DeleteReview id={review.id}/>
                     </td>
                 </tr>
@@ -65,7 +65,7 @@ function UserReviews() {
                     <p className="review-page-navigation">Profile <img id="review-chevron-right" src={chevronRight} style={{maxHeight:'10px', paddingLeft:'8px', paddingRight:'8px'}}></img> Reviews</p>
                 </div>
                 <div>
-                    <h1 id="reviews-title">Reviews by you</h1>
+                    <h1 id="UserReviewsPageTitle">Reviews by you</h1>
                 </div>
                 <div id="reviews-subtitle">
                     <p>Reviews by you</p>
@@ -73,8 +73,8 @@ function UserReviews() {
             </div>
 
             <div className="review-page-body">
-                <table id="review-table">
-                    <thead id='review-table-head'>
+                <table id="UserReviewsTable">
+                    <thead id='UserReviewsTableHead'>
                         <tr>
                             <th>Reviews to write</th>
                         </tr>
@@ -82,13 +82,13 @@ function UserReviews() {
 
                     <tbody id='review-table-body'>
                         <tr>
-                            <td id="review-table-head-data">Nobody to review right now. Looks like it’s time for another trip!</td>
+                            <td id="reviewsToWriteTableBodyData">Nobody to review right now. Looks like it’s time for another trip!</td>
                         </tr>
                     </tbody>
                 </table>
 
-                <table id="review-table">
-                    <thead id='review-table-head'>
+                <table id="UserReviewsTable">
+                    <thead id='UserReviewsTableHead'>
                         <tr>
                             <th>Past reviews you've written</th>
                         </tr>

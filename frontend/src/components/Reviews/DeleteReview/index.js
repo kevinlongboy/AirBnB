@@ -19,7 +19,7 @@ function DeleteReview({id}) {
 
     /**************** render component *****************/
     return (
-        <button id="review-table-button" type="submit" onClick={(e) => handleDelete(id)}>Delete</button>
+        <button id="reviewTableDeleteButton" type="submit" onClick={(e) => handleDelete(id)}>Delete</button>
     )
 }
 
