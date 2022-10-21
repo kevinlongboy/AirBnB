@@ -58,6 +58,8 @@ function UserReviews() {
     if (!sessionState.user.id) return <Redirect to="/" />;
 
     else return(
+
+    <div className="pageWrapperContainer">
         <div className="review-page">
 
             <div className="review-page-header">
@@ -101,6 +103,7 @@ function UserReviews() {
             </div>
 
         </div>
+    </div>
     )
 }
 

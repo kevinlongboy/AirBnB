@@ -14,3 +14,10 @@ body {
     margin: 0px;
     padding: 0px;
 }
+
+.pageWrapperContainer{
+    display: flex;
+    justify-content: center;
+    /* padding: min(0px 50px);
+    padding: max(0px 400px) */
+}

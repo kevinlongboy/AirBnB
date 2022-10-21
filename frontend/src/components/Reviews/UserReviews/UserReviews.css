@@ -1,5 +1,7 @@
 .review-page {
-    padding: 0px 50px;
+    min-width: 650px;
+    width: 770px;
+    padding: 0px 20px;
 }
 
 .review-page-navigation {
