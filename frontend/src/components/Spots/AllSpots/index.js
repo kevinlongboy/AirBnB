@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
 import { thunkReadAllSpots } from "../../../store/spotsReducer";
+import Footer from '../../Footer';
 import './AllSpots.css';
 
 
@@ -27,9 +28,11 @@ function AllSpots() {
 
     /**************** render component *****************/
     return (
-        <div className="spots">
+        <div>
 
-            {allSpotsArr.map((spot) => (
+            <div className="spots">
+
+                {allSpotsArr.map((spot) => (
                     <Link
                     className="spot-card"
                     key={`${spot.id}`}
@@ -38,23 +41,25 @@ function AllSpots() {
                     style={{textDecoration:"none"}} //?
                     >
 
-                        <div className="spot-image-container">
-                            <img className="spot-image" src={spot.previewImage} alt={`${spot.name}`}></img>
-                        </div>
-
-                        <div className="spot-text">
-
-                            <div className="spot-text-line-1">
-                                <div className="spot-name" style={{color:"black", fontWeight:"900"}}>{spot.name}</div>
-                                <div id="main-page-spot-rating">★ {spot.avgRatings ? spot.avgRatings : 0.00}</div>
+                            <div className="spot-image-container">
+                                <img className="spot-image" src={spot.previewImage} alt={`${spot.name}`}></img>
                             </div>
-                            <div className="spot-location" style={{color:"#717171",  fontWeight:"100"}}>{`${spot.city}, ${spot.state}`}</div>
-                            <div className="spot-price" style={{color:"black", fontWeight:"900"}}>{`$${spot.price} night`}</div>
-                        </div>
 
-                    </Link>
-            ))}
+                            <div className="spot-text">
 
+                                <div className="spot-text-line-1">
+                                    <div className="spot-name" style={{color:"black", fontWeight:"900"}}>{spot.name}</div>
+                                    <div id="main-page-spot-rating">★ {spot.avgRatings ? spot.avgRatings : 0.00}</div>
+                                </div>
+                                <div className="spot-location" style={{color:"#717171",  fontWeight:"100"}}>{`${spot.city}, ${spot.state}`}</div>
+                                <div className="spot-price" style={{color:"black", fontWeight:"900"}}>{`$${spot.price} night`}</div>
+                            </div>
+
+                        </Link>
+                ))}
+
+            </div>
+            <Footer />
         </div>
     )
 }

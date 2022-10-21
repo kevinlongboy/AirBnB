@@ -67,8 +67,6 @@ function App() {
 
         </Switch>
       )}
-
-      {/* <Footer /> */}
     </>
   );
 }

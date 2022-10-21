@@ -1,16 +1,40 @@
-.footer {
+.footerContainer {
     border-top: 2px solid #f6f6f6;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50px;
+    height: 45px;
+
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     align-items: center;
     background-color: white;
+    padding: 0px 50px;
     /* z-index: unset; */
 }
 
-.footer-contents {
-    left: 50px;
+.footerText {
+    color: #222;
+    font-weight: 100;
+    font-size: 14px;
+    padding: 0px 3px;
+    text-decoration: none;
+
+}
+
+.footerText:hover {
+    color: #222;
+    text-decoration: underline;
+}
+
+.footerText:visited {
+    color: #222;
+    text-decoration: none;
+}
+
+.footerText:active {
+    color: #222;
+    text-decoration: none;
 }
