@@ -41,12 +41,12 @@ function UserSpots() {
                 <div className="spots-page-header">
                     <h1>{allSpotsByUser.length} Listing<span>{allSpotsByUser.length === 1 ? '' : 's'}</span></h1>
 
-                    <div className="spots-create-listing-button" style={{display:"flex", justifyContent:"space-evenly", verticalAlign:"center", alignContent:'center', alignItems:'center'}}>
+                    <NavLink to={'/hosting'} className="createListingButtonLink">
+                        <div className="createListingButton">
                             <img src={plusIcon} style={{width:"15px"}}></img>
-                        <NavLink to={'/hosting'} style={{textDecoration:"none", color:"black", fontWeight:"900",verticalAlign:'start' }}>
                             Create listing
-                        </NavLink>
-                    </div>
+                        </div>
+                    </NavLink>
                 </div>
 
 
