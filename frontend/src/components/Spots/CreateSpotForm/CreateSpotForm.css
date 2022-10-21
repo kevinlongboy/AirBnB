@@ -112,24 +112,36 @@
     cursor: pointer;
 }
 
-.output-field-price {
+.outputFieldPrice {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     width: 295px;
     height: 80px;
-    border: 1px solid #afafaf;
     margin: 10px 0px;
+    border: 1px solid #afafaf;
     border-radius: 8px;
-    text-indent: 10px;
-    color: #afafaf;
-    font-size: 18px;
-    font-weight: 100;
     padding-top: 20px;
     text-align: center;
+    color: black;
+    font-weight: 100;
+    font-size: 48px;
+    /* font-weight: 900; */
 }
 
-.output-display-price {
+.inputFieldPrice{
     color: black;
+    font-weight: 100;
     font-size: 48px;
-    font-weight: 900;
+    border: none;
+    outline: none;
+    max-width: 160px;
+    text-align: right;
+    /* border: 1px solid red; */
+}
+
+.inputFieldPrice:visited{
+    border: none;
 }
 
 ::placeholder {

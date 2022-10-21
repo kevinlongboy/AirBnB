@@ -112,26 +112,6 @@
     cursor: pointer;
 }
 
-.output-field-price {
-    width: 295px;
-    height: 80px;
-    border: 1px solid #afafaf;
-    margin: 10px 0px;
-    border-radius: 8px;
-    text-indent: 10px;
-    color: #afafaf;
-    font-size: 18px;
-    font-weight: 100;
-    padding-top: 20px;
-    text-align: center;
-}
-
-.output-display-price {
-    color: black;
-    font-size: 48px;
-    font-weight: 900;
-}
-
 ::placeholder {
     color: #afafaf;
     font-size: 18px;

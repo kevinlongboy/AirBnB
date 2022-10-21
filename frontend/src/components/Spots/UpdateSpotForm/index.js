@@ -55,6 +55,12 @@ function UpdateSpotForm() {
     let decrementCounter = () => {
         if (price > 10) setPrice(price - 1);
     }
+    let changePriceViaType = (e) => {
+        let rawPrice = e.target.value;
+        if (rawPrice.length < 1 ) return;
+        else if (rawPrice.length > 5) return;
+        else setPrice(parseInt(e.target.value));
+    }
 
     // render errors
     useEffect(() => {
@@ -106,6 +112,12 @@ function UpdateSpotForm() {
 
         if (!price) {
             errors.push("Price per night is required.")
+        } else if (price > 10000) {
+            errors.push("Please enter a rate lower than $10,000.")
+        } else if (price < 10) {
+            errors.push("Minimum rate is $10.")
+        } else if (typeof price !== 'number') {
+            errors.push("Please enter a valid rate.")
         }
 
         setValidationErrors(errors)
@@ -140,7 +152,11 @@ function UpdateSpotForm() {
         if (description === "" ) {
             errors.push("Description is required.")
         }
+        if (price === "") {
+            errors.push("Price is required.")
+        }
         setValidationErrors(errors)
+        if (errors.length) return
 
         let updateSpotData = {
             address: address,
@@ -281,9 +297,17 @@ function UpdateSpotForm() {
                         </button>
                     </div>
 
-
-                    <div className="output-field-price" style={{color:"black"}}>
-                        <output className="output-display-price">${`${price}`}</output>
+                    <div className="outputFieldPrice">
+                        <span>$</span>
+                        <div>
+                        <input
+                        className="inputFieldPrice"
+                        type="text"
+                        name="price"
+                        onChange={changePriceViaType}
+                        value={price}
+                        />
+                        </div>
                     </div>
 
                     <div>
