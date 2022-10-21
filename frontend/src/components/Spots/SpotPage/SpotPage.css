@@ -101,7 +101,6 @@
 /************************** MIDDLE-LEFT **************************/
 .spot-page-middle-left{
     grid-column: 1 / 3;
-    padding-right: 30px;
 }
 
 .spot-page-host-info {
