@@ -142,33 +142,6 @@
     color: blue;
 }
 
-.continue-button {
-    width: 530px;
-    height: 60px;
-    color: black;
-    background-color: white;
-    border: 1.5px solid black;
-    border-radius: 8px;
-    /* margin-top: 9px; */
-    margin-bottom: 18px;
-    font-size: 16px;
-}
-
-.continue-button:active {
-    text-decoration: none;
-    color: black;
-}
-
-.continue-button:hover {
-    text-decoration: none;
-    color: black;
-    cursor: pointer;
-}
-
-.continue-button:visited {
-    text-decoration: none;
-    color: black;
-}
 
 .errors {
     color: red;

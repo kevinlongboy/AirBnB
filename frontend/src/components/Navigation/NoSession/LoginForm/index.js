@@ -133,7 +133,7 @@ function LoginForm() {
         <div className="or">or</div>
 
         <button
-          className="continue-button"
+          className="modalContinueButton"
           onClick={() => setShowModal(true)}
           >
           Continue to Sign Up
@@ -146,7 +146,7 @@ function LoginForm() {
         )}
 
         <button
-          className="continue-button"
+          className="modalContinueButton"
           type="submit"
           onClick={handleSubmitDemoUser}
           >
@@ -154,12 +154,12 @@ function LoginForm() {
         </button>
 
         <button
-          className="continue-button"
+          className="modalContinueButton"
           type="button"
           // onClick={handleSubmitRedirect}
           >
           {/* <i class="fa-brands fa-linkedin"></i> */}
-          {/* <div className="buttonIcon" style={{align:"left"}}>
+          {/* <div id="buttonIcon" style={{align:"left"}}>
             <img src={linkedinLogo} style={{width:"20px"}}></img>
           </div> */}
 
@@ -171,7 +171,7 @@ function LoginForm() {
         </button>
 
         <button
-          className="continue-button"
+          className="modalContinueButton"
           type="button"
           // onClick={handleSubmitRedirect}
           >

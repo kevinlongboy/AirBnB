@@ -64,6 +64,10 @@ export const thunkCreateSingleSpot = (data, url) => async (dispatch) => {
             const newSpotImage = await response2.json();
             dispatch(actionCreateSingleSpot(newSpot));
             return newSpot
+        } else {
+            const response = await csrfFetch(`/api/spots/${newSpot.id}`, {
+                method: 'delete',
+            })
         }
         return newSpot
     }
