@@ -33,8 +33,8 @@ function UserReviews() {
     if (!reviewsArr.length) {
         reviewComponent = (
             <>
-                <tr>
-                    <td>
+                <tr id="pastReviewsTableBodyRow">
+                    <td id="pastReviewsTableBodyData">
                     </td>
                 </tr>
             </>
@@ -83,7 +83,7 @@ function UserReviews() {
                     </thead>
 
                     <tbody id='review-table-body'>
-                        <tr>
+                        <tr id="reviewsToWriteTableBodyRow">
                             <td id="reviewsToWriteTableBodyData">Nobody to review right now. Looks like it’s time for another trip!</td>
                         </tr>
                     </tbody>
