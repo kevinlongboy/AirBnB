@@ -46,8 +46,17 @@ function LoginForm() {
     e.preventDefault();
 
     let errors = []
-
     setErrors([]);
+
+    if (!credential) {
+      errors.push("Please enter your username or email.")
+    }
+    if (!password) {
+      errors.push("Please enter your password.")
+    }
+    setErrors(errors)
+    if (errors.length) return
+
 
     return dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
