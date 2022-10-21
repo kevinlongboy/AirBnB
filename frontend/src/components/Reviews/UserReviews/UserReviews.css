@@ -71,3 +71,72 @@
     font-size: 14px;
     font-weight: 100;
 }
+
+/* ********** */
+
+
+/* .spots-page {
+    padding: 0px 50px;
+}
+
+.spots-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #494949;
+    font-size: 22px;
+}
+
+.spots-create-listing-button {
+    width: 145px;
+    height: 40px;
+    border: 1.5px solid #222222;
+    border-radius: 8px;
+    font-size: 14.5px;
+    text-align: center;
+}
+
+table {
+    gap: 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+thead {
+    border-bottom: 1.5px solid #f6f6f6;
+    color: #717171;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+
+tr {
+    border-collapse: collapse;
+}
+
+td {
+    border-bottom: 1.5px solid #f6f6f6;
+    border-collapse: collapse;
+    height: 65px;
+    width: 100%;
+}
+
+.table-button {
+    width: 70px;
+    height: 40px;
+    border: 1.5px solid #222222;
+    border-radius: 8px;
+    font-size: 14.5px;
+    text-align: center;
+    background: none;
+}
+
+.table-button:hover {
+    cursor: pointer;
+} */

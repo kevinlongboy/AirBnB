@@ -39,7 +39,7 @@ function UserSpots() {
             <div className="spots-page">
 
                 <div className="spots-page-header">
-                    <h1>{allSpotsByUser.length} Listing<span>{allSpotsByUser.length === 1 ? '' : 's'}</span></h1>
+                    <h1 className="userSpotsPageTitle">{allSpotsByUser.length} Listing<span>{allSpotsByUser.length === 1 ? '' : 's'}</span></h1>
 
                     <NavLink to={'/hosting'} className="createListingButtonLink">
                         <div className="createListingButton">
@@ -50,11 +50,11 @@ function UserSpots() {
                 </div>
 
 
-                <div className="spots-page-body">
-                    <table>
+                <div className="userSpotsBody">
+                    <table className="userSpotsTable">
 
-                        <thead className="tableHead">
-                            <tr className="tableHeadRow">
+                        <thead className="userSpotsTableHead">
+                            <tr className="userSpotsTableHeadRow">
                                 <th className="tableHeadItem">LISTING</th>
                                 <th className="tableHeadItem">TO DO</th>
                                 <th className="tableHeadItem">LOCATION</th>
@@ -65,7 +65,7 @@ function UserSpots() {
                         {
                             allSpotsByUser.map(spot => (
 
-                                <tr key={spot.id} className="tableBodyRow">
+                                <tr key={spot.id} className="userSpotsTableBodyRow">
 
                                     <NavLink
                                         className="spotTableListingLink"

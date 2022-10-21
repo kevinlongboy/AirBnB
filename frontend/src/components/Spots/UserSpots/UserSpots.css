@@ -11,7 +11,7 @@
     margin-bottom: 30px;
 }
 
-h1 {
+.userSpotsPageTitle {
     color: #494949;
     font-size: 22px;
 }
@@ -38,27 +38,30 @@ h1 {
     vertical-align: start;
 }
 
-table {
+.userSpotsTable {
     gap: 0;
     border-collapse: collapse;
     width: 100%;
 }
 
-thead {
+.userSpotsTableHead {
     border-bottom: 1.5px solid #f6f6f6;
     color: #717171;
     font-size: 14px;
     font-weight: 900;
 }
 
-tr {
+.userSpotsTableHeadRow {
     border-collapse: collapse;
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
 
-.tableBodyRow {
+.userSpotsTableBodyRow {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     border-bottom: 1.5px solid #f6f6f6;
     border-collapse: collapse;
     height: 65px;

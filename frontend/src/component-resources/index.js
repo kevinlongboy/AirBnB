@@ -16,7 +16,7 @@ export const states = [
 
 /******************************* PLACEHOLDER IMAGES FOR INSUFFICIENT SOURCES *******************************/
 let placeholderImages = [
-    "https://cdn1.vox-cdn.com/uploads/chorus_image/image/47552879/Pike_Place_Market_Entrance.0.0.jpg",
+    // "https://cdn1.vox-cdn.com/uploads/chorus_image/image/47552879/Pike_Place_Market_Entrance.0.0.jpg",
     // "http://sparkcreativeseattle.com/wp-content/uploads/2018/12/space-needle-fog.jpg",
     "https://i.pinimg.com/originals/61/9c/d7/619cd796299ae48b777881e8b5bdbc7e.jpg",
     "https://cdn.vox-cdn.com/thumbor/XIhmt3AT6oZpXGechlpqiWeMkxU=/0x0:5000x3333/1200x800/filters:focal(2100x1267:2900x2067)/cdn.vox-cdn.com/uploads/chorus_image/image/64758319/StarbucksPETA.0.jpg",
