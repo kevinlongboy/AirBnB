@@ -929,6 +929,8 @@ router.post('/', requireAuth, validateSpot, async (req, res) => { // removed val
         });
         postSpot.save();
 
+        // add initial image to newly created spot:
+
         return res
             .status(201)
             .json(postSpot)

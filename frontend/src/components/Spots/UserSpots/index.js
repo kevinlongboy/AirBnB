@@ -40,6 +40,7 @@ function UserSpots() {
 
                 <div className="spots-page-header">
                     <h1>{allSpotsByUser.length} Listing<span>{allSpotsByUser.length === 1 ? '' : 's'}</span></h1>
+
                     <div className="spots-create-listing-button" style={{display:"flex", justifyContent:"space-evenly", verticalAlign:"center", alignContent:'center', alignItems:'center'}}>
                             <img src={plusIcon} style={{width:"15px"}}></img>
                         <NavLink to={'/hosting'} style={{textDecoration:"none", color:"black", fontWeight:"900",verticalAlign:'start' }}>
@@ -51,11 +52,12 @@ function UserSpots() {
 
                 <div className="spots-page-body">
                     <table>
-                        <thead>
-                            <tr style={{display:'flex', justifyContent:"space-around"}}>
-                                <th>LISTING</th>
-                                <th>TO DO</th>
-                                <th>LOCATION</th>
+
+                        <thead className="tableHead">
+                            <tr className="tableHeadRow">
+                                <th className="tableHeadItem">LISTING</th>
+                                <th className="tableHeadItem">TO DO</th>
+                                <th className="tableHeadItem">LOCATION</th>
                             </tr>
                         </thead>
 
@@ -63,14 +65,16 @@ function UserSpots() {
                         {
                             allSpotsByUser.map(spot => (
 
-                                <tr key={spot.id} className="spot-listing-row">
+                                <tr key={spot.id} className="tableBodyRow">
 
                                     <NavLink
+                                        className="spotTableListingLink"
                                         to={`/spots/${spot.id}`}
-                                        style={{textDecoration:"none", color:"#484848",display:'flex', justifyContent:'space-around', paddingTop:'20px' }}>
-                                    <td>{spot.name}</td>
+                                    >
+                                    <td className="spotTableListingLinkText">{spot.name}</td>
                                     </NavLink>
-                                    <td>
+
+                                    <td className="spotTableManageListingButtons">
                                         <NavLink
                                         to={`/spots/${spot.id}/edit`}
                                         style={{paddingRight:"15px"}}>
@@ -81,12 +85,14 @@ function UserSpots() {
 
                                         <DeleteSpot id={spot.id}/>
                                     </td>
-                                    <td>{spot.city}, {spot.state}</td>
-                                </tr>
 
+                                    <td className="spotTableListingLocation">{spot.city}, {spot.state}</td>
+
+                                </tr>
                             ))
                         }
                         </tbody>
+
                     </table>
                 </div>
 

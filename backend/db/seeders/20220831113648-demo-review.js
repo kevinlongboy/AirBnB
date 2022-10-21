@@ -100,7 +100,7 @@ const demoReviews = [
   { // Niles reviews Gertrude's
     spotId: 10,
     userId: 2,
-    review: 'What a lovely home this was! And the host was like no other. In fact, the whole experience made me miss the sight of my own doorstep the moment we arrived!',
+    review: 'What a lovely home this was! And the host was like no other. In fact, the whole experience brought to mind visions of my own bed the moment we arrived!',
     stars: 5,
   },
   { // Gertrude reviews Martin's
