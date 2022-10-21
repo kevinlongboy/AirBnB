@@ -24,17 +24,17 @@
 
 }
 
-.footerText:hover {
+.footerContainer > a:hover {
     color: #222;
     text-decoration: underline;
 }
 
-.footerText:visited {
+.footerContainer > a:active {
     color: #222;
     text-decoration: none;
 }
 
-.footerText:active {
+.footerContainer > a:visited {
     color: #222;
     text-decoration: none;
 }

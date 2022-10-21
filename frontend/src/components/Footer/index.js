@@ -13,11 +13,11 @@ function Footer() {
         <div className="footerContainer">
             <div className="footerText">© 2022 Cranebnb, Inc.</div>
             <span className="footerText">·</span>
-            <div className="footerText"><a href="https://www.airbnb.com/help/article/2855/airbnb-privacy" className="footerText" >Privacy</a></div>
+            <a href="https://www.airbnb.com/help/article/2855/airbnb-privacy" className="footerText" >Privacy</a>
             <span className="footerText">·</span>
-            <div className="footerText"><a href="https://www.airbnb.com/help/article/2908" className="footerText">Terms</a></div>
+            <a href="https://www.airbnb.com/help/article/2908" className="footerText">Terms</a>
             <span className="footerText">·</span>
-            <div className="footerText"><a href="https://www.airbnb.com/sitemaps/v2" className="footerText">Sitemap</a></div>
+            <a href="https://www.airbnb.com/sitemaps/v2" className="footerText">Sitemap</a>
         </div>
     )
 }
