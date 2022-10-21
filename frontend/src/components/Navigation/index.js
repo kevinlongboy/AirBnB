@@ -26,7 +26,7 @@ function Navigation({ isLoaded }){
   const [desktop, setDesktop] = useState(true);
 
   const resize = () => {
-    if (window.innerWidth > 1130) {
+    if (window.innerWidth > 1100) {
       setDesktop(true)
     } else {
       setDesktop(false)
