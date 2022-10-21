@@ -78,7 +78,7 @@ function SpotPage() {
   /**************** render component *****************/
   return (
 
-    <div className="wrapperContainer">
+    <div className="pageWrapperContainer">
       <div className="spot-page">
 
           <h1 id="spot-page-name">{spot.name}</h1>

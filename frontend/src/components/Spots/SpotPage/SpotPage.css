@@ -1,3 +1,10 @@
+.pageWrapperContainer{
+    display: flex;
+    justify-content: center;
+    /* padding: min(0px 50px);
+    padding: max(0px 400px) */
+}
+
 .spot-page {
     display: flex;
     flex-direction: column;
@@ -6,7 +13,7 @@
     align-items: left;
     padding-left: min(50px);
     padding-right: max(50px);
-    /* max-width: 200px; */
+    max-width: 1120px;
 }
 
 #spot-page-name {
@@ -44,8 +51,7 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     max-width: 100%;
-    min-height: 45vw;
-    max-height: 425px;
+    height: 550px;
     border-radius: 25px;
 }
 

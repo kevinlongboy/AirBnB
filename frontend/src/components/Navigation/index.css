@@ -9,7 +9,7 @@
     position: sticky;
     top: 0;
     background-color: white;
-    z-index: 0;
+    z-index: 1;
 
     margin: 0px;
     border-bottom: 2px solid #f6f6f6;
