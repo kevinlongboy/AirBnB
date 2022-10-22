@@ -56,11 +56,13 @@ function UpdateSpotForm() {
         if (price > 10) setPrice(price - 1);
     }
     let changePriceViaType = (e) => {
-        if (typeof e.target.value !== "number") return;
         let rawPrice = e.target.value;
         if (rawPrice.length < 1 ) return;
         else if (rawPrice.length > 5) return;
-        else setPrice(parseInt(e.target.value));
+
+        let parsedPrice = parseInt(e.target.value)
+        if (Number.isNaN(parsedPrice)) return;
+        else setPrice(parsedPrice);
     }
 
     // render errors

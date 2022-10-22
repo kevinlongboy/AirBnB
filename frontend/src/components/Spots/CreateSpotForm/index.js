@@ -46,11 +46,13 @@ function CreateSpotForm() {
         }
     }
     let changePriceViaType = (e) => {
-        if (typeof e.target.value !== "number") return;
         let rawPrice = e.target.value;
         if (rawPrice.length < 1 ) return;
         else if (rawPrice.length > 5) return;
-        else setPrice(parseInt(e.target.value));
+
+        let parsedPrice = parseInt(e.target.value)
+        if (Number.isNaN(parsedPrice)) return;
+        else setPrice(parsedPrice);
     }
 
     // render errors
@@ -303,6 +305,7 @@ function CreateSpotForm() {
                         type="text"
                         name="price"
                         onChange={changePriceViaType}
+                        style={{width:"fit"}}
                         value={price}
                         />
                         </div>
