@@ -96,13 +96,11 @@ function CreateSpotForm() {
         }
 
         if (!price) {
-            errors.push("Price per night is required.")
-        } else if (price > 10000) {
-            errors.push("Please enter a rate lower than $10,000.")
-        } else if (price < 10) {
-            errors.push("Minimum rate is $10.")
+            errors.push("Price per night is required.");
+        } else if (price < 10 || price > 10000) {
+            errors.push("Please enter a base price between $10 and $10,000.");
         } else if (typeof price !== 'number') {
-            errors.push("Please enter a valid rate.")
+            errors.push("Please enter a valid rate.");
         }
 
         setValidationErrors(errors)
