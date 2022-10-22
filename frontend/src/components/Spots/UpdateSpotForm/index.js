@@ -262,7 +262,7 @@ function UpdateSpotForm() {
                 </div>
 
                 <div className="spotFormSection">
-                    <h2 className="">Change your title</h2>
+                    <h2 className="spotFormSectionPrompt">Change your title</h2>
                     <label>
                         <textarea
                         className="inputFieldTypeTextarea"
