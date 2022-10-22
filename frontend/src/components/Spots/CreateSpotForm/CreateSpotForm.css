@@ -7,6 +7,14 @@
     padding: 0;
 }
 
+
+::placeholder {
+    color: #afafaf;
+    font-size: 18px;
+    font-weight: 100;
+}
+
+
 .banner {
     height: 310px;
     background-image: linear-gradient(270deg, #d32877, #461ba1);
@@ -20,20 +28,72 @@
     font-size: 34px;
 }
 
-
+.spotFormContainer {
+    display: flex;
+    justify-content: center;
+    /* background-color: red; */
+}
 .create-spot-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     vertical-align: middle;
-    margin: 70px 0px;
+    margin: 50px 0px;
+    width: 550px
+}
+
+/********** sections of form **********/
+.spotFormSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+#spotFormInputFieldStreet {
+    border-radius: 8px 8px 0px 0px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    border-bottom: none;
+}
+
+#spotFormInputFieldCity {
+    border-radius: 0px;
+    margin: 0px;
+    border-bottom: none;
+}
+
+#spotFormInputFieldState {
+    border-radius: 0px;
+    margin: 0px;
+    border-bottom: none;
+    width: 556px;
+}
+
+#spotFormInputFieldCountry {
+    border-radius: 0px 0px 8px 8px;
+    margin-top: 0px;
+    width: 556px;
+}
+
+#spotFormInputFieldTitle{
+    min-height: 90px;
+    max-height: 90px;
+}
+
+#spotFormInputFieldDescription{
+    min-height: 180px;
+    max-height: 180px;
 }
 
 
-.input-field {
-    width: 500px;
-    height: 80px;
+/********** types of input fields **********/
+
+.inputFieldTypeText {
+    width: 550px;
+    height: 55px;
     margin: 10px 0px;
     border: 1px solid #afafaf;
     border-radius: 8px;
@@ -41,6 +101,7 @@
     font-size: 18px;
     font-weight: 100;
     color: black;
+    outline: none;
 }
 
 /* .input-field ::placeholder {
@@ -50,39 +111,23 @@
     font-weight: 100;
 } */
 
-.input-field-select {
+.inputFieldTypeSelect {
     margin: 10px 0px;
-    width: 505px;
-    height: 80px;
+    width: 550px;
+    height: 60px;
     border: 1px solid #afafaf;
     border-radius: 8px;
     text-indent: 14px;
     color: black;
     font-size: 18px;
     font-weight: 100;
+    outline: none;
 }
 
-.input-field-text-prompt {
-    font-size: 22px;
-    margin: 10px 0px 0px 10px;
-    border: 0;
-    padding: 0;
-    text-indent: 10px;
-    align-self: flex-start;
-}
-
-.input-field-text-subtitle {
-    margin-top: 0px;
-    border: 0px;
-    padding: 0px;
-}
-
-.input-field-textarea {
+.inputFieldTypeTextarea {
     margin: 10px 0px;
-    min-width: 500px;
-    max-width: 500px;
-    max-height: 180px;
-    min-height: 180px;
+    min-width: 550px;
+    max-width: 550px;
     border: 1px solid #afafaf;
     border-radius: 8px;
     font-size: 18px;
@@ -90,10 +135,56 @@
     font-weight: 100;
     text-indent: 10px;
     padding-top: 20px;
+    outline: none;
 }
 
+/********** input fields text prompts **********/
+
+.spotFormSectionPrompt {
+    font-size: 22px;
+    margin: 10px 0px 0px 10px;
+    border: 0;
+    padding: 0px;
+    text-indent: 10px;
+    /* align-self: flex-start; */
+}
+
+#spotFormSectionTextContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.spotFormSectionText{
+    font-size: 15px;
+    color: #222;
+    font-weight: 900;
+    margin: 0px;
+    padding: 0px;
+}
+
+.spotFormSectionSubtext {
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    font-size: 14px;
+    color: #717171;
+    font-weight: 100;
+}
+
+.spotFormFieldLink {
+    color: black;
+}
+
+.spotFormFieldLink:visited {
+    color: black;
+}
+
+
+/********** price **********/
+
+
 .price {
-    margin: 10px 0px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -140,20 +231,30 @@
     /* border: 1px solid red; */
 }
 
-.inputFieldPrice:visited{
-    border: none;
-}
-
-::placeholder {
-    color: #afafaf;
-    font-size: 18px;
+#perNightText  {
+    margin: 0px;
+    padding: 0px;
     font-weight: 100;
 }
+
+#priceRangeSuggestionContainer {
+    width: 350px;
+    margin-top: 7px;
+}
+
+#priceRangeSuggestionText {
+    font-size: 18px;
+    font-weight: 100;
+    text-align: center;
+}
+
+
+/******* submit *******/
 
 .spot-submit-button {
     width: 110px;
     height: 50px;
-    margin: 10px 0px;
+    margin: 0px;
     border: 1.5px solid black;
     border-radius: 8px;
     font-size: 15px;
@@ -167,6 +268,7 @@
     cursor: pointer;
 }
 
+/******* errors ******/
 .errors {
     color: red;
     margin: 0;

@@ -137,6 +137,9 @@ function CreateSpotForm() {
         if (description === "" ) {
             errors.push("Description is required.")
         }
+        if (price === "") {
+            errors.push("Price is required.")
+        }
         setValidationErrors(errors)
         if (errors.length) return
 
@@ -177,170 +180,204 @@ function CreateSpotForm() {
 
     return (
 
+
         <div className="spot-create-page">
             <div className="banner">
                 <h1 className="spot-create-title">Create a new listing</h1>
             </div>
 
-            <form
-                className="create-spot-form"
-                onSubmit={handleSubmit}
-                >
-
-            <label>
-                <p className="input-field-text-prompt">Enter your address</p>
-                {/* <p className="input-field-text-subtitle">Make it clear to guests where your place is located. We'll only share your address after they've made a reservation. Learn more</p> */}
-                <input
-                className="input-field"
-                type="text"
-                name="address"
-                placeholder="Address"
-                onChange={(e) => setAddress(e.target.value)}
-                value={address}
-            />
-            </label>
-
-            <label>
-                <input
-                className="input-field"
-                type="text"
-                name="city"
-                placeholder="City"
-                onChange={(e) => setCity(e.target.value)}
-                value={city}
-            />
-            </label>
-
-
-            <label>
-                <select className="input-field-select"
-                onChange={(e) => setState(e.target.value)}
-                value={state}
-                >
-                    <option>State</option>
-                    {states.map(state => (
-                    <option key={state} required="true"
+            <div className="spotFormContainer">
+                <form
+                    className="create-spot-form"
+                    onSubmit={handleSubmit}
                     >
-                    {state}
-                    </option>
-                    ))}
-                </select>
-            </label>
-
-            <label>
-                <select className="input-field-select"
-                onChange={(e) => setCountry(e.target.value)}
-                value={country}
-                >
-                    <option>Country</option>
-                    <option>United States</option>
-                </select>
-            </label>
-
-            <label>
-                <p className="input-field-text-prompt">Add a photo of your place</p>
-                {/* <p className="input-field-text-subtitle">Let's put your best photos first.</p> */}
-                <input
-                className="input-field"
-                type="text"
-                name="url"
-                placeholder="Enter your photo URL here"
-                onChange={(e) => setUrl(e.target.value)}
-                value={url}
-            />
-            </label>
-
-            <label>
-                <p className="input-field-text-prompt">Create your title</p>
-                {/* <p className="input-field-text-subtitle">Your listing title should highlight what makes your place special. Review listing title guidelines.</p> */}
-                <input
-                className="input-field"
-                type="text"
-                name="name"
-                placeholder="Lovely space in Seattle"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-            />
-            </label>
-
-            <label>
-                <p className="input-field-text-prompt">Create your description</p>
-                <textarea
-                className="input-field-textarea"
-                type="textarea"
-                name="description"
-                minLength={5}
-                placeholder="You'll have a great time at this comfortable place to stay."
-                // rows="5"
-                // cols="20"
-                onChange={(e) => setDescription(e.target.value)}
-                value={description}
-            />
-            </label>
 
 
+                <div className="spotFormSection">
+                    <h2 className="spotFormSectionPrompt">Enter your address</h2>
 
-            <label>
-                <div className="price">
-
-                    <div>
-                        <button
-                            id="price-button"
-                            type="button"
-                            name="price"
-                            min="10"
-                            onClick={decrementCounter}
-                            >
-                            <i class="fa-solid fa-minus"></i>
-                        </button>
-                    </div>
-
-                    <div className="outputFieldPrice">
-                        <span>$</span>
-                        <div>
+                    <label>
                         <input
-                        className="inputFieldPrice"
+                        className="inputFieldTypeText"
+                        id="spotFormInputFieldStreet"
                         type="text"
-                        name="price"
-                        onChange={changePriceViaType}
-                        style={{width:"fit"}}
-                        value={price}
+                        name="address"
+                        placeholder="Street"
+                        onChange={(e) => setAddress(e.target.value)}
+                        value={address}
                         />
-                        </div>
-                    </div>
+                    </label>
 
-                    <div>
-                        <button
-                            id="price-button"
-                            type="button"
-                            name="price"
-                            max="10000"
-                            onClick={incrementCounter}
-                            >
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
+                    <label>
+                        <input
+                        className="inputFieldTypeText"
+                        id="spotFormInputFieldCity"
+                        type="text"
+                        name="city"
+                        placeholder="City"
+                        onChange={(e) => setCity(e.target.value)}
+                        value={city}
+                        />
+                    </label>
+
+                    <label>
+                        <select
+                        className="inputFieldTypeSelect"
+                        id="spotFormInputFieldState"
+                        onChange={(e) => setState(e.target.value)}
+                        value={state}
+                        >
+                            <option>State</option>
+                            {states.map(state => (
+                                <option key={state} required="true"
+                                >
+                            {state}
+                            </option>
+                            ))}
+                        </select>
+                    </label>
+
+                    <label>
+                        <select
+                        className="inputFieldTypeSelect"
+                        id="spotFormInputFieldCountry"
+                        onChange={(e) => setCountry(e.target.value)}
+                        value={country}
+                        >
+                            <option>Country / Region</option>
+                            <option>United States</option>
+                        </select>
+                        <p className="spotFormSectionText">Share your specific location</p>
+                        <p className="spotFormSectionSubtext">Make it clear to guests where your place is located. We'll only share your address after they've made a reservation. <a href="https://www.airbnb.com/help/article/2855/privacy-policy?locale=en&country_override=US" className="spotFormFieldLink">Learn more</a></p>
+                    </label>
+                    {/* <div id="spotFormSectionTextContainer">
+                    </div> */}
+                </div>
+
+
+                <div className="spotFormSection">
+                    <h2 className="spotFormSectionPrompt">Add a photo of your place</h2>
+                    <label>
+                        <input
+                        className="inputFieldTypeText"
+                        type="text"
+                        name="url"
+                        placeholder="Enter your photo URL here"
+                        onChange={(e) => setUrl(e.target.value)}
+                        value={url}
+                        />
+                    {/* <p className="spotFormSectionText">Add at least 1 photo</p> */}
+                    <p className="spotFormSectionSubtext">Let's put your best photo first.</p>
+                    </label>
+                </div>
+
+
+                <div className="spotFormSection">
+                    <h2 className="spotFormSectionPrompt">Create your title</h2>
+                    <label>
+                        <textarea
+                        className="inputFieldTypeTextarea"
+                        id="spotFormInputFieldTitle"
+                        type="textarea"
+                        name="name"
+                        placeholder="Lovely space in Seattle"
+                        onChange={(e) => setName(e.target.value)}
+                        value={name}
+                    />
+                    <p className="spotFormSectionSubtext">Your listing title should highlight what makes your place special. <a href="https://www.airbnb.com/resources/hosting-homes/a/new-guidelines-for-writing-your-listing-title-533" className="spotFormFieldLink">Review listing title guidelines.</a></p>
+                    </label>
+                </div>
+
+
+                <div className="spotFormSection">
+                    <h2 className="spotFormSectionPrompt">Create your description</h2>
+                    <label>
+                        <textarea
+                        className="inputFieldTypeTextarea"
+                        id="spotFormInputFieldDescription"
+                        type="textarea"
+                        name="description"
+                        minLength={5}
+                        placeholder="You'll have a great time at this comfortable place to stay."
+                        // rows="5"
+                        // cols="20"
+                        onChange={(e) => setDescription(e.target.value)}
+                        value={description}
+                        />
+                    </label>
+                </div>
+
+
+                <div className="spotFormSection">
+
+                        <div className="price">
+
+                            <div>
+                                <button
+                                    id="price-button"
+                                    type="button"
+                                    name="price"
+                                    min="10"
+                                    onClick={decrementCounter}
+                                    >
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                            </div>
+
+                            <div className="outputFieldPrice">
+                                <span>$</span>
+                                <div>
+                                    <label>
+                                    <input
+                                    className="inputFieldPrice"
+                                    type="text"
+                                    name="price"
+                                    onChange={changePriceViaType}
+                                    style={{width:"fit"}}
+                                    value={price}
+                                    />
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <button
+                                    id="price-button"
+                                    type="button"
+                                    name="price"
+                                    max="10000"
+                                    onClick={incrementCounter}
+                                    >
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    <p id="perNightText">per night</p>
+                    <div id="priceRangeSuggestionContainer">
+                    <p id="priceRangeSuggestionText">Places like yours in your area usually range from $86 to $144</p>
                     </div>
                 </div>
-            </label>
-            <p className="input-field-text-subtitle">per night</p>
-            {/* <p className="input-field-text-prompt">Places like yours in your area usually range from $86 to $144</p> */}
 
-            <div className="errors">
-                {validationErrors.map((error, idx) => (
-                    <p className="error-item" key={error}>{error}</p>
-                ))}
+
+                <div className="errors">
+                    {validationErrors.map((error, idx) => (
+                        <p className="error-item" key={error}>{error}</p>
+                    ))}
+                </div>
+
+                <button
+                className="spot-submit-button"
+                type="submit"
+                // onSubmit={handleSubmit}
+                disabled={!!validationErrors.length}
+                >
+                Looks good
+                </button>
+
+                </form>
             </div>
-
-            <button
-            className="spot-submit-button"
-            type="submit"
-            // onSubmit={handleSubmit}
-            disabled={!!validationErrors.length}
-            >
-            Looks good
-            </button>
-
-            </form>
         </div>
     )
 }
