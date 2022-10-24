@@ -124,7 +124,7 @@ const demoReviews = [
   { // Gertrude reviews Martin's
     spotId: 5,
     userId: 10,
-    review: "the host was a bit of a charmer, that one. I just wish he didn't play so hard to get 😘",
+    review: "the host was a bit of a charmer, that one. I just wish he didn't play so hard to get ;)",
     stars: 5,
   },
   { // Roz reviews Daphne's
