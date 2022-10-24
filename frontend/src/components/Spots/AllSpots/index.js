@@ -41,21 +41,21 @@ function AllSpots() {
                     style={{textDecoration:"none"}} //?
                     >
 
-                            <div className="spot-image-container">
-                                <img className="spot-image" src={spot.previewImage} alt={`${spot.name}`}></img>
+                        <div className="spot-image-container">
+                            <img className="spot-image" src={spot.previewImage} alt={`${spot.name}`}></img>
+                        </div>
+
+                        <div className="spot-text">
+
+                            <div className="spot-text-line-1">
+                                <div className="spot-name" style={{color:"black", fontWeight:"900"}}>{spot.name}</div>
+                                <div id="main-page-spot-rating">★ {spot.avgRatings ? spot.avgRatings : 0.00}</div>
                             </div>
+                            <div className="spot-location" style={{color:"#717171",  fontWeight:"100"}}>{`${spot.city}, ${spot.state}`}</div>
+                            <div className="spot-price" style={{color:"black", fontWeight:"900"}}>{`$${spot.price} night`}</div>
+                        </div>
 
-                            <div className="spot-text">
-
-                                <div className="spot-text-line-1">
-                                    <div className="spot-name" style={{color:"black", fontWeight:"900"}}>{spot.name}</div>
-                                    <div id="main-page-spot-rating">★ {spot.avgRatings ? spot.avgRatings : 0.00}</div>
-                                </div>
-                                <div className="spot-location" style={{color:"#717171",  fontWeight:"100"}}>{`${spot.city}, ${spot.state}`}</div>
-                                <div className="spot-price" style={{color:"black", fontWeight:"900"}}>{`$${spot.price} night`}</div>
-                            </div>
-
-                        </Link>
+                    </Link>
                 ))}
 
             </div>

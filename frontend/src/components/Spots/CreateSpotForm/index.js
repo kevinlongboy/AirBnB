@@ -47,20 +47,7 @@ function CreateSpotForm() {
     }
 
     let changePriceViaType = (e) => {
-
-        // find $
-        // remove $ >> declare new variable
-        // check length
-        // ...
-        // concat $
-        // return
-
         let rawPrice = e.target.value;
-
-        if (rawPrice.includes('$')) {
-
-        }
-
         if (rawPrice.length < 1 ) return;
         else if (rawPrice.length > 5) return;
 
@@ -69,15 +56,23 @@ function CreateSpotForm() {
         else setPrice(parsedPrice);
     }
 
-
     // let changePriceViaType = (e) => {
-    //     let rawPrice = e.target.value;
-    //     if (rawPrice.length < 1 ) return;
-    //     else if (rawPrice.length > 5) return;
+    //     // let rawPrice = e.target.value;
+    //     // let rawPriceArr = rawPrice.split("")
+    //     // let splicedPrice;
 
-    //     let parsedPrice = parseInt(e.target.value)
-    //     if (Number.isNaN(parsedPrice)) return;
-    //     else setPrice(parsedPrice);
+    //     // while (rawPriceArr.indexOf('$') !== -1) {
+    //     //     let index = rawPriceArr.indexOf('$');
+    //     //     rawPriceArr.splice(index, 1);
+    //     //     splicedPrice = rawPriceArr.join("")
+    //     // }
+
+    //     // if (splicedPrice.length < 1 ) return;
+    //     // else if (splicedPrice.length > 5) return;
+
+    //     // let parsedPrice = parseInt(splicedPrice)
+    //     // if (Number.isNaN(parsedPrice)) return;
+    //     // else setPrice(parsedPrice);
     // }
 
     // render errors
