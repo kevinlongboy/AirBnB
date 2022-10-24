@@ -34,8 +34,8 @@ const demoReviews = [
   { // Niles reviews Frasier’s
     spotId: 1,
     userId: 2,
-    review: "placeholder",
-    stars: 4, // Prev: 3.5
+    review: 'What a quaint little home this is! The host did a great job of filling the space with eccentric pieces! I applaud his attempt at providing a refined living space for his guests. Bravo!',
+    stars: 4,
   },
   { // Frasier reviews Niles'
     spotId: 2,
@@ -124,7 +124,7 @@ const demoReviews = [
   { // Gertrude reviews Martin's
     spotId: 5,
     userId: 10,
-    review: "the host was a bit of a charmer, that one. I just wish he didn't play so hard to get ;)",
+    review: "the host was a bit of a charmer, that one. I just wish he didn't play so hard to get 😘",
     stars: 5,
   },
   { // Roz reviews Daphne's
