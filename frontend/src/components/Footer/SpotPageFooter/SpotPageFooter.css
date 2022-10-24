@@ -1,4 +1,4 @@
-.spotPageWrapperContainer{
+.spotPageFooterWrapperContainer{
     width: 100%;
     background-color: #f7f7f7;
     display: flex;
@@ -16,7 +16,7 @@
 
     /* container */
     margin: 0px 50px;
-    padding: 48px 0px;
+    padding: 48px 0px 5px 0px;
     /* size */
     width: 1120px;
     height: 45px;

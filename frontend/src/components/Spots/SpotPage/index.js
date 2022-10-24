@@ -8,9 +8,9 @@ import { thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../..
 import { thunkCreateSingleReview } from "../../../store/reviewsReducer.js";
 import CreateReviewForm from "../../Reviews/CreateReviewForm/index.js";
 import SpotReviews from "../../Reviews/SpotReviews/index.js";
+import SpotPageFooter from "../../Footer/SpotPageFooter";
 import { convertDate, addPlaceholderImages } from "../../../component-resources";
 import './SpotPage.css';
-import SpotPageFooter from "../../Footer/SpotPageFooter";
 
 
 /******************************* COMPONENT *******************************/

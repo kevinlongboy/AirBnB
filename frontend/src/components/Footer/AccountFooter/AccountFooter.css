@@ -1,0 +1,43 @@
+.accountFooterWrapperContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    /* padding-left: max(50px);
+    padding-right: max(50px); */
+}
+
+.accountFooterContainer {
+    /* display */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    /* container */
+    margin: 0px 30px;
+    border-top: 0.5px solid #ddd;
+    padding: 10px 0px 50px 0px;
+    /* size */
+    width: 1032px;
+    height: 45px;
+}
+
+.accountFooterContainerLeft {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+.accountFooterText {
+    padding: 0px 3px;
+    text-decoration: none;
+    color: #767676;
+    font-weight: 100;
+    font-size: 14px;
+}
+
+
+.footerLogo {
+    width: 24px;
+    padding-right: 5px;
+}

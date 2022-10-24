@@ -10,7 +10,7 @@ function SpotPageFooter() {
 
     /**************** render component *****************/
     return (
-        <div className="spotPageWrapperContainer">
+        <div className="spotPageFooterWrapperContainer">
 
             <div className="spotPageFooterContainer">
 

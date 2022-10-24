@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 // local files
 import { thunkReadUserReviews } from "../../../store/reviewsReducer";
 import DeleteReview from "../DeleteReview";
+import AccountFooter from "../../Footer/AccountFooter";
 import { convertDate } from "../../../component-resources";
 import chevronRight from '../../../assets/fontawesome/chevron-right.svg'
 import './UserReviews.css'
@@ -57,53 +58,57 @@ function UserReviews() {
     /**************** render component *****************/
     if (!sessionState.user.id) return <Redirect to="/" />;
 
-    else return(
+    else return (
 
-    <div className="pageWrapperContainer">
-        <div className="review-page">
+    <>
+        <div className="pageWrapperContainer">
+            <div className="review-page">
 
-            <div className="review-page-header">
-                <div>
-                    <p className="review-page-navigation">Profile <img id="review-chevron-right" src={chevronRight} style={{maxHeight:'10px', paddingLeft:'8px', paddingRight:'8px'}}></img> Reviews</p>
+                <div className="review-page-header">
+                    <div>
+                        <p className="review-page-navigation">Profile <img id="review-chevron-right" src={chevronRight} style={{maxHeight:'10px', paddingLeft:'8px', paddingRight:'8px'}}></img> Reviews</p>
+                    </div>
+                    <div>
+                        <h1 id="UserReviewsPageTitle">Reviews by you</h1>
+                    </div>
+                    <div id="reviews-subtitle">
+                        <p>Reviews by you</p>
+                    </div>
                 </div>
-                <div>
-                    <h1 id="UserReviewsPageTitle">Reviews by you</h1>
+
+                <div className="review-page-body">
+                    <table id="UserReviewsTable">
+                        <thead id='UserReviewsTableHead'>
+                            <tr>
+                                <th>Reviews to write</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id='review-table-body'>
+                            <tr id="reviewsToWriteTableBodyRow">
+                                <td id="reviewsToWriteTableBodyData">Nobody to review right now. Looks like it’s time for another trip!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table id="UserReviewsTable">
+                        <thead id='UserReviewsTableHead'>
+                            <tr>
+                                <th>Past reviews you've written</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id='review-table-body'>
+                        {reviewComponent}
+                        </tbody>
+                    </table>
                 </div>
-                <div id="reviews-subtitle">
-                    <p>Reviews by you</p>
-                </div>
+
             </div>
-
-            <div className="review-page-body">
-                <table id="UserReviewsTable">
-                    <thead id='UserReviewsTableHead'>
-                        <tr>
-                            <th>Reviews to write</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id='review-table-body'>
-                        <tr id="reviewsToWriteTableBodyRow">
-                            <td id="reviewsToWriteTableBodyData">Nobody to review right now. Looks like it’s time for another trip!</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table id="UserReviewsTable">
-                    <thead id='UserReviewsTableHead'>
-                        <tr>
-                            <th>Past reviews you've written</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id='review-table-body'>
-                    {reviewComponent}
-                    </tbody>
-                </table>
-            </div>
-
         </div>
-    </div>
+
+        <AccountFooter />
+    </>
     )
 }
 
