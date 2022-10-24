@@ -4,50 +4,44 @@ const demoReviews = [
   { // Niles reviews Daphne’s
     spotId: 3,
     userId: 2,
-    review: 'Placeholder text: Niles reviews Daphne',
+    review: 'This is without a doubt the most magnificent home you will ever lay your eyes on, and it\'s hosted by an absolute goddess that the gods have deigned to bestow on us mere men. Book yourself a stay at this place, only if you feel you are worthy of her presence.',
     stars: 5,
   },
   { // Frasier reviews Roz's
     spotId: 4,
     userId: 1,
-    review: 'Quite a delightful home -- and the host\'s decorating motif was certainly ... "courageous"',
+    review: 'A delightful home, and the host\'s decorating motif was certainly ... "courageous"',
     stars: 5,
   },
-  { // Niles reviews Roz's
+  { // Noel reviews Roz's
     spotId: 4,
-    userId: 2,
-    review: 'Well, there are just so many things that could be said about this place - and even more that could be said about its host. Her overall style could only be described as "offbeat", and it would seem that she furnished her place with the most curiously odd nicknacks she must have acquired throughout her years. If I hadn\'t known any better, there were times where I would have thought I was in a flea market!',
-    stars: 2,
+    userId: 8,
+    review: '“Sharing an orbit with God is no small experience.” — Deanna Troi',
+    stars: 5,
   },
   { // Daphne reviews Roz’s
     spotId: 4,
     userId: 3,
-    review: 'I had the loveliest time at Ballard. The host was so welcoming and made me feel right at home. She put such care and thought into my stay and didn\'t worry about putting on any airs. She even stocked the fridge with me favourite biscuits from back home. The whole experience brought me right back to Manchester and me memories from childhood. As my Grammy Moon used say, "Fish, chips and peas with pea wet"!',
+    review: 'I had the loveliest time at Ballard. The host was so welcoming and made me feel right at home. She put such care and thought into my stay and didn\'t worry about putting on any airs. She even stocked the fridge with my favourite biscuits from back home. The whole experience brought me right back to me childhood in Manchester. As my Grammy Moon used say, "Fish, chips and peas with pea wet"!',
     stars: 5,
   },
   { // Roz reviews Martin’s
     spotId: 5,
     userId: 4,
-    review: 'This was one the cutest places I\'ve been to in a while. The host was fun to be around and his place was in a perfect a location. There were so many great restaurants and bars to go to, and I even found a nice little park for my daughter to play in. Definitely recommend to everyone, and definitely coming back.',
+    review: 'This was one the cutest places I\'ve stayed at in a while. The host was so fun to be around and his place was in the perfect location. There were so many great restaurants and bars to go to, and I even found a nice little park for my daughter to play in. Definitely recommend to everyone, and definitely coming back.',
     stars: 5, // Prev: 4.5
   },
   { // Niles reviews Frasier’s
     spotId: 1,
     userId: 2,
-    review: 'Placeholder text: Niles Reviews Frasier',
+    review: 'What a quaint little home this is! The host did a great job of filling the space with eccentric pieces! I applaud his attempt at providing a refined living space for his guests. Bravo!',
     stars: 4, // Prev: 3.5
   },
   { // Frasier reviews Niles'
     spotId: 2,
     userId: 1,
-    review: 'Placeholder text: Frasier reviews Niles',
+    review: 'A perfectly acceptable lodging, if you ever find yourself in need of one.',
     stars: 3,
-  },
-  { // Lilith reviews Frasier's
-    spotId: 1,
-    userId: 6,
-    review: 'The host did a wonderful job. He has some beautiful things.',
-    stars: 3, // Prev: 3.5
   },
   { // Roz reviews Frasier's
     spotId: 1,
@@ -55,23 +49,29 @@ const demoReviews = [
     review: "A lot of beige",
     stars: 4,
   },
+  { // Lilith reviews Frasier's
+    spotId: 1,
+    userId: 6,
+    review: 'The host did a wonderful job. He has some beautiful things.',
+    stars: 3, // Prev: 3.5
+  },
   { // Gil reviews Frasier's
     spotId: 1,
     userId: 7,
     review: "What a stunning apartment! The palate is pure subtle elegance. The detailing -- well, it's inspired. And the furnishings: simply delectable.",
     stars: 4,
   },
-  { // Noel reviews Roz's
-    spotId: 4,
-    userId: 8,
-    review: 'Placeholder text: Noel reviews Roz',
-    stars: 5,
-  },
   { // Bulldog reviews Roz's
     spotId: 4,
     userId: 9,
     review: 'not bad . wouldve given this place another star if the host was willing to make my stay a little more "comfortable" if you get my meaning !',
     stars: 4,
+  },
+  { // Niles reviews Roz's
+    spotId: 4,
+    userId: 2,
+    review: 'Well, there are just so many things that could be said about this place - and even more that could be said about its host. Her overall style could only be described as "offbeat", and it would that appear she furnished her place with the most curiously odd nicknacks. If I hadn\'t known any better, there were times where I thought I was in a flea market!',
+    stars: 2,
   },
   { // Gertrude reviews Niles'
     spotId: 2,
@@ -88,19 +88,19 @@ const demoReviews = [
   { // Niles reviews Lilith's
     spotId: 6,
     userId: 2,
-    review: 'A stunning place in an idyllic location - the host certainly has the most exquisite taste!',
+    review: 'A stunning place in an idyllic location - the host certainly has exquisite taste!',
     stars: 5,
   },
   { // Frasier reviews Gil's
     spotId: 7,
     userId: 1,
-    review: 'This place is quite a find! Vibrant location and the host certainly has a taste for the finer things!',
+    review: 'This place is quite a find! It\'s in a vibrant neighborhood and the host certainly has a taste for the finer things!',
     stars: 5,
   },
   { // Frasier reviews Noel's
     spotId: 8,
     userId: 1,
-    review: 'The host has bit of a quirky personality, but I could tell he tried his best to make us feel comfortable. And for that, I thank his hospitality.',
+    review: 'The host has bit of a quirky personality, but I could tell he tried his best to make us feel welcome. And for that, I thank his hospitality.',
     stars: 3,
   },
   { // Frasier reviews Bulldog's
@@ -124,25 +124,25 @@ const demoReviews = [
   { // Gertrude reviews Martin's
     spotId: 5,
     userId: 10,
-    review: 'the host was a bit of a charmer, that one. I just wish he wasn\'t playin\' so hard to get ;)',
+    review: 'the host was a bit of a charmer, that one. I just wish he didn\'t play so hard to get 😘',
     stars: 5,
   },
   { // Roz reviews Daphne's
     spotId: 3,
     userId: 4,
-    review: 'My girlfriends and I just had the best time at this place! The host took such good care of us, and there were so many things to do in the area! Great place for a girl\'s night out - definitely coming here again',
+    review: 'My girlfriends and I just had the best time here! The host took such good care of us, and there were so many things to do in the area! Great place for a girl\'s night out - definitely comin\' here again',
     stars: 5,
   },
   { // Roz reviews Gil's
     spotId: 7,
     userId: 4,
-    review: 'This place was definitely fabulous - almost too fabulous, if you ask me. I would\'ve felt unwelcome and out-of-place had not been for the wine basket he left for our stay',
+    review: 'This place was fabulous alright - almost too fabulous, if you ask me. I would\'ve felt unwelcome and out-of-place had it not been for the wine basket the host left for our stay',
     stars: 4,
   },
   { // Roz reviews Noel's
     spotId: 8,
     userId: 4,
-    review: 'The host was kind of a freak, but I guess the stay wasn\'t that bad',
+    review: 'The host was kind of a creep, but I guess the stay wasn\'t that bad',
     stars: 2,
   },
   { // Roz reviews Bulldog's

@@ -11,7 +11,7 @@ const demoSpots = [
     lng: -122.340720,
     name: 'Queen Anne Condo',
     description: 'Eclectic',
-    price: 1000
+    price: 1000,
   },
   {
     ownerId: 2, // Niles
