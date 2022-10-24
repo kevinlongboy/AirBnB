@@ -83,32 +83,6 @@
 }
 
 /*  */
-.disclaimer {
-    width: 520px;
-    height: 60px;
-    font-size: small;
-    font-weight: 100;
-    color: black;
-    padding-top: 10px;
-}
-
-.disclaimer :link {
-    width: 520px;
-    height: 60px;
-    font-size: small;
-    font-weight: 100;
-    color: black;
-    padding-top: 10px;
-}
-
-.disclaimer :visited {
-    width: 520px;
-    height: 60px;
-    font-size: small;
-    font-weight: 100;
-    color: black;
-    padding-top: 10px;
-}
 
 .submit-button {
     width: 530px;
@@ -129,17 +103,6 @@
     font-weight: 100;
     margin-top: 9px;
     margin-bottom: 9px;
-}
-
-#signup-disclaimer:active {
-    color: blue;
-}
-#signup-disclaimer:hover {
-    color: blue;
-}
-
-#signup-disclaimer:visited {
-    color: blue;
 }
 
 .continue-button {

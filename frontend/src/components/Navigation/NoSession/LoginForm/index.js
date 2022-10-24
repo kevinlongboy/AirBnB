@@ -118,7 +118,7 @@ function LoginForm() {
           </label>
         </div>
 
-        <div className="disclaimer">
+        <div className="loginDisclaimer">
           We’ll call or text you to confirm your number. Standard message and data rates apply.{' '}
           <a href="https://www.airbnb.com/help/article/2855/airbnb-privacy" style={{fontWeight:"bolder"}}>Privacy Policy</a>
         </div>

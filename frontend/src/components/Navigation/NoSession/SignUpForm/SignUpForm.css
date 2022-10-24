@@ -5,6 +5,26 @@
     /* justify-content: center; */
 }
 
+.singUpDisclaimer {
+    width: 520px;
+    height: 60px;
+    font-size: small;
+    font-weight: 100;
+    color: black;
+    padding-top: 10px;
+}
+
+#singUpDisclaimer:active {
+    color: blue;
+}
+#singUpDisclaimer:hover {
+    color: blue;
+}
+
+#singUpDisclaimer:visited {
+    color: blue;
+}
+
 #signUpErrors {
     margin-top: 0px;
     border-top: 0px;

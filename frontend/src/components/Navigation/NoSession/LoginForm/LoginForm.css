@@ -34,3 +34,30 @@
     justify-self: left;
     justify-content: left;
 }
+
+.loginDisclaimer {
+    width: 520px;
+    height: 60px;
+    font-size: small;
+    font-weight: 100;
+    color: black;
+    padding-top: 10px;
+}
+
+.loginDisclaimer :link {
+    width: 520px;
+    height: 60px;
+    font-size: small;
+    font-weight: 100;
+    color: black;
+    padding-top: 10px;
+}
+
+.loginDisclaimer :visited {
+    width: 520px;
+    height: 60px;
+    font-size: small;
+    font-weight: 100;
+    color: black;
+    padding-top: 10px;
+}
