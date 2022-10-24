@@ -1,0 +1,80 @@
+.spotPageWrapperContainer{
+    width: 100%;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    border-top: 1px solid #ddd;
+    /* padding-left: max(50px);
+    padding-right: max(50px); */
+}
+
+.spotPageFooterContainer {
+    /* display */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    /* container */
+    margin: 0px 50px;
+    padding: 48px 0px;
+    /* size */
+    width: 1120px;
+    height: 45px;
+    background-color: #f7f7f7;
+}
+
+.spotPageFooterContainerLeft {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+.footerText {
+    padding: 0px 3px;
+    text-decoration: none;
+    color: #222;
+    font-weight: 100;
+    font-size: 14px;
+}
+
+.spotPageFooterContainerLeft > a:hover {
+    color: #222;
+    text-decoration: underline;
+}
+
+.spotPageFooterContainerLeft > a:active {
+    color: #222;
+    text-decoration: none;
+}
+
+.spotPageFooterContainerLeft > a:visited {
+    color: #222;
+    text-decoration: none;
+}
+
+.spotPageFooterContainerRight {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+.spotPageFooterContainerRight > a:hover {
+    color: #222;
+    text-decoration: underline;
+}
+
+.spotPageFooterContainerRight > a:active {
+    color: #222;
+    text-decoration: none;
+}
+
+.spotPageFooterContainerRight > a:visited {
+    color: #222;
+    text-decoration: none;
+}
+
+#spotPageFooterSocialMediaIcon {
+    font-size: 20px;
+    color: #222;
+    padding-left: 20px
+}

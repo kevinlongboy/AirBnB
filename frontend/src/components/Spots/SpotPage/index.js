@@ -10,6 +10,7 @@ import CreateReviewForm from "../../Reviews/CreateReviewForm/index.js";
 import SpotReviews from "../../Reviews/SpotReviews/index.js";
 import { convertDate, addPlaceholderImages } from "../../../component-resources";
 import './SpotPage.css';
+import SpotPageFooter from "../../Footer/SpotPageFooter";
 
 
 /******************************* COMPONENT *******************************/
@@ -79,55 +80,57 @@ function SpotPage() {
 
   /**************** render component *****************/
   return (
+    <>
+      <div className="pageWrapperContainer">
+        <div className="spot-page">
 
-    <div className="pageWrapperContainer">
-      <div className="spot-page">
+            <h1 id="spot-page-name">{spot.name}</h1>
 
-          <h1 id="spot-page-name">{spot.name}</h1>
+            <div className="spot-page-overview">
+              <p className="spot-page-rating">{`★ ${spot.avgStarRating}`}</p>
+              <p> · </p>
+              <p className="spot-page-review-count">{spot.numReviews} Review<span>{spot.numReviews === 1 ? '' : 's'}</span></p>
+              <p> · </p>
+              <p className="spot-page-location"> {`${spot.city}, ${spot.state}, ${spot.country}`}</p>
+            </div>
 
-          <div className="spot-page-overview">
-            <p className="spot-page-rating">{`★ ${spot.avgStarRating}`}</p>
-            <p> · </p>
-            <p className="spot-page-review-count">{spot.numReviews} Review<span>{spot.numReviews === 1 ? '' : 's'}</span></p>
-            <p> · </p>
-            <p className="spot-page-location"> {`${spot.city}, ${spot.state}, ${spot.country}`}</p>
-          </div>
+            <div className="spot-page-images-cover">
 
-          <div className="spot-page-images-cover">
+              {
+                images.map((image, index) => (
+                  <img key={index + 1} className={`img${index + 1}`} src={image.url}></img>
+                  ))
+                }
+            </div>
 
-            {
-              images.map((image, index) => (
-                <img key={index + 1} className={`img${index + 1}`} src={image.url}></img>
-                ))
-              }
-          </div>
+            <div className="spot-page-middle">
 
-          <div className="spot-page-middle">
+              <div className="spot-page-middle-left">
+                <div className="spot-page-host-info">
+                  <h2 className="spot-page-host-name">{`Hosted by ${spot.Owner.firstName}`}</h2>
+                  <p className="spot-page-host-creation-date">Since {spot.createdAt && convertDate(spot.createdAt)}</p>
+                </div>
 
-            <div className="spot-page-middle-left">
-              <div className="spot-page-host-info">
-                <h2 className="spot-page-host-name">{`Hosted by ${spot.Owner.firstName}`}</h2>
-                <p className="spot-page-host-creation-date">Since {spot.createdAt && convertDate(spot.createdAt)}</p>
+                <div className="spot-page-description">
+                  <p>{`${spot.description}`}</p>
+                </div>
+
               </div>
 
-              <div className="spot-page-description">
-                <p>{`${spot.description}`}</p>
+              <div className="spot-page-middle-right">
+                <div>
+                  {reviewComponent}
+                </div>
               </div>
 
             </div>
 
-            <div className="spot-page-middle-right">
-              <div>
-                {reviewComponent}
-              </div>
-            </div>
+            <SpotReviews />
 
-          </div>
-
-          <SpotReviews />
-
+        </div>
       </div>
-    </div>
+    <SpotPageFooter />
+    </>
   )
 }
 

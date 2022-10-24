@@ -4,8 +4,10 @@
     justify-content: space-between;
     /* align-content: space-between; */
     align-items: left;
+    margin-bottom: 0px;
     padding-left: min(50px);
     padding-right: max(50px);
+    padding-bottom: 0px;
     max-width: 1120px;
 }
 
@@ -20,7 +22,7 @@
     flex-direction: row;
     margin-bottom: 15px;
 }
-.spot-page-overview p {
+.spot-page-overview > p {
     margin-top: 0;
     border-top: 0;
     padding-left: 3.5px;
