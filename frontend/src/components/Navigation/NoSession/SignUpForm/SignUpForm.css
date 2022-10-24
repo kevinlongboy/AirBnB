@@ -14,6 +14,10 @@
     padding-top: 10px;
 }
 
+#agreeAndContinue {
+    font-weight: 900;
+}
+
 #singUpDisclaimer:active {
     color: blue;
 }

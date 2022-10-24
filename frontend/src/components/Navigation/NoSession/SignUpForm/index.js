@@ -148,7 +148,7 @@ function SignUpForm() {
         </label>
 
         <div className="singUpDisclaimer">
-        By selecting <span style={{fontWeight:"900"}}>Agree and continue</span>, I agree to Cranebnb's <span><a id="singUpDisclaimer" href="https://www.airbnb.com/terms?source=tos">Terms of Service</a></span>, <span><a id="singUpDisclaimer" href="https://www.airbnb.com/terms/payments_terms?source=tos">Payments Terms of Service</a></span>, and <span><a id="singUpDisclaimer" href="https://www.airbnb.com/terms/nondiscrimination_policy?source=tos">Nondiscrimination Policy</a></span>, and acknowledge the <span><a id="singUpDisclaimer" href="https://www.airbnb.com/terms/privacy_policy?source=tos"> Privacy Policy</a></span>.
+        By selecting <span id="agreeAndContinue">Agree and continue</span>, I agree to Cranebnb's <span><a id="singUpDisclaimer" href="https://www.airbnb.com/terms?source=tos">Terms of Service</a></span>, <span><a id="singUpDisclaimer" href="https://www.airbnb.com/terms/payments_terms?source=tos">Payments Terms of Service</a></span>, and <span><a id="singUpDisclaimer" href="https://www.airbnb.com/terms/nondiscrimination_policy?source=tos">Nondiscrimination Policy</a></span>, and acknowledge the <span><a id="singUpDisclaimer" href="https://www.airbnb.com/terms/privacy_policy?source=tos"> Privacy Policy</a></span>.
         </div>
 
         <div className="errors" id="signUpErrors">
