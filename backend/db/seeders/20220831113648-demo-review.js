@@ -4,13 +4,13 @@ const demoReviews = [
   { // Niles reviews Daphne’s
     spotId: 3,
     userId: 2,
-    review: "This is without a doubt the most magnificent home you will ever lay your eyes on, and it's hosted by an absolute goddess that the gods have deigned to bestow on us mere men. Book yourself a stay at this place, only if you feel you are worthy of her presence.",
+    review: "placeholder",
     stars: 5,
   },
   { // Frasier reviews Roz's
     spotId: 4,
     userId: 1,
-    review: "placeholder",
+    review: 'A delightful home, and the decorating motif was certainly ... "courageous"',
     stars: 5,
   },
   { // Noel reviews Roz's
