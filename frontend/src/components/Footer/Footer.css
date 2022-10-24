@@ -1,27 +1,31 @@
 .footerContainer {
-    border-top: 2px solid #f6f6f6;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 45px;
-
+    /* display */
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
-    background-color: white;
-    padding: 0px 50px;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
     /* z-index: unset; */
+
+    /* container */
+    border-top: 2px solid #f6f6f6;
+    padding: 0px 50px;
+    /* size */
+    width: 100%;
+    height: 45px;
+
+    background-color: white;
 }
 
 .footerText {
+    padding: 0px 3px;
+    text-decoration: none;
     color: #222;
     font-weight: 100;
     font-size: 14px;
-    padding: 0px 3px;
-    text-decoration: none;
-
 }
 
 .footerContainer > a:hover {

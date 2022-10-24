@@ -50,10 +50,12 @@ function SpotPage() {
 
   /************* conditional components **************/
   // images
-  if (images.length < 5) {
-    addPlaceholderImages(images)
-  } else if (images.length > 5) {
-    images.splice(5, images.length - 1)
+  if (images.length) {
+    if (images.length < 5) {
+      addPlaceholderImages(images)
+    } else if (images.length > 5) {
+      images.splice(5, images.length - 1)
+    }
   }
 
   // reviews

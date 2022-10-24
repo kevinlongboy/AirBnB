@@ -45,8 +45,22 @@ function CreateSpotForm() {
             setPrice(newPrice);
         }
     }
+
     let changePriceViaType = (e) => {
+
+        // find $
+        // remove $ >> declare new variable
+        // check length
+        // ...
+        // concat $
+        // return
+
         let rawPrice = e.target.value;
+
+        if (rawPrice.includes('$')) {
+
+        }
+
         if (rawPrice.length < 1 ) return;
         else if (rawPrice.length > 5) return;
 
@@ -54,6 +68,17 @@ function CreateSpotForm() {
         if (Number.isNaN(parsedPrice)) return;
         else setPrice(parsedPrice);
     }
+
+
+    // let changePriceViaType = (e) => {
+    //     let rawPrice = e.target.value;
+    //     if (rawPrice.length < 1 ) return;
+    //     else if (rawPrice.length > 5) return;
+
+    //     let parsedPrice = parseInt(e.target.value)
+    //     if (Number.isNaN(parsedPrice)) return;
+    //     else setPrice(parsedPrice);
+    // }
 
     // render errors
     useEffect(() => {
