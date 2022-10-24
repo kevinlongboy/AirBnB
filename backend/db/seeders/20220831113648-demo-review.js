@@ -4,13 +4,13 @@ const demoReviews = [
   { // Niles reviews Daphne’s
     spotId: 3,
     userId: 2,
-    review: 'This is without a doubt the most magnificent home you will ever lay your eyes on, and it\'s hosted by an absolute goddess that the gods have deigned to bestow on us mere men. Book yourself a stay at this place, only if you feel you are worthy of her presence.',
+    review: "This is without a doubt the most magnificent home you will ever lay your eyes on, and it's hosted by an absolute goddess that the gods have deigned to bestow on us mere men. Book yourself a stay at this place, only if you feel you are worthy of her presence.",
     stars: 5,
   },
   { // Frasier reviews Roz's
     spotId: 4,
     userId: 1,
-    review: 'A delightful home, and the host\'s decorating motif was certainly ... "courageous"',
+    review: 'A delightful home, and the decorating motif was certainly ... "courageous"',
     stars: 5,
   },
   { // Noel reviews Roz's
@@ -28,7 +28,7 @@ const demoReviews = [
   { // Roz reviews Martin’s
     spotId: 5,
     userId: 4,
-    review: 'This was one the cutest places I\'ve stayed at in a while, and it was in the perfect location. Lots of great restaurants and bars, and I even found a nice little park for my daughter to play in. Definitely recommend to everyone, and definitely coming back.',
+    review: "This was one the cutest places I've stayed at in a while, and it was in the perfect location. Lots of great restaurants and bars, and I even found a nice little park for my daughter to play in. Definitely recommend to everyone, and definitely coming back.",
     stars: 5, // Prev: 4.5
   },
   { // Niles reviews Frasier’s
@@ -70,7 +70,7 @@ const demoReviews = [
   { // Niles reviews Roz's
     spotId: 4,
     userId: 2,
-    review: 'Well, there are just so many things that could be said about this place - and even more about its host. Certainly offbeat and filled with the most curious nicknacks. If I hadn\'t known any better, I would\'ve thought I was in a flea market!',
+    review: "Well, there are just so many things that could be said about this place - and even more about its host. Certainly offbeat and filled with the most curious nicknacks. If I hadn't known any better, I would've thought I was in a flea market!",
     stars: 2,
   },
   { // Gertrude reviews Niles'
@@ -82,7 +82,7 @@ const demoReviews = [
   { // Frasier reviews Lilith's
     spotId: 6,
     userId: 1,
-    review: 'Simply superb! You\'d be hard-pressed to find a better place to stay in Seattle.',
+    review: "Simply superb! You'd be hard-pressed to find a better place to stay in Seattle.",
     stars: 5,
   },
   { // Niles reviews Lilith's
@@ -94,13 +94,13 @@ const demoReviews = [
   { // Frasier reviews Gil's
     spotId: 7,
     userId: 1,
-    review: 'This place is quite a find! It\'s in a vibrant neighborhood and the host certainly has a taste for the finer things!',
+    review: "This place is quite a find! It's in a vibrant neighborhood and the host certainly has a taste for the finer things!",
     stars: 5,
   },
   { // Frasier reviews Noel's
     spotId: 8,
     userId: 1,
-    review: 'The host has bit of a quirky personality, but I could tell he tried his best to make us feel welcome. And for that, I thank his hospitality.',
+    review: "The host has bit of a quirky personality, but I could tell he tried his best to make us feel welcome. And for that, I thank his hospitality.",
     stars: 3,
   },
   { // Frasier reviews Bulldog's
@@ -112,7 +112,7 @@ const demoReviews = [
   { // Daphne reviews Gertrude's
     spotId: 10,
     userId: 3,
-    review: 'It was such a treat for us to stay in this home. We can\'t thank the host enough for her generosity!',
+    review: "It was such a treat for us to stay in this home. We can't thank the host enough for her generosity!",
     stars: 5,
   },
   { // Niles reviews Gertrude's
@@ -124,25 +124,25 @@ const demoReviews = [
   { // Gertrude reviews Martin's
     spotId: 5,
     userId: 10,
-    review: 'the host was a bit of a charmer, that one. I just wish he didn\'t play so hard to get 😘',
+    review: "the host was a bit of a charmer, that one. I just wish he didn't play so hard to get 😘",
     stars: 5,
   },
   { // Roz reviews Daphne's
     spotId: 3,
     userId: 4,
-    review: 'My girlfriends and I just had the best time here! The host took such good care of us, and there were so many things to do in the area! Great place for a girl\'s night out - definitely comin\' here again',
+    review: "My girlfriends and I just had the best time here! The host took such good care of us, and there were so many things to do in the area! Great place for a girl's night out - definitely comin' here again",
     stars: 5,
   },
   { // Roz reviews Gil's
     spotId: 7,
     userId: 4,
-    review: 'This place was fabulous alright - almost too fabulous, if you ask me. I would\'ve felt unwelcome and out-of-place had it not been for the wine basket the host left for our stay',
+    review: "This place was fabulous alright - almost too fabulous, if you ask me. I would've felt unwelcome and out-of-place had it not been for the wine basket the host left for our stay",
     stars: 4,
   },
   { // Roz reviews Noel's
     spotId: 8,
     userId: 4,
-    review: 'The host was kind of a creep, but I guess the stay wasn\'t that bad',
+    review: "The host was kind of a creep, but I guess the stay wasn't that bad",
     stars: 2,
   },
   { // Roz reviews Bulldog's
