@@ -22,13 +22,13 @@ const demoReviews = [
   { // Daphne reviews Roz’s
     spotId: 4,
     userId: 3,
-    review: 'I had the loveliest time at Ballard. The host was so welcoming and made me feel right at home. She put such care and thought into my stay and didn\'t worry about putting on any airs. She even stocked the fridge with my favourite biscuits from back home. The whole experience brought me right back to me childhood in Manchester. As my Grammy Moon used say, "Fish, chips and peas with pea wet"!',
+    review: 'I had the loveliest time at Ballard. The host even stocked the fridge with my favourite biscuits from back home. The whole experience brought me right back to me childhood in Manchester. As my Grammy Moon used say, "Fish, chips and peas with pea wet"!',
     stars: 5,
   },
   { // Roz reviews Martin’s
     spotId: 5,
     userId: 4,
-    review: 'This was one the cutest places I\'ve stayed at in a while. The host was so fun to be around and his place was in the perfect location. There were so many great restaurants and bars to go to, and I even found a nice little park for my daughter to play in. Definitely recommend to everyone, and definitely coming back.',
+    review: 'This was one the cutest places I\'ve stayed at in a while, and it was in the perfect location. Lots of great restaurants and bars, and I even found a nice little park for my daughter to play in. Definitely recommend to everyone, and definitely coming back.',
     stars: 5, // Prev: 4.5
   },
   { // Niles reviews Frasier’s
@@ -70,7 +70,7 @@ const demoReviews = [
   { // Niles reviews Roz's
     spotId: 4,
     userId: 2,
-    review: 'Well, there are just so many things that could be said about this place - and even more that could be said about its host. Her overall style could only be described as "offbeat", and it would that appear she furnished her place with the most curiously odd nicknacks. If I hadn\'t known any better, there were times where I thought I was in a flea market!',
+    review: 'Well, there are just so many things that could be said about this place - and even more about its host. Certainly offbeat and filled with the most curious nicknacks. If I hadn\'t known any better, I would\'ve thought I was in a flea market!',
     stars: 2,
   },
   { // Gertrude reviews Niles'
