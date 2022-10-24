@@ -77,7 +77,7 @@ function UserReviews() {
                 </div>
 
                 <div className="review-page-body">
-                    <table id="UserReviewsTable">
+                    <table id="UserReviewsTablePending">
                         <thead id='UserReviewsTableHead'>
                             <tr>
                                 <th>Reviews to write</th>
@@ -91,7 +91,7 @@ function UserReviews() {
                         </tbody>
                     </table>
 
-                    <table id="UserReviewsTable">
+                    <table id="UserReviewsTablePast">
                         <thead id='UserReviewsTableHead'>
                             <tr>
                                 <th>Past reviews you've written</th>

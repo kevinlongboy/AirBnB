@@ -23,7 +23,14 @@
     border-bottom: 1px solid #dce0e0;
 }
 
-#UserReviewsTable {
+#UserReviewsTablePending {
+    margin-bottom: 30px;
+    gap: 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#UserReviewsTablePast {
     margin-bottom: 90px;
     gap: 0;
     border-collapse: collapse;
