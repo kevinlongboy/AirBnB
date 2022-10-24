@@ -78,6 +78,20 @@
     text-decoration: none;
 }
 
+.spotTableListingContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+.spotTableListingThumbnail{
+    width: 60px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 12px;
+}
 .spotTableListingLinkText{
     text-decoration:"none";
     color:"#484848",

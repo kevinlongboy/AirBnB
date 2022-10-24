@@ -71,7 +71,10 @@ function UserSpots() {
                                         className="spotTableListingLink"
                                         to={`/spots/${spot.id}`}
                                     >
-                                    <td className="spotTableListingLinkText">{spot.name}</td>
+                                    <td className="spotTableListingContainer">
+                                        <div><img src={spot.previewImage} className="spotTableListingThumbnail"></img></div>
+                                        <div className="spotTableListingLinkText">{spot.name}</div>
+                                    </td>
                                     </NavLink>
 
                                     <td className="spotTableManageListingButtons">
