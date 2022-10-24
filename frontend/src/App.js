@@ -13,7 +13,6 @@ import CreateSpotForm from "./components/Spots/CreateSpotForm";
 import UpdateSpotForm from "./components/Spots/UpdateSpotForm";
 import UserReviews from "./components/Reviews/UserReviews"
 import UpdateReviewForm from "./components/Reviews/UpdateReviewForm";
-import Footer from "./components/Footer/index.js"
 
 
 /******************************* COMPONENT *******************************/

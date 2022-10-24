@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
 import { thunkReadAllSpots } from "../../../store/spotsReducer";
-import Footer from '../../Footer';
+import MainFooter from '../../Footer/MainFooter';
 import './AllSpots.css';
 
 
@@ -59,7 +59,7 @@ function AllSpots() {
                 ))}
 
             </div>
-            <Footer />
+            <MainFooter />
         </div>
     )
 }

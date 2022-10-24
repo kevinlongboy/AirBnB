@@ -2,11 +2,11 @@
 // libraries
 import React from "react";
 // local files
-import './Footer.css'
+import './MainFooter.css'
 
 
 /******************************* COMPONENT *******************************/
-function Footer() {
+function MainFooter() {
 
     /**************** render component *****************/
     return (
@@ -24,4 +24,4 @@ function Footer() {
 
 
 /******************************** EXPORTS ********************************/
-export default Footer
+export default MainFooter
