@@ -68,7 +68,7 @@ function LoginForm() {
 
           errors.push(data.message)
 
-          setErrors(errors)
+          setErrors([...errors])
         }
       }
     );

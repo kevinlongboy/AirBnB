@@ -28,7 +28,7 @@ const demoReviews = [
   { // Roz reviews Martin’s
     spotId: 5,
     userId: 4,
-    review: "This was one the cutest places I've stayed at in a while, and it's in the perfect location. Lots of great restaurants and bars, and I even found a nice little park for my daughter to play in. Definitely recommend to everyone, and definitely coming back.",
+    review: "This was one the cutest places I've stayed at in a while, and it's in the perfect location. Lots of great restaurants and bars, and I even found a cute little park for my daughter to play in. Definitely recommend to everyone, and definitely coming back.",
     stars: 5, // Prev: 4.5
   },
   { // Niles reviews Frasier’s
@@ -40,7 +40,7 @@ const demoReviews = [
   { // Frasier reviews Niles'
     spotId: 2,
     userId: 1,
-    review: 'A perfectly acceptable lodging, if you ever find yourself in need of one.',
+    review: 'A perfectly acceptable lodging, should you ever find yourself in need of one.',
     stars: 3,
   },
   { // Roz reviews Frasier's
@@ -52,7 +52,7 @@ const demoReviews = [
   { // Lilith reviews Frasier's
     spotId: 1,
     userId: 6,
-    review: 'The host did a wonderful job. He has some beautiful things.',
+    review: 'The host did a wonderful job.',
     stars: 3, // Prev: 3.5
   },
   { // Gil reviews Frasier's
