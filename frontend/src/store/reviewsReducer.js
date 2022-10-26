@@ -38,7 +38,6 @@ export const thunkCreateSingleReview = (spotId, data) => async (dispatch) => {
 
     if (response.ok) {
         const newReview = await response.json();
-        console.log("newReview", newReview)
         dispatch(actionCreateSingleReview(newReview));
         return newReview;
     }

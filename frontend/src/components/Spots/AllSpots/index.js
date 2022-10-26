@@ -16,8 +16,8 @@ function AllSpots() {
     const spotsState = useSelector(state => state.spots)
 
     /************ key into pertinent values ************/
-    const allSpots = spotsState.allSpots
-    let allSpotsArr = Object.values(allSpots) // removes keys from original object
+    const allSpots = spotsState.allSpots;
+    let allSpotsArr = Object.values(allSpots);
 
     /************ reducer/API communication ************/
     const dispatch = useDispatch();
