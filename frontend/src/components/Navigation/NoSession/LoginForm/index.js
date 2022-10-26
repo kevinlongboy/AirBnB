@@ -167,37 +167,37 @@ function LoginForm() {
           <div className="loginFormContinueButtonText">Continue as Demo User</div>
         </button>
 
-        <button
-          className="loginFormContinueButton"
-          type="button"
-          // onClick={handleSubmitRedirect}
-          >
-          {/* <div id="buttonIcon" style={{align:"left"}}>
-            <img src={linkedinLogo} style={{width:"20px"}}></img>
-          </div> */}
-          <div className="loginFormContinueButtonLogo"><i class="fa-brands fa-linkedin" style={{color:'#0d65c2'}}></i></div>
-          <div className="loginFormContinueButtonText">
-            <a style={{textDecoration:"none", color:"black"}} href="https://www.linkedin.com/in/kevinlongboy/">
-            Continue with LinkedIn
-            </a>
-          </div>
-        </button>
+        <a style={{textDecoration:"none", color:"black"}} href="https://www.linkedin.com/in/kevinlongboy/">
+          <button
+            className="loginFormContinueButton"
+            type="button"
+            // onClick={handleSubmitRedirect}
+            >
+            {/* <div id="buttonIcon" style={{align:"left"}}>
+              <img src={linkedinLogo} style={{width:"20px"}}></img>
+            </div> */}
+            <div className="loginFormContinueButtonLogo"><i class="fa-brands fa-linkedin" style={{color:'#0d65c2'}}></i></div>
+            <div className="loginFormContinueButtonText">
+              Continue with LinkedIn
+            </div>
+          </button>
+        </a>
 
-        <button
-          className="loginFormContinueButton"
-          type="button"
-          // onClick={handleSubmitRedirect}
-          >
-          {/* <div className="buttonIcon" style={{align:"left"}}>
-            <img src={githubLogo} style={{width:"20px"}}></img>
-          </div> */}
-          <div className="loginFormContinueButtonLogo"><i class="fa-brands fa-github"></i></div>
-          <div className="loginFormContinueButtonText">
-            <a style={{textDecoration:"none", color:"black"}} href="https://github.com/kevinlongboy">
-            Continue with GitHub
-            </a>
-          </div>
-        </button>
+        <a style={{textDecoration:"none", color:"black"}} href="https://github.com/kevinlongboy">
+          <button
+            className="loginFormContinueButton"
+            type="button"
+            // onClick={handleSubmitRedirect}
+            >
+            {/* <div className="buttonIcon" style={{align:"left"}}>
+              <img src={githubLogo} style={{width:"20px"}}></img>
+            </div> */}
+            <div className="loginFormContinueButtonLogo"><i class="fa-brands fa-github"></i></div>
+            <div className="loginFormContinueButtonText">
+              Continue with GitHub
+            </div>
+          </button>
+        </a>
 
 
       </form>
