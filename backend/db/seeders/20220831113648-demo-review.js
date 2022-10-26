@@ -22,7 +22,7 @@ const demoReviews = [
   { // Daphne reviews Roz’s
     spotId: 4,
     userId: 3,
-    review: 'I had the loveliest time at Ballard. The host even stocked the fridge with my favourite biscuits from back home. The whole experience brought me right back to me childhood in Manchester. As my Grammy Moon used say, "Fish, chips and peas with pea wet"!',
+    review: 'I had the loveliest time at Ballard. The host even stocked the fridge with my favourite biscuits from back home. The whole experience brought me right back to me childhood in Manchester. As my Grammy Moon used to say, "Fish, chips and peas with pea wet"!',
     stars: 5,
   },
   { // Roz reviews Martin’s
@@ -34,7 +34,7 @@ const demoReviews = [
   { // Niles reviews Frasier’s
     spotId: 1,
     userId: 2,
-    review: 'What a quaint little home this is! The host did a great job of filling the space with eccentric pieces! I applaud his attempt at providing a refined living space for his guests. Bravo!',
+    review: 'What a quaint little home this is! The host did an excellent job of filling the space with eccentric pieces! I applaud his attempt at providing a refined living space for his guests. Bravo!',
     stars: 4,
   },
   { // Frasier reviews Niles'
@@ -52,7 +52,7 @@ const demoReviews = [
   { // Lilith reviews Frasier's
     spotId: 1,
     userId: 6,
-    review: 'The host did a wonderful job.',
+    review: 'The host did a wonderful job. He has some beautiful things.',
     stars: 3, // Prev: 3.5
   },
   { // Gil reviews Frasier's

@@ -145,10 +145,11 @@ function LoginForm() {
         <div className="or">or</div>
 
         <button
-          className="modalContinueButton"
+          className="loginFormContinueButton"
           onClick={() => setShowModal(true)}
-          >
-          Continue to Sign Up
+        >
+          <div className="loginFormContinueButtonLogo"><i class="fa-regular fa-envelope"></i></div>
+          <div className="loginFormContinueButtonText">Continue to Sign Up</div>
         </button>
 
         {showModal && (
@@ -158,24 +159,24 @@ function LoginForm() {
         )}
 
         <button
-          className="modalContinueButton"
+          className="loginFormContinueButton"
           type="submit"
           onClick={handleSubmitDemoUser}
           >
-          Continue as Demo User
+          <div className="loginFormContinueButtonLogo"><i class="fa-solid fa-user"></i></div>
+          <div className="loginFormContinueButtonText">Continue as Demo User</div>
         </button>
 
         <button
-          className="modalContinueButton"
+          className="loginFormContinueButton"
           type="button"
           // onClick={handleSubmitRedirect}
           >
-          {/* <i class="fa-brands fa-linkedin"></i> */}
           {/* <div id="buttonIcon" style={{align:"left"}}>
             <img src={linkedinLogo} style={{width:"20px"}}></img>
           </div> */}
-
-          <div>
+          <div className="loginFormContinueButtonLogo"><i class="fa-brands fa-linkedin" style={{color:'#0d65c2'}}></i></div>
+          <div className="loginFormContinueButtonText">
             <a style={{textDecoration:"none", color:"black"}} href="https://www.linkedin.com/in/kevinlongboy/">
             Continue with LinkedIn
             </a>
@@ -183,15 +184,15 @@ function LoginForm() {
         </button>
 
         <button
-          className="modalContinueButton"
+          className="loginFormContinueButton"
           type="button"
           // onClick={handleSubmitRedirect}
           >
-          {/* <i class="fa-brands fa-github"></i> */}
           {/* <div className="buttonIcon" style={{align:"left"}}>
             <img src={githubLogo} style={{width:"20px"}}></img>
           </div> */}
-          <div>
+          <div className="loginFormContinueButtonLogo"><i class="fa-brands fa-github"></i></div>
+          <div className="loginFormContinueButtonText">
             <a style={{textDecoration:"none", color:"black"}} href="https://github.com/kevinlongboy">
             Continue with GitHub
             </a>
