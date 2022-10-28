@@ -7,16 +7,16 @@ const demoReviews = [
     review: "This is without a doubt the most magnificent home you will ever lay your eyes on, and it's hosted by an absolute goddess that the gods have deigned to bestow on us mere men. Book a stay at this place, only if you feel you are worthy of her presence.",
     stars: 5,
   },
-  { // Frasier reviews Roz's
-    spotId: 4,
-    userId: 1,
-    review: 'A delightful home, and the decorating motif was certainly ... "courageous"',
-    stars: 5,
-  },
   { // Noel reviews Roz's
     spotId: 4,
     userId: 8,
     review: '“Sharing an orbit with God is no small experience.” — Deanna Troi',
+    stars: 5,
+  },
+  { // Frasier reviews Roz's
+    spotId: 4,
+    userId: 1,
+    review: 'A delightful home, and the decorating motif was certainly ... courageous',
     stars: 5,
   },
   { // Daphne reviews Roz’s
@@ -124,7 +124,7 @@ const demoReviews = [
   { // Gertrude reviews Martin's
     spotId: 5,
     userId: 10,
-    review: "the host was a bit of a charmer, that one. I just wish he didn't play so hard to get 😘",
+    review: "host was a bit of a charmer, that one. I just wish he didn't play so hard to get 😘",
     stars: 5,
   },
   { // Roz reviews Daphne's
