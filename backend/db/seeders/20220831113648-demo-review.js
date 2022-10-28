@@ -52,7 +52,7 @@ const demoReviews = [
   { // Lilith reviews Frasier's
     spotId: 1,
     userId: 6,
-    review: 'The host did a wonderful job.',
+    review: 'The host did a wonderful job. He has some beautiful things.',
     stars: 3, // Prev: 3.5
   },
   { // Gil reviews Frasier's
