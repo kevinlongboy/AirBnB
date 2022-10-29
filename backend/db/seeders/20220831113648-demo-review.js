@@ -46,7 +46,7 @@ const demoReviews = [
   { // Roz reviews Frasier's
     spotId: 1,
     userId: 4,
-    review: "A lot of beige",
+    review: "Lots of beige",
     stars: 4,
   },
   { // Lilith reviews Frasier's
@@ -136,7 +136,7 @@ const demoReviews = [
   { // Roz reviews Gil's
     spotId: 7,
     userId: 4,
-    review: "This place was fabulous alright - almost too fabulous, if you ask me. I would've felt unwelcome and out-of-place had it not been for the wine basket the host left for our stay",
+    review: "This place was fabulous alright - a little too fabulous, if you ask me. I would've felt unwelcome and out-of-place had it not been for the wine basket the host left for our stay",
     stars: 4,
   },
   { // Roz reviews Noel's
