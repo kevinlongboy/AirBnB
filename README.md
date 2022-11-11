@@ -145,7 +145,7 @@ Images feature will bring life to both Spots and Reviews. Hosts will have the ab
 Check out CraneBnB for yourself. Click the icon below to be redirected to Heroku, the current hosting site for the fullstack API:
 
 <p>
-<a href="https://kl-airbnb.herokuapp.com/"><img vertical-align="middle" alt="CraneBnB Live Site hosted via Heroku" width="45px" src="assets/social-media-branding/heroku-logo.jpg"/></a>
+<a href="https://kl-airbnb.herokuapp.com/"><img vertical-align="middle" alt="CraneBnB live site hosted via Heroku" width="45px" src="assets/social-media-branding/heroku-logo.jpg"/></a>
 
 ---
   
