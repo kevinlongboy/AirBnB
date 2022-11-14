@@ -87,7 +87,7 @@ export function convertDate(iso) {
 // uses "id" specifically as key
 // { 1: { id: 1, ...}, 2: { id: 2, ...}, 3: { id: 3 ...}, ... }
 export function normalizeArray(arr) {
-    let obj = {}
-    arr.forEach(el => obj[el.id] = el);
+    let obj = {};
+    if (Array.isArray(arr)) arr.forEach(el => obj[el.id] = el);
     return obj;
-  };
+};

@@ -18,7 +18,7 @@ const SPOTS_DELETE_SINGLE_SPOT = 'spots/DELETE_SINGLE_SPOT';
 export const actionCreateSingleSpot = (newSpot) => ({
     type: SPOTS_CREATE_SINGLE_SPOT,
     payload: newSpot
-})
+});
 
 export const actionReadAllSpots = (spots) => ({
     type: SPOTS_READ_ALL_SPOTS,
@@ -28,17 +28,17 @@ export const actionReadAllSpots = (spots) => ({
 export const actionReadSingleSpotDetails = (singleSpotDetails) => ({
     type: SPOTS_READ_SINGLE_SPOT_DETAILS,
     payload: singleSpotDetails
-})
+});
 
 export const actionReadSingleSpotReviews = (singleSpotReviews) => ({
     type: SPOTS_READ_SINGLE_SPOT_REVIEWS,
     payload: singleSpotReviews
-})
+});
 
 export const actionUpdateSingleSpot = (updateSpot) => ({
     type: SPOTS_UPDATE_SINGLE_SPOT,
     payload: updateSpot
-})
+});
 
 export const actionDeleteSingleSpot = (spotId) => ({
     type: SPOTS_DELETE_SINGLE_SPOT,
@@ -47,11 +47,11 @@ export const actionDeleteSingleSpot = (spotId) => ({
 
 
 /***************************** THUNKS (API) ******************************/
-export const thunkCreateSingleSpot = (data, url) => async (dispatch) => {
+export const thunkCreateSingleSpot = (createSpotData, url) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' } ,
-        body: JSON.stringify(data)
+        body: JSON.stringify(createSpotData)
     });
     if (response.ok) {
         const newSpot = await response.json();
