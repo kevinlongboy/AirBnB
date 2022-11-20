@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Redirect, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import { thunkCreateSingleSpot } from "../../../store/spotsReducer";
+import  { thunkCreateSingleSpot }  from "../../../store/spotsReducer";
 import { states } from "../../../component-resources";
 import './CreateSpotForm.css'
 

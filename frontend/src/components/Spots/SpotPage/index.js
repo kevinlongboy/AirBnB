@@ -23,7 +23,7 @@ function SpotPage() {
   /************ key into pertinent values ************/
   // user
   const userId = sessionState.user.id;
-  // spots
+  // spot
   const spot = spotsState.singleSpotDetails;
   // reviews
   const spotReviews = spotsState.singleSpotReviews;
