@@ -86,7 +86,7 @@ function UserSpots() {
                                             </button>
                                         </NavLink>
 
-                                        <DeleteSpot id={spot.id}/>
+                                        <DeleteSpot id={spot.id} />
                                     </td>
 
                                     <td className="spotTableListingLocation">{spot.city}, {spot.state}</td>

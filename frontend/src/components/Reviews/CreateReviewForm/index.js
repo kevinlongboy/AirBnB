@@ -88,6 +88,8 @@ function CreateReviewForm() {
                     setValidationErrors(errors);
                 }
             });
+
+            // make sure to redirect to either product page or reviews page afterwards
     }
 
 

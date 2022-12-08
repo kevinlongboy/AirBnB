@@ -46,8 +46,8 @@ function SignUpForm() {
       let userData = {firstName, lastName, username, password, email }
 
       return  dispatch(sessionActions.signup(userData)).catch(
-        async (res) => {
 
+        async (res) => {
           const data = await res.json();
 
           if (data && data.errors) {

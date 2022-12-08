@@ -8,6 +8,7 @@ import './DeleteReview.css'
 
 /******************************* COMPONENT *******************************/
 function DeleteReview({id}) {
+    console.log("id", id)
 
     /************ reducer/API communication ************/
     const dispatch = useDispatch();

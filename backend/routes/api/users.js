@@ -1,9 +1,9 @@
 const express = require('express');
+const { check } = require('express-validator');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
-const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { User } = require('../../db/models');
 
 const router = express.Router();
 
@@ -50,7 +50,7 @@ router.post('/', validateSignup, async (req, res) => {
     const { firstName, lastName, email, username, password } = req.body;
     let error = {};
 
-    // validate signup will rin before try-code block; will return rejected promise if errors
+    // validate signup will run before try-code block; will return rejected promise if errors
     try {
 
         // validate unique user credentials
