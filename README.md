@@ -1,6 +1,6 @@
 <p align="center"><img align="justify" src="assets/logo/CraneBnB-logo-large.png" alt="CraneBnB Logo" width="500"></p>
 <!-- <p align="center">An AirBnB Clone</p> -->
- 
+
 ---
 
 ## 🔎 Contents
