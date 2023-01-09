@@ -27,7 +27,7 @@ const demoSpots = [
   },
   {
     ownerId: 3, // Daphne
-    address: '62 Cedar St',
+    address: '2116 4th Ave',
     city: 'Seattle',
     state: 'WA',
     country: 'United States of America',
