@@ -1,0 +1,143 @@
+.CreateBookingForm-component {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/********** OVERVIEW **********/
+.CreateBookingForm-overview-container {
+    width: 100%;
+
+    margin-bottom: 22px;
+
+    display: flex;
+    justify-content: space-between;
+}
+.CreateBookingForm-spot-price {
+    width: 100%;
+
+    font-size: 22px;
+    color: #222;
+}
+.CreateBookingForm-spot-price > span {
+    font-size: 16px;
+}
+
+.CreateBookingForm-spot-rating {
+    width: 100%;
+
+    display: flex;
+    justify-content: right;
+    align-items: center;
+
+    font-size: 14px;
+    color: #222;
+}
+.CreateBookingForm-spot-rating > span {
+    margin: 0px;
+    padding: 0px 4px;
+}
+.CreateBookingForm-spot-rating > u {
+    margin: 0px;
+
+    color: #717171;
+}
+
+/********** FORM **********/
+.CreateBookingForm-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* input fields */
+#CreateBookingForm-date-field-start {
+    /* width: 160.66px; */
+    width: 158px;
+    height: 56px;
+
+    border: 1px solid #afafaf;
+    border-right: 0px;
+    border-radius: 8px 0px 0px 0px;
+}
+#CreateBookingForm-date-field-end {
+    /* width: 160.66px; */
+    width: 158px;
+    height: 56px;
+
+    border: 1px solid #afafaf;
+    border-radius: 0px 8px 0px 0px;
+}
+#CreateBookingForm-select-field {
+    width: 321px;
+    height: 56px;
+
+    margin-bottom: 15px;
+    border: 1px solid #afafaf;
+    border-top: 0px;
+    border-radius: 0px 0px 8px 9px;
+
+    outline: none;
+}
+.CreateBookingForm-reserve-button {
+    min-width: 200px;
+    width: 100%;
+    /* width: 322.328px; */
+
+    height: 48px;
+
+    border: 0px;
+    border-radius: 8px;
+    background-color: #ff385c;
+
+
+    font: 16px;
+    color: #fff;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+.CreateBookingForm-form > p {
+    font-size: 14px;
+    /* margin: 8px 0px 0px; */
+
+    font-weight: 100;
+}
+
+
+/********** FEE ITEMIZATION **********/
+.CreateBookingForm-itemization-container {
+    display: flex;
+    flex-direction: column;
+
+    font-size: 16px;
+}
+
+.CreateBookingForm-itemization-subtotal-container > div {
+    height: 22px;
+
+    margin: 0px;
+    padding: 0px 0px 24px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.CreateBookingForm-subtotal-item {
+    margin: 0px;
+}
+
+.CreateBookingForm-itemization-total-container {
+    padding-top: 12px;
+    margin-top: 24px;
+    border-top: 1px solid rgb(221, 221, 221);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    font-weight: 700;
+
+}

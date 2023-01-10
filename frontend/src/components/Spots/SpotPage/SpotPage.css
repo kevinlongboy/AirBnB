@@ -147,3 +147,15 @@
     align-self: start;
 
 }
+
+.SpotPage-panel-container {
+    width: 324.33px;
+    /* width: 372.33px; */
+    /* height: 496.5px; */
+    box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+
+    margin-left: 90px;
+    padding: 24px;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 12px;
+}

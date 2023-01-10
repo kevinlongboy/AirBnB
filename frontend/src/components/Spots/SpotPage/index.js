@@ -11,6 +11,7 @@ import SpotReviews from "../../Reviews/SpotReviews/index.js";
 import SpotPageFooter from "../../Footer/SpotPageFooter";
 import { convertDate, addPlaceholderImages } from "../../../component-resources";
 import './SpotPage.css';
+import CreateBookingForm from "../../Bookings/CreateBookingForm";
 
 
 /******************************* COMPONENT *******************************/
@@ -66,7 +67,7 @@ function SpotPage() {
 
   if (userId && (userId !== spot.ownerId)) {
     reviewComponent = (
-    <CreateReviewForm />
+    <CreateBookingForm spot={spot}/>
     )
   }
 
@@ -118,14 +119,14 @@ function SpotPage() {
               </div>
 
               <div className="spot-page-middle-right">
-                <div>
+                <div className="SpotPage-panel-container">
                   {reviewComponent}
                 </div>
               </div>
 
             </div>
 
-            <SpotReviews />
+            {/* <SpotReviews /> */}
 
         </div>
       </div>
