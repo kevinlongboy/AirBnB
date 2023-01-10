@@ -39,9 +39,6 @@ function CreateBookingForm({spot}) {
     const [price, setPrice] = useState(125);
     const [validationErrors, setValidationErrors] = useState([]);
 
-    const today = new Date()
-    console.log("today", today)
-
     /**************** render component *****************/
     return (
         <div className="CreateBookingForm-component">
@@ -61,7 +58,6 @@ function CreateBookingForm({spot}) {
                         <input
                             type="date"
                             id="CreateBookingForm-date-field-start"
-                            placeholder={today}
                         >
                         </input>
 

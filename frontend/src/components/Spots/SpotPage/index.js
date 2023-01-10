@@ -40,7 +40,7 @@ function SpotPage() {
 
   useEffect(() => {
     dispatch(thunkReadSingleSpotDetails(spotId));
-  }, [dispatch]);
+  }, [dispatch, spotId]);
 
   useEffect(() => {
     dispatch(thunkReadSingleSpotReviews(spotId));
@@ -71,13 +71,13 @@ function SpotPage() {
     )
   }
 
-  const userAlreadyReviewedSpot = reviews.filter(obj => obj.User.id === userId)
-  if (userAlreadyReviewedSpot.length > 0) {
-    reviewComponent = (
-      <>
-      </>
-    )
-  }
+  // const userAlreadyReviewedSpot = reviews.filter(obj => obj.User.id === userId)
+  // if (userAlreadyReviewedSpot.length > 0) {
+  //   reviewComponent = (
+  //     <>
+  //     </>
+  //   )
+  // }
 
   /**************** render component *****************/
   return (
