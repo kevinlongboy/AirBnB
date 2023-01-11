@@ -250,9 +250,9 @@
 }
 .UserBookings-past-trips-card {
     width: 406px;
-    height: 96px;
+    height: 76px;
 
-    margin: 12px 0px;
+    margin: 0px 0px 12px;
     /* border: 1px solid red; */
 
     display: flex;
