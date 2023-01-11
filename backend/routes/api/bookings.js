@@ -175,6 +175,8 @@ router.get('/current', requireAuth, async (req, res, next) => {
             })
             booking.Spot = bookingSpotInfo;
 
+            // add keys
+            // previewImage-key
             let spotPreviewImg = await SpotImage.findOne({
                 where: { spotId: booking.Spot.id, preview: true },
                 attributes: {
@@ -183,6 +185,14 @@ router.get('/current', requireAuth, async (req, res, next) => {
                 raw: true
             })
             booking.Spot.previewImage = spotPreviewImg.url
+
+            // owner's firstName and lastName -keys
+            let owner = await User.findOne({
+                where: { id: bookingSpotInfo.ownerId},
+                raw: true
+            })
+            console.log("owner", owner)
+            booking.Spot.ownerName = `${owner.firstName}`
 
         }
         return res

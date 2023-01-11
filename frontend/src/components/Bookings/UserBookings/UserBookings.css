@@ -29,6 +29,108 @@
 
     padding: 24px 0px;
 }
+/***** NOT NULL *****/
+.UserBookings-upcoming-trips-subtitle {
+    margin-bottom: 23px;
+
+    font-size: 22px;
+    color: #222;
+    font-weight: 700;
+}
+.UserBookings-card {
+    width: 100%;
+    box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+
+    display: flex;
+
+    border-radius: 14px;
+}
+/* Text */
+.UserBookings-card-text-container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    margin: 24px;
+    border-radius: 14px 0px 0px 14px;
+}
+.UserBookings-card-text-container > div {
+    height: 100%;
+}
+.UserBookings-card-owner-info-container {
+    padding-bottom: 24px;
+    border-bottom: 1px solid #ddd;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.UserBookings-card-owner-info-container > span:first-of-type {
+    margin-bottom: 3px;
+
+    font-size: 26px;
+    font-weight: 700;
+}
+.UserBookings-card-owner-info-container > span:last-of-type {
+    font-size: 14px;
+    font-weight: 100;
+}
+.UserBookings-card-spot-info-container {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    margin-top: 16px;
+}
+.UserBookings-card-booking-dates-container {
+    width: 85px;
+
+    border-right: 1px solid #ddd;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    color: #222;
+    font-weight: 100;
+}
+.UserBookings-card-booking-dates-container > * {
+    margin: 0px;
+}
+.UserBookings-card-booking-location-container {
+    margin-left: 24px;
+
+    display: flex;
+    flex-direction: column;
+}
+.UserBookings-card-booking-location-container > * {
+    margin: 0px;
+
+    color: #222;
+    font-weight: 100;
+}
+.UserBookings-card-booking-location-container > p:first-of-type {
+    font-size: 18px;
+}
+.UserBookings-card-booking-location-container > p:last-of-type {
+    font-size: 14px;
+}
+/* Image */
+.UserBookings-card-image-container {
+    width: 100%;
+    height: 213px;
+}
+.UserBookings-card-image {
+    width: 100%;
+    height: 100%;
+
+    border-radius: 0px 14px 14px 0px;
+    object-fit: cover;
+}
+
+/* Null */
 .upcomingBookingsCard-null {
     width: 100%;
 

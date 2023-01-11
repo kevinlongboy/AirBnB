@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import './UserBookings.css';
 import { thunkReadUserBookings } from "../../../store/bookingsReducer";
 import waveIcon from "../../../assets/icons/wave-icon.png";
+import { convertInformalDate } from "../../../component-resources";
 
 
 
@@ -29,10 +30,10 @@ function UserBookings() {
 
     let bookings = Object.values(bookingsState.userBookings)
 
-    // let upcomingBookingsArr = bookings.filter(obj => obj.startDate > today)
-    let upcomingBookingsArr = []
+    let upcomingBookingsArr = bookings.filter(obj => obj.startDate > today)
+    // let upcomingBookingsArr = [] // uncomment to test for null upcoming bookings
     let pastBookingsArr = bookings.filter(obj => obj.endDate < today)
-
+    // let pastBookingsArr = [] // uncomment to test for null past bookings
 
 
 
@@ -66,6 +67,47 @@ function UserBookings() {
                     ></img>
                     </div>
             </div>
+        )
+    } else {
+        upcomingBookingsCard = (
+            <>
+                <div className="UserBookings-upcoming-trips-subtitle">
+                    Upcoming reservations
+                </div>
+                <div>
+                    {upcomingBookingsArr.map(booking => (
+                        <div className="UserBookings-card">
+
+                            <div className="UserBookings-card-text-container">
+                                <div className="UserBookings-card-owner-info-container">
+                                    <span>{booking.Spot.name}</span>
+                                    <span>Hosted by {booking.Spot.ownerName}</span>
+                                </div>
+                                <div className="UserBookings-card-spot-info-container">
+                                    <div className="UserBookings-card-booking-dates-container">
+                                        <p>{convertInformalDate(booking.startDate)}</p>
+                                        <p>-</p>
+                                        <p>{convertInformalDate(booking.endDate)}</p>
+                                    </div>
+                                    <div className="UserBookings-card-booking-location-container">
+                                        <p>{`${booking.Spot.city}, ${booking.Spot.state}`}</p>
+                                        <p>{booking.Spot.country}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="UserBookings-card-image-container">
+                                <img
+                                    src={booking.Spot.previewImage}
+                                    alt="Preview image of trip destination"
+                                    className="UserBookings-card-image"
+                                    ></img>
+                            </div>
+
+                        </div>
+                    ))}
+                </div>
+            </>
         )
     }
 
