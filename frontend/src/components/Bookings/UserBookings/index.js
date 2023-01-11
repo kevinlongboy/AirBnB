@@ -119,22 +119,24 @@ function UserBookings() {
         pastBookingsCard = (
             <div className="UserBookings-past-trips-cards-container">
                 {pastBookingsArr.map(booking => (
-                    <div className="UserBookings-past-trips-card">
-                        <div className="past-trip-card-thumbnail-container">
-                            <img
-                                src={booking.Spot.previewImage}
-                                alt="past booking thumbnail"
-                                className="past-trip-card-thumbnail"
-                                >
-                            </img>
-                        </div>
+                    <NavLink exact to={`/spots/${booking.Spot.id}`}>
+                        <div className="UserBookings-past-trips-card">
+                            <div className="past-trip-card-thumbnail-container">
+                                <img
+                                    src={booking.Spot.previewImage}
+                                    alt="past booking thumbnail"
+                                    className="past-trip-card-thumbnail"
+                                    >
+                                </img>
+                            </div>
 
-                        <div className="past-trip-card-booking-details-container">
-                            <p>{booking.Spot.name}</p>
-                            <p>Hosted by {booking.Spot.ownerName}</p>
-                            <p>{`${convertInformalDate(booking.startDate)} - ${convertInformalDate(booking.endDate)}`}</p>
+                            <div className="past-trip-card-booking-details-container">
+                                <p>{booking.Spot.name}</p>
+                                <p>Hosted by {booking.Spot.ownerName}</p>
+                                <p>{`${convertInformalDate(booking.startDate)} - ${convertInformalDate(booking.endDate)}`}</p>
+                            </div>
                         </div>
-                    </div>
+                    </NavLink>
                 ))}
             </div>
         )
