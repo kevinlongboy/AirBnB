@@ -13,6 +13,7 @@ import CreateSpotForm from "./components/Spots/CreateSpotForm";
 import UpdateSpotForm from "./components/Spots/UpdateSpotForm";
 import UserReviews from "./components/Reviews/UserReviews"
 import UpdateReviewForm from "./components/Reviews/UpdateReviewForm";
+import UserBookings from "./components/Bookings/UserBookings";
 
 
 /******************************* COMPONENT *******************************/
@@ -63,6 +64,19 @@ function App() {
           {/* <Route exact path={'/reviews/:reviewId/edit'}>
             <UpdateReviewForm />
           </Route> */}
+
+          <Route exact path={'/trips'}>
+            <UserBookings />
+          </Route>
+
+          <Route exact path={'/confirmation/:tripId'}>
+          </Route>
+
+          <Route exact path={'/trips/:tripId/edit'}>
+          </Route>
+
+          <Route exact path={'/reservations'}>
+          </Route>
 
         {/* <Route>
           Page Not Found

@@ -1,6 +1,7 @@
 'use strict';
 
 const demoBookings = [
+  // PAST
   // Niles books Daphne's
   {
     spotId: 3,
@@ -21,6 +22,15 @@ const demoBookings = [
     userId: 4,
     startDate: '2022-10-07',
     endDate: '2022-10-13',
+  },
+
+  // UPCOMING
+  // Niles books Daphne's
+  {
+    spotId: 3,
+    userId: 2, // userId of who is renting spot
+    startDate: '2023-01-23',
+    endDate: '2023-01-25',
   },
 ]
 

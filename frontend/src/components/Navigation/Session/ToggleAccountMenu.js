@@ -55,17 +55,39 @@ function ToggleAccountMenu({ user }) {
             Welcome, {sessionState.user.firstName}
           </div>
 
+          {/* GUEST */}
+
+          <div id="account-listings-button">
+            <NavLink to='/trips' style={{textDecoration:"none", color:"black", fontWeight:"100"}}>
+                Trips
+            </NavLink>
+          </div>
+
+          <div id="account-reviews-button">
+            <NavLink to='/reviews' style={{textDecoration:"none", color:"black", fontWeight:"100"}}>
+                Reviews
+            </NavLink>
+          </div>
+
+          <div id="line-break">
+          </div>
+
+
+          {/* HOST */}
+
           <div id="account-listings-button">
             <NavLink to='/spots' style={{textDecoration:"none", color:"black", fontWeight:"100"}}>
                 Manage Listings
             </NavLink>
           </div>
 
-          <div id="account-reviews-button">
-            <NavLink to='/reviews' style={{textDecoration:"none", color:"black", fontWeight:"100"}}>
-                Manage Reviews
+
+          <div id="account-listings-button">
+            <NavLink to='/reservations' style={{textDecoration:"none", color:"black", fontWeight:"100"}}>
+                Manage Reservations
             </NavLink>
           </div>
+
 
           <div id="line-break">
           </div>

@@ -119,14 +119,17 @@ const bookingsReducer = (state = initialState, action) => {
             // add new booking to Spots's existing reservations
             newState.spotReservations = {...state.spotReservations};
             newState.spotReservations[action.payload.id] = {...action.payload}
+            return newState
 
         case BOOKINGS_READ_USER_BOOKINGS:
             newState.userBookings = normalizeArray(action.payload.Bookings);
             newState.spotReservations = { ...state.spotReservations };
+            return newState
 
         case BOOKINGS_READ_SPOT_RESERVATIONS:
             newState.userBookings = { ...state.userBookings };
             newState.spotReservations = normalizeArray(action.payload.Bookings);
+            return newState
 
         case BOOKINGS_UPDATE_SPOT_BOOKING:
             // add updated booking to User's existing bookings
@@ -135,6 +138,7 @@ const bookingsReducer = (state = initialState, action) => {
             // add updated booking to Spots's existing reservations
             newState.spotReservations = {...state.spotReservations};
             newState.spotReservations[action.payload.id] = {...action.payload}
+            return newState
 
         case BOOKINGS_DELETE_SPOT_BOOKING:
             // add updated booking to User's existing bookings
@@ -144,6 +148,7 @@ const bookingsReducer = (state = initialState, action) => {
             // since delete happens on a different page that does not util this thunk
             // spotReservations will update when that page is revisited
             newState.spotReservations = {...state.spotReservations};
+            return newState
 
         default:
             return state
