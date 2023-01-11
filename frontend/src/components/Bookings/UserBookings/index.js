@@ -36,7 +36,6 @@ function UserBookings() {
     // let pastBookingsArr = [] // uncomment to test for null past bookings
 
 
-
     /************ reducer/API communication ************/
     const dispatch = useDispatch();
 
@@ -111,8 +110,35 @@ function UserBookings() {
         )
     }
 
-
     let pastBookingsCard
+    if (pastBookingsArr.length < 1 ) {
+        pastBookingsCard = (
+            <></>
+        )
+    } else {
+        pastBookingsCard = (
+            <div className="UserBookings-past-trips-cards-container">
+                {pastBookingsArr.map(booking => (
+                    <div className="UserBookings-past-trips-card">
+                        <div className="past-trip-card-thumbnail-container">
+                            <img
+                                src={booking.Spot.previewImage}
+                                alt="past booking thumbnail"
+                                className="past-trip-card-thumbnail"
+                                >
+                            </img>
+                        </div>
+
+                        <div className="past-trip-card-booking-details-container">
+                            <p>{booking.Spot.name}</p>
+                            <p>Hosted by {booking.Spot.ownerName}</p>
+                            <p>{`${convertInformalDate(booking.startDate)} - ${convertInformalDate(booking.endDate)}`}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        )
+    }
 
 
 
@@ -132,7 +158,8 @@ function UserBookings() {
                 </div>
 
                 <div className="UserBookings-past-trips-container">
-                    Where you've been
+                    <div className="UserBookings-past-trips-subheader">Where you've been</div>
+                    {pastBookingsCard}
                 </div>
 
             </div>
