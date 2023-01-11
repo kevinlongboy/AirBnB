@@ -29,7 +29,7 @@ function SpotPageFooter() {
                 <div className="spotPageFooterContainerRight">
                     <a href="https://www.linkedin.com/in/kevinlongboy/"><i class="fa-brands fa-linkedin" id="spotPageFooterSocialMediaIcon"></i></a>
                     <a href="https://github.com/kevinlongboy"><i class="fa-brands fa-github" id="spotPageFooterSocialMediaIcon"></i></a>
-                    <a href="kl-market.herokuapp.com"><img src={marketLogo} id="spotPageFooterSocialMediaImage"></img></a>
+                    <a href="http://kevinlongboy.com"><img src={marketLogo} id="spotPageFooterSocialMediaImage"></img></a>
                 </div>
 
             </div>
