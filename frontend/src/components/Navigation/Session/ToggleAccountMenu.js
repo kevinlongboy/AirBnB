@@ -51,49 +51,45 @@ function ToggleAccountMenu({ user }) {
       {showMenu && (
         <div className="account-dropdown-menu">
 
-          <div id="welcome-user" style={{textDecoration:"none", color:"black", fontWeight:"900"}}>
+          <div className="welcome-user" id="emphasis-item">
             Welcome, {sessionState.user.firstName}
           </div>
 
+          <div id="line-break"></div>
+
           {/* GUEST */}
-
-          <div id="account-listings-button">
-            <NavLink to='/trips' style={{textDecoration:"none", color:"black", fontWeight:"100"}}>
+          <NavLink exact to='/trips'>
+            <button className="account-listings-button" id="emphasis-item">
                 Trips
-            </NavLink>
-          </div>
+            </button>
+          </NavLink>
 
-          <div id="account-reviews-button">
-            <NavLink to='/reviews' style={{textDecoration:"none", color:"black", fontWeight:"100"}}>
+          <NavLink exact to='/reviews'>
+            <button className="account-listings-button" id="emphasis-item">
                 Reviews
-            </NavLink>
-          </div>
+            </button>
+          </NavLink>
 
-          <div id="line-break">
-          </div>
-
+          <div id="line-break"></div>
 
           {/* HOST */}
 
-          <div id="account-listings-button">
-            <NavLink to='/spots' style={{textDecoration:"none", color:"black", fontWeight:"100"}}>
-                Manage Listings
-            </NavLink>
-          </div>
+          <NavLink exact to='/spots'>
+            <button className="account-listings-button">
+              Manage Listings
+            </button>
+          </NavLink>
 
+          <NavLink exact to='/reservations'>
+            <button className="account-listings-button">
+              Manage Reservations
+            </button>
+          </NavLink>
 
-          <div id="account-listings-button">
-            <NavLink to='/reservations' style={{textDecoration:"none", color:"black", fontWeight:"100"}}>
-                Manage Reservations
-            </NavLink>
-          </div>
-
-
-          <div id="line-break">
-          </div>
+          <div id="line-break"></div>
 
           <div>
-            <button id="account-logout-button" style={{textAlign:"left", fontWeight:"0", paddingTop:"7px"}} onClick={logout}>Log out</button>
+            <button className="account-listings-button" onClick={logout}>Log out</button>
           </div>
 
         </div>

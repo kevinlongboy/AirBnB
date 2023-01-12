@@ -18,58 +18,45 @@
     box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
 }
 
-.account-dropdown-menu > div {
-    height: 40px;
-    padding-top: 5px;
-    margin-bottom: 5px;
-    padding-left: 15px;
-}
-
-.account-dropdown-menu > div:hover {
-    background-color: #f7f7f7;
-}
-
-#welcome-user {
-    /* margin-top: 10px; */
-    padding-top: 15px;
-    border-bottom: 1px solid #dadada;
-}
-
-#welcome-user:hover {
-    background-color: white;
-}
-
-
-#account-listings-button {
-    margin-top: 8px;
-    padding-top: 15px;
-}
-
-#account-reviews-button {
-    margin-bottom: 8px;
-    padding-top: 15px;
+.welcome-user {
+    padding: 15px 15px;
 }
 
 #line-break {
     height: 0;
-    margin-bottom: 8px;
+
+    margin: 8px 0px;
     padding: 0;
     border-bottom: 1px solid #dadada;
 }
 
+.account-dropdown-menu > a {
 
-#account-logout-button {
-    border: none;
-    background: none;
-    margin: 0;
-    border: 0;
-    padding: 0%;
-    width: 270px;
+    text-decoration: none;
+    /* border: 1px solid blue; */
+}
+.account-listings-button {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+
+    padding: 15px 15px;
+    border: 0px;
+
+    display: flex;
+    align-items: center;
+    text-align: left;
+    vertical-align: center;
+
+    font-weight: 100;
     font-size: 15px;
-    align-self: left;
+    cursor: pointer;
+    /* background-color: red; */
+}
+.account-listings-button:hover {
+    background-color: #f7f7f7;
 }
 
-#account-logout-button:hover {
-    border: none;
-    cursor: pointer;
+#emphasis-item {
+    font-weight: 700;
 }

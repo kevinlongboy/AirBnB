@@ -95,11 +95,13 @@ function UserBookings() {
                             </div>
 
                             <div className="UserBookings-card-image-container">
-                                <img
-                                    src={booking.Spot.previewImage}
-                                    alt="Preview image of trip destination"
-                                    className="UserBookings-card-image"
+                                <NavLink exact to={`/spots/${booking.Spot.id}`}>
+                                    <img
+                                        src={booking.Spot.previewImage}
+                                        alt="Preview image of trip destination"
+                                        className="UserBookings-card-image"
                                     ></img>
+                                </NavLink>
                             </div>
 
                         </div>
