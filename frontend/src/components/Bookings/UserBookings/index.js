@@ -16,7 +16,6 @@ function UserBookings() {
 
     /****************** access store *******************/
     const bookingsState = useSelector(state => state.bookings);
-    const spotsState = useSelector(state => state.spots);
 
     /************ key into pertinent values ************/
     // instantiate current date

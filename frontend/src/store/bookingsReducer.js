@@ -9,6 +9,7 @@ import { normalizeArray } from "../component-resources/index";
 // "reservation" - for host(s) of a spot
 const BOOKINGS_CREATE_SINGLE_BOOKING = 'bookings/CREATE_SINGLE_BOOKING';
 const BOOKINGS_READ_USER_BOOKINGS = 'bookings/READ_USER_BOOKINGS';
+const BOOKINGS_READ_USER_RESERVATIONS = 'bookings/READ_USER_RESERVATIONS';
 const BOOKINGS_READ_SPOT_RESERVATIONS = 'bookings/READ_SPOT_RESERVATIONS';
 const BOOKINGS_UPDATE_SPOT_BOOKING = 'bookings/UPDATE_SPOT_BOOKING';
 const BOOKINGS_DELETE_SPOT_BOOKING = 'bookings/DELETE_SPOT_BOOKING';
@@ -24,6 +25,11 @@ export const actionReadUserBookings = (userBookings) => ({
     type: BOOKINGS_READ_USER_BOOKINGS,
     payload: userBookings
 });
+
+export const actionReadUserReservations = (userReservations) => ({
+    type: BOOKINGS_READ_USER_RESERVATIONS,
+    payload: userReservations
+})
 
 export const actionReadSpotReservations = (spotReservations) => ({
     type: BOOKINGS_READ_SPOT_RESERVATIONS,
@@ -64,6 +70,17 @@ export const thunkReadUserBookings = () => async (dispatch) => {
     };
 };
 
+export const thunkReadUserReservations = () => async (dispatch) => {
+    console.log("reach")
+    const response = await csrfFetch(`/api/reservations`);
+    if (response.ok) {
+        const userReservations = await response.json();
+        console.log("userReservations", userReservations)
+        dispatch(actionReadUserBookings(userReservations));
+        return userReservations;
+    };
+};
+
 export const thunkReadSpotReservations = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/bookings`);
     if (response.ok) {
@@ -72,7 +89,6 @@ export const thunkReadSpotReservations = (spotId) => async (dispatch) => {
         return spotReservations;
     };
 };
-
 
 export const thunkUpdateSpotBooking = (bookingId, updateBookingData) => async (dispatch) => {
     const response = await csrfFetch(`/api/bookings/${bookingId}`, {
@@ -101,6 +117,7 @@ export const thunkDeleteSpotBooking = (bookingId) => async (dispatch) => {
 /***************************** STATE SHAPE *******************************/
 const initialState = {
     userBookings: {},
+    userReservations: {},
     spotReservations: {},
 }
 
@@ -114,36 +131,41 @@ const bookingsReducer = (state = initialState, action) => {
 
         case BOOKINGS_CREATE_SINGLE_BOOKING:
             // add new booking to User's existing bookings
-            newState.userBookings = {...state.userBookings};
-            newState.userBookings[action.payload.id] = {...action.payload};
+            newState.userBookings = { ...state.userBookings };
+            newState.userBookings[action.payload.id] = { ...action.payload };
+            newState.userReservations = { ...state.userReservations };
             // add new booking to Spots's existing reservations
-            newState.spotReservations = {...state.spotReservations};
-            newState.spotReservations[action.payload.id] = {...action.payload}
+            newState.spotReservations = { ...state.spotReservations };
+            newState.spotReservations[action.payload.id] = { ...action.payload }
             return newState
 
         case BOOKINGS_READ_USER_BOOKINGS:
             newState.userBookings = normalizeArray(action.payload.Bookings);
+            newState.userReservations = { ...state.userReservations }
             newState.spotReservations = { ...state.spotReservations };
             return newState
 
         case BOOKINGS_READ_SPOT_RESERVATIONS:
             newState.userBookings = { ...state.userBookings };
+            newState.userReservations = { ...state.userReservations }
             newState.spotReservations = normalizeArray(action.payload.Bookings);
             return newState
 
         case BOOKINGS_UPDATE_SPOT_BOOKING:
             // add updated booking to User's existing bookings
-            newState.userBookings = {...state.userBookings};
+            newState.userBookings = { ...state.userBookings };
             newState.userBookings[action.payload.id] = {...action.payload};
+            newState.userReservations = { ...state.userReservations }
             // add updated booking to Spots's existing reservations
-            newState.spotReservations = {...state.spotReservations};
-            newState.spotReservations[action.payload.id] = {...action.payload}
+            newState.spotReservations = { ...state.spotReservations };
+            newState.spotReservations[action.payload.id] = { ...action.payload }
             return newState
 
         case BOOKINGS_DELETE_SPOT_BOOKING:
             // add updated booking to User's existing bookings
             newState.userBookings = {...state.userBookings};
             delete newState.userBookings[action.payload]
+            newState.userReservations = {...state.userReservations};
             // deleting from spotReservations is not necessary
             // since delete happens on a different page that does not util this thunk
             // spotReservations will update when that page is revisited
