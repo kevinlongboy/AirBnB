@@ -71,12 +71,10 @@ export const thunkReadUserBookings = () => async (dispatch) => {
 };
 
 export const thunkReadUserReservations = () => async (dispatch) => {
-    console.log("reach")
     const response = await csrfFetch(`/api/reservations`);
     if (response.ok) {
         const userReservations = await response.json();
-        console.log("userReservations", userReservations)
-        dispatch(actionReadUserBookings(userReservations));
+        dispatch(actionReadUserReservations(userReservations));
         return userReservations;
     };
 };
@@ -142,6 +140,12 @@ const bookingsReducer = (state = initialState, action) => {
         case BOOKINGS_READ_USER_BOOKINGS:
             newState.userBookings = normalizeArray(action.payload.Bookings);
             newState.userReservations = { ...state.userReservations }
+            newState.spotReservations = { ...state.spotReservations };
+            return newState
+
+        case BOOKINGS_READ_USER_RESERVATIONS:
+            newState.userBookings = { ...state.userBookings };
+            newState.userReservations = normalizeArray(action.payload.Reservations)
             newState.spotReservations = { ...state.spotReservations };
             return newState
 

@@ -14,6 +14,7 @@ import UpdateSpotForm from "./components/Spots/UpdateSpotForm";
 import UserReviews from "./components/Reviews/UserReviews"
 import UpdateReviewForm from "./components/Reviews/UpdateReviewForm";
 import UserBookings from "./components/Bookings/UserBookings";
+import UserReservations from "./components/Bookings/UserReservations";
 
 
 /******************************* COMPONENT *******************************/
@@ -76,6 +77,7 @@ function App() {
           </Route>
 
           <Route exact path={'/reservations'}>
+            <UserReservations />
           </Route>
 
         {/* <Route>

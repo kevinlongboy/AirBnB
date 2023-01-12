@@ -1,0 +1,80 @@
+/****************** COMPONENT ******************/
+.UserReservations-component {
+    width: 100%;
+    max-width: 1440px;
+
+    margin: 0px;
+    padding: 0px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/****************** HEADER ******************/
+.UserReservations-header {
+    width: 100%;
+
+    padding: 36px 0px 24px;
+
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.UserReservations-subheader {
+    width: 100%;
+
+    padding: 64px 0px 30px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    font-size: 26px;
+    font-weight: 700;
+}
+.UserReservations-subheader > * {
+    margin: 0px;
+}
+.UserReservations-subheader > p:last-of-type {
+    font-size: 16px;
+}
+
+
+/****************** HEADER ******************/
+.UserReservations-navbar-container {
+    width: 100%;
+
+    margin-bottom: 25px;
+}
+.UserReservations-navbar-button {
+    height: 40px;
+    background-color: #fff;
+
+    margin-right: 10px;
+    padding: 4px 16px;
+    border: 1px solid #ddd;
+    border-radius: 24px;
+
+    font-size: 14px;
+    color: #222;
+    font-weight: 100;
+
+    cursor: pointer;
+}
+#UserReservations-navbar-button-active {
+    background-color: #f7f7f7;
+
+    border: 2px solid #222;
+}
+
+/****************** NESTED COMPONENT ******************/
+.conditional-reservations-card-container {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

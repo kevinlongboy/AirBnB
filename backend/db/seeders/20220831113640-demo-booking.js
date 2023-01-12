@@ -32,6 +32,13 @@ const demoBookings = [
     startDate: '2023-01-23',
     endDate: '2023-01-25',
   },
+  // Daphne books Gertrude's
+  {
+    spotId: 10,
+    userId: 3, // userId of who is renting spot
+    startDate: '2023-01-23',
+    endDate: '2023-01-25',
+  },
 ]
 
 let userIds = [];
