@@ -24,7 +24,6 @@ body {
     padding: max(0px 400px) */
 }
 
-
 /*
 
 COMPONENT
@@ -40,3 +39,21 @@ flex-direction:column;
 align-items: center;
 
 */
+
+
+/* ERRORS */
+
+.errors {
+    margin: 0;
+    border: none;
+    padding: 10px 0px;
+
+    font-size: 14px;
+    color: red;
+}
+
+.error-item {
+    margin: 0;
+    border: none;
+    padding: none;
+}

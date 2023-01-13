@@ -26,8 +26,8 @@ function CreateBookingForm({spot}) {
 
     /****************** manage state *******************/
     const [startDate, setStartDate] = useState(today);
-    const [endDate, setEndDate] = useState(tomorrow);
-    const [guests, setGuests] = useState("");
+    const [endDate, setEndDate] = useState(today);
+    let [guests, setGuests] = useState(1);
     const [cost, setCost] = useState(spot.price);
     const [total, setTotal] = useState();
     const [numDays, setNumDays]  = useState(1);
@@ -48,6 +48,7 @@ function CreateBookingForm({spot}) {
 
     const changeStartDate = async (e) => {
 
+        setValidationErrors([])
 
         if (e.target.value < endDate) {
             setStartDate(e.target.value);
@@ -67,6 +68,8 @@ function CreateBookingForm({spot}) {
 
     const changeEndDate = async (e) => {
 
+        setValidationErrors([])
+
         if (e.target.value > startDate) {
             setEndDate(e.target.value);
 
@@ -83,26 +86,38 @@ function CreateBookingForm({spot}) {
         }
     }
 
-
     // submit form
     const history = useHistory();
     const handleSubmit = async (e) => {
 
         e.preventDefault();
 
+        /******** Check for errors ********/
         let errors = [];
         setValidationErrors(errors);
+
+        if (startDate == endDate) {
+            errors.push("Minimum stay is 1 night")
+        }
+
+        setValidationErrors(errors);
+        if (errors.length) return;
+
+        /******** Parse form data ********/
+        if (typeof guests != 'number') {
+            let rawVal = guests.slice(0, 1)
+            guests = parseFloat(rawVal)
+        }
 
         let createBookingData = {
             startDate: startDate,
             endDate: endDate,
-            // guests: guests,
-            // total, total,
+            guests: guests,
+            total: total,
         }
 
-        console.log("numDays", numDays)
-
-        console.log("spot.id", spot.id)
+        // console.log("numDays", numDays)
+        // console.log("spot.id", spot.id)
         console.log("createBookingData", createBookingData)
 
         // const newBooking = await dispatch(thunkCreateSingleBooking(spot.id, createBookingData)).catch(
@@ -171,6 +186,12 @@ function CreateBookingForm({spot}) {
                         <option>4 guests</option>
                         <option>5 guests</option>
                     </select>
+
+                    <div className="errors">
+                        {validationErrors.length > 0 && validationErrors.map(err => (
+                            <p className="error-item" key={err}>{err}</p>
+                        ))}
+                    </div>
 
                     <button
                         type="submit"

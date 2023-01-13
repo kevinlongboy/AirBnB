@@ -267,18 +267,3 @@
 .spot-submit-button {
     cursor: pointer;
 }
-
-/******* errors ******/
-.errors {
-    color: red;
-    margin: 0;
-    border: none;
-    padding: 10px 0px;
-}
-
-.error-item {
-    color: red;
-    margin: 0;
-    border: none;
-    padding: none;
-}
