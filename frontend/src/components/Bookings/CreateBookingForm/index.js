@@ -29,7 +29,7 @@ function CreateBookingForm({spot}) {
     const [endDate, setEndDate] = useState(tomorrow);
     const [guests, setGuests] = useState("");
     const [cost, setCost] = useState(spot.price);
-    const [grandTotal, setGrandTotal] = useState();
+    const [total, setTotal] = useState();
     const [numDays, setNumDays]  = useState(1);
     const [validationErrors, setValidationErrors] = useState([]);
     const [isDisplayed, setIsDisplayed] = useState(false)
@@ -47,34 +47,37 @@ function CreateBookingForm({spot}) {
     // problems: will change endDate if user modifies start date again after choosing an endDate
 
     const changeStartDate = async (e) => {
-        setStartDate(e.target.value);
+
 
         if (e.target.value < endDate) {
+            setStartDate(e.target.value);
+
             let days = calculateNumberOfDays(e.target.value, endDate)
             setNumDays(days)
 
             let subtotal = spot.price * days
             setCost(subtotal)
 
-            let total = calculateGrandTotal(subtotal)
-            setGrandTotal(total)
+            let grandTotal = calculateGrandTotal(subtotal)
+            setTotal(grandTotal)
 
             setIsDisplayed(true)
         }
     }
 
     const changeEndDate = async (e) => {
-        setEndDate(e.target.value);
 
         if (e.target.value > startDate) {
+            setEndDate(e.target.value);
+
             let days = calculateNumberOfDays(startDate, e.target.value)
             setNumDays(days)
 
             let subtotal = spot.price * days
             setCost(subtotal)
 
-            let total = calculateGrandTotal(subtotal)
-            setGrandTotal(total)
+            let grandTotal = calculateGrandTotal(subtotal)
+            setTotal(grandTotal)
 
             setIsDisplayed(true)
         }
@@ -94,7 +97,7 @@ function CreateBookingForm({spot}) {
             startDate: startDate,
             endDate: endDate,
             // guests: guests,
-            // cost, cost,
+            // total, total,
         }
 
         console.log("numDays", numDays)
@@ -164,6 +167,9 @@ function CreateBookingForm({spot}) {
                     >
                         <option>1 guest</option>
                         <option>2 guests</option>
+                        <option>3 guests</option>
+                        <option>4 guests</option>
+                        <option>5 guests</option>
                     </select>
 
                     <button
@@ -201,7 +207,7 @@ function CreateBookingForm({spot}) {
                 {isDisplayed &&
                     <div className="CreateBookingForm-itemization-total-container">
                         <p>Total before taxes</p>
-                        <p>${grandTotal}</p>
+                        <p>${total}</p>
                     </div>
                 }
             </div>

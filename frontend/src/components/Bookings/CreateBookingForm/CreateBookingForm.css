@@ -55,22 +55,24 @@
 /* input fields */
 #CreateBookingForm-date-field-start {
     /* width: 160.66px; */
-    width: 158px;
+    width: 149px;
     height: 56px;
 
     border: 1px solid #afafaf;
     border-right: 0px;
     border-radius: 8px 0px 0px 0px;
+    padding-left: 10px;
 
     cursor: pointer;
 }
 #CreateBookingForm-date-field-end {
     /* width: 160.66px; */
-    width: 158px;
+    width: 149px;
     height: 56px;
 
     border: 1px solid #afafaf;
     border-radius: 0px 8px 0px 0px;
+    padding-left: 10px;
 
     cursor: pointer;
 }
@@ -82,6 +84,7 @@
     border: 1px solid #afafaf;
     border-top: 0px;
     border-radius: 0px 0px 8px 9px;
+    padding-left: 10px;
 
     outline: none;
     cursor: pointer;
