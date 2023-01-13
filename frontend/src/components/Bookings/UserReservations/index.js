@@ -16,7 +16,6 @@ function UserReservations() {
     /****************** access store *******************/
     const sessionState = useSelector(state => state.session)
     const bookingsState = useSelector(state => state.bookings);
-    console.log("bookingsState", bookingsState)
 
     /************ key into pertinent values ************/
     let iso = new Date().toISOString();
@@ -24,7 +23,6 @@ function UserReservations() {
 
     let spots;
     bookingsState.userReservations ? spots = Object.values(bookingsState.userReservations) : spots = null;
-    console.log("spots", spots)
 
     // get all user's spots
     // iterate through all spots,
@@ -46,10 +44,6 @@ function UserReservations() {
         }
     }
 
-    // console.log("spotIds", spotIds)
-    // console.log("upcomingBookingsArr", upcomingBookingsArr)
-    // console.log("pastBookingsArr", pastBookingsArr)
-
     /************ reducer/API communication ************/
     const dispatch = useDispatch();
 
@@ -57,15 +51,8 @@ function UserReservations() {
         dispatch(thunkReadUserReservations());
     }, [dispatch]);
 
-
-
     /****************** manage state *******************/
     const [display, setDisplay] = useState('upcoming');
-
-    /************* conditional components **************/
-
-
-
 
     /**************** render component *****************/
     return (
@@ -106,7 +93,7 @@ function UserReservations() {
                             spotIds={spotIds}
                             upcomingReservationsArr={upcomingReservationsArr}/> :
 
-                            <PastReservations
+                        <PastReservations
                             spots={spots}
                             spotIds={spotIds}
                             pastReservationsArr={pastReservationsArr}/>

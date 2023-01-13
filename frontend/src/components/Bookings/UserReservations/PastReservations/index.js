@@ -12,9 +12,7 @@ import accountIcon from "../../../../assets/icons/done-icon.png";
 function PastReservations({spots, spotIds, pastReservationsArr}) {
 
     /************ key into pertinent values ************/
-    console.log("pastReservationsArr", pastReservationsArr)
     // pastReservationsArr = [] // uncomment to test for null reservations
-    console.log("spots", spots)
 
     /************* conditional components **************/
     let PastReservationsCard;

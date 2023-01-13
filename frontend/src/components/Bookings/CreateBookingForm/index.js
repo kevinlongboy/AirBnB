@@ -58,6 +58,7 @@ function CreateBookingForm({spot}) {
                         <input
                             type="date"
                             id="CreateBookingForm-date-field-start"
+                            // min={new Date()}
                         >
                         </input>
 

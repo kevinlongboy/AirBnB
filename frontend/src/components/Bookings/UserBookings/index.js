@@ -70,7 +70,7 @@ function UserBookings() {
         upcomingBookingsCard = (
             <>
                 <div className="UserBookings-upcoming-trips-subtitle">
-                    Upcoming reservations
+                    Upcoming
                 </div>
                 <div>
                     {upcomingBookingsArr.map(booking => (

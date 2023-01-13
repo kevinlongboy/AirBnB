@@ -12,9 +12,7 @@ import accountIcon from "../../../../assets/icons/done-icon.png";
 function UpcomingReservations({spots, spotIds, upcomingReservationsArr}) {
 
     /************ key into pertinent values ************/
-    console.log("upcomingReservationsArr", upcomingReservationsArr)
     // upcomingReservationsArr = [] // uncomment to test for null reservations
-    console.log("spots", spots)
 
     /************* conditional components **************/
     let upcomingReservationsCard;
