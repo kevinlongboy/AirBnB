@@ -57,7 +57,7 @@ export function addPlaceholderImages(arr) {
 }
 
 
-/*********************************** FUNCTION TO ADD PLACEHOLDER IMAGES ************************************/
+/************************************ GET CURRENT DATE IN "CCYY-DD-YY" *************************************/
 export function getTodayISO(arr) {
 
     const todayRaw = new Date();
@@ -141,4 +141,34 @@ export function convertInformalDate(iso) {
     }
 
     return `${month} ${day}`
+}
+
+
+/****************************** CALCULATE NUMBER OF DAYS BETWEEN TO DATES ******************************/
+export function calculateNumberOfDays(startDate, endDate) {
+    // To set two dates to two variables
+    var date1 = new Date(startDate);
+    var date2 = new Date(endDate);
+
+    // To calculate the time difference of two dates
+    var Difference_In_Time = date2.getTime() - date1.getTime();
+
+    // To calculate the no. of days between two dates
+    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+
+    //To display the final no. of days (result)
+    return Difference_In_Days
+}
+// courtesy: GeeksForGeeks:
+// https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/
+
+
+/************************************ CALCULATE TOTAL COST OF STAY *************************************/
+export function calculateGrandTotal(subtotal) {
+    let cleaning = 25
+    let service = 50
+
+    let total = cleaning + service + subtotal
+
+    return total
 }

@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkReadAllSpots, thunkReadSingleSpotDetails } from "../../../store/spotsReducer";
 import MainFooter from '../../Footer/MainFooter';
 import './CreateBookingForm.css';
-import { getTodayISO } from "../../../component-resources";
+import { calculateGrandTotal, calculateNumberOfDays, getTodayISO } from "../../../component-resources";
+import dayjs from "dayjs";
 
 
 /******************************* COMPONENT *******************************/
@@ -18,18 +19,68 @@ function CreateBookingForm({spot}) {
 
     /************ key into pertinent values ************/
     const today = getTodayISO()
+    const tomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD') // endDate: min value
 
     /************ reducer/API communication ************/
     const dispatch = useDispatch();
 
     /****************** manage state *******************/
     const [startDate, setStartDate] = useState(today);
-    const [endDate, setEndDate] = useState(today);
+    const [endDate, setEndDate] = useState(tomorrow);
     const [guests, setGuests] = useState("");
     const [cost, setCost] = useState(spot.price);
+    const [grandTotal, setGrandTotal] = useState();
+    const [numDays, setNumDays]  = useState(1);
     const [validationErrors, setValidationErrors] = useState([]);
+    const [isDisplayed, setIsDisplayed] = useState(false)
 
     /***************** handle events *******************/
+    // dynamically change endDate to correspond with changes to startDate
+    // with a value of 1 day
+    // const changeStartAndEndDates = async (e) => {
+        //     setStartDate(e.target.value);
+        //     let nextDay = dayjs(e.target.value).add(1, 'day').format('YYYY-MM-DD')
+        //     // can also be modified to be dynamic per host requirements
+        //     // IF host can require min. amount of days per stay
+        //     setEndDate(nextDay)
+    // }
+    // problems: will change endDate if user modifies start date again after choosing an endDate
+
+    const changeStartDate = async (e) => {
+        setStartDate(e.target.value);
+
+        if (e.target.value < endDate) {
+            let days = calculateNumberOfDays(e.target.value, endDate)
+            setNumDays(days)
+
+            let subtotal = spot.price * days
+            setCost(subtotal)
+
+            let total = calculateGrandTotal(subtotal)
+            setGrandTotal(total)
+
+            setIsDisplayed(true)
+        }
+    }
+
+    const changeEndDate = async (e) => {
+        setEndDate(e.target.value);
+
+        if (e.target.value > startDate) {
+            let days = calculateNumberOfDays(startDate, e.target.value)
+            setNumDays(days)
+
+            let subtotal = spot.price * days
+            setCost(subtotal)
+
+            let total = calculateGrandTotal(subtotal)
+            setGrandTotal(total)
+
+            setIsDisplayed(true)
+        }
+    }
+
+
     // submit form
     const history = useHistory();
     const handleSubmit = async (e) => {
@@ -45,6 +96,8 @@ function CreateBookingForm({spot}) {
             // guests: guests,
             // cost, cost,
         }
+
+        console.log("numDays", numDays)
 
         console.log("spot.id", spot.id)
         console.log("createBookingData", createBookingData)
@@ -86,18 +139,19 @@ function CreateBookingForm({spot}) {
                     <div className="CreateBookingForm-date-field-container">
                         <input
                             type="date"
-                            min={today}
-                            onChange={(e) => setStartDate(e.target.value)}
                             value={startDate}
+                            // onChange={changeStartAndEndDates}
+                            onChange={changeStartDate}
+                            min={today}
                             id="CreateBookingForm-date-field-start"
                         >
                         </input>
 
                         <input
                             type="date"
-                            min={today}
-                            onChange={(e) => setEndDate(e.target.value)}
                             value={endDate}
+                            onChange={changeEndDate}
+                            min={tomorrow}
                             id="CreateBookingForm-date-field-end"
                         >
                         </input>
@@ -127,24 +181,29 @@ function CreateBookingForm({spot}) {
 
             <div className="CreateBookingForm-itemization-container">
                 <div className="CreateBookingForm-itemization-subtotal-container">
-                    <div className="CreateBookingForm-subtotal-item">
-                        <p><u>${spot.price} X nights</u></p>
-                        <p>$ function res</p>
-                    </div>
+                    {isDisplayed &&
+                        <div className="CreateBookingForm-subtotal-item">
+                            <p><u>${spot.price} X {numDays} night{numDays == 1 ? '' : 's'}</u></p>
+                            <p>${cost}</p>
+                        </div>
+                    }
                     <div className="CreateBookingForm-subtotal-item">
                         <p><u>Cleaning fee</u></p>
-                        <p>$0</p>
+                        <p>$25</p>
                     </div>
                     <div className="CreateBookingForm-subtotal-item">
                         <p><u>Service fee</u></p>
-                        <p>$0</p>
+                        <p>$50</p>
                     </div>
                 </div>
 
-                <div className="CreateBookingForm-itemization-total-container">
-                    <p>Total before taxes</p>
-                    <p>$0</p>
-                </div>
+
+                {isDisplayed &&
+                    <div className="CreateBookingForm-itemization-total-container">
+                        <p>Total before taxes</p>
+                        <p>${grandTotal}</p>
+                    </div>
+                }
             </div>
         </div>
     )

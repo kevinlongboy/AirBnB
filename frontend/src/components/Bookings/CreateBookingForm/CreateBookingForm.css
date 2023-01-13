@@ -61,6 +61,8 @@
     border: 1px solid #afafaf;
     border-right: 0px;
     border-radius: 8px 0px 0px 0px;
+
+    cursor: pointer;
 }
 #CreateBookingForm-date-field-end {
     /* width: 160.66px; */
@@ -69,6 +71,8 @@
 
     border: 1px solid #afafaf;
     border-radius: 0px 8px 0px 0px;
+
+    cursor: pointer;
 }
 #CreateBookingForm-select-field {
     width: 321px;
@@ -80,6 +84,7 @@
     border-radius: 0px 0px 8px 9px;
 
     outline: none;
+    cursor: pointer;
 }
 .CreateBookingForm-reserve-button {
     min-width: 200px;
