@@ -1,43 +1,72 @@
 /******************************** IMPORTS ********************************/
 // libraries
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
 import { thunkReadAllSpots, thunkReadSingleSpotDetails } from "../../../store/spotsReducer";
 import MainFooter from '../../Footer/MainFooter';
 import './CreateBookingForm.css';
+import { getTodayISO } from "../../../component-resources";
 
 
 /******************************* COMPONENT *******************************/
 function CreateBookingForm({spot}) {
 
-
     /****************** access store *******************/
     const spotsState = useSelector(state => state.spots)
-    console.log("spot", spot)
 
     /************ key into pertinent values ************/
-    // const allSpots = spotsState.allSpots;
-    // let allSpotsArr = Object.values(allSpots);
+    const today = getTodayISO()
 
     /************ reducer/API communication ************/
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(thunkReadSingleSpotDetails(spotId));
-    // }, [dispatch])
-
     /****************** manage state *******************/
-    const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [country, setCountry] = useState("");
-    const [url, setUrl] = useState("");
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState(125);
+    const [startDate, setStartDate] = useState(today);
+    const [endDate, setEndDate] = useState(today);
+    const [guests, setGuests] = useState("");
+    const [cost, setCost] = useState(spot.price);
     const [validationErrors, setValidationErrors] = useState([]);
+
+    /***************** handle events *******************/
+    // submit form
+    const history = useHistory();
+    const handleSubmit = async (e) => {
+
+        e.preventDefault();
+
+        let errors = [];
+        setValidationErrors(errors);
+
+        let createBookingData = {
+            startDate: startDate,
+            endDate: endDate,
+            // guests: guests,
+            // cost, cost,
+        }
+
+        console.log("spot.id", spot.id)
+        console.log("createBookingData", createBookingData)
+
+        // const newBooking = await dispatch(thunkCreateSingleBooking(spot.id, createBookingData)).catch(
+
+        //     async (res) => {
+        //         const data = await res.json();
+
+        //         if (data && data.errors) {
+        //             data.errors.forEach(message => errors.push(message));
+        //             setValidationErrors(errors);
+        //         }
+        //     }
+        // )
+
+        // if (newBooking) {
+        //     history.push(`confirmation/${newBooking.id}`)
+        // }
+    }
+
+
 
     /**************** render component *****************/
     return (
@@ -57,13 +86,18 @@ function CreateBookingForm({spot}) {
                     <div className="CreateBookingForm-date-field-container">
                         <input
                             type="date"
+                            min={today}
+                            onChange={(e) => setStartDate(e.target.value)}
+                            value={startDate}
                             id="CreateBookingForm-date-field-start"
-                            // min={new Date()}
                         >
                         </input>
 
                         <input
                             type="date"
+                            min={today}
+                            onChange={(e) => setEndDate(e.target.value)}
+                            value={endDate}
                             id="CreateBookingForm-date-field-end"
                         >
                         </input>
@@ -71,12 +105,19 @@ function CreateBookingForm({spot}) {
 
                     <select
                         id="CreateBookingForm-select-field"
+                        onChange={(e) => setGuests(e.target.value)}
+                        value={guests}
                     >
                         <option>1 guest</option>
                         <option>2 guests</option>
                     </select>
 
-                    <button className="CreateBookingForm-reserve-button">
+                    <button
+                        type="submit"
+                        className="CreateBookingForm-reserve-button"
+                        disabled={!!validationErrors.length}
+                        onClick={handleSubmit}
+                        >
                         Reserve
                     </button>
 
@@ -86,6 +127,10 @@ function CreateBookingForm({spot}) {
 
             <div className="CreateBookingForm-itemization-container">
                 <div className="CreateBookingForm-itemization-subtotal-container">
+                    <div className="CreateBookingForm-subtotal-item">
+                        <p><u>${spot.price} X nights</u></p>
+                        <p>$ function res</p>
+                    </div>
                     <div className="CreateBookingForm-subtotal-item">
                         <p><u>Cleaning fee</u></p>
                         <p>$0</p>

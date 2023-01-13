@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isDate: true,
         isAfter: "2022-09-01",
-      }
+      },
     },
     endDate: {
       type: DataTypes.DATEONLY,
@@ -38,8 +38,9 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isDate: true,
         isAfter: "2022-09-01",
-      }
+      },
     },
+
   }, {
     sequelize,
     modelName: 'Booking',

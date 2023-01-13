@@ -57,6 +57,17 @@ export function addPlaceholderImages(arr) {
 }
 
 
+/*********************************** FUNCTION TO ADD PLACEHOLDER IMAGES ************************************/
+export function getTodayISO(arr) {
+
+    const todayRaw = new Date();
+    const todayISORaw = todayRaw.toISOString();
+    const todayISO = todayISORaw.slice(0, 10)
+
+    return todayISO
+}
+
+
 /*********************************** CONVERT ISO STRING TO "Month Year" ************************************/
 export function convertDate(iso) {
 
