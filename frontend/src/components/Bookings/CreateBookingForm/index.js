@@ -141,7 +141,7 @@ function CreateBookingForm({spot}) {
         console.log("newBooking", newBooking)
 
         if (newBooking) {
-            history.push(`confirmation/${newBooking.id}`)
+            history.push(`confirmation/trips/${newBooking.id}`)
         }
     }
 

@@ -15,6 +15,7 @@ import UserReviews from "./components/Reviews/UserReviews"
 import UpdateReviewForm from "./components/Reviews/UpdateReviewForm";
 import UserBookings from "./components/Bookings/UserBookings";
 import UserReservations from "./components/Bookings/UserReservations";
+import BookingConfirmationPage from "./components/Bookings/BookingConfirmationPage";
 
 
 /******************************* COMPONENT *******************************/
@@ -70,7 +71,8 @@ function App() {
             <UserBookings />
           </Route>
 
-          <Route exact path={'/confirmation/:tripId'}>
+          <Route exact path={'/confirmation/trips/:tripId'}>
+            <BookingConfirmationPage />
           </Route>
 
           <Route exact path={'/trips/:tripId/edit'}>
