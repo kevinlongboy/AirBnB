@@ -27,7 +27,7 @@
 .UserBookings-upcoming-trips-container {
     width: 100%;
 
-    padding: 24px 0px;
+    padding: 24px 0px 0px;
 }
 /***** NOT NULL *****/
 .UserBookings-upcoming-trips-subtitle {
@@ -42,6 +42,8 @@
     height: 213px;
     box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
 
+    margin-bottom: 25px;
+
     display: flex;
 
     border-radius: 14px;
@@ -55,6 +57,9 @@
 
     margin: 24px;
     border-radius: 14px 0px 0px 14px;
+
+    text-decoration: none;
+    color: #222;
 }
 .UserBookings-card-text-container > div {
     height: 100%;

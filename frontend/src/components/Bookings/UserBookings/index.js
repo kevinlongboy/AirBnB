@@ -30,6 +30,7 @@ function UserBookings() {
     let bookings = Object.values(bookingsState.userBookings)
 
     let upcomingBookingsArr = bookings.filter(obj => obj.startDate > today)
+    console.log("upcomingBookingsArr", upcomingBookingsArr)
     // let upcomingBookingsArr = [] // uncomment to test for null upcoming bookings
     let pastBookingsArr = bookings.filter(obj => obj.endDate < today)
     // let pastBookingsArr = [] // uncomment to test for null past bookings
@@ -76,7 +77,8 @@ function UserBookings() {
                     {upcomingBookingsArr.map(booking => (
                         <div className="UserBookings-card">
 
-                            <div className="UserBookings-card-text-container">
+                            <NavLink exact to={`/trips/${booking.id}/edit`} className="UserBookings-card-text-container">
+                            {/* <div className="UserBookings-card-text-container"> */}
                                 <div className="UserBookings-card-owner-info-container">
                                     <span>{booking.Spot.name}</span>
                                     <span>Hosted by {booking.Spot.ownerName}</span>
@@ -92,7 +94,8 @@ function UserBookings() {
                                         <p>{booking.Spot.country}</p>
                                     </div>
                                 </div>
-                            </div>
+                            {/* </div> */}
+                            </NavLink>
 
                             <div className="UserBookings-card-image-container">
                                 <NavLink exact to={`/spots/${booking.Spot.id}`}>
