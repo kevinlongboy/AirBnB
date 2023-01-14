@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import dayjs from "dayjs";
 // local files
 import { thunkReadAllSpots, thunkReadSingleSpotDetails } from "../../../store/spotsReducer";
 import MainFooter from '../../Footer/MainFooter';
 import './CreateBookingForm.css';
 import { calculateGrandTotal, calculateNumberOfDays, getTodayISO } from "../../../component-resources";
-import dayjs from "dayjs";
+import { thunkCreateSingleBooking } from "../../../store/bookingsReducer";
 
 
 /******************************* COMPONENT *******************************/
@@ -47,11 +48,11 @@ function CreateBookingForm({spot}) {
     // problems: will change endDate if user modifies start date again after choosing an endDate
 
     const changeStartDate = async (e) => {
+        setStartDate(e.target.value);
 
         setValidationErrors([])
 
         if (e.target.value < endDate) {
-            setStartDate(e.target.value);
 
             let days = calculateNumberOfDays(e.target.value, endDate)
             setNumDays(days)
@@ -67,11 +68,11 @@ function CreateBookingForm({spot}) {
     }
 
     const changeEndDate = async (e) => {
+        setEndDate(e.target.value);
 
         setValidationErrors([])
 
         if (e.target.value > startDate) {
-            setEndDate(e.target.value);
 
             let days = calculateNumberOfDays(startDate, e.target.value)
             setNumDays(days)
@@ -98,6 +99,10 @@ function CreateBookingForm({spot}) {
 
         if (startDate == endDate) {
             errors.push("Minimum stay is 1 night")
+        } else if (startDate > endDate) {
+            errors.push("Please enter valid start and end dates")
+        } else if (startDate > endDate) {
+            errors.push("Start date cannot be on or after end date")
         }
 
         setValidationErrors(errors);
@@ -120,23 +125,25 @@ function CreateBookingForm({spot}) {
         // console.log("spot.id", spot.id)
         console.log("createBookingData", createBookingData)
 
-        // const newBooking = await dispatch(thunkCreateSingleBooking(spot.id, createBookingData)).catch(
+        const newBooking = await dispatch(thunkCreateSingleBooking(spot.id, createBookingData)).catch(
 
-        //     async (res) => {
-        //         const data = await res.json();
+            async (res) => {
+                const data = await res.json();
+                console.log("data", data)
 
-        //         if (data && data.errors) {
-        //             data.errors.forEach(message => errors.push(message));
-        //             setValidationErrors(errors);
-        //         }
-        //     }
-        // )
+                if (data && data.errors) {
+                    errors.push(data.message);
+                    setValidationErrors([...errors]);
+                }
+            }
+        )
 
-        // if (newBooking) {
-        //     history.push(`confirmation/${newBooking.id}`)
-        // }
+        console.log("newBooking", newBooking)
+
+        if (newBooking) {
+            history.push(`confirmation/${newBooking.id}`)
+        }
     }
-
 
 
     /**************** render component *****************/

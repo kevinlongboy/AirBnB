@@ -223,7 +223,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
         }
 
         let findSpotOwnerId = findSpot.ownerId
-        let { startDate, endDate } = req.body;
+        let { startDate, endDate, guests, total } = req.body;
 
         if (currentUserId === findSpotOwnerId) {
             error.message = "Sorry, cannot book your own spot"
@@ -252,25 +252,25 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             let existingEndDate = existingBooking.endDate
 
             if ((startDate == existingStartDate) && (endDate == existingEndDate)) {
-                error.message = "Sorry, this spot is already booked for the specified dates";
+                error.message = "Those dates are not available";
                 error.statusCode = 403;
                 error.errors = {
                     startDate: "Start date conflicts with an existing booking",
                     endDate: "End date conflict with an existing booking",
                 }
-                return res.json(error)
+                return res.status(403).json(error)
 
             } else if ((endDate >= existingStartDate) && (endDate <= existingEndDate)) {
-                error.message = "Sorry, this spot is already booked for the specified dates";
+                error.message = "Those dates are not available";
                 error.statusCode = 403;
                 error.errors = { endDate: "End date conflicts with an existing booking" }
-                return res.json(error)
+                return res.status(403).json(error)
 
             } else if ((startDate >= existingStartDate) && (startDate <= existingEndDate)) {
-                error.message = "Sorry, this spot is already booked for the specified dates";
+                error.message = "Those dates are not available";
                 error.statusCode = 403;
                 error.errors = { startDate: "Start date conflicts with an existing booking" }
-                return res.json(error)
+                return res.status(403).json(error)
             }
         }
 
@@ -280,6 +280,8 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
                 userId: currentUserId,
                 startDate: startDate,
                 endDate: endDate,
+                guests: guests,
+                total: total,
             })
 
             return res

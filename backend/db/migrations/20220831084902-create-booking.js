@@ -16,6 +16,14 @@ module.exports = {
         type: Sequelize.DATEONLY,
         allowNull: false,
       },
+      guests: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      total: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -66,6 +66,7 @@ router.get('/', requireAuth, async (req, res, next) => {
             // Reservations-key (pointing to a value with an array of bookings)
             let allSpotReservations = await Booking.findAll({
                 where: { spotId: currSpot.id },
+                order: [['spotId'], ['startDate']],
                 raw: true
             })
 

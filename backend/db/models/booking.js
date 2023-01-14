@@ -1,6 +1,12 @@
 'use strict';
 const { Model } = require('sequelize');
 
+/************ key into pertinent values ************/
+const todayRaw = new Date();
+const todayISORaw = todayRaw.toISOString();
+const todayISO = todayISORaw.slice(0, 10)
+
+
 module.exports = (sequelize, DataTypes) => {
   class Booking extends Model {
     /**
@@ -29,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         isDate: true,
-        isAfter: "2022-09-01",
+        isAfter: "2023-01-01",
       },
     },
     endDate: {
@@ -37,9 +43,24 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         isDate: true,
-        isAfter: "2022-09-01",
+        isAfter: todayISO,
       },
     },
+    guests: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate : {
+        isNumeric: true,
+      }
+    },
+    total: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate : {
+        isNumeric: true,
+      }
+    },
+
 
   }, {
     sequelize,

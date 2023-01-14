@@ -1,45 +1,67 @@
 'use strict';
 
+// template
+// {
+//   spotId: ,
+//   userId: , // userId of guest (person renting spot)
+//   startDate: '2022-09-23',
+//   endDate: '2022-09-25',
+//   guests: ,
+//   total: ,
+// }
+
 const demoBookings = [
-  // PAST
+
+  /********** PAST **********/
   // Niles books Daphne's
   {
     spotId: 3,
-    userId: 2, // userId of who is renting spot
+    userId: 2, // userId of guest (person renting spot)
     startDate: '2022-09-23',
     endDate: '2022-09-25',
+    guests: 1,
+    total: 575,
   },
   // Daphne books Roz's
   {
     spotId: 4,
-    userId: 3,
+    userId: 3, // userId of guest (person renting spot)
     startDate: '2022-11-11',
     endDate: '2022-11-12',
+    guests: 1,
+    total: 375,
   },
   // Roz books Martin's
   {
     spotId: 5,
-    userId: 4,
+    userId: 4, // userId of guest (person renting spot)
     startDate: '2022-10-07',
     endDate: '2022-10-13',
+    guests: 2,
+    total: 975,
   },
 
-  // UPCOMING
+  /********** UPCOMING **********/
   // Niles books Daphne's
   {
     spotId: 3,
-    userId: 2, // userId of who is renting spot
+    userId: 2, // userId of guest (person renting spot)
     startDate: '2023-01-23',
     endDate: '2023-01-25',
+    guests: 1,
+    total: 575,
   },
   // Daphne books Gertrude's
   {
     spotId: 10,
-    userId: 3, // userId of who is renting spot
+    userId: 3, // userId of guest (person renting spot)
     startDate: '2023-01-23',
     endDate: '2023-01-25',
+    guests: 2,
+    total: 275,
   },
 ]
+
 
 let userIds = [];
 demoBookings.forEach(booking => userIds.push(booking.userId))
