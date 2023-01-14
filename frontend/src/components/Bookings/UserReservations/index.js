@@ -39,7 +39,7 @@ function UserReservations() {
 
         for (let j = 0; j < spot.Reservations.length; j++) {
             let reservation = spot.Reservations[j]
-            if (reservation.startDate > today) upcomingReservationsArr.push(reservation)
+            if (reservation.startDate >= today) upcomingReservationsArr.push(reservation)
             if (reservation.endDate < today) pastReservationsArr.push(reservation)
         }
     }

@@ -40,7 +40,7 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
                 .json(error);
         }
 
-        let { startDate, endDate } = req.body;
+        let { startDate, endDate, guests, total } = req.body;
 
         /*************** Error Handler: endDate cannot be on or before startDate ***************/
         if (startDate >= endDate) {
@@ -90,11 +90,29 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
         if (putBooking.userId == req.user.id) {
             if (startDate) putBooking.update({ startDate: startDate });
             if (endDate) putBooking.update({ endDate: endDate });
+            if (guests) putBooking.update({ guests: guests });
+            if (total) putBooking.update({ total: total });
             await putBooking.save();
-            return res
-                .status(200)
-                .json(putBooking)
         }
+
+        /********** Modify keys **********/
+        // Add spot info -key
+        let spotInfo = Spot.findByPk(putBooking.spotId, {
+            raw: true,
+        })
+        putBooking.Spot = spotInfo
+
+        // Add spot owner info -key
+        let owner = await User.findOne({
+            where: { id: spotInfo.ownerId},
+            raw: true
+        })
+        putBooking.Spot.ownerName = `${owner.firstName}`
+
+        return res
+            .status(200)
+            .json(putBooking)
+
 
     } catch (err) {
         error.message = err;
@@ -191,7 +209,6 @@ router.get('/current', requireAuth, async (req, res, next) => {
                 where: { id: bookingSpotInfo.ownerId},
                 raw: true
             })
-            console.log("owner", owner)
             booking.Spot.ownerName = `${owner.firstName}`
 
         }

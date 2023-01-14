@@ -274,20 +274,35 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             }
         }
 
-        if (currentUserId !== findSpotOwnerId) {
-            let postSpotBooking = await findSpot.createBooking({
-                spotId: currSpotId,
-                userId: currentUserId,
-                startDate: startDate,
-                endDate: endDate,
-                guests: guests,
-                total: total,
-            })
+        let postSpotBooking = await currentUser.createBooking({
+            spotId: currSpotId,
+            userId: currentUserId,
+            startDate: startDate,
+            endDate: endDate,
+            guests: guests,
+            total: total,
+        })
+        postSpotBooking.save()
 
-            return res
-                .status(200)
-                .json(postSpotBooking)
-        }
+        console.log("postSpotBooking", postSpotBooking)
+        /********** Modify keys **********/
+        // Add spot info -key
+        let spotInfo = await Spot.findOne({
+            where: {id: postSpotBooking.spotId},
+            raw: true,
+        })
+        postSpotBooking.Spot = spotInfo
+
+        // Add spot owner info -key
+        let owner = await User.findOne({
+            where: { id: spotInfo.ownerId},
+            raw: true
+        })
+        postSpotBooking.Spot.ownerName = `${owner.firstName}`
+
+        return res
+            .status(200)
+            .json(postSpotBooking)
 
     } catch (err) {
         error.error = err

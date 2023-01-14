@@ -122,7 +122,7 @@ function CreateBookingForm({spot}) {
         }
 
         // console.log("numDays", numDays)
-        // console.log("spot.id", spot.id)
+        console.log("spot.id", spot.id)
         console.log("createBookingData", createBookingData)
 
         const newBooking = await dispatch(thunkCreateSingleBooking(spot.id, createBookingData)).catch(
@@ -141,7 +141,7 @@ function CreateBookingForm({spot}) {
         console.log("newBooking", newBooking)
 
         if (newBooking) {
-            history.push(`confirmation/trips/${newBooking.id}`)
+            history.push(`/confirmation/trips/${newBooking.id}`)
         }
     }
 

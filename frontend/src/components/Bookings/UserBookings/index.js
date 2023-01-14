@@ -29,7 +29,7 @@ function UserBookings() {
 
     let bookings = Object.values(bookingsState.userBookings)
 
-    let upcomingBookingsArr = bookings.filter(obj => obj.startDate > today)
+    let upcomingBookingsArr = bookings.filter(obj => obj.startDate >= today)
     console.log("upcomingBookingsArr", upcomingBookingsArr)
     // let upcomingBookingsArr = [] // uncomment to test for null upcoming bookings
     let pastBookingsArr = bookings.filter(obj => obj.endDate < today)

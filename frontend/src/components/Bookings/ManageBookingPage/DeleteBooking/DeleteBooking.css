@@ -1,0 +1,42 @@
+/******************** COMPONENT ********************/
+.DeleteBooking-component {
+    width: 100%;
+
+    margin: 0px;
+    padding: 0px 0px 24px 24px;
+
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+/******************** TEXT ********************/
+.DeleteBooking-component > p {
+    font-size: 16px;
+    color: #222;
+}
+
+/******************** BUTTON ********************/
+.DeleteBooking-cancel-button {
+    min-width: 200px;
+    width: 40%;
+    /* width: 322.328px; */
+
+    height: 48px;
+
+    border: 0px;
+    border-radius: 8px;
+    background-color: #000;
+
+
+    font: 16px;
+    color: #fff;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+.DeleteBooking-cancel-button:hover {
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+}

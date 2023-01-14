@@ -103,6 +103,46 @@ export function convertDate(iso) {
     return month.concat(' ', year)
 }
 
+/*********************************** CONVERT ISO STRING TO "Month Day, Year" ************************************/
+export function convertExactDate(iso) {
+
+    let year = iso.slice(0, 4);
+    let month = iso.slice(5, 7);
+    let day = iso.slice(8, 10);
+
+    if (month == 1) {
+        month = 'January'
+    } else if (month == 2) {
+        month = 'February'
+    } else if (month == 3) {
+        month = 'March'
+    } else if (month == 4) {
+        month = 'April'
+    } else if (month == 5) {
+        month = 'May'
+    } else if (month == 6) {
+        month = 'June'
+    } else if (month == 7) {
+        month = 'July'
+    } else if (month == 8) {
+        month = 'August'
+    } else if (month == 9) {
+        month = 'September'
+    } else if (month == 10) {
+        month = 'October'
+    } else if (month == 11) {
+        month = 'November'
+    } else if (month == 12) {
+        month = 'December'
+    }
+
+    if (day.length == 2 && day[0] == '0') {
+        day = day[1]
+    }
+
+    return `${month} ${day}, ${year}`
+}
+
 
 /*********************************** CONVERT ISO STRING TO "Mon DD" ************************************/
 export function convertInformalDate(iso) {

@@ -16,6 +16,7 @@ import UpdateReviewForm from "./components/Reviews/UpdateReviewForm";
 import UserBookings from "./components/Bookings/UserBookings";
 import UserReservations from "./components/Bookings/UserReservations";
 import BookingConfirmationPage from "./components/Bookings/BookingConfirmationPage";
+import ManageBookingPage from "./components/Bookings/ManageBookingPage";
 
 
 /******************************* COMPONENT *******************************/
@@ -76,6 +77,7 @@ function App() {
           </Route>
 
           <Route exact path={'/trips/:tripId/edit'}>
+            <ManageBookingPage />
           </Route>
 
           <Route exact path={'/reservations'}>

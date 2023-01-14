@@ -1,66 +1,34 @@
-.CreateBookingForm-component {
+/******************** COMPONENT ********************/
+.UpdateBooking-component {
     width: 100%;
+
+    margin: 0px;
+    padding: 0px 0px 24px 24px;
 
     display: flex;
-    flex-direction: column;
-}
-
-
-/********** OVERVIEW **********/
-.CreateBookingForm-overview-container {
-    width: 100%;
-
-    margin-bottom: 22px;
-
-    display: flex;
-    justify-content: space-between;
-}
-.CreateBookingForm-spot-price {
-    width: 100%;
-
-    font-size: 22px;
-    color: #222;
-}
-.CreateBookingForm-spot-price > span {
-    font-size: 16px;
-}
-
-.CreateBookingForm-spot-rating {
-    width: 100%;
-
-    display: flex;
-    justify-content: right;
+    flex-direction:column;
     align-items: center;
-
-    font-size: 14px;
-    color: #222;
-}
-.CreateBookingForm-spot-rating > span {
-    margin: 0px;
-    padding: 0px 4px;
-}
-.CreateBookingForm-spot-rating > u {
-    margin: 0px;
-
-    color: #717171;
 }
 
-/********** FORM **********/
-.CreateBookingForm-form {
+
+/******************** FORM ********************/
+
+.UpdateBooking-form {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* input fields */
-.CreateBookingForm-date-field-container {
+/********** Controlled Inputs **********/
+.UpdateBooking-date-field-container {
     width: 100%;
     display: flex;
     flex-direction: row;
 }
-#CreateBookingForm-date-field-start {
+#UpdateBooking-date-field-start {
     /* width: 160.66px; */
-    /* width: 149px; */
     width: 100%;
     height: 56px;
 
@@ -71,9 +39,8 @@
 
     cursor: pointer;
 }
-#CreateBookingForm-date-field-end {
+#UpdateBooking-date-field-end {
     /* width: 160.66px; */
-    /* width: 149px; */
     width: 100%;
     height: 56px;
 
@@ -83,8 +50,7 @@
 
     cursor: pointer;
 }
-#CreateBookingForm-select-field {
-    /* width: 321px; */
+#UpdateBooking-select-field {
     width: 100%;
     height: 56px;
 
@@ -97,7 +63,7 @@
     outline: none;
     cursor: pointer;
 }
-.CreateBookingForm-reserve-button {
+.UpdateBooking-reserve-button {
     min-width: 200px;
     width: 100%;
     /* width: 322.328px; */
@@ -106,7 +72,7 @@
 
     border: 0px;
     border-radius: 8px;
-    background-color: #ff385c;
+    background-color: #000;
 
 
     font: 16px;
@@ -115,7 +81,12 @@
 
     cursor: pointer;
 }
-.CreateBookingForm-form > p {
+.UpdateBooking-reserve-button:hover {
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+}
+.UpdateBooking-form > p {
     font-size: 14px;
     /* margin: 8px 0px 0px; */
 
@@ -123,15 +94,17 @@
 }
 
 
-/********** FEE ITEMIZATION **********/
-.CreateBookingForm-itemization-container {
+/********** Fee itemization **********/
+.UpdateBooking-itemization-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
 
     font-size: 16px;
 }
 
-.CreateBookingForm-itemization-subtotal-container > div {
+.UpdateBooking-itemization-subtotal-container > div {
+    width: 100%;
     height: 22px;
 
     margin: 0px;
@@ -141,11 +114,13 @@
     flex-direction: row;
     justify-content: space-between;
 }
-.CreateBookingForm-subtotal-item {
+.UpdateBooking-subtotal-item {
+    width: 100%;
     margin: 0px;
 }
 
-.CreateBookingForm-itemization-total-container {
+.UpdateBooking-itemization-total-container {
+    width: 100%;
     padding-top: 12px;
     margin-top: 24px;
     border-top: 1px solid rgb(221, 221, 221);

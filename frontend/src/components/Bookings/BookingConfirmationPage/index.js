@@ -1,7 +1,7 @@
 /******************************** IMPORTS ********************************/
 // libraries
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
 import './BookingConfirmationPage.css';
@@ -30,10 +30,6 @@ function BookingConfirmationPage() {
     dispatch(thunkReadUserBookings());
   }, [dispatch]);
 
-  /************* conditional components **************/
-  // images
-
-
   /**************** render component *****************/
   return (
       <div className="pageWrapperContainer">
@@ -44,6 +40,16 @@ function BookingConfirmationPage() {
                     <h1>Your reservation is pending</h1>
                     <p>This isn’t a confirmed reservation—yet. You’ll get a response from the host, {trip && trip.Spot.ownerName}, at {sessionState.user.email} within 24 hours.</p>
                     <p>Don’t worry—you won’t be charged until your reservation is confirmed.</p>
+                    <NavLink exact to="/trips">
+                        <button
+                            type="submit"
+                            className="BookingConfirmationPage-reserve-button"
+                            // disabled={!!validationErrors.length}
+                            // onClick={handleSubmit}
+                            >
+                            View trips
+                        </button>
+                    </NavLink>
                 </div>
             </div>
 

@@ -1,18 +1,20 @@
 /******************** COMPONENT ********************/
 .BookingConfirmationPage-component {
     width: 100%;
-    max-width: 1440px;
+    max-width: 1280px;
 
-    margin: 50px 0px;
-    padding: 0px 80px;
+    margin: 50px 317.5px;
+    padding: 0px 40px;
 
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
 
 /******************** LEFT ********************/
 .BookingConfirmationPage-left-container {
+    width: 100%;
     height: 100%;
 
     display: flex;
@@ -23,9 +25,12 @@
 
 /********** HEADER **********/
 .BookingConfirmationPage-header {
+    width: 100%;
     height: 100%;
 }
 .BookingConfirmationPage-header > h1 {
+    width: 100%;
+
     margin: 0px;
     padding: 0px 0px 16px;
 
@@ -34,6 +39,8 @@
     font-weight: 700;
 }
 .BookingConfirmationPage-header > p {
+    width: 100%;
+
     margin: 0px;
     padding: 0px 0px 24px;
 
@@ -42,14 +49,42 @@
     font-weight: 100;
 }
 
+/********** BUTTON **********/
+.BookingConfirmationPage-reserve-button {
+    min-width: 200px;
+    width: 40%;
+    /* width: 322.328px; */
+
+    height: 48px;
+
+    border: 0px;
+    border-radius: 8px;
+    background-color: #000;
+
+
+    font: 16px;
+    color: #fff;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+.BookingConfirmationPage-reserve-button:hover {
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+}
+
 /******************** RIGHT ********************/
 .BookingConfirmationPage-right-container {
+    width: 100%;
     height: 100%;
+
+    margin-left: 30px;
 
     display: flex;
     flex-direction: column;
-    justify-content:start;
-    align-items: flex-start;
+    justify-content: start;
+    align-items: flex-end;
 }
 
 /********** CARD **********/

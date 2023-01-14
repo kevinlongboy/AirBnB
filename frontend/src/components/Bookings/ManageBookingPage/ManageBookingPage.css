@@ -1,0 +1,264 @@
+/******************** COMPONENT ********************/
+.ManageBookingPage-component {
+    width: 100%;
+    max-width: 1440px;
+
+    margin: 50px 0px;
+    padding: 0px 80px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/******************** CARD ********************/
+.ManageBookingPage-card {
+    /* width: 100%; */
+    width: 800px;
+
+    margin-bottom: 10px;
+    padding: 24px;
+    box-shadow: rgb(0 0 0 / 12%) 0px 6px 8px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+/********** OVERVIEW CARD **********/
+#ManageBookingPage-overview-card {
+    width: 848px;
+    padding: 0px;
+
+}
+
+/* Image */
+
+/* Use if image as backgroundImage */
+.ManageBookingPage-overview-card-thumbnail-container {
+    /* height: 600px; */
+    /* padding: 80px 80px 24px 24px; */
+    /* display: flex; */
+}
+#ManageBookingPage-overview-card-thumbnail-container-text {
+    /* font-size: 32px; */
+    /* color: #fff; */
+    /* filter: brightness(100%) !important; */
+}
+
+/* Use if image as img */
+.ManageBookingPage-overview-card-thumbnail-container {
+    width: 100%;
+    height: 700px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ManageBookingPage-overview-card-thumbnail {
+    width: 100%;
+    height: 700px;
+
+    border-radius: 8px 8px 0px 0px;
+
+    object-fit: cover;
+}
+
+/* Text */
+.ManageBookingPage-overview-card-text-container {
+    margin: 24px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.ManageBookingPage-overview-card-text-container > div {
+    width: 100%;
+}
+/* Name */
+.ManageBookingPage-overview-card-text-container > div:first-of-type {
+    width: 100%;
+    padding: 0px 0px 24px;
+    margin: 0px 0px 24px;
+
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+.ManageBookingPage-overview-card-text-container > div:first-of-type > h1 {
+    padding: 0px;
+    margin: 0px;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* Dates */
+.ManageBookingPage-overview-card-dates-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.ManageBookingPage-overview-card-dates-container > div {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+.ManageBookingPage-overview-card-dates-container > div:first-of-type {
+    margin-right: 24px;
+    border-right: 1px solid rgb(221, 221, 221);
+}
+.ManageBookingPage-overview-card-date {
+    height: fit-content;
+    padding: 3px 0px;
+    /* margin: 24px 0px; */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.ManageBookingPage-overview-card-date > p {
+    margin: 0px;
+
+    font-size: 14px;
+    color: #222;
+    font-weight: 700;
+}
+.ManageBookingPage-overview-card-date > p:last-of-type {
+    padding-top: 10px;
+
+    font-size: 16px;
+}
+
+
+/********** DETAILS CARD **********/
+#ManageBookingPage-details-card {
+    color: #222;
+}
+#ManageBookingPage-details-card > h1 {
+    margin: 0px;
+
+    font-size: 22px;
+}
+.ManageBookingPage-details-card-row > h2 {
+    margin: 0px;
+    padding: 3px 0px;
+
+    font-size:  16px;
+    font-weight: 700;
+}
+.ManageBookingPage-details-card-row {
+    margin: 0px;
+    padding: 24px 0px;
+}
+.ManageBookingPage-details-card-row > p {
+    margin: 0px;
+    padding: 0px;
+
+    font-size:  16px;
+    font-weight: 100;
+}
+.ManageBookingPage-details-card-row:last-of-type {
+    border-top: 1px solid rgb(221, 221, 221);
+    padding: 24px 0px 0px;
+}
+
+
+/********** PAYMENT CARD **********/
+#ManageBookingPage-payment-card {
+    color: #222;
+}
+#ManageBookingPage-payment-card > h1 {
+    margin: 0px;
+
+    font-size: 22px;
+}
+.ManageBookingPage-payment-card-row > h2 {
+    margin: 0px;
+    padding: 3px 0px;
+
+    font-size:  16px;
+    font-weight: 700;
+}
+.ManageBookingPage-payment-card-row {
+    margin: 0px;
+    padding: 24px 0px 0px;
+}
+.ManageBookingPage-payment-card-row > p {
+    margin: 0px;
+    padding: 0px;
+
+    font-size:  16px;
+    font-weight: 100;
+}
+
+
+/********** MANAGE CARD **********/
+#ManageBookingPage-manage-card {
+    color: #222;
+    padding-bottom: 0px;
+}
+#ManageBookingPage-manage-card > h1 {
+    margin: 0px 0px 0px;
+    border-bottom: 1px solid rgb(221, 221, 221);
+    padding: 0px 0px 24px;
+
+    font-size: 22px;
+}
+.ManageBookingPage-manage-card-row {
+    width: 100%;
+
+    margin: 0px 0px 24px;
+    padding: 24px 0px 0px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* Buttons */
+.ManageBookingPage-manage-card-buttons-container {
+    width: 20%;
+    height: 100%;
+
+    border-right: 1px solid rgb(221, 221, 221);
+    padding-right: 24px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ManageBookingPage-navbar-button {
+    /* width: 80px; */
+    width: 100%;
+    height: 40px;
+    background-color: #fff;
+
+    margin: 0px 0px 10px;
+    padding: 4px 16px;
+    border: 1px solid #ddd;
+    border-radius: 24px;
+
+    font-size: 14px;
+    color: #222;
+    font-weight: 100;
+
+    cursor: pointer;
+}
+#ManageBookingPage-navbar-button-active {
+    background-color: #f7f7f7;
+
+    border: 2px solid #222;
+}
+
+
+/********** CONDITIONAL NESTED COMPONENT **********/
+.ManageBookingPage-nested-booking-component-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    /* background-color: red; */
+}
