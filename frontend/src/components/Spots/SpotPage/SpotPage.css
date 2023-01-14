@@ -149,9 +149,10 @@
 }
 
 .SpotPage-panel-container {
-    width: 324.33px;
     /* width: 372.33px; */
     /* height: 496.5px; */
+    width: 324.33px;
+    min-height: 260px;
     box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
 
     margin-left: 90px;

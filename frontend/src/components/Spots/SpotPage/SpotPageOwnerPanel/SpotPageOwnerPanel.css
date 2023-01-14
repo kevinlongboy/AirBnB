@@ -1,0 +1,107 @@
+/****************** COMPONENT ******************/
+.SpotPageOwnerPanel-component {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/****************** OVERVIEW ******************/
+.SpotPageOwnerPanel-overview-container {
+    width: 100%;
+
+    margin-bottom: 22px;
+
+    display: flex;
+    justify-content: space-between;
+}
+.SpotPageOwnerPanel-spot-price {
+    width: 100%;
+
+    font-size: 22px;
+    color: #222;
+}
+.SpotPageOwnerPanel-spot-price > span {
+    font-size: 16px;
+}
+
+.SpotPageOwnerPanel-spot-rating {
+    width: 100%;
+
+    display: flex;
+    justify-content: right;
+    align-items: center;
+
+    font-size: 14px;
+    color: #222;
+}
+.SpotPageOwnerPanel-spot-rating > span {
+    margin: 0px;
+    padding: 0px 4px;
+}
+.SpotPageOwnerPanel-spot-rating > u {
+    margin: 0px;
+
+    color: #717171;
+}
+
+
+/****************** BODY ******************/
+.SpotPageOwnerPanel-body {
+    width: 100%;
+    height: 200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/****************** HEADER ******************/
+.SpotPageOwnerPanel-header-container {
+    width: 100%;
+    height: 110px;
+
+    margin-bottom: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.SpotPageOwnerPanel-header {
+    /* margin: 0px; */
+
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+}
+.door-icon {
+    width: 35px;
+}
+
+/****************** BUTTON ******************/
+.SpotPageOwnerPanel-reserve-button-container {
+    width: 100%;
+}
+.SpotPageOwnerPanel-reserve-button {
+    min-width: 200px;
+    width: 100%;
+    /* width: 322.328px; */
+
+    height: 48px;
+
+    border: 0px;
+    border-radius: 8px;
+    background-color: #ff385c;
+
+
+    font: 16px;
+    color: #fff;
+    font-weight: 600;
+
+    cursor: pointer;
+}
