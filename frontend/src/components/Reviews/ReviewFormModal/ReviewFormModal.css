@@ -1,0 +1,154 @@
+/************************** MODAL (HIGHER-ORDER COMPONENT) **************************/
+.ReviewFormModal-button {
+    width: 70px;
+    height: 40px;
+
+    margin: 8px 0px 24px;
+    border: 1px solid #767676;
+    border-radius: 8px;
+    background: #fff;
+
+    font-size: 14.5px;
+    color: #484848;
+    text-align: center;
+
+    cursor: pointer;
+}
+.ReviewFormModal-button:hover {
+    background: #f7f7f7;
+}
+
+/************************** FORM (NESTED COMPONENT) **************************/
+.ReviewForm-component {
+    width: 570px;
+
+    /* margin: 30px; */
+    /* padding: 50px; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /* border: 1px solid red; */
+}
+
+/************************** HEADER **************************/
+.ReviewForm-close-header-container {
+    width: 100%;
+    height: 80px;
+
+    border-bottom: 1px solid rgb(221, 221, 221);
+
+    display: flex;
+    align-items: center;
+}
+.ReviewForm-close-button-container {
+    margin-left: 30px;
+    width: fit-content;
+}
+.ReviewForm-close-button {
+    width: 30px;
+    height: 30px;
+
+    background-color: #fff;
+    border: 0px;
+    border-radius: 100%;
+
+    font-size: 20px;
+    cursor: pointer;
+}
+.ReviewForm-close-button:hover {
+    background-color: #f7f7f7;
+}
+.ReviewForm-close-header-text-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-indent: -60px;
+}
+
+/************************** FORM **************************/
+.ReviewForm-form {
+    /* width: 100%; */
+
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+
+    /* border: 1px solid blue; */
+}
+
+/* Header */
+.ReviewForm-input-section {
+    width: 100%;
+    margin: 0px 0px 20px;
+
+    color: #222;
+}
+.ReviewForm-input-section > h2 {
+    width: 100%;
+
+    margin: 0px 0px 3px;
+    padding: 0px;
+
+    font-size: 22px;
+    font-weight: 700;
+}
+.ReviewForm-input-section > p {
+    width: 100%;
+
+    margin: 0px;
+    padding: 0px;
+
+    font-size: 16px;
+    font-weight: 100;
+}
+.ReviewForm-input-section > p:last-of-type {
+    margin-bottom: 20px;
+}
+
+/* Textarea */
+.ReviewForm-textarea-field {
+    min-width: 510px;
+    max-width: 510px;
+    min-height: 205px;
+    max-height: 205px;
+
+    border-radius: 0px;
+    outline: none;
+}
+.ReviewForm-textarea-field::placeholder {
+    font-size: 14px;
+    /* text-indent: 3px; */
+}
+
+/* Button */
+.ReviewForm-submit-button {
+    min-width: 200px;
+    width: 100%;
+    /* width: 322.328px; */
+    height: 48px;
+
+    margin: 24px 0px;
+    border: 0px;
+    border-radius: 8px;
+    background-color: #000;
+
+
+    font: 16px;
+    color: #fff;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+.ReviewForm-submit-button:hover {
+    border: 1px solid #000;
+    background-color: #fff;
+    color: #000;
+}
+
+/****************** IMAGES GRID ******************/

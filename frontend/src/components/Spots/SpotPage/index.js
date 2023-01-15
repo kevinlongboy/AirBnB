@@ -4,15 +4,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
+import './SpotPage.css';
 import { thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../../store/spotsReducer";
 import { thunkCreateSingleReview } from "../../../store/reviewsReducer.js";
 import SpotReviews from "../../Reviews/SpotReviews/index.js";
 import SpotPageFooter from "../../Footer/SpotPageFooter";
 import { convertDate, addPlaceholderImages } from "../../../component-resources";
-import './SpotPage.css';
 import CreateBookingForm from "../../Bookings/CreateBookingForm";
 import SpotPageOwnerPanel from "./SpotPageOwnerPanel";
-import CreateReviewForm from "../../Reviews/CreateReviewForm";
 
 
 /******************************* COMPONENT *******************************/
@@ -37,7 +36,8 @@ function SpotPage() {
   const spotImgs = spotsState.singleSpotDetails.SpotImages;
   const images = Object.values(spotImgs);
   // params
-  const { spotId } = useParams()
+  let { spotId } = useParams()
+  spotId = parseInt(spotId)
 
   /************ reducer/API communication ************/
   const dispatch = useDispatch();
@@ -79,9 +79,6 @@ function SpotPage() {
       <SpotPageOwnerPanel spot={spot} spotId={spotId}/>
     )
   }
-
-
-
 
   /**************** render component *****************/
   return (
@@ -131,11 +128,6 @@ function SpotPage() {
             </div>
 
             {/* <SpotReviews /> */}
-            <CreateReviewForm
-              reviewFormAction={ userAlreadyReviewedSpot.length > 0 ? 'update' : 'create' }
-              userReview={ userReview }
-            />
-
         </div>
       </div>
     <SpotPageFooter />

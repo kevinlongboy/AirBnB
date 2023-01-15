@@ -4,10 +4,11 @@
     right: 0;
     left: 0;
     bottom: 0;
+    z-index: 2;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2;
   }
 
   #modal-background {
@@ -20,9 +21,11 @@
   }
 
   #modal-content {
-    position: absolute;
-    background-color:white;
     width: 570px;
     min-height: 810px;
+
     border-radius: 12px;
+    background-color:white;
+    
+    position: absolute;
   }

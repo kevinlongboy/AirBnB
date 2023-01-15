@@ -7,48 +7,103 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkReadUserReviews } from "../../../store/reviewsReducer";
 import DeleteReview from "../DeleteReview";
 import AccountFooter from "../../Footer/AccountFooter";
-import { convertDate } from "../../../component-resources";
+import { convertDate, convertInformalDate } from "../../../component-resources";
 import chevronRight from '../../../assets/fontawesome/chevron-right.svg'
 import './UserReviews.css'
+import { thunkReadUserBookings } from "../../../store/bookingsReducer";
+import ReviewFormModal from "../ReviewFormModal";
 
 
 /******************************* COMPONENT *******************************/
 function UserReviews() {
 
+    // query bookings
+    // query reviews
+
     /****************** access store *******************/
     const sessionState = useSelector(state => state.session);
     const reviewsState = useSelector(state => state.reviews);
+    const bookingsState = useSelector(state => state.bookings)
 
     /************ key into pertinent values ************/
+    let bookingsArr = Object.values(bookingsState.userBookings)
+    let spotsVisited = []
+    bookingsArr.forEach(obj => spotsVisited.push(obj.spotId))
+
     let reviewsArr = Object.values(reviewsState)
+    let spotsReviewed = []
+    reviewsArr.forEach(obj => spotsReviewed.push(obj.spotId))
+
+    let spotsToBeReviewed = bookingsArr.filter(obj => !spotsReviewed.includes(obj.spotId) )
+    console.log("spotsToBeReviewed",spotsToBeReviewed)
+    // let spotsToBeReviewed= [] // uncomment to test for no new reviews
+
 
     /************ reducer/API communication ************/
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(thunkReadUserReviews())
-    }, [reviewsState]);
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(thunkReadUserBookings())
+    }, [dispatch]);
 
     /************* conditional components **************/
-    let reviewComponent
+    let newReviewsTable
+    if (!spotsToBeReviewed.length) {
+        newReviewsTable = (
+            <tr id="reviewsToWriteTableBodyRow">
+                <td id="reviewsToWriteTableBodyData">Nobody to review right now. Looks like it’s time for another trip!</td>
+            </tr>
+        )
+    } else {
+        newReviewsTable = (
+            spotsToBeReviewed.map(spot => (
+                <tr>
+                    <td className="reviews-table-body-data">
+                        <h1>{spot.Spot.name}</h1>
+                        <p>Hosted by {spot.Spot.ownerName}</p>
+                        <span>{`${convertInformalDate(spot.startDate)} - ${convertInformalDate(spot.endDate)}`}</span>
+                        <div className="reviews-table-buttons-container">
+                            <ReviewFormModal
+                                reviewFormAction={'Create'}
+                                spot={spot}
+                            />
+                        </div>
+                    </td>
+                </tr>
+            ))
+        )
+    }
+
+
+    let pastReviewsTable
     if (!reviewsArr.length) {
-        reviewComponent = (
+        pastReviewsTable = (
             <>
-                <tr id="pastReviewsTableBodyRow">
-                    <td id="pastReviewsTableBodyData">
+                <tr className="reviews-table-body-row">
+                    <td className="reviews-table-body-data">
                     </td>
                 </tr>
             </>
         )
     } else {
-        reviewComponent =
+        pastReviewsTable =
             reviewsArr.map(review => (
                 <tr key={review.id}>
-                    <td id="pastReviewsTableBodyData">
-                        <p id="pastReviewSpotName">Review for {review.Spot && review.Spot.name}</p>
+                    <td className="reviews-table-body-data">
+                        <h1>Review for {review.Spot && review.Spot.name}</h1>
                         <p id="pastReviewText">{review.review}</p>
-                        <p id="pastReviewDateCreated">{review.createdAt && convertDate(review.createdAt)}</p>
-                        <DeleteReview id={review.id}/>
+                        <span id="pastReviewDateCreated">{review.createdAt && convertDate(review.createdAt)}</span>
+                        <div className="reviews-table-buttons-container">
+                            <ReviewFormModal
+                                reviewFormAction={'Update'}
+                                spot={review}
+                                />
+                            <DeleteReview id={review.id}/>
+                        </div>
                     </td>
                 </tr>
             )
@@ -85,9 +140,7 @@ function UserReviews() {
                         </thead>
 
                         <tbody id='review-table-body'>
-                            <tr id="reviewsToWriteTableBodyRow">
-                                <td id="reviewsToWriteTableBodyData">Nobody to review right now. Looks like it’s time for another trip!</td>
-                            </tr>
+                            {newReviewsTable}
                         </tbody>
                     </table>
 
@@ -99,7 +152,7 @@ function UserReviews() {
                         </thead>
 
                         <tbody id='review-table-body'>
-                        {reviewComponent}
+                        {pastReviewsTable}
                         </tbody>
                     </table>
                 </div>

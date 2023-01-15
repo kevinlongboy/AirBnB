@@ -1,16 +1,18 @@
 #reviewTableDeleteButton {
     width: 70px;
     height: 40px;
-    border: 1.5px solid #767676;
-    border-radius: 8px;
-    font-size: 14.5px;
-    text-align: center;
-    background: none;
-    margin-top: 8px;
-    margin-bottom: 24px;
-    color: #484848;
-}
 
-#reviewTableDeleteButton:hover {
+    margin: 8px 0px 24px;
+    border: 1px solid #767676;
+    border-radius: 8px;
+    background: #fff;
+
+    font-size: 14.5px;
+    color: #484848;
+    text-align: center;
+
     cursor: pointer;
+}
+#reviewTableDeleteButton:hover {
+    background: #f7f7f7;
 }

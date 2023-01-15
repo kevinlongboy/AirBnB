@@ -71,28 +71,47 @@
     width: 100%;
 }
 
-#pastReviewsTableBodyRow{
+
+/* PAST REVIEWS */
+
+.reviews-table-body-row {
     height: 70px;
 }
 
-#pastReviewsTableBodyData{
+.reviews-table-body-data {
     padding: 0px 24px;
     border-bottom: 1px solid #dce0e0;
     min-height: 700px;
 }
 
-#pastReviewSpotName {
+/* Text */
+.reviews-table-body-data > h1 {
+    margin: 20px 0px;
+
     color: #484848;
     font-size: 20px;
     font-weight: 900;
 }
 
-#pastReviewText{
+.reviews-table-body-data > p {
+    margin: 0px 0px 5px;
     color: #484848;
 }
 
-#pastReviewDateCreated {
+.reviews-table-body-data > span {
     color: #767676;
     font-size: 14px;
     font-weight: 100;
+}
+
+/* Buttons */
+.reviews-table-buttons-container {
+    width: 100%;
+
+    margin: 10px 0px;
+
+    display: flex;
+}
+.reviews-table-buttons-container > * {
+    margin-right: 15px;
 }

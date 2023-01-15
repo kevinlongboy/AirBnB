@@ -106,6 +106,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
             })
             currReview.Spot = currSpotData
 
+            let owner = await User.findByPk(currSpotData.ownerId, {
+                raw: true,
+            })
+            currReview.Spot.ownerName = owner.firstName
+
             let currSpotPreviewImg = await SpotImage.findOne({
                 where: { spotId: currReview.spotId, preview: true },
                 attributes: {
@@ -125,6 +130,7 @@ router.get('/current', requireAuth, async (req, res, next) => {
             })
             currReview.ReviewImages = currReviewImgs
         }
+        console.log("getCurrentUserReviews", getCurrentUserReviews)
 
         return res
             .status(200)

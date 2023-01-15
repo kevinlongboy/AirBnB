@@ -1,12 +1,8 @@
-.spot-page {
+/* .spot-page {
     z-index: 0;
 }
 
 .review-create-panel {
-    /* position: sticky;
-    display: flex;
-    top: 0px; */
-
     min-width: 220px;
     max-width: 400px;
     max-height: 540px;
@@ -84,9 +80,8 @@
     text-align: center;
     background-color: #ff385c;
     color: white;
-    /* padding-top: 12px; */
 }
 
 #review-submit-button {
     cursor: pointer;
-}
+} */
