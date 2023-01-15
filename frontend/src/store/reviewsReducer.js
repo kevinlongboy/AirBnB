@@ -95,22 +95,22 @@ const reviewsReducer = (state = initialState, action) => {
 
         case REVIEWS_CREATE_SINGLE_REVIEW:
             newState.reviews = {...state.reviews};
-            newState.reviews[action.payload.id] = {...action.payload};
+            newState[action.payload.id] = {...action.payload};
             return newState;
 
-        case REVIEWS_READ_USER_REVIEWS:
-            let reviewsRaw = action.payload;
-            reviewsRaw.forEach(reviewObj => {
+            case REVIEWS_READ_USER_REVIEWS:
+                let reviewsRaw = action.payload;
+                reviewsRaw.forEach(reviewObj => {
                     reviewObj.User = { ...reviewObj.User };
                     reviewObj.Spot = { ...reviewObj.Spot };
                     const images = []
                     reviewObj.ReviewImages.forEach(obj => images.push({...obj}))
                     reviewObj.ReviewImages = images
-            })
-            newState = normalizeArray(reviewsRaw);
-            return newState;
+                })
+                newState = normalizeArray(reviewsRaw);
+                return newState;
 
-        case REVIEWS_UPDATE_SINGLE_REVIEW:
+            case REVIEWS_UPDATE_SINGLE_REVIEW:
             newState.reviews = { ...state.reviews };
             newState.reviews[action.payload.id] = { ...action.payload };
 

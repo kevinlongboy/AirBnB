@@ -127,7 +127,7 @@ function SpotPage() {
 
             </div>
 
-            {/* <SpotReviews /> */}
+            <SpotReviews />
         </div>
       </div>
     <SpotPageFooter />

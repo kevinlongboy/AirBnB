@@ -30,7 +30,7 @@ function SpotReviews() {
 
     useEffect(() => {
         dispatch(thunkReadSingleSpotReviews(spotId));
-    }, [dispatch, spotReviews]);
+    }, [dispatch]);
 
 
     /**************** render component *****************/

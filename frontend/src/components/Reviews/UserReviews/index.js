@@ -26,16 +26,18 @@ function UserReviews() {
     // limits user to one review per spot
     // rather than one review per booking
     let bookingsArr = Object.values(bookingsState.userBookings)
-    console.log("bookingsArr", bookingsArr)
+    // console.log("bookingsArr", bookingsArr)
 
     let spotIdsVisited = []
     bookingsArr.forEach(obj => spotIdsVisited.push(obj.spotId))
-    console.log("spotIdsVisited", spotIdsVisited)
+    // console.log("spotIdsVisited", spotIdsVisited)
 
     let reviewsArr = Object.values(reviewsState)
+    console.log("reviewsArr", reviewsArr)
+
     let spotIdsReviewed = []
     reviewsArr.forEach(obj => spotIdsReviewed.push(obj.spotId))
-    console.log("spotIdsReviewed", spotIdsReviewed)
+    // console.log("spotIdsReviewed", spotIdsReviewed)
 
     let spotsToBeReviewed = []
     bookingsArr.forEach(obj => {
@@ -44,7 +46,7 @@ function UserReviews() {
             spotsToBeReviewed.push(obj)
         }
     })
-    console.log("spotsToBeReviewed", spotsToBeReviewed)
+    // console.log("spotsToBeReviewed", spotsToBeReviewed)
     // let spotsToBeReviewed= [] // uncomment to test for no new reviews
 
 

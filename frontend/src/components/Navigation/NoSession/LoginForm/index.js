@@ -8,8 +8,6 @@ import { Modal } from '../../../../context/Modal';
 import '../../../../context/Modal.css'
 import SignUpForm from "../SignUpForm/index.js";
 import './LoginForm.css';
-import linkedinLogo from '../../../../assets/social-media-branding/linkedinLogo.png'
-import githubLogo from '../../../../assets/social-media-branding/githubLogo.png'
 
 
 /******************************* COMPONENT *******************************/

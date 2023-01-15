@@ -79,8 +79,8 @@ function ReviewForm({reviewFormAction, spot, userReview, modalFunc}) {
                     }
                 }
             );
-            
-            modalFunc(false)
+
+            return modalFunc(false)
 
         } else if (reviewFormAction == "Update") {
             let reviewId = userReview.id
@@ -98,7 +98,7 @@ function ReviewForm({reviewFormAction, spot, userReview, modalFunc}) {
                 }
             )
 
-            modalFunc(false)
+            return modalFunc(false)
         }
     }
 
@@ -133,7 +133,7 @@ function ReviewForm({reviewFormAction, spot, userReview, modalFunc}) {
                 <div className="ReviewForm-input-section">
                     <h2 >Leave a public review</h2>
                     <p >Write a fair, honest review about your stay so future hosts know what to expect.</p>
-                    <label for="review">
+                    <label htmlFor="review">
                         <textarea
                             type="textarea"
                             name="review"
@@ -151,7 +151,7 @@ function ReviewForm({reviewFormAction, spot, userReview, modalFunc}) {
                 <div className="ReviewForm-input-section">
                     <h2 >Rating</h2>
                     <p >Share your overall rating</p>
-                    <label for="stars">
+                    <label htmlFor="stars">
                         <StarRatings
                             isSelectable={true}
                             rating={stars}
