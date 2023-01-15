@@ -29,6 +29,9 @@ export const actionDeleteSingleReview = (reviewId) => ({
 
 /***************************** THUNKS (API) ******************************/
 export const thunkCreateSingleReview = (spotId, data) => async (dispatch) => {
+    console.log("reach")
+    console.log("spotId from thunk", spotId)
+    console.log("data from thunk", data)
 
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'post',
@@ -36,6 +39,7 @@ export const thunkCreateSingleReview = (spotId, data) => async (dispatch) => {
         body: JSON.stringify(data)
     });
 
+    console.log("response", response)
     if (response.ok) {
         const newReview = await response.json();
         dispatch(actionCreateSingleReview(newReview));

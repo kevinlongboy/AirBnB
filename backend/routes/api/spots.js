@@ -386,6 +386,7 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
         let { review, stars } = req.body;
 
         const validationErrorMessages = []
+        console.log("reach")
 
         // handle error: missing spot
         let findSpot = await Spot.findByPk(postSpotId);
@@ -416,26 +417,28 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
         let spotReviewExists = await Review.findAll({ // returns array of review for req. spot
             where: { userId: currentUserId, spotId: postSpotId }
         });
-        // handle error: review exits
-        if (spotReviewExists.length > 0) {
-            error.message = "User already has a review for this spot";
-            error.statusCode = 403;
-            validationErrorMessages.push("User already has a review for this spot");
-            error.errors = validationErrorMessages;
-            return res.status(403).json(error)
 
-        } else {
-            let postSpotReview = await currentUser.createReview({
-                spotId: parseInt(postSpotId),
-                userId: currentUserId,
-                review: review,
-                stars: stars,
-            })
-            postSpotReview.save();
-            return res
-                .status(201)
-                .json(postSpotReview)
-        }
+        // handle error: review exits
+        // if (spotReviewExists.length > 0) {
+        //     error.message = "User already has a review for this spot";
+        //     error.statusCode = 403;
+        //     validationErrorMessages.push("User already has a review for this spot");
+        //     error.errors = validationErrorMessages;
+        //     return res.status(403).json(error)
+        // }
+        // remove restriction; user reviews per spot is
+        // limited to amount of bookings per spot
+
+        let postSpotReview = await currentUser.createReview({
+            spotId: parseInt(postSpotId),
+            userId: currentUserId,
+            review: review,
+            stars: stars,
+        })
+        postSpotReview.save();
+        return res
+            .status(201)
+            .json(postSpotReview)
 
     } catch (err) {
         error.error = err

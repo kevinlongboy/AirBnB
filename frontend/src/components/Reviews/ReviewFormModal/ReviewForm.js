@@ -13,41 +13,71 @@ function ReviewForm({reviewFormAction, spot, userReview, modalFunc}) {
 
     // console.log("reviewFormAction", reviewFormAction)
     // console.log("userReview", userReview)
-    // console.log("spotId", spotId)
-    console.log("spot", spot)
 
     /************* conditional components **************/
     const dispatch = useDispatch()
 
     /****************** manage state *******************/
     const [review, setReview] = useState("");
-    const [stars, setStars] = useState();
+    const [stars, setStars] = useState(5);
     const [validationErrors, setValidationErrors] = useState([]);
 
+
+    // set initial input field values as current spot values
+    useEffect(() => {
+        setReview(userReview ? userReview.review : '')
+        setStars(userReview ? userReview.stars : 5)
+    }, [userReview]);
+
     /***************** handle events *******************/
+    // submit form
     const handleSubmit = (e) => {
 
         e.preventDefault();
 
+        /******** Check for errors ********/
         let errors = [];
         setValidationErrors(errors);
 
+        if (review.length > 0 && review.length < 5) {
+            errors.push("Please write a longer review.")
+        } else if (review.length > 500) {
+            errors.push("Please write a shorter review.")
+        }
+
+        if (stars < 1 || stars > 5) {
+          errors.push("Please enter a rating.")
+        }
+
+        setValidationErrors(errors);
+        if (errors.length) return;
+
+
+        /******** Parse form data ********/
         let reviewData = {
             review: review,
             stars: stars
         }
 
+        let spotId
+        reviewFormAction == "Create" ? spotId = spot.Spot.id : spotId = spot.id
+
         if (reviewFormAction == "Create") {
-            // return dispatch(thunkCreateSingleReview(spotId, createReviewData)).catch(
-            //     async (res) => {
 
-            //         const data = await res.json();
+            console.log("spotId", spotId)
+            console.log("reviewData", reviewData)
+            // modalFunc(false)
+            return dispatch(thunkCreateSingleReview(spotId, reviewData)).catch(
+                async (res) => {
 
-            //         if (data && data.errors) {
-            //             data.errors.forEach(message => errors.push(message));
-            //             setValidationErrors(errors);
-            //         }
-            //     });
+                    const data = await res.json();
+
+                    if (data && data.errors) {
+                        data.errors.forEach(message => errors.push(message));
+                        setValidationErrors(errors);
+                    }
+                }
+            );
 
         } else if (reviewFormAction == "Update") {
             // dispatch(thunkUpdateSingleReview())
@@ -77,8 +107,8 @@ function ReviewForm({reviewFormAction, spot, userReview, modalFunc}) {
                 onSubmit={handleSubmit}
             >
                 <div className="ReviewForm-input-section">
-                    <h2>{spot.Spot.name}</h2>
-                    <p>Hosted by {spot.Spot.ownerName}</p>
+                    <h2>{reviewFormAction == "Create" ? spot.Spot.name : spot.name}</h2>
+                    <p>Hosted by {reviewFormAction == "Create" ? spot.Spot.ownerName : spot.ownerName}</p>
                     {/* <p>{convertInformalDate(spot.startDate)} - {convertInformalDate(spot.endDate)}</p> */}
                 </div>
 

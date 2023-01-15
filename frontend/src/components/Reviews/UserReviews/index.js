@@ -17,9 +17,6 @@ import ReviewFormModal from "../ReviewFormModal";
 /******************************* COMPONENT *******************************/
 function UserReviews() {
 
-    // query bookings
-    // query reviews
-
     /****************** access store *******************/
     const sessionState = useSelector(state => state.session);
     const reviewsState = useSelector(state => state.reviews);
@@ -34,8 +31,8 @@ function UserReviews() {
     let spotsReviewed = []
     reviewsArr.forEach(obj => spotsReviewed.push(obj.spotId))
 
-    let spotsToBeReviewed = bookingsArr.filter(obj => !spotsReviewed.includes(obj.spotId) )
-    console.log("spotsToBeReviewed",spotsToBeReviewed)
+    let spotsToBeReviewed = bookingsArr.filter(obj => !spotsReviewed.includes(obj.spotId))
+    console.log("spotsToBeReviewed", spotsToBeReviewed)
     // let spotsToBeReviewed= [] // uncomment to test for no new reviews
 
 
@@ -100,7 +97,8 @@ function UserReviews() {
                         <div className="reviews-table-buttons-container">
                             <ReviewFormModal
                                 reviewFormAction={'Update'}
-                                spot={review}
+                                spot={review.Spot}
+                                userReview={review}
                                 />
                             <DeleteReview id={review.id}/>
                         </div>
