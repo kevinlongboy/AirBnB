@@ -151,16 +151,20 @@ router.get('/current', requireAuth, async (req, res, next) => {
 // README, line 879
 router.put('/:reviewId', requireAuth, async (req, res) => {
 
-    let reviewId = req.params.reviewId;
+    let reviewId = parseInt(req.params.reviewId);
     let error = {};
 
     try {
         let putReview = await Review.findByPk(reviewId);
 
+        const validationErrorMessages = []
+
+        // handle error: missing review
         if (!putReview) {
             error.message = "Review couldn't be found";
             error.statusCode = 404;
-            return res.json(error);
+            validationErrorMessages.push("Review couldn't be found");
+            return res.status(404).json(error);
         }
 
         let { review, stars } = req.body;

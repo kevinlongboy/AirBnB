@@ -7,6 +7,7 @@ import { normalizeArray } from "../component-resources/index";
 /********************************* TYPES *********************************/
 const REVIEWS_CREATE_SINGLE_REVIEW = 'reviews/CREATE_SINGLE_REVIEW';
 const REVIEWS_READ_USER_REVIEWS = 'reviews/READ_USER_REVIEWS';
+const REVIEWS_UPDATE_SINGLE_REVIEW = 'reviews/UPDATE_SINGLE_REVIEW';
 const REVIEWS_DELETE_SINGLE_REVIEW = 'reviews/DELETE_SINGLE_REVIEW';
 
 
@@ -21,6 +22,11 @@ export const actionReadUserReviews = (reviews) => ({
     payload: reviews
 });
 
+export const actionUpdateSingleReview = (updateReview) => ({
+    type: REVIEWS_UPDATE_SINGLE_REVIEW,
+    payload: updateReview
+});
+
 export const actionDeleteSingleReview = (reviewId) => ({
     type: REVIEWS_DELETE_SINGLE_REVIEW,
     payload: reviewId
@@ -29,17 +35,11 @@ export const actionDeleteSingleReview = (reviewId) => ({
 
 /***************************** THUNKS (API) ******************************/
 export const thunkCreateSingleReview = (spotId, data) => async (dispatch) => {
-    console.log("reach")
-    console.log("spotId from thunk", spotId)
-    console.log("data from thunk", data)
-
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json'} ,
         body: JSON.stringify(data)
     });
-
-    console.log("response", response)
     if (response.ok) {
         const newReview = await response.json();
         dispatch(actionCreateSingleReview(newReview));
@@ -48,7 +48,6 @@ export const thunkCreateSingleReview = (spotId, data) => async (dispatch) => {
 }
 
 export const thunkReadUserReviews = () => async (dispatch) => {
-
     const response = await csrfFetch(`/api/reviews/current`);
     if (response.ok) {
         const reviews = await response.json();
@@ -57,12 +56,23 @@ export const thunkReadUserReviews = () => async (dispatch) => {
     }
 }
 
-export const thunkDeleteSingleReview = (reviewId) => async (dispatch) => {
+export const thunkUpdateSingleReview = (reviewId, updateReviewData) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json'} ,
+        body: JSON.stringify(updateReviewData)
+    });
+    if (response.ok) {
+        const updateReview = await response.json();
+        dispatch(actionUpdateSingleReview(updateReview));
+        return updateReview;
+    }
+}
 
+export const thunkDeleteSingleReview = (reviewId) => async (dispatch) => {
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'delete',
     });
-
     if (response.ok) {
         dispatch(actionDeleteSingleReview(reviewId))
         return
@@ -79,17 +89,17 @@ const initialState = {
 /******************************* REDUCER *********************************/
 const reviewsReducer = (state = initialState, action) => {
 
-    let newState = {...state};
+    let newState = { ...state };
 
     switch (action.type) {
 
         case REVIEWS_CREATE_SINGLE_REVIEW:
-            newState.reviews = {...state.reviews}
-            newState.reviews[action.payload.id] = {...action.payload}
-            return newState
+            newState.reviews = {...state.reviews};
+            newState.reviews[action.payload.id] = {...action.payload};
+            return newState;
 
         case REVIEWS_READ_USER_REVIEWS:
-            let reviewsRaw = action.payload
+            let reviewsRaw = action.payload;
             reviewsRaw.forEach(reviewObj => {
                     reviewObj.User = { ...reviewObj.User };
                     reviewObj.Spot = { ...reviewObj.Spot };
@@ -97,16 +107,21 @@ const reviewsReducer = (state = initialState, action) => {
                     reviewObj.ReviewImages.forEach(obj => images.push({...obj}))
                     reviewObj.ReviewImages = images
             })
-            newState = normalizeArray(reviewsRaw)
-            return newState
+            newState = normalizeArray(reviewsRaw);
+            return newState;
+
+        case REVIEWS_UPDATE_SINGLE_REVIEW:
+            newState.reviews = { ...state.reviews };
+            newState.reviews[action.payload.id] = { ...action.payload };
+
 
         case REVIEWS_DELETE_SINGLE_REVIEW:
-            newState.reviews = {...state.reviews}
-            delete newState.reviews.reviewId
-            return newState
+            newState.reviews = { ...state.reviews };
+            delete newState.reviews.reviewId;
+            return newState;
 
         default:
-            return state
+            return state;
     }
 }
 

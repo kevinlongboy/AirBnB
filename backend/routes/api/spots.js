@@ -386,7 +386,6 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
         let { review, stars } = req.body;
 
         const validationErrorMessages = []
-        console.log("reach")
 
         // handle error: missing spot
         let findSpot = await Spot.findByPk(postSpotId);

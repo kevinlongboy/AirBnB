@@ -5,7 +5,7 @@ import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import  StarRatings from 'react-star-ratings';
 // local files
-import { thunkCreateSingleReview } from "../../../store/reviewsReducer";
+import { thunkCreateSingleReview, thunkUpdateSingleReview } from "../../../store/reviewsReducer";
 import { convertInformalDate } from "../../../component-resources";
 
 /******************************* COMPONENT *******************************/
@@ -62,12 +62,13 @@ function ReviewForm({reviewFormAction, spot, userReview, modalFunc}) {
         let spotId
         reviewFormAction == "Create" ? spotId = spot.Spot.id : spotId = spot.id
 
+
         if (reviewFormAction == "Create") {
 
             console.log("spotId", spotId)
             console.log("reviewData", reviewData)
-            // modalFunc(false)
-            return dispatch(thunkCreateSingleReview(spotId, reviewData)).catch(
+
+            dispatch(thunkCreateSingleReview(spotId, reviewData)).catch(
                 async (res) => {
 
                     const data = await res.json();
@@ -78,9 +79,26 @@ function ReviewForm({reviewFormAction, spot, userReview, modalFunc}) {
                     }
                 }
             );
+            
+            modalFunc(false)
 
         } else if (reviewFormAction == "Update") {
-            // dispatch(thunkUpdateSingleReview())
+            let reviewId = userReview.id
+
+
+            dispatch(thunkUpdateSingleReview(reviewId, reviewData)).catch(
+                async (res) => {
+
+                    const data = await res.json();
+
+                    if (data && data.errors) {
+                        data.errors.forEach(message => errors.push(message));
+                        setValidationErrors(errors);
+                    }
+                }
+            )
+
+            modalFunc(false)
         }
     }
 
@@ -148,7 +166,7 @@ function ReviewForm({reviewFormAction, spot, userReview, modalFunc}) {
                     </label>
                 </div>
 
-                <div>
+                <div className="errors">
                     {validationErrors.map((error, idx) => (
                         <p className="error-item" key={idx}>{error}</p>
                     ))}

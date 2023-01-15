@@ -23,15 +23,27 @@ function UserReviews() {
     const bookingsState = useSelector(state => state.bookings)
 
     /************ key into pertinent values ************/
+    // limits user to one review per spot
+    // rather than one review per booking
     let bookingsArr = Object.values(bookingsState.userBookings)
-    let spotsVisited = []
-    bookingsArr.forEach(obj => spotsVisited.push(obj.spotId))
+    console.log("bookingsArr", bookingsArr)
+
+    let spotIdsVisited = []
+    bookingsArr.forEach(obj => spotIdsVisited.push(obj.spotId))
+    console.log("spotIdsVisited", spotIdsVisited)
 
     let reviewsArr = Object.values(reviewsState)
-    let spotsReviewed = []
-    reviewsArr.forEach(obj => spotsReviewed.push(obj.spotId))
+    let spotIdsReviewed = []
+    reviewsArr.forEach(obj => spotIdsReviewed.push(obj.spotId))
+    console.log("spotIdsReviewed", spotIdsReviewed)
 
-    let spotsToBeReviewed = bookingsArr.filter(obj => !spotsReviewed.includes(obj.spotId))
+    let spotsToBeReviewed = []
+    bookingsArr.forEach(obj => {
+        if (!spotIdsReviewed.includes(obj.spotId)) {
+            spotIdsReviewed.push(obj.spotId);
+            spotsToBeReviewed.push(obj)
+        }
+    })
     console.log("spotsToBeReviewed", spotsToBeReviewed)
     // let spotsToBeReviewed= [] // uncomment to test for no new reviews
 
@@ -62,7 +74,9 @@ function UserReviews() {
                     <td className="reviews-table-body-data">
                         <h1>{spot.Spot.name}</h1>
                         <p>Hosted by {spot.Spot.ownerName}</p>
-                        <span>{`${convertInformalDate(spot.startDate)} - ${convertInformalDate(spot.endDate)}`}</span>
+                        <span>{spot.Spot.city}, {spot.Spot.state}</span>
+                            {/* Note: booking dates irrelevant, since reviews to be written contingent on spots, not bookings */}
+                            {/* <span>{`${convertInformalDate(spot.startDate)} - ${convertInformalDate(spot.endDate)}`}</span> */}
                         <div className="reviews-table-buttons-container">
                             <ReviewFormModal
                                 reviewFormAction={'Create'}
@@ -166,3 +180,11 @@ function UserReviews() {
 
 /******************************** EXPORTS ********************************/
 export default UserReviews;
+
+
+/********************************* NOTES *********************************/
+// 1.
+// Using bookingId as a filter instead of spotId,
+// in order to limit user to one review per booking,
+// rather than one review per spot.
+// However, this will require reviews to have bookingId as key
