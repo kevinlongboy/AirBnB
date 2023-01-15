@@ -291,18 +291,24 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             where: {id: postSpotBooking.spotId},
             raw: true,
         })
-        postSpotBooking.Spot = spotInfo
+        // postSpotBooking.Spot = spotInfo
 
         // Add spot owner info -key
         let owner = await User.findOne({
             where: { id: spotInfo.ownerId},
             raw: true
         })
-        postSpotBooking.Spot.ownerName = `${owner.firstName}`
+        // postSpotBooking.Spot.ownerName = `${owner.firstName}`
+        let ownerName = `${owner.firstName}`
 
         return res
             .status(200)
-            .json(postSpotBooking)
+            // .json(postSpotBooking)
+            .json({
+                "Bookings": postSpotBooking,
+                "Spots": spotInfo,
+                "Owner": ownerName,
+            })
 
     } catch (err) {
         error.error = err

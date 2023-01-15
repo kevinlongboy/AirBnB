@@ -132,14 +132,13 @@ function UpdateBooking({tripId, trip}) {
         dispatch(thunkUpdateSpotBooking(tripId, updateBookingData)).catch(
 
             async (res) => {
-                console.log("res", res)
-                // const data = await res.json();
-                // console.log("data", data)
+                const data = await res.json();
+                console.log("data", data)
 
-                // if (data && data.errors) {
-                //     errors.push(data.message);
-                //     setValidationErrors([...errors]);
-                // }
+                if (data && data.errors) {
+                    errors.push(data.message);
+                    setValidationErrors([...errors]);
+                }
             }
         )
 

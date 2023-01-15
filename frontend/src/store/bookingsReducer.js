@@ -56,6 +56,7 @@ export const thunkCreateSingleBooking = (spotId, createBookingData) => async (di
     });
     if (response.ok) {
         const newBooking = await response.json();
+        console.log("newBooking", newBooking)
         dispatch(actionCreateSingleBooking(newBooking));
         return newBooking;
     };
@@ -96,6 +97,7 @@ export const thunkUpdateSpotBooking = (bookingId, updateBookingData) => async (d
     });
     if (response.ok) {
         const updateBooking = await response.json();
+        console.log("updateBooking", updateBooking)
         dispatch(actionUpdateSpotBooking(updateBooking));
         return updateBooking;
     }
@@ -128,9 +130,14 @@ const bookingsReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case BOOKINGS_CREATE_SINGLE_BOOKING:
-            // add new booking to User's existing bookings
             newState.userBookings = { ...state.userBookings };
+            // add new booking to User's existing bookings
             newState.userBookings[action.payload.id] = { ...action.payload };
+
+            // shape payload here, since unable to add keys in backend for whatever reason
+            newState.userBookings[action.payload.id].Spots = { ... action.payload.Spots }
+            newState.userBookings[action.payload.id].Spots.ownerName = action.payload.Spots.Owner
+
             newState.userReservations = { ...state.userReservations };
             // add new booking to Spots's existing reservations
             newState.spotReservations = { ...state.spotReservations };

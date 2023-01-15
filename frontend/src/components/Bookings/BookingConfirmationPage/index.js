@@ -28,7 +28,7 @@ function BookingConfirmationPage() {
 
   useEffect(() => {
     dispatch(thunkReadUserBookings());
-  }, [dispatch]);
+  }, [dispatch, tripId]);
 
   /**************** render component *****************/
   return (

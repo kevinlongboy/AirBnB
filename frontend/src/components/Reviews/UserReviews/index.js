@@ -33,7 +33,7 @@ function UserReviews() {
     // console.log("spotIdsVisited", spotIdsVisited)
 
     let reviewsArr = Object.values(reviewsState)
-    console.log("reviewsArr", reviewsArr)
+    // console.log("reviewsArr", reviewsArr)
 
     let spotIdsReviewed = []
     reviewsArr.forEach(obj => spotIdsReviewed.push(obj.spotId))

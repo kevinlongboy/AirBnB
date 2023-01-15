@@ -37,7 +37,7 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
             error.message = "Booking couldn't be found";
             error.status = 404;
             return res
-                .json(error);
+                .status(404).json(error);
         }
 
         let { startDate, endDate, guests, total } = req.body;
@@ -47,7 +47,7 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
             error.message = "Validation error"
             error.statusCode = 400
             error.errors = { endDate: "endDate cannot be on or before startDate" }
-            return res.json(error)
+            return res.status(404).json(error)
         }
 
         let allExistingBookings = await Booking.findAll({
@@ -70,19 +70,19 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
                     startDate: "Start date conflicts with an existing booking",
                     endDate: "End date conflict with an existing booking",
                 }
-                return res.json(error)
+                return res.status(404).json(error)
 
             } else if ((endDate >= existingStartDate) && (endDate <= existingEndDate)) {
                 error.message = "Sorry, this spot is already booked for the specified dates";
                 error.statusCode = 403;
                 error.errors = { endDate: "End date conflicts with an existing booking" }
-                return res.json(error)
+                return res.status(404).json(error)
 
             } else if ((startDate >= existingStartDate) && (startDate <= existingEndDate)) {
                 error.message = "Sorry, this spot is already booked for the specified dates";
                 error.statusCode = 403;
                 error.errors = { startDate: "Start date conflicts with an existing booking" }
-                return res.json(error)
+                return res.status(404).json(error)
             }
         }
 
@@ -116,7 +116,7 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
 
     } catch (err) {
         error.message = err;
-        return res.json(error);
+        return res.status(400).json(error);
     }
 });
 

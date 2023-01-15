@@ -36,17 +36,6 @@ function CreateBookingForm({spot}) {
     const [isDisplayed, setIsDisplayed] = useState(false)
 
     /***************** handle events *******************/
-    // dynamically change endDate to correspond with changes to startDate
-    // with a value of 1 day
-    // const changeStartAndEndDates = async (e) => {
-        //     setStartDate(e.target.value);
-        //     let nextDay = dayjs(e.target.value).add(1, 'day').format('YYYY-MM-DD')
-        //     // can also be modified to be dynamic per host requirements
-        //     // IF host can require min. amount of days per stay
-        //     setEndDate(nextDay)
-    // }
-    // problems: will change endDate if user modifies start date again after choosing an endDate
-
     const changeStartDate = async (e) => {
         setStartDate(e.target.value);
 
@@ -122,14 +111,14 @@ function CreateBookingForm({spot}) {
         }
 
         // console.log("numDays", numDays)
-        console.log("spot.id", spot.id)
-        console.log("createBookingData", createBookingData)
+        // console.log("spot.id", spot.id)
+        // console.log("createBookingData", createBookingData)
 
         const newBooking = await dispatch(thunkCreateSingleBooking(spot.id, createBookingData)).catch(
 
             async (res) => {
                 const data = await res.json();
-                console.log("data", data)
+                console.log("data at CreateBookingForm", data)
 
                 if (data && data.errors) {
                     errors.push(data.message);
@@ -138,10 +127,9 @@ function CreateBookingForm({spot}) {
             }
         )
 
-        console.log("newBooking", newBooking)
-
         if (newBooking) {
-            history.push(`/confirmation/trips/${newBooking.id}`)
+            // key into raw db data, since unable to add keys in backend for whatever reason
+            history.push(`/confirmation/trips/${newBooking.Bookings.id}`)
         }
     }
 
@@ -246,3 +234,18 @@ function CreateBookingForm({spot}) {
 
 /******************************** EXPORTS ********************************/
 export default CreateBookingForm
+
+
+
+/******************************** NOTES ********************************/
+// 1.
+// dynamically change endDate to correspond with changes to startDate
+// with a value of 1 day
+// const changeStartAndEndDates = async (e) => {
+    //     setStartDate(e.target.value);
+    //     let nextDay = dayjs(e.target.value).add(1, 'day').format('YYYY-MM-DD')
+    //     // can also be modified to be dynamic per host requirements
+    //     // IF host can require min. amount of days per stay
+    //     setEndDate(nextDay)
+// }
+// problems: will change endDate if user modifies start date again after choosing an endDate
