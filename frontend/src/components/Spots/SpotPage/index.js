@@ -1,18 +1,18 @@
 /******************************** IMPORTS ********************************/
 // libraries
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
 import { thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../../store/spotsReducer";
 import { thunkCreateSingleReview } from "../../../store/reviewsReducer.js";
-import CreateReviewForm from "../../Reviews/CreateReviewForm/index.js";
 import SpotReviews from "../../Reviews/SpotReviews/index.js";
 import SpotPageFooter from "../../Footer/SpotPageFooter";
 import { convertDate, addPlaceholderImages } from "../../../component-resources";
 import './SpotPage.css';
 import CreateBookingForm from "../../Bookings/CreateBookingForm";
 import SpotPageOwnerPanel from "./SpotPageOwnerPanel";
+import CreateReviewForm from "../../Reviews/CreateReviewForm";
 
 
 /******************************* COMPONENT *******************************/
@@ -27,9 +27,12 @@ function SpotPage() {
   const userId = sessionState.user.id;
   // spot
   const spot = spotsState.singleSpotDetails;
-  // reviews
+  // spot reviews
   const spotReviews = spotsState.singleSpotReviews;
   const reviews = Object.values(spotReviews);
+  // user's review
+  const userAlreadyReviewedSpot = reviews.filter(obj => obj.User.id === userId)
+  const userReview = userAlreadyReviewedSpot[0]
   // images
   const spotImgs = spotsState.singleSpotDetails.SpotImages;
   const images = Object.values(spotImgs);
@@ -51,6 +54,10 @@ function SpotPage() {
     dispatch(thunkCreateSingleReview());
   }, [dispatch]);
 
+  /****************** manage state *******************/
+  let [reviewFormAction, setReviewFormAction] = useState();
+
+
   /************* conditional components **************/
   // images
   if (images.length) {
@@ -61,9 +68,8 @@ function SpotPage() {
     }
   }
 
-  // reviews
-  let panel
-
+  // Booking
+  let panel;
   if (userId && (userId !== spot.ownerId)) {
     panel = (
     <CreateBookingForm spot={spot}/>
@@ -74,13 +80,8 @@ function SpotPage() {
     )
   }
 
-  // const userAlreadyReviewedSpot = reviews.filter(obj => obj.User.id === userId)
-  // if (userAlreadyReviewedSpot.length > 0) {
-  //   reviewComponent = (
-  //     <>
-  //     </>
-  //   )
-  // }
+
+
 
   /**************** render component *****************/
   return (
@@ -130,6 +131,10 @@ function SpotPage() {
             </div>
 
             {/* <SpotReviews /> */}
+            <CreateReviewForm
+              reviewFormAction={ userAlreadyReviewedSpot.length > 0 ? 'update' : 'create' }
+              userReview={ userReview }
+            />
 
         </div>
       </div>

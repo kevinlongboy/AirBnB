@@ -1,182 +1,38 @@
 /******************************** IMPORTS ********************************/
 // libraries
-import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
+import { useEffect } from "react";
+import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
-import { thunkCreateSingleReview } from "../../../store/reviewsReducer";
-import './CreateReviewForm.css'
-
+import './CreateReviewForm.css';
 
 /******************************* COMPONENT *******************************/
-function CreateReviewForm() {
+function CreateReviewForm({reviewFormAction, review}) {
 
-    /****************** access store *******************/
-    const sessionState = useSelector(state => state.session);
-    const reviewsState = useSelector(state => state.reviews);
-
-    /************ reducer/API communication ************/
-    const dispatch = useDispatch();
-
-    /****************** manage state *******************/
-    const [review, setReview] = useState("");
-    const [stars, setStars] = useState("★★★★★");
-    const [validationErrors, setValidationErrors] = useState([]);
-
-    // change star-value
-    let incrementCounter = () => {
-        if (stars.length < 5) setStars(stars.concat("★"));
-    }
-    let decrementCounter = () => {
-        if (stars.length > 1) setStars(stars.slice(0, stars.length-1));
-    }
-
-    // render errors
-    useEffect(() => {
-        const errors = [];
-
-        if (review.length > 0 && review.length < 5) {
-            errors.push("Please write a longer review.")
-        } else if (review.length > 500) {
-            errors.push("Please write a shorter review.")
-        }
-
-        if (stars < 1 || stars > 5) {
-          errors.push("Please enter a rating.")
-        }
-
-        let displayErrors;
-        if (errors.length) {
-            displayErrors = (
-                <div className="errors">
-                {validationErrors.length > 0 &&
-                validationErrors.map((error) =>
-                <p key={error}>{error}</p>)}
-                </div>
-            )
-        } else {
-            displayErrors = (
-                <div className="errors">
-                </div>
-            )
-        }
-
-        setValidationErrors(errors)
-      }, [review, stars])
+    console.log("reviewFormAction", reviewFormAction)
 
     /***************** handle events *******************/
-    const { spotId } = useParams()
-    const handleSubmit = (e) => {
+    const dispatch = useDispatch()
 
-        e.preventDefault();
+    if (reviewFormAction == "create") {
 
-        let errors = [];
-        setValidationErrors(errors);
+    } else {
 
-        let createReviewData = {
-            review: review,
-            stars: stars.length
-        }
-
-        return dispatch(thunkCreateSingleReview(parseInt(spotId), createReviewData)).catch(
-            async (res) => {
-
-                const data = await res.json();
-
-                if (data && data.errors) {
-                    data.errors.forEach(message => errors.push(message));
-                    setValidationErrors(errors);
-                }
-            });
-
-            // make sure to redirect to either product page or reviews page afterwards
     }
+
+
+    /************* conditional components **************/
+
 
 
     /**************** render component *****************/
     return (
+        <div className="CreateReviewForm-component">
 
-        <div className="review-create-panel">
-            <form
-                className="create-review-form"
-                onSubmit={handleSubmit}
-            >
-
-            <label>
-                <div>
-                    <h2 className="review-create-prompt">Leave a public review</h2>
-                    <p className="review-create-subtitle">Write a fair, honest review about your stay so future hosts know what to expect.</p>
-                </div>
-                <textarea
-                    className="textarea-field"
-                    type="textarea"
-                    name="review"
-                    minLength={5}
-                    placeholder="Say a few words about your stay"
-                    onChange={(e) => setReview(e.target.value)}
-                    value={review}
-                >
-                </textarea>
-            </label>
-
-                <div>
-                    <h2 className="review-create-prompt">Rating</h2>
-                    <p className="review-create-subtitle">Share your overall rating</p>
-                </div>
-
-            <label>
-                <div className="stars">
-                    <div>
-                        <button
-                            id="stars-button"
-                            type="button"
-                            name="stars"
-                            min="1"
-                            onClick={decrementCounter}
-                            >
-                            <i class="fa-solid fa-minus"></i>
-                        </button>
-                    </div>
-
-                    <div className="output-field-stars">
-                        <output>{stars}</output>
-                    </div>
-
-                    <div>
-
-                        <button
-                            id="stars-button"
-                            type="button"
-                            name="stars"
-                            max="5"
-                            onClick={incrementCounter}
-                            >
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
-            </label>
-
-
-           {/* { <div className="errors">
-                {validationErrors.length > 0 &&
-                validationErrors.map((error) =>
-                <p className="error-item" key={error}>{error}</p>)}
-            </div>} */}
-
-            {validationErrors.map((error, idx) => (
-                <p className="error-item" key={idx}>{error}</p>
-            ))}
-
-            <button
-            id="review-submit-button"
-            type="submit"
-            disabled={!!validationErrors.length}
-            >
-            Submit review
+            
+            <button>
+                {reviewFormAction}
             </button>
-
-            </form>
         </div>
     )
 }
