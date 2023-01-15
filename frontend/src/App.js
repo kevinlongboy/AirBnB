@@ -12,7 +12,6 @@ import UserSpots from "./components/Spots/UserSpots";
 import CreateSpotForm from "./components/Spots/CreateSpotForm";
 import UpdateSpotForm from "./components/Spots/UpdateSpotForm";
 import UserReviews from "./components/Reviews/UserReviews"
-import UpdateReviewForm from "./components/Reviews/UpdateReviewForm";
 import UserBookings from "./components/Bookings/UserBookings";
 import UserReservations from "./components/Bookings/UserReservations";
 import BookingConfirmationPage from "./components/Bookings/BookingConfirmationPage";
@@ -40,6 +39,8 @@ function App() {
       {isLoaded && (
         <Switch>
 
+
+          {/* SPOTS */}
           <Route exact path={'/'}>
             <AllSpots />
           </Route>
@@ -60,14 +61,14 @@ function App() {
             <CreateSpotForm />
           </Route>
 
+
+          {/* REVIEWS */}
           <Route exact path={'/reviews'}>
             <UserReviews />
           </Route>
 
-          {/* <Route exact path={'/reviews/:reviewId/edit'}>
-            <UpdateReviewForm />
-          </Route> */}
 
+          {/* BOOKINGS */}
           <Route exact path={'/trips'}>
             <UserBookings />
           </Route>
@@ -83,6 +84,10 @@ function App() {
           <Route exact path={'/reservations'}>
             <UserReservations />
           </Route>
+
+
+          {/* SEARCH */}
+          
 
         {/* <Route>
           Page Not Found

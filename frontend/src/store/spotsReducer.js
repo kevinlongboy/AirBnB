@@ -78,6 +78,15 @@ export const thunkReadAllSpots = () => async (dispatch) => {
     }
 }
 
+// export const thunkReadAllSpots = (minPrice) => async (dispatch) => {
+//     const response = await csrfFetch(`/api/spots?minPrice=${minPrice}`);
+//     if (response.ok) {
+//         const spots = await response.json();
+//         dispatch(actionReadAllSpots(spots.Spots))
+//         return spots
+//     }
+// }
+
 export const thunkReadSingleSpotDetails = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}`);
     if (response.ok) {

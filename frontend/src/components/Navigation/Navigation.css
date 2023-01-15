@@ -1,0 +1,98 @@
+/******************* NAV BAR WHOLE *******************/
+.nav-bar {
+    width: 100vw;
+    height: 80px;
+
+    margin: 0px;
+    border-bottom: 2px solid #f6f6f6;
+    /* border-bottom: 2px solid red; */
+    padding: 0px 50px;
+
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    /* display: grid; */
+    /* grid-template-columns: repeat(4, 1fr); */
+}
+
+
+/*********************** LEFT ************************/
+.nav-bar-left-container {
+    /* grid-column: 1 / 2; */
+    width: 100%;
+    height: 100%;
+    /* background-color: red; */
+
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+/* Logo */
+#cranebnbLogoText {
+    max-height: 55px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+#cranebnbLogoOnly {
+    max-width: 80px;
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+
+
+/********************** MIDDLE ***********************/
+.nav-bar-middle-container {
+    /* grid-column: 2 / 4; */
+    width: 100%;
+    height: 100%;
+    /* background-color: blue; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*********************** RIGHT ***********************/
+.nav-bar-right-container {
+    /* grid-column: 5 / 5; */
+    width: 100%;
+    height: 100%;
+    /* background-color: yellow; */
+
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+/* Hosting button */
+.hosting-button {
+    margin: 0px 5px;
+    border: 0;
+    border-radius: 32px;
+    background-color: white;
+
+    width: 145px;
+    height: 48px;
+    left: 0;
+
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.hosting-button:hover {
+    background-color: #f7f7f7;
+    cursor: pointer;
+}

@@ -4,12 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // local files
+import './Navigation.css';
 import ProfileButton from './Session/ToggleAccountMenu';
 import HostingButton from './HostingButton';
 import LoginOrSignUpModal from './NoSession/LoginOrSignUpModal/index';
 import cranebnbLogo from "../../assets/branding/cranebnb-logo-3.png";
 import cranebnbLogoOnly from "../../assets/branding/cranebnb-logo-only/cranebnb-logo-only-3.png";
-import './index.css';
+import SearchBar from '../Search/SearchBar';
 
 
 /******************************* COMPONENT *******************************/
@@ -41,16 +42,14 @@ function Navigation({ isLoaded }){
   let sessionLinks;
   if (userId) { // prev: if (sessionUser)
     sessionLinks = (
-      <div className="nav-bar-right">
+      <>
         <HostingButton />
         <ProfileButton user={sessionUser} />
-      </div>
+      </>
     );
   } else {
     sessionLinks = (
-      <div className="nav-bar-right">
         <LoginOrSignUpModal />
-      </div>
     );
   }
 
@@ -58,6 +57,7 @@ function Navigation({ isLoaded }){
   return (
     <div className="nav-bar">
 
+      <div className="nav-bar-left-container">
         <NavLink exact to="/">
           <img
             className="nav-bar-left"
@@ -67,8 +67,15 @@ function Navigation({ isLoaded }){
           >
           </img>
         </NavLink>
+      </div>
 
+      <div className="nav-bar-middle-container">
+        <SearchBar />
+      </div>
+
+      <div className="nav-bar-right-container">
         {isLoaded && sessionLinks}
+      </div>
 
     </div>
   );
