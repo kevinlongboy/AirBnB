@@ -16,7 +16,7 @@ const demoBookings = [
   // Niles books Daphne's
   {
     spotId: 3,
-    userId: 2, // userId of guest (person renting spot)
+    userId: 3, // userId of guest (person renting spot)
     startDate: '2022-09-23',
     endDate: '2022-09-25',
     guests: 1,
@@ -25,7 +25,7 @@ const demoBookings = [
   // Daphne books Roz's
   {
     spotId: 4,
-    userId: 3, // userId of guest (person renting spot)
+    userId: 4, // userId of guest (person renting spot)
     startDate: '2022-11-11',
     endDate: '2022-11-12',
     guests: 1,
@@ -34,7 +34,7 @@ const demoBookings = [
   // Roz books Martin's
   {
     spotId: 5,
-    userId: 4, // userId of guest (person renting spot)
+    userId: 5, // userId of guest (person renting spot)
     startDate: '2022-10-07',
     endDate: '2022-10-13',
     guests: 2,
@@ -45,7 +45,7 @@ const demoBookings = [
   // Niles books Daphne's
   {
     spotId: 3,
-    userId: 2, // userId of guest (person renting spot)
+    userId: 3, // userId of guest (person renting spot)
     startDate: '2023-01-23',
     endDate: '2023-01-25',
     guests: 1,
@@ -54,7 +54,7 @@ const demoBookings = [
   // Daphne books Gertrude's
   {
     spotId: 10,
-    userId: 3, // userId of guest (person renting spot)
+    userId: 4, // userId of guest (person renting spot)
     startDate: '2023-01-23',
     endDate: '2023-01-25',
     guests: 2,

@@ -1,8 +1,23 @@
 'use strict';
 
+// template
+// {
+//   ownerId: , // Frasier
+//   address: '',
+//   city: 'Seattle',
+//   state: 'WA',
+//   country: 'United States of America',
+//   lat: 47.620224,
+//   lng: -122.340720,
+//   name: '',
+//   description: '',
+//   price: ,
+// },
+
 const demoSpots = [
   {
-    ownerId: 1, // Frasier
+    // id: 1,
+    ownerId: 2, // Frasier
     address: '159 S Jackson St #600',
     city: 'Seattle',
     state: 'WA',
@@ -14,7 +29,8 @@ const demoSpots = [
     price: 1000,
   },
   {
-    ownerId: 2, // Niles
+    // id: 2,
+    ownerId: 3, // Niles
     address: '1632 77th Ave NE',
     city: 'Medina',
     state: 'WA',
@@ -26,7 +42,8 @@ const demoSpots = [
     price: 2500
   },
   {
-    ownerId: 3, // Daphne
+    // id: 3,
+    ownerId: 4, // Daphne
     address: '2116 4th Ave',
     city: 'Seattle',
     state: 'WA',
@@ -38,7 +55,8 @@ const demoSpots = [
     price: 250
   },
   {
-    ownerId: 4, // Roz
+    // id: 4,
+    ownerId: 5, // Roz
     address: '4106 Stone Way N',
     city: 'Seattle',
     state: 'WA',
@@ -50,7 +68,8 @@ const demoSpots = [
     price: 300
   },
   {
-    ownerId: 5, // Martin
+    // id: 5,
+    ownerId: 6, // Martin
     address: '1541 Grand Ave',
     city: 'Seattle',
     state: 'WA',
@@ -59,10 +78,11 @@ const demoSpots = [
     lng: -122.283928,
     name: 'Madrona House',
     description: 'Classic comfort',
-    price: 150
+    price: 125
   },
   {
-    ownerId: 6, // Lilith
+    // id: 6,
+    ownerId: 7, // Lilith
     address: '925 Westlake Avenue North',
     city: 'Seattle',
     state: 'WA',
@@ -74,7 +94,8 @@ const demoSpots = [
     price: 500
   },
   {
-    ownerId: 7, // Gil
+    // id: 7,
+    ownerId: 8, // Gil
     address: '1530 Belmont Ave',
     city: 'Seattle',
     state: 'WA',
@@ -86,7 +107,8 @@ const demoSpots = [
     price: 400
   },
   {
-    ownerId: 8, // Noel
+    // id: 8,
+    ownerId: 9, // Noel
     address: '1001 Minor Avenue Seattle',
     city: 'Seattle',
     state: 'WA',
@@ -95,10 +117,11 @@ const demoSpots = [
     lng: -122.283928,
     name: 'Chinatown-Intl. Room',
     description: 'Out of this world',
-    price: 150
+    price: 100
   },
   {
-    ownerId: 9, // Bulldog
+    // id: 9,
+    ownerId: 10, // Bulldog
     address: '1801 S Jackson St',
     city: 'Seattle',
     state: 'WA',
@@ -110,7 +133,8 @@ const demoSpots = [
     price: 75
   },
   {
-    ownerId: 10, // Gertrude
+    // id: 10,
+    ownerId: 11, // Gertrude
     address: '2371 Franklin Ave E',
     city: 'Seattle',
     state: 'WA',
@@ -119,9 +143,74 @@ const demoSpots = [
     lng: -122.283928,
     name: 'Eastlake Flat',
     description: 'Insistent and opinionated',
-    price: 100
+    price: 150
   },
-]
+  {
+    // id: 11,
+    ownerId: 12, // Sherry
+    address: '2233 1st Avenue',
+    city: 'Seattle',
+    state: 'WA',
+    country: 'United States of America',
+    lat: 47.620224,
+    lng: -122.340720,
+    name: 'Magnolia Townhouse',
+    description: 'Brassy and flamboyant',
+    price: 125,
+  },
+  {
+    // id: 12,
+    ownerId: 13, // Maris
+    address: '3267 Evergreen Point Rd',
+    city: 'Medina',
+    state: 'WA',
+    country: 'United States of America',
+    lat: 47.620224,
+    lng: -122.340720,
+    name: 'Roosevelt Estate',
+    description: 'Indescribable',
+    price: 5000,
+  },
+  {
+    // id: 13,
+    ownerId: 14, // Kenny
+    address: '1430 2nd Ave., Suite 800',
+    city: 'Seattle',
+    state: 'WA',
+    country: 'United States of America',
+    lat: 47.620224,
+    lng: -122.340720,
+    name: 'Leschi In-Law Unit',
+    description: 'Quirky and unique',
+    price: 80,
+  },
+  {
+    // id: 14,
+    ownerId: 1, // Demo
+    address: '255 Lenora St',
+    city: 'Seattle',
+    state: 'WA',
+    country: 'United States of America',
+    lat: 47.620224,
+    lng: -122.340720,
+    name: 'Pike Place',
+    description: 'In the heart of the city',
+    price: 200,
+  },
+  {
+    // id: 15,
+    ownerId: 1, // Demo
+    address: '1250 Alki Avenue SW, Unit 3A',
+    city: 'Seattle',
+    state: 'WA',
+    country: 'United States of America',
+    lat: 47.620224,
+    lng: -122.340720,
+    name: 'Downtown Duplex',
+    description: 'Close to all the action',
+    price: 800,
+  },
+];
 
 let ownerIds = [];
 demoSpots.forEach(spot => ownerIds.push(spot.ownerId))

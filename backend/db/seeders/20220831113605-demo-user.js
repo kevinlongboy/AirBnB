@@ -2,8 +2,27 @@
 
 const bcrypt = require("bcryptjs");
 
+// template
+// {
+//   // id: 1,
+//   firstName: '',
+//   lastName: '',
+//   username: '',
+//   hashedPassword: bcrypt.hashSync('password'),
+//   email: '@kacl.com',
+// },
+
 const demoUsers = [
   {
+    // id: 1,
+    firstName: 'Demo',
+    lastName: 'User',
+    username: 'Demo',
+    hashedPassword: bcrypt.hashSync('demoPassword'),
+    email: 'demo@email.com',
+  },
+  {
+    // id: 2,
     firstName: 'Frasier',
     lastName: 'Crane',
     username: 'fcrane',
@@ -11,6 +30,7 @@ const demoUsers = [
     email: 'fcrane@kacl.com',
   },
   {
+    // id: 3,
     firstName: 'Niles',
     lastName: 'Crane',
     username: 'ncrane',
@@ -18,6 +38,7 @@ const demoUsers = [
     email: 'ncrane@me.com',
   },
   {
+    // id: 4,
     firstName: 'Daphne',
     lastName: 'Moon',
     username: 'dmoon',
@@ -25,6 +46,7 @@ const demoUsers = [
     email: 'dmoon@hotmail.co.uk',
   },
   {
+    // id: 5,
     firstName: 'Roz',
     lastName: 'Doyle',
     username: 'rdoyle',
@@ -32,6 +54,7 @@ const demoUsers = [
     email: 'rdoyle@kacl.com',
   },
   {
+    // id: 6,
     firstName: 'Martin',
     lastName: 'Crane',
     username: 'mcrane',
@@ -39,6 +62,7 @@ const demoUsers = [
     email: 'mcrane@spd.gov',
   },
   {
+    // id: 7,
     firstName: 'Lilith',
     lastName: 'Sternin',
     username: 'lsternin',
@@ -46,6 +70,7 @@ const demoUsers = [
     email: 'lsternin@sternin.com',
   },
   {
+    // id: 8,
     firstName: 'Gil',
     lastName: 'Chesterton',
     username: 'gchesterton',
@@ -53,6 +78,7 @@ const demoUsers = [
     email: 'gchesterton@kacl.com',
   },
   {
+    // id: 9,
     firstName: 'Noel',
     lastName: 'Shempsky',
     username: 'nshempsky',
@@ -60,6 +86,7 @@ const demoUsers = [
     email: 'nshempsky@sfi.org',
   },
   {
+    // id: 10,
     firstName: 'Bulldog',
     lastName: 'Briscoe',
     username: 'bbriscoe',
@@ -67,6 +94,7 @@ const demoUsers = [
     email: 'bbriscoe@yahoo.com',
   },
   {
+    // id: 11,
     firstName: 'Gertrude',
     lastName: 'Moon',
     username: 'gmoon',
@@ -74,11 +102,28 @@ const demoUsers = [
     email: 'gmoon@yahoo.co.uk',
   },
   {
-    firstName: 'Demo',
-    lastName: 'User',
-    username: 'Demo',
-    hashedPassword: bcrypt.hashSync('demoPassword'),
-    email: 'demo@email.com',
+    // id: 12,
+    firstName: 'Sherry',
+    lastName: 'Dempsey',
+    username: 'sdempsey',
+    hashedPassword: bcrypt.hashSync('passwordL'),
+    email: 'sdempsey@yahoo.com',
+  },
+  {
+    // id: 13,
+    firstName: 'Maris',
+    lastName: 'Crane',
+    username: 'maris', // mcrane === ncrane ?
+    hashedPassword: bcrypt.hashSync('passwordM'),
+    email: 'mcrane@me.com',
+  },
+  {
+    // id: 14,
+    firstName: 'Kenny',
+    lastName: 'Daly',
+    username: 'kdaly',
+    hashedPassword: bcrypt.hashSync('passwordK'),
+    email: 'kdaly@kacl.com',
   },
 ]
 

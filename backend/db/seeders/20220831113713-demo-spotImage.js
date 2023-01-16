@@ -37,7 +37,6 @@ const demoSpotImages = [
     preview: false,
   },
 
-
   /*********************** Niles' Medina Mansion ***********************/
   {
     // id: 6,
@@ -379,6 +378,166 @@ const demoSpotImages = [
     // id: 54,
     spotId: 10,
     url: 'https://images1.apartmenthomeliving.com/i2/lF1Hi2ccyPHc4kND_LDPb0TuzqcmCzMhZm7lMgvRnZE/114/image.jpg?p=1',
+    preview: false,
+  },
+
+  /*********************** Sherry's Magnolia Townhouse ***********************/
+  {
+    // id: 60,
+    spotId: 11,
+    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073003/620478ab0858b4.53771142248.jpg',
+    preview: true,
+  },
+  {
+    // id: 61,
+    spotId: 11,
+    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073004/620478aca036a2.40055366228.jpg',
+    preview: false,
+  },
+  {
+    // id: 62,
+    spotId: 11,
+    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073003/620478abd1b0e9.03866488127.jpg',
+    preview: false,
+  },
+  {
+    // id: 63,
+    spotId: 11,
+    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073008/620478b0bfe1d5.63686334337.jpg',
+    preview: false,
+  },
+  {
+    // id: 64,
+    spotId: 11,
+    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/072634/620477d98f7964.50935396848.jpg',
+    preview: false,
+  },
+
+  /*********************** Maris' Roosevelt Estate ***********************/
+  {
+    // id: 65,
+    spotId: 12,
+    url: 'https://ssl.cdn-redfin.com/photo/1/bigphoto/463/1999463_26_0.jpg',
+    preview: true,
+  },
+  {
+    // id: 66,
+    spotId: 12,
+    url: 'https://ssl.cdn-redfin.com/photo/1/bigphoto/463/1999463_31_0.jpg',
+    preview: false,
+  },
+  {
+    // id: 67,
+    spotId: 12,
+    url: 'https://ssl.cdn-redfin.com/photo/1/bigphoto/463/1999463_24_0.jpg',
+    preview: false,
+  },
+  {
+    // id: 68,
+    spotId: 12,
+    url: 'https://ssl.cdn-redfin.com/photo/1/bigphoto/463/1999463_19_1.jpg',
+    preview: false,
+  },
+  {
+    // id: 69,
+    spotId: 12,
+    url: 'https://ssl.cdn-redfin.com/photo/1/bigphoto/463/1999463_28_0.jpg',
+    preview: false,
+  },
+
+  /*********************** Kenny's Leschi In-Law Unit ***********************/
+  {
+    // id: 55,
+    spotId: 13,
+    url: 'https://weseattle.com/assets/images/cache/living_bedroom-497b8d8269af17e99e99010943b0e4ae.jpg',
+    preview: true,
+  },
+  {
+    // id: 56,
+    spotId: 13,
+    url: 'https://weseattle.com/assets/images/cache/Living_Room2-8ef382173328d603055964174be5214c.jpg',
+    preview: false,
+  },
+  {
+    // id: 57,
+    spotId: 13,
+    url: 'https://weseattle.com/assets/images/cache/Studio4-4341c8c008b3dbe2d75fe863cb5ba098.jpg',
+    preview: false,
+  },
+  {
+    // id: 58,
+    spotId: 13,
+    url: 'https://weseattle.com/assets/images/cache/living_kitchen_bedroom-4f37ec8fa9ce60c25de6aad65f8c3101.jpg',
+    preview: false,
+  },
+  {
+    // id: 59,
+    spotId: 13,
+    url: 'https://weseattle.com/assets/images/cache/Studio5-ae2fd15b5e04ed2e363d59c9c3b38d05.jpg',
+    preview: false,
+  },
+
+  /*********************** Demo Pike Place ***********************/
+  {
+    // id: 70,
+    spotId: 14,
+    url: 'https://images1.apartments.com/i2/Kr6OoXQbVw7fAyCrPSQPbh9B_42KkGR9hBiRcjAiCmc/116/the-modern-seattle-wa-1bd-loft-15ba---1111sf.jpg?p=1',
+    preview: true,
+  },
+  {
+    // id: 71,
+    spotId: 14,
+    url: 'https://images1.apartments.com/i2/cywuH6R3ihvKpW0RPnx1_hZn5ePt4PBvNxWXDcH7WoY/116/the-modern-seattle-wa-2bd-2ba---1157sf.jpg?p=1',
+    preview: false,
+  },
+  {
+    // id: 72,
+    spotId: 14,
+    url: 'https://images1.apartments.com/i2/zAkvncdktX3iE4G9Vg-p4vdf0E4u1GmNk4-C9ULEQnY/116/the-modern-seattle-wa-2bd-2ba---1157sf.jpg?p=1',
+    preview: false,
+  },
+  {
+    // id: 73,
+    spotId: 14,
+    url: 'https://images1.apartments.com/i2/kdAqCf94q5cpWM-_Zy0LHE0_Qa2qHghgXPFuHaU6-CA/116/the-modern-seattle-wa-building-photo.jpg?p=1',
+    preview: false,
+  },
+  {
+    // id: 74,
+    spotId: 14,
+    url: 'https://images1.apartments.com/i2/d4fNqlQ9YAN-0IEX-inQYtWayeCbcvvjBR0NSQHmODQ/116/the-modern-seattle-wa-building-photo.jpg?p=1',
+    preview: false,
+  },
+
+  /*********************** Demo Downtown Duplex ***********************/
+  {
+    // id: 75,
+    spotId: 15,
+    url: 'https://photos.zillowstatic.com/fp/2c2ad1c49f7ce56493e35db4d3668e39-uncropped_scaled_within_1536_1152.webp',
+    preview: true,
+  },
+  {
+    // id: 76,
+    spotId: 15,
+    url: 'https://photos.zillowstatic.com/fp/9ab2b74792a7ea088bd5b48bd955e7d8-uncropped_scaled_within_1536_1152.webp',
+    preview: false,
+  },
+  {
+    // id: 77,
+    spotId: 15,
+    url: 'https://photos.zillowstatic.com/fp/182026316d9b3c44a82a214439b71407-uncropped_scaled_within_1536_1152.webp',
+    preview: false,
+  },
+  {
+    // id: 78,
+    spotId: 15,
+    url: 'https://photos.zillowstatic.com/fp/72a6b49edf28f2419a67fef06ea85509-uncropped_scaled_within_1536_1152.webp',
+    preview: false,
+  },
+  {
+    // id: 79,
+    spotId: 15,
+    url: 'https://photos.zillowstatic.com/fp/a91d94b17a0b0ffcd132b763c644e6ea-uncropped_scaled_within_1536_1152.webp',
     preview: false,
   },
 ]
