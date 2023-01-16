@@ -112,7 +112,6 @@ const validateURL = [
 
 
 /********************************** spots/:spotId/bookings ***********************************/
-
 // Postman 29, 30: "Get All Bookings for a Spot By Id"
 // README, line 1031
 // *NOTE*

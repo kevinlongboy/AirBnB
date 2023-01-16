@@ -16,6 +16,7 @@ import UserBookings from "./components/Bookings/UserBookings";
 import UserReservations from "./components/Bookings/UserReservations";
 import BookingConfirmationPage from "./components/Bookings/BookingConfirmationPage";
 import ManageBookingPage from "./components/Bookings/ManageBookingPage";
+import SearchResultsPage from "./components/Search/SearchResultsPage";
 
 
 /******************************* COMPONENT *******************************/
@@ -87,7 +88,10 @@ function App() {
 
 
           {/* SEARCH */}
-          
+          <Route exact path={'/spots?'}>
+            <SearchResultsPage />
+          </Route>
+
 
         {/* <Route>
           Page Not Found

@@ -118,7 +118,6 @@ function CreateBookingForm({spot}) {
 
             async (res) => {
                 const data = await res.json();
-                console.log("data at CreateBookingForm", data)
 
                 if (data && data.errors) {
                     errors.push(data.message);
