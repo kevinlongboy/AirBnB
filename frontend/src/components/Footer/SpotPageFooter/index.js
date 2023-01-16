@@ -17,12 +17,21 @@ function SpotPageFooter() {
 
                 <div className="spotPageFooterContainerLeft">
                     <div className="footerText">© 2022 Cranebnb, Inc.</div>
+
                     <span className="footerText">·</span>
-                    <a href="https://www.airbnb.com/help/article/2855/airbnb-privacy" className="footerText" >Privacy</a>
+
+                    <span className="footerText">Privacy</span>
+                    {/* <a href="https://www.airbnb.com/help/article/2855/airbnb-privacy" className="footerText" >Privacy</a> */}
+
                     <span className="footerText">·</span>
-                    <a href="https://www.airbnb.com/help/article/2908" className="footerText">Terms</a>
+
+                    <span className="footerText">Terms</span>
+                    {/* <a href="https://www.airbnb.com/help/article/2908" className="footerText">Terms</a> */}
+
                     <span className="footerText">·</span>
-                    <a href="https://www.airbnb.com/sitemaps/v2" className="footerText">Sitemap</a>
+
+                    <span className="footerText">Sitemap</span>
+                    {/* <a href="https://www.airbnb.com/sitemaps/v2" className="footerText">Sitemap</a> */}
                 </div>
 
 
