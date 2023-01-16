@@ -88,7 +88,7 @@ function App() {
 
 
           {/* SEARCH */}
-          <Route exact path={'/spots?'}>
+          <Route exact path={'/search'}>
             <SearchResultsPage />
           </Route>
 

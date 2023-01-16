@@ -5,7 +5,7 @@ import { Link, NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // local files
 import './SearchResultsPage.css';
-import { thunkReadAllSpots } from '../../../store/spotsReducer';
+import { thunkSearchAllSpots } from '../../../store/spotsReducer';
 
 
 /******************************* COMPONENT *******************************/
@@ -22,7 +22,7 @@ function SearchResultsPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(thunkReadAllSpots());
+        dispatch(thunkSearchAllSpots());
     }, [dispatch])
 
     /**************** render component *****************/

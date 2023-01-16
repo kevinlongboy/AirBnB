@@ -5,6 +5,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // local files
 import './SearchBar.css';
+import { thunkSearchAllSpots } from '../../../store/spotsReducer';
 
 
 /******************************* COMPONENT *******************************/
@@ -23,7 +24,7 @@ function SearchBar(){
     const [location, setLocation] = useState();
     const [minPrice, setMinPrice] = useState();
     const [maxPrice, setMaxPrice] = useState();
-    const [spotName, setSpotName] = useState();
+    const [name, setName] = useState();
     const [validationErrors, setValidationErrors] = useState([]);
 
     /***************** handle events *******************/
@@ -34,7 +35,7 @@ function SearchBar(){
     //     document.addEventListener('click', closeMenu);
     //     return () => document.removeEventListener("click", closeMenu);
     //   }, [displaySearchForm]);
-    
+
     // useEffect(() => {
     //     window.addEventListener("mouseover", setDisplaySearchForm(false))
     // })
@@ -61,23 +62,25 @@ function SearchBar(){
         if (location) searchData.location = location
         if (minPrice) searchData.minPrice = minPrice
         if (maxPrice) searchData.maxPrice = maxPrice
-        if (spotName) searchData.spotName = spotName
+        if (name) searchData.name = name
 
-        // const searchResults = await dispatch(thunkSearchSpots(searchData).catch(
+        console.log("searchData", searchData)
 
-        //     async (res) => {
-        //         const data = await res.json();
+        const searchResults = await dispatch(thunkSearchAllSpots(searchData)).catch(
 
-        //         if (data && data.errors) {
-        //             errors.push(data.message);
-        //             setValidationErrors([...errors]);
-        //         }
-        //     }
-        // )
+            async (res) => {
+                const data = await res.json();
+
+                if (data && data.errors) {
+                    errors.push(data.message);
+                    setValidationErrors([...errors]);
+                }
+            }
+        )
+        history.push(`/search`)
 
         // if (searchResults) {
         //     // key into raw db data, since unable to add keys in backend for whatever reason
-            history.push(`/spots?`)
         // }
 
     }
@@ -125,8 +128,8 @@ function SearchBar(){
                     <label htmlFor='spot'>
                         <input
                             type='text'
-                            value={spotName}
-                            onChange={e => setSpotName(e.target.value)}
+                            value={name}
+                            onChange={e => setName(e.target.value)}
                             className='search-form-text-input'
                             placeholder='Name'
                         >

@@ -774,6 +774,94 @@ router.delete('/:spotId', requireAuth, async (req, res, next) => {
 });
 
 
+/***************************************** /search ******************************************/
+router.post('/search', async(req, res, next) => {
+
+    let error = {};
+
+    try {
+
+        let query = {
+            where: {},
+            include: []
+        }
+
+        /**************************** add filter ****************************/
+        // parse req data
+        let { location, minPrice, maxPrice, name } = req.body;
+
+        // custom query filter
+        // location - search: address, city, state, country
+        // if (location) query.where.address = { [Op.substring]: location };
+        if (location) query.where.city = { [Op.substring]: location };
+        // if (location) query.where.state = { [Op.substring]: location };
+        // if (location) query.where.country = { [Op.substring]: location };
+        // price - search: price
+        if (minPrice) query.where.price = { [Op.gte]: minPrice };
+        if (maxPrice) query.where.price = { [Op.lte]: maxPrice };
+        // name - search: name, description
+        if (name) query.where.name = { [Op.substring]: name };
+        // if (name) query.where.description = { [Op.substring]: name };
+        console.log("query", query)
+
+        /****************************** query *******************************/
+        let searchSpots = await Spot.findAll(query);
+        console.log("searchSpots", searchSpots)
+
+        /*************************** modify keys ****************************/
+        let spotHasBeenReviewed = []
+
+        for (let i = 0; i < searchSpots.length; i++) {
+            let currSpot = searchSpots[i]
+
+            if (!spotHasBeenReviewed.includes(currSpot.id)) {
+
+                /**************************** add avgRating-key ****************************/
+                let currSpotReviews = await Review.findAll({ // returns array of current spot's reviews
+                    where: { spotId: currSpot.id },
+                })
+
+                let sumStars = 0
+                for (let j = 0; j < currSpotReviews.length; j++) {
+                    let currReview = currSpotReviews[j];
+                    sumStars += currReview.stars
+                }
+                let aveStars = sumStars / currSpotReviews.length
+                if (!aveStars) aveStars = 0.0
+                currSpot.dataValues.avgRatings = aveStars.toFixed(2)
+
+                /*************************** add previewImage-key ***************************/
+                let prevImg = await SpotImage.findOne({
+                    where: { spotId: currSpot.id, preview: true },
+                    attributes: {
+                        exclude: ['id', 'spotId', 'preview', 'createdAt', 'updatedAt']
+                    },
+                    raw: true
+                })
+
+                // temporary solution until spotImages feature is implemented:
+                if (!prevImg) currSpot.dataValues.previewImage = "https://cdn1.vox-cdn.com/uploads/chorus_image/image/47552879/Pike_Place_Market_Entrance.0.0.jpg"
+                else currSpot.dataValues.previewImage = prevImg.url
+            }
+
+            spotHasBeenReviewed.push(currSpot.id)
+        }
+
+        return res
+        .status(200)
+        .json({
+            "Spots": searchSpots,
+        });
+
+
+    } catch (err) {
+        error.error = err
+        return res.json(error);
+    }
+})
+
+
+
 /****************************************** /spots ******************************************/
 
 // Postman 6: "Get All Spots"

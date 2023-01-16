@@ -12,6 +12,7 @@ const SPOTS_READ_SINGLE_SPOT_DETAILS = 'spots/READ_SINGLE_SPOT_DETAILS';
 const SPOTS_READ_SINGLE_SPOT_REVIEWS = 'spots/READ_SINGLE_SPOT_REVIEWS';
 const SPOTS_UPDATE_SINGLE_SPOT = 'spots/UPDATE_SINGLE_SPOT'
 const SPOTS_DELETE_SINGLE_SPOT = 'spots/DELETE_SINGLE_SPOT';
+const SPOTS_SEARCH_ALL_SPOTS = 'spots/SEARCH_ALL_SPOTS';
 
 
 /**************************** ACTION CREATORS ****************************/
@@ -43,6 +44,11 @@ export const actionUpdateSingleSpot = (updateSpot) => ({
 export const actionDeleteSingleSpot = (spotId) => ({
     type: SPOTS_DELETE_SINGLE_SPOT,
     payload: spotId
+});
+
+export const actionSearchAllSpots = (searchSpots) => ({
+    type: SPOTS_SEARCH_ALL_SPOTS,
+    payload: searchSpots
 });
 
 
@@ -127,6 +133,18 @@ export const thunkDeleteSingleSpot = (spotId) => async (dispatch) => {
         return
     }
 }
+
+export const thunkSearchAllSpots = (searchData) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/search`, {
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' } ,
+        body: JSON.stringify(searchData)
+    });
+    if (response.ok) {
+        const searchSpots = await response.json();
+        dispatch(actionSearchAllSpots(searchSpots.Spots))
+        return searchSpots.Spots
+    }}
 
 
 /***************************** STATE SHAPE *******************************/
@@ -243,6 +261,19 @@ const spotsReducer = (state = initialState, action) => {
             newState.singleSpotReviews = {...state.singleSpotReviews}
             delete newState.allSpots.spotId
             return newState
+
+        case SPOTS_SEARCH_ALL_SPOTS:
+            // copy newState.allSpots
+            newState.allSpots = {...state.allSpots}
+            newState.allSpots = normalizeArray(action.payload)
+            // copy newState.singleSpotDetails
+            newState.singleSpotDetails = {...state.singleSpotDetails}
+                newState.singleSpotDetails.SpotImages = [...state.singleSpotDetails.SpotImages]
+                newState.singleSpotDetails.Owner = {...state.singleSpotDetails.Owner}
+            // copy newState.singleSpotReviews
+            newState.singleSpotReviews = {...state.singleSpotReviews}
+            return newState
+
 
         default:
             return state

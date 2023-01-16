@@ -1,0 +1,12 @@
+.SearchResultsPage-component {
+    /* display: inline-block; */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    /* flex-grow: 3; */
+    justify-content: center;
+    align-items: left;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 60px;
+}
