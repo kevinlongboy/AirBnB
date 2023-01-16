@@ -1,3 +1,15 @@
+.AllSpots-component {
+    width: 100%;
+    max-width: 1440px;
+
+    margin: 0px;
+    padding: 0px 20px;
+
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+
 .spots {
     /* display: inline-block; */
     display: flex;

@@ -5,7 +5,6 @@ import React from "react";
 import './SpotPageFooter.css'
 import marketLogo from "../../../assets/social-media-branding/market-logo-black.png";
 
-
 /******************************* COMPONENT *******************************/
 function SpotPageFooter() {
 

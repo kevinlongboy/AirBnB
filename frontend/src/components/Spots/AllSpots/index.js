@@ -28,8 +28,8 @@ function AllSpots() {
 
     /**************** render component *****************/
     return (
-        <div>
-
+        // <div className="AllSpots-component">
+        <>
             <div className="spots">
 
                 {allSpotsArr.map((spot) => (
@@ -59,8 +59,10 @@ function AllSpots() {
                 ))}
 
             </div>
+
             <MainFooter />
-        </div>
+        </>
+        // </div> 
     )
 }
 
