@@ -4,6 +4,7 @@ import React from "react";
 // local files
 import './SpotPageFooter.css'
 import marketLogo from "../../../assets/social-media-branding/market-logo-black.png";
+import klLogo from "../../../assets/social-media-branding/kl-logo.png";
 
 /******************************* COMPONENT *******************************/
 function SpotPageFooter() {
@@ -26,9 +27,10 @@ function SpotPageFooter() {
 
 
                 <div className="spotPageFooterContainerRight">
-                    <a href="https://www.linkedin.com/in/kevinlongboy/"><i class="fa-brands fa-linkedin" id="spotPageFooterSocialMediaIcon"></i></a>
-                    <a href="https://github.com/kevinlongboy"><i class="fa-brands fa-github" id="spotPageFooterSocialMediaIcon"></i></a>
-                    <a href="http://kevinlongboy.com"><img src={marketLogo} id="spotPageFooterSocialMediaImage"></img></a>
+                    <a href="http://kevinlongboy.com" target="_blank"><img src={klLogo} id="spotPageFooterSocialMediaImage"></img></a>
+                    <a href="https://www.linkedin.com/in/kevinlongboy/" target="_blank"><i class="fa-brands fa-linkedin" id="spotPageFooterSocialMediaIcon"></i></a>
+                    <a href="https://github.com/kevinlongboy" target="_blank"><i class="fa-brands fa-github" id="spotPageFooterSocialMediaIcon"></i></a>
+                    <a href="https://kl-market.herokuapp.com" target="_blank"><img src={marketLogo} id="spotPageFooterSocialMediaImage"></img></a>
                 </div>
 
             </div>
