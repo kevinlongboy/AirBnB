@@ -58,8 +58,6 @@ function MainFooter() {
                     <i class="fa-brands fa-github"></i>
                 </a>
 
-
-
                 <a
                     href="https://kl-market.herokuapp.com"
                     target='_blank'
