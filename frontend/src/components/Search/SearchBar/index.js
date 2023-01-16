@@ -11,11 +11,6 @@ import { thunkSearchAllSpots } from '../../../store/spotsReducer';
 /******************************* COMPONENT *******************************/
 function SearchBar(){
 
-    /****************** access store *******************/
-    const sessionUser = useSelector(state => state.session.user);
-
-    /************ key into pertinent values ************/
-
     /************ reducer/API communication ************/
     const dispatch = useDispatch();
 
@@ -77,6 +72,7 @@ function SearchBar(){
                 }
             }
         )
+        // e.target.reset();
         history.push(`/search`)
 
         // if (searchResults) {

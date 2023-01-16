@@ -27,34 +27,35 @@ function SearchResultsPage() {
 
     /**************** render component *****************/
     return (
-        <div className="SearchResultsPage-component">
+        <div className='pageWrapperContainer'>
+            <div className="SearchResultsPage-component">
 
-            {allSpotsArr.map((spot) => (
-                <Link
-                    className="spot-card"
-                    key={`${spot.id}`}
-                    id={spot.id}
-                    to={`/spots/${spot.id}`}
-                    style={{textDecoration:"none"}} //?
-                >
+                {allSpotsArr.map((spot) => (
+                    <Link
+                        to={`/spots/${spot.id}`}
+                        key={`${spot.id}`}
+                        className="SearchResultsPage-card"
+                    >
 
-                    <div className="spot-image-container">
-                        <img className="spot-image" src={spot.previewImage} alt={`${spot.name}`}></img>
-                    </div>
-
-                    <div className="spot-text">
-
-                        <div className="spot-text-line-1">
-                            <div className="spot-name" style={{color:"black", fontWeight:"900"}}>{spot.name}</div>
-                            <div id="main-page-spot-rating">★ {spot.avgRatings ? spot.avgRatings : 0.00}</div>
+                        <div className="SearchResultsPage-card-image-container">
+                            <img src={spot.previewImage} alt={`${spot.name}`} className="SearchResultsPage-card-image"></img>
                         </div>
-                        <div className="spot-location" style={{color:"#717171",  fontWeight:"100"}}>{`${spot.city}, ${spot.state}`}</div>
-                        <div className="spot-price" style={{color:"black", fontWeight:"900"}}>{`$${spot.price} night`}</div>
-                    </div>
 
-                </Link>
-            ))}
+                        <div className="SearchResultsPage-card-text-container">
 
+                            <div className="SearchResultsPage-card-header-container">
+                                <div className="spot-name">{spot.name}</div>
+                                <div>★ {spot.avgRatings ? spot.avgRatings : 0.00}</div>
+                            </div>
+
+                            <div className="SearchResultsPage-card-location">{`${spot.city}, ${spot.state}`}</div>
+                            <div className="SearchResultsPage-card-price">{`$${spot.price} night`}</div>
+                        </div>
+
+                    </Link>
+                ))}
+
+            </div>
         </div>
     );
 }
