@@ -385,31 +385,31 @@ const demoSpotImages = [
   {
     // id: 60,
     spotId: 11,
-    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073003/620478ab0858b4.53771142248.jpg',
+    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073008/620478b0bfe1d5.63686334337.jpg',
     preview: true,
   },
   {
     // id: 61,
     spotId: 11,
-    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073004/620478aca036a2.40055366228.jpg',
+    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073003/620478ab0858b4.53771142248.jpg',
     preview: false,
   },
   {
     // id: 62,
     spotId: 11,
-    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073003/620478abd1b0e9.03866488127.jpg',
+    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073006/620478ae1554b2.40707547422.jpg',
     preview: false,
   },
   {
     // id: 63,
     spotId: 11,
-    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073008/620478b0bfe1d5.63686334337.jpg',
+    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073004/620478aca036a2.40055366228.jpg',
     preview: false,
   },
   {
     // id: 64,
     spotId: 11,
-    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/072634/620477d98f7964.50935396848.jpg',
+    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073010/620478b2653ac8.77825402943.jpg',
     preview: false,
   },
 
@@ -421,7 +421,7 @@ const demoSpotImages = [
     preview: true,
   },
   {
-    // id: 66,
+    // id: 66
     spotId: 12,
     url: 'https://ssl.cdn-redfin.com/photo/1/bigphoto/463/1999463_31_0.jpg',
     preview: false,
@@ -447,31 +447,31 @@ const demoSpotImages = [
 
   /*********************** Kenny's Leschi In-Law Unit ***********************/
   {
-    // id: 55,
+    // id: 70,
     spotId: 13,
     url: 'https://weseattle.com/assets/images/cache/living_bedroom-497b8d8269af17e99e99010943b0e4ae.jpg',
     preview: true,
   },
   {
-    // id: 56,
+    // id: 71,
     spotId: 13,
     url: 'https://weseattle.com/assets/images/cache/Living_Room2-8ef382173328d603055964174be5214c.jpg',
     preview: false,
   },
   {
-    // id: 57,
+    // id: 72,
     spotId: 13,
     url: 'https://weseattle.com/assets/images/cache/Studio4-4341c8c008b3dbe2d75fe863cb5ba098.jpg',
     preview: false,
   },
   {
-    // id: 58,
+    // id: 73,
     spotId: 13,
     url: 'https://weseattle.com/assets/images/cache/living_kitchen_bedroom-4f37ec8fa9ce60c25de6aad65f8c3101.jpg',
     preview: false,
   },
   {
-    // id: 59,
+    // id: 74,
     spotId: 13,
     url: 'https://weseattle.com/assets/images/cache/Studio5-ae2fd15b5e04ed2e363d59c9c3b38d05.jpg',
     preview: false,
@@ -479,65 +479,65 @@ const demoSpotImages = [
 
   /*********************** Demo Pike Place ***********************/
   {
-    // id: 70,
+    // id: 75,
     spotId: 14,
-    url: 'https://images1.apartments.com/i2/Kr6OoXQbVw7fAyCrPSQPbh9B_42KkGR9hBiRcjAiCmc/116/the-modern-seattle-wa-1bd-loft-15ba---1111sf.jpg?p=1',
+    url: 'https://avalonbay-avalon-communities-prod.cdn.arcpublishing.com/resizer/-jUT3oMviKWWIdwZ9OfyGKgf2n0=/1440x810/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/avalonbay/R2V2X5TXNJO6ZBTWVT7RALHH2Y.jpg',
     preview: true,
   },
   {
-    // id: 71,
+    // id: 76,
     spotId: 14,
-    url: 'https://images1.apartments.com/i2/cywuH6R3ihvKpW0RPnx1_hZn5ePt4PBvNxWXDcH7WoY/116/the-modern-seattle-wa-2bd-2ba---1157sf.jpg?p=1',
+    url: 'https://avalonbay-avalon-communities-prod.cdn.arcpublishing.com/resizer/gsMBcnc6nt3YeA8lYqRbLsX-Xow=/1440x810/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/avalonbay/53226WDQZ5M6JHFU4JUAI27OCU.jpg',
     preview: false,
   },
   {
-    // id: 72,
+    // id: 77,
     spotId: 14,
-    url: 'https://images1.apartments.com/i2/zAkvncdktX3iE4G9Vg-p4vdf0E4u1GmNk4-C9ULEQnY/116/the-modern-seattle-wa-2bd-2ba---1157sf.jpg?p=1',
+    url: 'https://avalonbay-avalon-communities-prod.cdn.arcpublishing.com/resizer/jmgjPTCXWVgQYFEEFMzIGV5oEHs=/1440x810/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/avalonbay/MEBORVKIS5OXRDXU2XDZJAI3YM.jpg',
     preview: false,
   },
   {
-    // id: 73,
+    // id: 78,
     spotId: 14,
-    url: 'https://images1.apartments.com/i2/kdAqCf94q5cpWM-_Zy0LHE0_Qa2qHghgXPFuHaU6-CA/116/the-modern-seattle-wa-building-photo.jpg?p=1',
+    url: 'https://avalonbay-avalon-communities-prod.cdn.arcpublishing.com/resizer/9RxAzPE6Wjda4_Dt1tta2NGCQgs=/1440x810/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/avalonbay/MM73QVFBNFMJ5FE3E3ISEAOUXE.jpg',
     preview: false,
   },
   {
-    // id: 74,
+    // id: 79,
     spotId: 14,
-    url: 'https://images1.apartments.com/i2/d4fNqlQ9YAN-0IEX-inQYtWayeCbcvvjBR0NSQHmODQ/116/the-modern-seattle-wa-building-photo.jpg?p=1',
+    url: 'https://avalonbay-avalon-communities-prod.cdn.arcpublishing.com/resizer/oNDXfn4UjaHl2OYptp2J27Vnq3g=/1440x810/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/avalonbay/WGGL6MG6CRJENIC6CNVRLQDOTA.jpg',
     preview: false,
   },
 
   /*********************** Demo Downtown Duplex ***********************/
   {
-    // id: 75,
+    // id: 80,
     spotId: 15,
-    url: 'https://photos.zillowstatic.com/fp/2c2ad1c49f7ce56493e35db4d3668e39-uncropped_scaled_within_1536_1152.webp',
+    url: 'https://images1.apartments.com/i2/Kr6OoXQbVw7fAyCrPSQPbh9B_42KkGR9hBiRcjAiCmc/116/the-modern-seattle-wa-1bd-loft-15ba---1111sf.jpg?p=1',
     preview: true,
   },
   {
-    // id: 76,
+    // id: 81,
     spotId: 15,
-    url: 'https://photos.zillowstatic.com/fp/9ab2b74792a7ea088bd5b48bd955e7d8-uncropped_scaled_within_1536_1152.webp',
+    url: 'https://images1.apartments.com/i2/cywuH6R3ihvKpW0RPnx1_hZn5ePt4PBvNxWXDcH7WoY/116/the-modern-seattle-wa-2bd-2ba---1157sf.jpg?p=1',
     preview: false,
   },
   {
-    // id: 77,
+    // id: 82,
     spotId: 15,
-    url: 'https://photos.zillowstatic.com/fp/182026316d9b3c44a82a214439b71407-uncropped_scaled_within_1536_1152.webp',
+    url: 'https://images1.apartments.com/i2/zAkvncdktX3iE4G9Vg-p4vdf0E4u1GmNk4-C9ULEQnY/116/the-modern-seattle-wa-2bd-2ba---1157sf.jpg?p=1',
     preview: false,
   },
   {
-    // id: 78,
+    // id: 83,
     spotId: 15,
-    url: 'https://photos.zillowstatic.com/fp/72a6b49edf28f2419a67fef06ea85509-uncropped_scaled_within_1536_1152.webp',
+    url: 'https://images1.apartments.com/i2/kdAqCf94q5cpWM-_Zy0LHE0_Qa2qHghgXPFuHaU6-CA/116/the-modern-seattle-wa-building-photo.jpg?p=1',
     preview: false,
   },
   {
-    // id: 79,
+    // id: 84,
     spotId: 15,
-    url: 'https://photos.zillowstatic.com/fp/a91d94b17a0b0ffcd132b763c644e6ea-uncropped_scaled_within_1536_1152.webp',
+    url: 'https://images1.apartments.com/i2/d4fNqlQ9YAN-0IEX-inQYtWayeCbcvvjBR0NSQHmODQ/116/the-modern-seattle-wa-building-photo.jpg?p=1',
     preview: false,
   },
 ]

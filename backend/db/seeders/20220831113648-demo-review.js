@@ -66,7 +66,7 @@ const demoReviews = [
   },
   { // Frasier reviews Roz's
     spotId: 4,
-    userId: 1,
+    userId: 2,
     review: 'A delightful home, and the decorating motif was certainly ... courageous',
     stars: 5,
   },
@@ -107,7 +107,7 @@ const demoReviews = [
   /*********************** 6. Lilith's South Lake Union Suite ***********************/
   { // Frasier reviews Lilith's
     spotId: 6,
-    userId: 1,
+    userId: 2,
     review: "Simply superb! You'd be hard-pressed to find a better place to stay in Seattle.",
     stars: 5,
   },
@@ -122,7 +122,7 @@ const demoReviews = [
   /*********************** 7. Gil's Capitol Hill Abode ***********************/
   { // Frasier reviews Gil's
     spotId: 7,
-    userId: 1,
+    userId: 2,
     review: "This place is quite a find! It's in a vibrant neighborhood and the host certainly has a taste for the finer things!",
     stars: 5,
   },
@@ -137,7 +137,7 @@ const demoReviews = [
   /*********************** 8. Noel's Chinatown-International Room ***********************/
   { // Frasier reviews Noel's
     spotId: 8,
-    userId: 1,
+    userId: 2,
     review: "The host has bit of a quirky personality, but I could tell he tried his best to make us feel welcome. And for that, I thank his hospitality.",
     stars: 3,
   },
@@ -152,7 +152,7 @@ const demoReviews = [
   /*********************** 9. Bulldog's SoDo Shared Space ***********************/
   { // Frasier reviews Bulldog's
     spotId: 9,
-    userId: 1,
+    userId: 2,
     review: 'Charming.',
     stars: 2,
   },

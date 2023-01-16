@@ -187,7 +187,7 @@ const demoSpots = [
   {
     // id: 14,
     ownerId: 1, // Demo
-    address: '255 Lenora St',
+    address: '1530 Belmont Ave',
     city: 'Seattle',
     state: 'WA',
     country: 'United States of America',
@@ -200,7 +200,7 @@ const demoSpots = [
   {
     // id: 15,
     ownerId: 1, // Demo
-    address: '1250 Alki Avenue SW, Unit 3A',
+    address: '255 Lenora St',
     city: 'Seattle',
     state: 'WA',
     country: 'United States of America',
