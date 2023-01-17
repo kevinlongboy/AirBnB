@@ -21,7 +21,6 @@ function DeleteBooking({tripId}) {
 
   /**************** render component *****************/
   return (
-      <div className="pageWrapperContainer">
         <div className="DeleteBooking-component">
 
             <p>Are you sure you want to cancel this reservation?</p>
@@ -36,7 +35,6 @@ function DeleteBooking({tripId}) {
                 </button>
             </NavLink>
         </div>
-      </div>
   )
 }
 
