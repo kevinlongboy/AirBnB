@@ -66,7 +66,7 @@ function UserReviews() {
     if (!spotsToBeReviewed.length) {
         newReviewsTable = (
             <tr id="reviewsToWriteTableBodyRow">
-                <td id="reviewsToWriteTableBodyData">Nobody to review right now. Looks like it’s time for another trip!</td>
+                <td id="UserReviews-null-reviews-table-data">Nobody to review right now. Looks like it’s time for another trip!</td>
             </tr>
         )
     } else {
@@ -98,6 +98,7 @@ function UserReviews() {
             <>
                 <tr className="reviews-table-body-row">
                     <td className="reviews-table-body-data">
+                        <h1 id="UserReviews-null-reviews-table-data">No reviews written so far. Looks like it’s time for another trip!</h1>
                     </td>
                 </tr>
             </>
