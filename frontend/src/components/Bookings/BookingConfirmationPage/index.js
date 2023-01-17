@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import './BookingConfirmationPage.css';
 import { thunkReadUserBookings } from "../../../store/bookingsReducer";
 import { convertInformalDate } from "../../../component-resources";
+import SpotPageFooter from "../../Footer/SpotPageFooter";
 
 
 /******************************* COMPONENT *******************************/
@@ -32,60 +33,63 @@ function BookingConfirmationPage() {
 
   /**************** render component *****************/
   return (
-      <div className="pageWrapperContainer">
-        <div className="BookingConfirmationPage-component">
+      <>
+        <div className="pageWrapperContainer">
+            <div className="BookingConfirmationPage-component">
 
-            <div className="BookingConfirmationPage-left-container">
-                <div className="BookingConfirmationPage-header">
-                    <h1>Your reservation is pending</h1>
-                    <p>This isn’t a confirmed reservation—yet. You’ll get a response from the host, {trip && trip.Spot.ownerName}, at {sessionState.user.email} within 24 hours.</p>
-                    <p>Don’t worry—you won’t be charged until your reservation is confirmed.</p>
-                    <NavLink exact to="/trips">
-                        <button
-                            type="submit"
-                            className="BookingConfirmationPage-reserve-button"
-                            // disabled={!!validationErrors.length}
-                            // onClick={handleSubmit}
-                            >
-                            View trips
-                        </button>
-                    </NavLink>
+                <div className="BookingConfirmationPage-left-container">
+                    <div className="BookingConfirmationPage-header">
+                        <h1>Your reservation is pending</h1>
+                        <p>This isn’t a confirmed reservation—yet. You’ll get a response from the host, {trip && trip.Spot.ownerName}, at {sessionState.user.email} within 24 hours.</p>
+                        <p>Don’t worry—you won’t be charged until your reservation is confirmed.</p>
+                        <NavLink exact to="/trips">
+                            <button
+                                type="submit"
+                                className="BookingConfirmationPage-reserve-button"
+                                // disabled={!!validationErrors.length}
+                                // onClick={handleSubmit}
+                                >
+                                View trips
+                            </button>
+                        </NavLink>
+                    </div>
                 </div>
-            </div>
 
-            <div className="BookingConfirmationPage-right-container">
-                <div className="BookingConfirmationPage-card">
-                    <div className="BookingConfirmationPage-card-thumbnail-container">
-                        <img
-                            src={trip && trip.Spot.previewImage}
-                            alt="Spot image"
-                            className="BookingConfirmationPage-card-thumbnail"
-                            >
-                        </img>
-                    </div>
-
-                    <div className="BookingConfirmationPage-card-overview-container">
-                        <h1>{trip && trip.Spot.name}</h1>
-                        <p>
-                            {trip && convertInformalDate(trip.startDate)} - {trip && convertInformalDate(trip.endDate)} · {trip && trip.guests} guest{trip && trip.guests == 1 ? '' : 's'}
-                        </p>
-                    </div>
-
-                    <div className="BookingConfirmationPage-card-details-container">
-                        <div className="BookingConfirmationPage-card-detail">
-                            <p>Total</p>
-                            <p>${trip && trip.total}</p>
+                <div className="BookingConfirmationPage-right-container">
+                    <div className="BookingConfirmationPage-card">
+                        <div className="BookingConfirmationPage-card-thumbnail-container">
+                            <img
+                                src={trip && trip.Spot.previewImage}
+                                alt="Spot image"
+                                className="BookingConfirmationPage-card-thumbnail"
+                                >
+                            </img>
                         </div>
-                        <div className="BookingConfirmationPage-card-detail">
-                            <p>Reservation code</p>
-                            <p>{tripId}</p>
-                        </div>
-                    </div>
 
+                        <div className="BookingConfirmationPage-card-overview-container">
+                            <h1>{trip && trip.Spot.name}</h1>
+                            <p>
+                                {trip && convertInformalDate(trip.startDate)} - {trip && convertInformalDate(trip.endDate)} · {trip && trip.guests} guest{trip && trip.guests == 1 ? '' : 's'}
+                            </p>
+                        </div>
+
+                        <div className="BookingConfirmationPage-card-details-container">
+                            <div className="BookingConfirmationPage-card-detail">
+                                <p>Total</p>
+                                <p>${trip && trip.total}</p>
+                            </div>
+                            <div className="BookingConfirmationPage-card-detail">
+                                <p>Reservation code</p>
+                                <p>{tripId}</p>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-      </div>
+        <SpotPageFooter />
+    </>
   )
 }
 

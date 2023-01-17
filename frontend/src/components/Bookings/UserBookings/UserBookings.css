@@ -2,6 +2,7 @@
 .UserBookings-component {
     width: 100%;
     max-width: 1440px;
+    height: 100%;
 
     margin: 0px;
     padding: 0px 20px;

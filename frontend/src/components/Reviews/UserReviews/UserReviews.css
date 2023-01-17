@@ -1,6 +1,20 @@
+/**************** PAGE *****************/
+.UserReviews-page-wrapper-container{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    /* padding: min(0px 50px);
+    padding: max(0px 400px) */
+}
+
+/**************** COMPONENT *****************/
 .review-page {
     min-width: 650px;
     width: 770px;
+    height: 100%;
+
     padding: 0px 20px;
 }
 

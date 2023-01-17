@@ -1,6 +1,19 @@
 /******************** COMPONENT ********************/
+.SearchResultsPage-wrapper-container{
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: min(0px 50px);
+    padding: max(0px 400px) */
+}
+
+
+/******************** COMPONENT ********************/
 .SearchResultsPage-component {
     width: 100%;
+    height: 100%;
 
     padding: 0px 50px 60px;
 

@@ -8,6 +8,7 @@ import './UserReservations.css';
 import { thunkReadUserReservations } from "../../../store/bookingsReducer";
 import UpcomingReservations from "./UpcomingReservations";
 import PastReservations from "./PastReservations";
+import SpotPageFooter from "../../Footer/SpotPageFooter";
 
 
 /******************************* COMPONENT *******************************/
@@ -56,53 +57,56 @@ function UserReservations() {
 
     /**************** render component *****************/
     return (
-        <div className="pageWrapperContainer">
-            <div className="UserReservations-component">
+        <>
+            <div className="UserReservations-page-wrapper-container">
+                <div className="UserReservations-component">
 
-                <div className="UserReservations-header">
-                    Hi, {sessionState.user.firstName}!
-                </div>
+                    <div className="UserReservations-header">
+                        Hi, {sessionState.user.firstName}!
+                    </div>
 
-                <div className="UserReservations-subheader">
-                    <p>Your reservations</p>
-                    <p><u>All Reservations ({upcomingReservationsArr.length + pastReservationsArr.length})</u></p>
-                </div>
+                    <div className="UserReservations-subheader">
+                        <p>Your reservations</p>
+                        <p><u>All Reservations ({upcomingReservationsArr.length + pastReservationsArr.length})</u></p>
+                    </div>
 
-                <div className="UserReservations-navbar-container">
-                    <button
-                        onClick={() => setDisplay('upcoming')}
-                        className="UserReservations-navbar-button"
-                        id={display === "upcoming" ? "UserReservations-navbar-button-active" : "UserReservations-navbar-button"}
-                    >
-                        Upcoming ({upcomingReservationsArr.length})
-                    </button>
+                    <div className="UserReservations-navbar-container">
+                        <button
+                            onClick={() => setDisplay('upcoming')}
+                            className="UserReservations-navbar-button"
+                            id={display === "upcoming" ? "UserReservations-navbar-button-active" : "UserReservations-navbar-button"}
+                            >
+                            Upcoming ({upcomingReservationsArr.length})
+                        </button>
 
-                    <button
-                        onClick={() => setDisplay('past')}
-                        className="UserReservations-navbar-button"
-                        id={display === "past" ? "UserReservations-navbar-button-active" : "UserReservations-navbar-button"}
-                    >
-                        Past ({pastReservationsArr.length})
-                    </button>
-                </div>
+                        <button
+                            onClick={() => setDisplay('past')}
+                            className="UserReservations-navbar-button"
+                            id={display === "past" ? "UserReservations-navbar-button-active" : "UserReservations-navbar-button"}
+                            >
+                            Past ({pastReservationsArr.length})
+                        </button>
+                    </div>
 
-                <div className="conditional-reservations-card-container">
-                    {display === 'upcoming' ?
-                        <UpcomingReservations
+                    <div className="conditional-reservations-card-container">
+                        {display === 'upcoming' ?
+                            <UpcomingReservations
                             spots={spots}
                             spotIds={spotIds}
                             upcomingReservationsArr={upcomingReservationsArr}/> :
 
-                        <PastReservations
+                            <PastReservations
                             spots={spots}
                             spotIds={spotIds}
                             pastReservationsArr={pastReservationsArr}/>
-                    }
+                        }
+                    </div>
+
+
                 </div>
-
-
             </div>
-        </div>
+            <SpotPageFooter />
+        </>
     )
 }
 

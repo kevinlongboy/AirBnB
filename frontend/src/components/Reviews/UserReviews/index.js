@@ -131,7 +131,7 @@ function UserReviews() {
     else return (
 
     <>
-        <div className="pageWrapperContainer">
+        <div className="UserReviews-page-wrapper-container">
             <div className="review-page">
 
                 <div className="review-page-header">

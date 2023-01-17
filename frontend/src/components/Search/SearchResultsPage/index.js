@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // local files
 import './SearchResultsPage.css';
 import { thunkSearchAllSpots } from '../../../store/spotsReducer';
+import SpotPageFooter from '../../Footer/SpotPageFooter';
 
 
 /******************************* COMPONENT *******************************/
@@ -27,14 +28,14 @@ function SearchResultsPage() {
 
     /**************** render component *****************/
     return (
-        <div className='pageWrapperContainer'>
+        <div className='SearchResultsPage-wrapper-container'>
             <div className="SearchResultsPage-component">
 
                 {allSpotsArr.map((spot) => (
                     <Link
-                        to={`/spots/${spot.id}`}
-                        key={`${spot.id}`}
-                        className="SearchResultsPage-card"
+                    to={`/spots/${spot.id}`}
+                    key={`${spot.id}`}
+                    className="SearchResultsPage-card"
                     >
 
                         <div className="SearchResultsPage-card-image-container">
@@ -56,6 +57,7 @@ function SearchResultsPage() {
                 ))}
 
             </div>
+            <SpotPageFooter />
         </div>
     );
 }

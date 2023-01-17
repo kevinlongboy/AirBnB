@@ -1,14 +1,28 @@
+/****************** PAGE ******************/
+.SpotPage-wrapper-container {
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+/****************** COMPONENT ******************/
 .spot-page {
+    width: 100%;
+    max-width: 1120px;
+    height: 100%;
+
+    margin-bottom: 0px;
+    padding-left: min(50px);
+    padding-right: max(50px);
+    padding-bottom: 0px;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     /* align-content: space-between; */
     align-items: left;
-    margin-bottom: 0px;
-    padding-left: min(50px);
-    padding-right: max(50px);
-    padding-bottom: 0px;
-    max-width: 1120px;
 }
 
 #spot-page-name {

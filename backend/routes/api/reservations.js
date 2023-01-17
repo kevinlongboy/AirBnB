@@ -86,6 +86,7 @@ router.get('/', requireAuth, async (req, res, next) => {
         }
 
         console.log("allUserSpots", allUserSpots)
+
         return res
             .status(200)
             .json({
@@ -97,6 +98,17 @@ router.get('/', requireAuth, async (req, res, next) => {
         return res.json(error);
     }
 });
+
+// currently returns reservations by spotID
+// to return by dates,
+// either use sorting algorithm
+// or revise query
+    // search spot
+        // obtain spotIDs that match userID
+    // search reservations
+        // order by start date - DESC
+    //  per reservation
+        // filter by spot ID
 
 
 /*************************************** error handler ****************************************/

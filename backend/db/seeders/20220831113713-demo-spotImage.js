@@ -397,13 +397,13 @@ const demoSpotImages = [
   {
     // id: 62,
     spotId: 11,
-    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073006/620478ae1554b2.40707547422.jpg',
+    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073004/620478aca036a2.40055366228.jpg',
     preview: false,
   },
   {
     // id: 63,
     spotId: 11,
-    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073004/620478aca036a2.40055366228.jpg',
+    url: 'https://medialibrarycf.entrata.com/16362/MLv3/3/27/2022/02/09/073006/620478ae1554b2.40707547422.jpg',
     preview: false,
   },
   {
@@ -417,13 +417,13 @@ const demoSpotImages = [
   {
     // id: 65,
     spotId: 12,
-    url: 'https://ssl.cdn-redfin.com/photo/1/bigphoto/463/1999463_26_0.jpg',
+    url: 'https://ssl.cdn-redfin.com/photo/1/bigphoto/463/1999463_31_0.jpg',
     preview: true,
   },
   {
     // id: 66
     spotId: 12,
-    url: 'https://ssl.cdn-redfin.com/photo/1/bigphoto/463/1999463_31_0.jpg',
+    url: 'https://ssl.cdn-redfin.com/photo/1/bigphoto/463/1999463_26_0.jpg',
     preview: false,
   },
   {

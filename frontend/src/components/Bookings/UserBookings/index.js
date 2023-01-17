@@ -8,6 +8,7 @@ import './UserBookings.css';
 import { thunkReadUserBookings } from "../../../store/bookingsReducer";
 import waveIcon from "../../../assets/icons/wave-icon.png";
 import { convertInformalDate } from "../../../component-resources";
+import SpotPageFooter from "../../Footer/SpotPageFooter";
 
 
 
@@ -150,26 +151,29 @@ function UserBookings() {
 
     /**************** render component *****************/
     return (
-        <div className="pageWrapperContainer">
-            <div className="UserBookings-component">
+        <>
+            <div className="pageWrapperContainer">
+                <div className="UserBookings-component">
 
-                <div className="UserBookings-header">
-                    Trips
-                </div>
-
-                <div className="UserBookings-upcoming-trips-container">
-                    <div className="UserBookings-upcoming-trips-card-container">
-                        {upcomingBookingsCard}
+                    <div className="UserBookings-header">
+                        Trips
                     </div>
-                </div>
 
-                <div className="UserBookings-past-trips-container">
-                    <div className="UserBookings-past-trips-subheader">Where you've been</div>
-                    {pastBookingsCard}
-                </div>
+                    <div className="UserBookings-upcoming-trips-container">
+                        <div className="UserBookings-upcoming-trips-card-container">
+                            {upcomingBookingsCard}
+                        </div>
+                    </div>
 
+                    <div className="UserBookings-past-trips-container">
+                        <div className="UserBookings-past-trips-subheader">Where you've been</div>
+                        {pastBookingsCard}
+                    </div>
+
+                </div>
             </div>
-        </div>
+            <SpotPageFooter />
+        </>
     )
 }
 
