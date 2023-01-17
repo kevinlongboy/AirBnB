@@ -80,7 +80,7 @@ function LoginForm() {
 
   /**************** render component *****************/
   return (
-    <div>
+    <div className="LoginForm-component">
 
       <form className="login-form">
         {/* <div className="modalSubtitleContainer"> */}

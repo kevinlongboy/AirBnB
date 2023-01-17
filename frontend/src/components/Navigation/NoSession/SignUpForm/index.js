@@ -63,7 +63,7 @@ function SignUpForm() {
 
   return (
 
-    <div>
+    <div className="SignUpForm-component">
 
       <form className="signup-form">
 

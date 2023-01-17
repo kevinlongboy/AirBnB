@@ -1,8 +1,24 @@
+.SignUpForm-component {
+    width: 570px;
+    min-height: 810px;
+    /* height: 100%; */
+
+    border-radius: 12px;
+    background-color:white;
+
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .signup-form{
     display: flex;
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
+    /* background-color: red; */
 }
 
 .singUpDisclaimer {

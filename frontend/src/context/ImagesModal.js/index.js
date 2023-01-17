@@ -3,7 +3,7 @@
 import React, { useContext, useRef, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 // local files
-import './Modal.css';
+import './ImagesModal.css';
 
 
 /************ key into pertinent values ************/
@@ -11,7 +11,7 @@ const ModalContext = React.createContext();
 
 
 /******************************* COMPONENT *******************************/
-export function ModalProvider({ children }) {
+export function ImagesModalProvider({ children }) {
 
   /****************** manage state *******************/
   const modalRef = useRef();
@@ -34,7 +34,7 @@ export function ModalProvider({ children }) {
 
 
 /******************************* COMPONENT *******************************/
-export function Modal({ onClose, children }) {
+export function ImagesModal({ onClose, children }) {
 
   const modalNode = useContext(ModalContext);
   if (!modalNode) return null;

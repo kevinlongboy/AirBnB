@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import ImageGallery from 'react-image-gallery';
 // local files
 import './SpotPage.css';
 import { thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../../store/spotsReducer";
@@ -12,6 +13,7 @@ import SpotPageFooter from "../../Footer/SpotPageFooter";
 import { convertDate, addPlaceholderImages } from "../../../component-resources";
 import CreateBookingForm from "../../Bookings/CreateBookingForm";
 import SpotPageOwnerPanel from "./SpotPageOwnerPanel";
+import { Modal } from "../../../context/Modal";
 
 
 /******************************* COMPONENT *******************************/
@@ -39,6 +41,9 @@ function SpotPage() {
   let { spotId } = useParams()
   spotId = parseInt(spotId)
 
+  const modalImages = []
+  images && images.forEach(img => modalImages.push({original: img.url, thumbnail: img.url}))
+
   /************ reducer/API communication ************/
   const dispatch = useDispatch();
 
@@ -56,7 +61,7 @@ function SpotPage() {
 
   /****************** manage state *******************/
   let [reviewFormAction, setReviewFormAction] = useState();
-
+  const [showModal, setShowModal] = useState(false);
 
   /************* conditional components **************/
   // images
@@ -100,10 +105,23 @@ function SpotPage() {
 
               {
                 images.map((image, index) => (
-                  <img key={index + 1} className={`img${index + 1}`} src={image.url}></img>
+                  <img
+                    src={image.url}
+                    key={index + 1}
+                    className="SpotPage-image"
+                    id={`img${index + 1}`}
+                    onClick={()=> setShowModal(true)}
+                    >
+                  </img>
                   ))
                 }
             </div>
+
+                {showModal && (
+                  <Modal onClose={() => setShowModal(false)}>
+                    <ImageGallery items={modalImages} showPlayButton={false} showThumbnails={false} onClick={(e) => setShowModal(false)}/>
+                  </Modal>
+                )}
 
             <div className="spot-page-middle">
 
