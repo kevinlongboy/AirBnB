@@ -73,6 +73,11 @@ function SearchBar(){
             }
         )
         // e.target.reset();
+        setDisplaySearchForm(false)
+        setLocation()
+        setMinPrice()
+        setMaxPrice()
+        setName()
         history.push(`/search`)
 
         // if (searchResults) {

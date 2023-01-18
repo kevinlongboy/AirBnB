@@ -14,6 +14,7 @@ import { convertDate, addPlaceholderImages } from "../../../component-resources"
 import CreateBookingForm from "../../Bookings/CreateBookingForm";
 import SpotPageOwnerPanel from "./SpotPageOwnerPanel";
 import { Modal } from "../../../context/Modal";
+import SpotPageNullUserPanel from "./SpotPageNullUserPanel";
 
 
 /******************************* COMPONENT *******************************/
@@ -56,7 +57,7 @@ function SpotPage() {
 
   /****************** manage state *******************/
   const [showModal, setShowModal] = useState(false);
-
+  console.log(sessionState.user)
   /************* conditional components **************/
   // images
   if (images.length) {
@@ -69,10 +70,18 @@ function SpotPage() {
 
   // Booking
   let panel;
-  if (sessionState.user.id && (sessionState.user.id === spot.ownerId)) {
+  // no user
+  if (sessionState.user.id == undefined) {
+    panel = (
+      <SpotPageNullUserPanel spot={spot}/>
+    )
+  }
+  // user owns spots
+  else if (sessionState.user.id && (sessionState.user.id === spot.ownerId)) {
       panel = (
       <SpotPageOwnerPanel spot={spot} spotId={spotId}/>
     )
+  // user does not own spot
   } else {
     panel = (
       <CreateBookingForm spot={spot} />
