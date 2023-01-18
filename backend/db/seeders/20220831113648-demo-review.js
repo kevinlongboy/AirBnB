@@ -94,7 +94,7 @@ const demoReviews = [
   { // Roz reviews Martin’s
     spotId: 5,
     userId: 5,
-    review: "This was one the cutest places I've stayed at in a while, and it's in the perfect location. Lots of great restaurants and bars, and I even found a cute little park for my daughter to play in. Definitely recommend to everyone, and definitely coming back.",
+    review: "This was one the cutest places that I've stayed at in a while, and it's in the perfect location. Lots of great restaurants and bars, and I even found a cute little park for my daughter to play in. Definitely recommend to everyone, and definitely coming back.",
     stars: 5, // Prev: 4.5
   },
   { // Gertrude reviews Martin's
@@ -128,7 +128,7 @@ const demoReviews = [
   },
   { // Roz reviews Gil's
     spotId: 7,
-    userId: 4,
+    userId: 5,
     review: "This place was fabulous alright - a little too fabulous, if you ask me. I would've felt unwelcome and out-of-place had it not been for the wine basket the host left for our stay",
     stars: 4,
   },

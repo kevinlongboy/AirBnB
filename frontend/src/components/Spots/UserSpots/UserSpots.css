@@ -59,16 +59,24 @@
 }
 
 .userSpotsTableBodyRow {
+    height: 65px;
+    width: 100%;
+
+    border-bottom: 1.5px solid #f6f6f6;
+
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-bottom: 1.5px solid #f6f6f6;
+
+
     border-collapse: collapse;
-    height: 65px;
-    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     text-align: left;
+}
+
+.userSpotsTableBodyRow:hover {
+    /* background-color: #f7f7f7; */
 }
 
 .spotTableListingLink {
@@ -107,15 +115,19 @@
 .table-button {
     width: 70px;
     height: 40px;
-    border: 1.5px solid #222222;
+    background: none;
+
+    border: 1px solid #222222;
     border-radius: 8px;
+
     font-size: 14.5px;
     text-align: center;
-    background: none;
+
+    cursor: pointer;
 }
 
 .table-button:hover {
-    cursor: pointer;
+    background-color: #f7f7f7;
 }
 
 .spotTableListingLocation{

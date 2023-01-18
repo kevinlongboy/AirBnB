@@ -35,8 +35,11 @@
 
 /************************** HEADER **************************/
 .ReviewForm-close-header-container {
-    width: 100%;
+    /* width: 100%; */
+    width: 576px;
     height: 80px;
+    background-color: #fff;
+    border-radius: 12px 12px 0px 0px;
 
     border-bottom: 1px solid rgb(221, 221, 221);
 
@@ -44,6 +47,8 @@
     align-items: center;
 }
 .ReviewForm-close-button-container {
+    width: 100%;
+
     margin-left: 30px;
     width: fit-content;
 }
@@ -71,7 +76,9 @@
 /************************** FORM **************************/
 .ReviewForm-form {
     /* width: 100%; */
+    background-color: #fff;
 
+    border-radius: 0px 0px 12px 12px;
     padding: 30px;
 
     display: flex;

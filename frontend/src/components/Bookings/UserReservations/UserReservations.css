@@ -5,7 +5,7 @@
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
     /* padding: min(0px 50px);
     padding: max(0px 400px) */
 }
@@ -14,6 +14,7 @@
 .UserReservations-component {
     width: 100%;
     max-width: 1440px;
+    min-height: 100vh;
 
     margin: 0px;
     padding: 0px 20px;

@@ -24,16 +24,11 @@ function SpotPage() {
   const spotsState = useSelector(state => state.spots);
 
   /************ key into pertinent values ************/
-  // user
-  const userId = sessionState.user.id;
   // spot
   const spot = spotsState.singleSpotDetails;
   // spot reviews
   const spotReviews = spotsState.singleSpotReviews;
   const reviews = Object.values(spotReviews);
-  // user's review
-  const userAlreadyReviewedSpot = reviews.filter(obj => obj.User.id === userId)
-  const userReview = userAlreadyReviewedSpot[0]
   // images
   const spotImgs = spotsState.singleSpotDetails.SpotImages;
   const images = Object.values(spotImgs);
@@ -60,7 +55,6 @@ function SpotPage() {
   }, [dispatch]);
 
   /****************** manage state *******************/
-  let [reviewFormAction, setReviewFormAction] = useState();
   const [showModal, setShowModal] = useState(false);
 
   /************* conditional components **************/
@@ -75,13 +69,13 @@ function SpotPage() {
 
   // Booking
   let panel;
-  if (userId && (userId !== spot.ownerId)) {
-    panel = (
-    <CreateBookingForm spot={spot}/>
+  if (sessionState.user.id && (sessionState.user.id === spot.ownerId)) {
+      panel = (
+      <SpotPageOwnerPanel spot={spot} spotId={spotId}/>
     )
   } else {
     panel = (
-      <SpotPageOwnerPanel spot={spot} spotId={spotId}/>
+      <CreateBookingForm spot={spot} />
     )
   }
 
@@ -115,13 +109,13 @@ function SpotPage() {
                   </img>
                   ))
                 }
-            </div>
 
                 {showModal && (
                   <Modal onClose={() => setShowModal(false)}>
                     <ImageGallery items={modalImages} showPlayButton={false} showThumbnails={false} onClick={(e) => setShowModal(false)}/>
                   </Modal>
                 )}
+            </div>
 
             <div className="spot-page-middle">
 
@@ -156,3 +150,34 @@ function SpotPage() {
 
 /******************************** EXPORTS ********************************/
 export default SpotPage
+
+
+// {
+//   images.map((image, index) => {
+
+//     if (showModal) return (
+//         <>
+//           <img
+//             src={image.url}
+//             key={index + 1}
+//             className="SpotPage-image"
+//             id={`img${index + 1}`}
+//             onClick={()=> setShowModal(true)}
+//           >
+//           </img>
+//           <Modal onClose={() => setShowModal(false)}>
+//             <ImageGallery items={modalImages} showPlayButton={false} showThumbnails={false} onClick={(e) => setShowModal(false)} startIndex={index}/>
+//           </Modal>
+//         </>
+//     );
+//     if (!showModal) return (
+//       <img
+//       src={image.url}
+//       key={index + 1}
+//       className="SpotPage-image"
+//       id={`img${index + 1}`}
+//       onClick={()=> setShowModal(true)}
+//     >
+//     </img>
+//     )
+// })}
