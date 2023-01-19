@@ -127,12 +127,12 @@ const demoReviews = [
     review: "This place is quite a find! It's in a vibrant neighborhood and the host certainly has a taste for the finer things!",
     stars: 5,
   },
-  // { // Roz reviews Gil's
-  //   spotId: 7,
-  //   userId: 5,
-  //   review: "This place was fabulous alright - a little too fabulous, if you ask me. I would've felt unwelcome and out-of-place had it not been for the wine basket the host left for our stay",
-  //   stars: 4,
-  // },
+  { // Roz reviews Gil's
+    spotId: 7,
+    userId: 5,
+    review: "This place was fabulous alright - a little too fabulous, if you ask me. I would've felt unwelcome and out-of-place had it not been for the wine basket the host left for our stay",
+    stars: 4,
+  },
 
 
   /*********************** 8. Noel's Chinatown-International Room ***********************/
@@ -157,12 +157,12 @@ const demoReviews = [
     review: 'Charming.',
     stars: 2,
   },
-  // { // Roz reviews Bulldog's
-  //   spotId: 9,
-  //   userId: 5,
-  //   review: "Ugh. This place is DISGUSTING. I don't know why I even bothered staying here. The room was a total mess and the host kept hitting on me the entire time I was there. Save yourself the headache and STAY SOMEWHERE ELSE.",
-  //   stars: 1,
-  // },
+  { // Roz reviews Bulldog's
+    spotId: 9,
+    userId: 5,
+    review: "Ugh. This place is DISGUSTING. I don't know why I even bothered staying here. The room was a total mess and the host kept hitting on me the entire time I was there. Save yourself the headache and STAY SOMEWHERE ELSE.",
+    stars: 1,
+  },
 
 
   /*********************** 10. Gertrude's Eastlake Flat ***********************/
