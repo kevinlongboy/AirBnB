@@ -11,7 +11,7 @@ import './SignUpForm.css'
 
 /******************************* COMPONENT *******************************/
 function SignUpForm() {
-  
+
   /************ reducer/API communication ************/
   const dispatch = useDispatch();
 

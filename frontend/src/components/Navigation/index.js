@@ -72,7 +72,7 @@ function Navigation({ isLoaded }){
       </div>
 
       <div className="nav-bar-middle-container">
-        {/* <SearchBar /> */}
+        <SearchBar />
       </div>
 
       <div className="nav-bar-right-container">
