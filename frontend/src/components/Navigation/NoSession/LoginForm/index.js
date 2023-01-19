@@ -90,7 +90,7 @@ function LoginForm() {
       <form className="login-form">
         {/* <div className="modalSubtitleContainer"> */}
           {/* <span>X</span> */}
-          <div className="modal-subtitle">Log in or sign up</div>
+          <div className="modal-subtitle" id="modal-subtitle-signup">Log in or sign up</div>
         {/* </div> */}
 
         <div className="login-welcome" style={{textAlign:"left"}}>Welcome to Cranebnb</div>
