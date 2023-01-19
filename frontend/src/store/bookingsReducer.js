@@ -84,6 +84,7 @@ export const thunkReadSpotReservations = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/bookings`);
     if (response.ok) {
         const spotReservations = await response.json();
+        console.log("spotReservations", spotReservations)
         dispatch(actionReadSpotReservations(spotReservations));
         return spotReservations;
     };
@@ -97,7 +98,6 @@ export const thunkUpdateSpotBooking = (bookingId, updateBookingData) => async (d
     });
     if (response.ok) {
         const updateBooking = await response.json();
-        console.log("updateBooking", updateBooking)
         dispatch(actionUpdateSpotBooking(updateBooking));
         return updateBooking;
     }
@@ -159,6 +159,7 @@ const bookingsReducer = (state = initialState, action) => {
         case BOOKINGS_READ_SPOT_RESERVATIONS:
             newState.userBookings = { ...state.userBookings };
             newState.userReservations = { ...state.userReservations }
+            console.log("action.payload", action.payload)
             newState.spotReservations = normalizeArray(action.payload.Bookings);
             return newState
 

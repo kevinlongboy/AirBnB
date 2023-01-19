@@ -43,6 +43,8 @@ align-items: center;
 /* ERRORS */
 
 .errors {
+    width: 100%;
+    
     margin: 0;
     border: none;
     padding: 10px 0px;

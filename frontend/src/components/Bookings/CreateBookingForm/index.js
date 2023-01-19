@@ -8,19 +8,22 @@ import dayjs from "dayjs";
 import { thunkReadAllSpots, thunkReadSingleSpotDetails } from "../../../store/spotsReducer";
 import MainFooter from '../../Footer/MainFooter';
 import './CreateBookingForm.css';
-import { calculateGrandTotal, calculateNumberOfDays, getTodayISO } from "../../../component-resources";
+import { calculateGrandTotal, calculateNumberOfDays, convertExactDate, convertSemiFormalDate, getTodayISO } from "../../../component-resources";
 import { thunkCreateSingleBooking } from "../../../store/bookingsReducer";
 
 
 /******************************* COMPONENT *******************************/
-function CreateBookingForm({spot}) {
+function CreateBookingForm({spot, bookings}) {
 
     /****************** access store *******************/
     const spotsState = useSelector(state => state.spots)
+    console.log("bookings", bookings)
+
 
     /************ key into pertinent values ************/
     const today = getTodayISO()
     const tomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD') // endDate: min value
+    const currBookings = bookings.filter(obj => obj.endDate > today)
 
     /************ reducer/API communication ************/
     const dispatch = useDispatch();
@@ -180,6 +183,21 @@ function CreateBookingForm({spot}) {
                         <option>4 guests</option>
                         <option>5 guests</option>
                     </select>
+
+                    {isDisplayed &&
+                        <>
+                            <div className="errors">
+                                <div className="unavailable-dates-title">Dates unavailable:</div>
+                                    {currBookings.length > 0 && currBookings.map(booking => (
+                                        <div id="unavailable-dates-container">
+                                            <p className="error-item" key={booking.id}>{convertSemiFormalDate(booking.startDate)}</p>
+                                            <p>-</p>
+                                            <p>{convertSemiFormalDate(booking.endDate)}</p>
+                                        </div>
+                                    ))}
+                            </div>
+                        </>
+                    }
 
                     <div className="errors">
                         {validationErrors.length > 0 && validationErrors.map(err => (

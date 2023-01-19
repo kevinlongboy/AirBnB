@@ -166,10 +166,13 @@ router.get('/:spotId/bookings', async (req, res) => {
                     spotId: getSpotId
                 },
                 attributes: {
-                    exclude: ['id', 'createdAt', 'updatedAt', 'userId']
+                    exclude: ['createdAt', 'updatedAt', 'userId']
                 },
-                order: [['spotId'], ['startDate'], ['endDate']]
+                order: [['spotId'], ['startDate'], ['endDate']],
+                raw: true
             })
+
+            console.log("publiclyViewBookings", publiclyViewBookings)
             return res
                 .status(200)
                 .json({

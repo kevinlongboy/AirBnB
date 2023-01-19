@@ -142,7 +142,7 @@ function SpotPageNullUserPanel({spot}) {
                         className="CreateBookingForm-reserve-button"
                         onClick={handleSubmit}
                         >
-                        Login to reserve
+                        Log in to reserve
                     </button>
 
                     {showModal && (

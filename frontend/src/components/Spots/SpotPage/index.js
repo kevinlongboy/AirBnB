@@ -7,6 +7,7 @@ import ImageGallery from 'react-image-gallery';
 // local files
 import './SpotPage.css';
 import { thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../../store/spotsReducer";
+import { thunkReadSpotReservations } from "../../../store/bookingsReducer";
 import { thunkCreateSingleReview } from "../../../store/reviewsReducer.js";
 import SpotReviews from "../../Reviews/SpotReviews/index.js";
 import SpotPageFooter from "../../Footer/SpotPageFooter";
@@ -23,6 +24,7 @@ function SpotPage() {
   /****************** access store *******************/
   const sessionState = useSelector(state => state.session);
   const spotsState = useSelector(state => state.spots);
+  const bookingsState = useSelector(state => state.bookings);
 
   /************ key into pertinent values ************/
   // spot
@@ -36,7 +38,9 @@ function SpotPage() {
   // params
   let { spotId } = useParams()
   spotId = parseInt(spotId)
-
+  // bookings
+  let bookings = Object.values(bookingsState.spotReservations)
+  // modal
   const modalImages = []
   images && images.forEach(img => modalImages.push({original: img.url, thumbnail: img.url}))
 
@@ -55,9 +59,13 @@ function SpotPage() {
     dispatch(thunkCreateSingleReview());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(thunkReadSpotReservations(spotId))
+  }, [dispatch])
+
   /****************** manage state *******************/
   const [showModal, setShowModal] = useState(false);
-  console.log(sessionState.user)
+
   /************* conditional components **************/
   // images
   if (images.length) {
@@ -84,7 +92,7 @@ function SpotPage() {
   // user does not own spot
   } else {
     panel = (
-      <CreateBookingForm spot={spot} />
+      <CreateBookingForm spot={spot} bookings={bookings}/>
     )
   }
 
