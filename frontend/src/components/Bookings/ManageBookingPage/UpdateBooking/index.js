@@ -6,22 +6,17 @@ import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
 // local files
 import './UpdateBooking.css';
-import { calculateGrandTotal, calculateNumberOfDays, getTodayISO } from "../../../../component-resources";
+import { calculateGrandTotal, calculateNumberOfDays, convertSemiFormalDate, getTodayISO } from "../../../../component-resources";
 import { thunkUpdateSpotBooking } from "../../../../store/bookingsReducer";
 
 /******************************* COMPONENT *******************************/
-function UpdateBooking({tripId, trip}) {
-
-    console.log("trip", trip)
-
-
-    /****************** access store *******************/
-    const sessionState = useSelector(state => state.session);
-    const bookingsState = useSelector(state => state.bookings);
+function UpdateBooking({tripId, trip, spotBookings}) {
 
     /************ key into pertinent values ************/
     const today = getTodayISO()
     const tomorrow = dayjs().add(1, 'day').format('YYYY-MM-DD') // endDate: min value
+    const bookings = Object.values(spotBookings)
+    const currBookings = bookings.filter(obj => obj.endDate > today)
 
     /************ reducer/API communication ************/
     const dispatch = useDispatch();
@@ -148,10 +143,6 @@ function UpdateBooking({tripId, trip}) {
         window.scrollTo(0,0)
     }
 
-    /************* conditional components **************/
-    // images
-
-
     /**************** render component *****************/
     return (
             <div className="UpdateBooking-component">
@@ -191,6 +182,21 @@ function UpdateBooking({tripId, trip}) {
                             <option>4 guests</option>
                             <option>5 guests</option>
                         </select>
+
+                        {isDisplayed &&
+                        <>
+                            <div className="errors">
+                                <div className="unavailable-dates-title">Dates unavailable:</div>
+                                    {currBookings.length > 0 && currBookings.map(booking => (
+                                        <div id="unavailable-dates-container">
+                                            <p className="error-item" key={booking.id}>{convertSemiFormalDate(booking.startDate)}</p>
+                                            <p>-</p>
+                                            <p>{convertSemiFormalDate(booking.endDate)}</p>
+                                        </div>
+                                    ))}
+                            </div>
+                        </>
+                    }
 
                         <div className="UpdateBooking-itemization-container">
                             <div className="UpdateBooking-itemization-subtotal-container">

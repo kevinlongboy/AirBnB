@@ -17,8 +17,6 @@ function CreateBookingForm({spot, bookings}) {
 
     /****************** access store *******************/
     const spotsState = useSelector(state => state.spots)
-    console.log("bookings", bookings)
-
 
     /************ key into pertinent values ************/
     const today = getTodayISO()

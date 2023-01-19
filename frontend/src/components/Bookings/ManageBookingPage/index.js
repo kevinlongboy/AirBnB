@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // local files
 import './ManageBookingPage.css';
-import { thunkReadUserBookings } from "../../../store/bookingsReducer";
+import { thunkReadSpotReservations, thunkReadUserBookings } from "../../../store/bookingsReducer";
 import { convertExactDate, convertInformalDate } from "../../../component-resources";
 import UpdateBooking from "./UpdateBooking";
 import DeleteBooking from "./DeleteBooking";
@@ -22,8 +22,9 @@ function ManageBookingPage() {
     const { tripId } = useParams()
     const allUserBookings = Object.values(bookingsState.userBookings)
     const booking = allUserBookings.filter(obj => obj.id == tripId)
-    const trip = booking[0]
-    console.log("trip", booking)
+    const trip = booking[0];
+    const spotId = trip.spotId;
+    const spotBookings = bookingsState.spotReservations
 
     /************ reducer/API communication ************/
     const dispatch = useDispatch();
@@ -31,6 +32,10 @@ function ManageBookingPage() {
     useEffect(() => {
         dispatch(thunkReadUserBookings());
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(thunkReadSpotReservations((spotId)))
+    }, [dispatch])
 
     /****************** manage state *******************/
     const [display, setDisplay] = useState('edit');
@@ -142,6 +147,7 @@ function ManageBookingPage() {
                                     <UpdateBooking
                                     tripId={tripId}
                                     trip={trip}
+                                    spotBookings={spotBookings}
                                     /> :
 
                                     <DeleteBooking
