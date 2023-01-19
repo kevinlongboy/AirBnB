@@ -70,12 +70,12 @@ const demoReviews = [
     review: 'A delightful home, and the decorating motif was certainly ... courageous',
     stars: 5,
   },
-  // { // Daphne reviews Roz’s
-  //   spotId: 4,
-  //   userId: 4,
-  //   review: 'I had the loveliest time at Ballard. The host even stocked the fridge with my favourite biscuits from back home. The whole experience brought me back to me childhood in Manchester. As my Grammy Moon used to say, "Fish, chips and peas with pea wet"!',
-  //   stars: 5,
-  // },
+  { // Daphne reviews Roz’s
+    spotId: 4,
+    userId: 4,
+    review: 'I had the loveliest time at Ballard. The host even stocked the fridge with my favourite biscuits from back home. The whole experience brought me back to me childhood in Manchester. As my Grammy Moon used to say, "Fish, chips and peas with pea wet"!',
+    stars: 5,
+  },
   { // Bulldog reviews Roz's
     spotId: 4,
     userId: 10,
