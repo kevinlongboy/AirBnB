@@ -44,12 +44,12 @@ const demoReviews = [
 
 
   /*********************** 3. Daphne's Belltown Loft ***********************/
-  // { // Niles reviews Daphne’s
-  //   spotId: 3,
-  //   userId: 3,
-  //   review: "This is without a doubt the most magnificent home you will ever lay your eyes on, and it's hosted by an absolute goddess that the gods have deigned to bestow on us mere men. Book a stay at this place, only if you feel you are worthy of her presence.",
-  //   stars: 5,
-  // },
+  { // Niles reviews Daphne’s
+    spotId: 3,
+    userId: 3,
+    review: "This is without a doubt the most magnificent home you will ever lay your eyes on, and it's hosted by an absolute goddess that the gods have deigned to bestow on us mere men. Book a stay at this place, only if you feel you are worthy of her presence.",
+    stars: 5,
+  },
   { // Roz reviews Daphne's
     spotId: 3,
     userId: 5,
