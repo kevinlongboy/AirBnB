@@ -35,12 +35,12 @@ const demoReviews = [
     review: 'A perfectly acceptable lodging, should you ever find yourself in need of one.',
     stars: 3,
   },
-  { // Gertrude reviews Niles'
-    spotId: 2,
-    userId: 11,
-    review: "don't bother wasting yer money 'ere. The hosts are couple of stuck up phony art lovers who keep all their good liquor locked away from their payin' guests. Yer be'er off staying somewhere halfway decent like me flat in Eastlake",
-    stars: 1,
-  },
+  // { // Gertrude reviews Niles'
+  //   spotId: 2,
+  //   userId: 11,
+  //   review: "don't bother wasting yer money 'ere. The hosts are couple of stuck up phony art lovers who keep all their good liquor locked away from their payin' guests. Yer be'er off staying somewhere halfway decent like me flat in Eastlake",
+  //   stars: 1,
+  // },
 
 
   /*********************** 3. Daphne's Belltown Loft ***********************/
