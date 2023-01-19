@@ -44,12 +44,12 @@ const demoReviews = [
 
 
   /*********************** 3. Daphne's Belltown Loft ***********************/
-  { // Niles reviews Daphne’s
-    spotId: 3,
-    userId: 3,
-    review: "This is without a doubt the most magnificent home you will ever lay your eyes on, and it's hosted by an absolute goddess that the gods have deigned to bestow on us mere men. Book a stay at this place, only if you feel you are worthy of her presence.",
-    stars: 5,
-  },
+  // { // Niles reviews Daphne’s
+  //   spotId: 3,
+  //   userId: 3,
+  //   review: "This is without a doubt the most magnificent home you will ever lay your eyes on, and it's hosted by an absolute goddess that the gods have deigned to bestow on us mere men. Book a stay at this place, only if you feel you are worthy of her presence.",
+  //   stars: 5,
+  // },
   { // Roz reviews Daphne's
     spotId: 3,
     userId: 5,
@@ -91,12 +91,12 @@ const demoReviews = [
 
 
   /*********************** 5. Martin's Ballard Apartment ***********************/
-  { // Roz reviews Martin’s
-    spotId: 5,
-    userId: 5,
-    review: "This was one the cutest places that I've stayed at in a while, and it's in the perfect location. Lots of great restaurants and bars, and I even found a cute little park for my daughter to play in. Definitely recommend to everyone, and definitely coming back.",
-    stars: 5,
-  },
+  // { // Roz reviews Martin’s
+  //   spotId: 5,
+  //   userId: 5,
+  //   review: "This was one the cutest places that I've stayed at in a while, and it's in the perfect location. Lots of great restaurants and bars, and I even found a cute little park for my daughter to play in. Definitely recommend to everyone, and definitely coming back.",
+  //   stars: 5,
+  // },
   { // Gertrude reviews Martin's
     spotId: 5,
     userId: 11,
@@ -156,12 +156,12 @@ const demoReviews = [
     review: 'Charming.',
     stars: 2,
   },
-  { // Roz reviews Bulldog's
-    spotId: 9,
-    userId: 5,
-    review: "Ugh. This place is DISGUSTING. I don't know why I even bothered staying here. The room was a total mess and the host kept hitting on me the entire time I was there. Save yourself the headache and STAY SOMEWHERE ELSE.",
-    stars: 1,
-  },
+  // { // Roz reviews Bulldog's
+  //   spotId: 9,
+  //   userId: 5,
+  //   review: "Ugh. This place is DISGUSTING. I don't know why I even bothered staying here. The room was a total mess and the host kept hitting on me the entire time I was there. Save yourself the headache and STAY SOMEWHERE ELSE.",
+  //   stars: 1,
+  // },
 
 
   /*********************** 10. Gertrude's Eastlake Flat ***********************/
