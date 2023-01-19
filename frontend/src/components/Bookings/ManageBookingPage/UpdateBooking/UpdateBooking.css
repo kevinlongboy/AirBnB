@@ -93,6 +93,43 @@
     font-weight: 100;
 }
 
+/********** UNAVAILABLE DATES **********/
+/* 🛑 The following properties are shared with "UpdateBooking" 🛑 */
+/* START SHARE */
+
+.unavailable-dates-title {
+    color: #b0b0b0;
+}
+#unavailable-dates-container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    color: #b0b0b0;
+
+}
+#unavailable-dates-container > p {
+    width: 8px;
+    /* height: fit-content; */
+
+    margin: 0px;
+    padding: 0px 7px;
+}
+#unavailable-dates-container > p:first-of-type{
+    width: 90px;
+
+    text-align: left;
+}
+#unavailable-dates-container > p:last-of-type{
+    width: 90px;
+
+    text-align: left;
+}
+/* END SHARE */
+
 
 /********** Fee itemization **********/
 .UpdateBooking-itemization-container {

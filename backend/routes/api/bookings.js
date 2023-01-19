@@ -24,13 +24,16 @@ const validateBooking = [
 
 // Postman 31, 32: "Edit a Booking"
 // README, line 1181
-router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
+router.put('/:bookingId', requireAuth, async (req, res) => {
 
     let bookingId = req.params.bookingId;
     let error = {};
 
     try {
-        let putBooking = await Booking.findByPk(bookingId);
+        let putBooking = await Booking.findByPk(bookingId, {
+            raw: true,
+        });
+        console.log("putBooking", putBooking)
 
         /*************** Error Handler: Spot couldn't be found ***************/
         if (!putBooking) {
@@ -53,8 +56,9 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
         let allExistingBookings = await Booking.findAll({
             where: { spotId: putBooking.spotId },
             attributes: {
-                exclude: ['id', 'createdAt', 'updatedAt', 'userId', 'spotId']
-            }
+                exclude: ['id', 'createdAt', 'updatedAt', 'spotId']
+            },
+            raw: true,
         });
 
         /*************** Error Handler: Sorry, this spot is already booked for the specified dates ***************/
@@ -63,44 +67,66 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
             let existingStartDate = existingBooking.startDate
             let existingEndDate = existingBooking.endDate
 
-            if ((startDate === existingStartDate) && (endDate === existingEndDate)) {
-                error.message = "Sorry, this spot is already booked for the specified dates";
-                error.statusCode = 403;
-                error.errors = {
-                    startDate: "Start date conflicts with an existing booking",
-                    endDate: "End date conflict with an existing booking",
+
+            // iterate through existing bookings that user does not own,
+            // to prevent collisions with reserved dates
+            // this will allow user to change their own booking's startDate or endDate exclusively
+            if (existingBooking.userId != req.user.id) {
+
+                if ((startDate === existingStartDate) && (endDate === existingEndDate)) {
+                    error.message = "Sorry, this spot is already booked for the specified dates";
+                    error.statusCode = 403;
+                    error.errors = {
+                        startDate: "Start date conflicts with an existing booking",
+                        endDate: "End date conflict with an existing booking",
+                    }
+                    return res.status(404).json(error)
+
+                } else if ((endDate >= existingStartDate) && (endDate <= existingEndDate)) {
+                    error.message = "Sorry, this spot is already booked for the specified dates";
+                    error.statusCode = 403;
+                    error.errors = { endDate: "End date conflicts with an existing booking" }
+                    return res.status(404).json(error)
+
+                } else if ((startDate >= existingStartDate) && (startDate <= existingEndDate)) {
+                    error.message = "Sorry, this spot is already booked for the specified dates";
+                    error.statusCode = 403;
+                    error.errors = { startDate: "Start date conflicts with an existing booking" }
+                    return res.status(404).json(error)
                 }
-                return res.status(404).json(error)
-
-            } else if ((endDate >= existingStartDate) && (endDate <= existingEndDate)) {
-                error.message = "Sorry, this spot is already booked for the specified dates";
-                error.statusCode = 403;
-                error.errors = { endDate: "End date conflicts with an existing booking" }
-                return res.status(404).json(error)
-
-            } else if ((startDate >= existingStartDate) && (startDate <= existingEndDate)) {
-                error.message = "Sorry, this spot is already booked for the specified dates";
-                error.statusCode = 403;
-                error.errors = { startDate: "Start date conflicts with an existing booking" }
-                return res.status(404).json(error)
             }
         }
 
         /*************** Booking must belong to the current user ***************/
+        console.log("putBooking.userId", putBooking.userId)
+        console.log("req.user.id", req.user.id)
         if (putBooking.userId == req.user.id) {
-            if (startDate) putBooking.update({ startDate: startDate });
-            if (endDate) putBooking.update({ endDate: endDate });
-            if (guests) putBooking.update({ guests: guests });
-            if (total) putBooking.update({ total: total });
-            await putBooking.save();
+            console.log("reach")
+            if (startDate) putBooking.startDate = startDate;
+            console.log("if (startDate) putBooking.update({ startDate: startDate });")
+
+            if (endDate) putBooking.endDate = endDate
+            console.log("if (endDate) putBooking.update({ endDate: endDate });")
+
+            if (guests) putBooking.guests = guests
+            console.log("if (guests) putBooking.update({ guests: guests });")
+
+            if (total) putBooking.total = total
+            console.log("if (total) putBooking.update({ total: total });")
+
+            // await putBooking.save();
+            // console.log("await putBooking.save();")
         }
+
+        console.log("putBooking", putBooking)
 
         /********** Modify keys **********/
         // Add spot info -key
-        let spotInfo = Spot.findByPk(putBooking.spotId, {
+        let spotInfo = await Spot.findByPk(putBooking.spotId, {
             raw: true,
         })
         putBooking.Spot = spotInfo
+        console.log("putBooking.Spot", putBooking.Spot)
 
         // Add spot owner info -key
         let owner = await User.findOne({
@@ -108,6 +134,8 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
             raw: true
         })
         putBooking.Spot.ownerName = `${owner.firstName}`
+
+        console.log("putBooking", putBooking)
 
         return res
             .status(200)

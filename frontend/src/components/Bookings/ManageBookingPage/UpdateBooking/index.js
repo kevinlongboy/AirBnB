@@ -88,7 +88,7 @@ function UpdateBooking({tripId, trip, spotBookings}) {
 
     // submit form
     const history = useHistory();
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
@@ -123,8 +123,9 @@ function UpdateBooking({tripId, trip, spotBookings}) {
         // console.log("numDays", numDays)
         // console.log("spot.id", spot.id)
         console.log("updateBookingData", updateBookingData)
+        console.log("tripId", tripId)
 
-        dispatch(thunkUpdateSpotBooking(tripId, updateBookingData)).catch(
+        const updateBooking = dispatch(thunkUpdateSpotBooking(tripId, updateBookingData)).catch(
 
             async (res) => {
                 const data = await res.json();
@@ -132,15 +133,18 @@ function UpdateBooking({tripId, trip, spotBookings}) {
 
                 if (data && data.errors) {
                     errors.push(data.message);
-                    setValidationErrors([...errors]);
+                    setValidationErrors([errors]);
+                    console.log("validationErrors", validationErrors)
+                    return
                 }
+
+                if (errors.length) return
             }
         )
 
-        // console.log("updateBooking", updateBooking)
 
-        history.push(`/confirmation/trips/${tripId}`)
         window.scrollTo(0,0)
+        history.push(`/confirmation/trips/${tripId}`)
     }
 
     /**************** render component *****************/

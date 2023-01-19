@@ -1,11 +1,11 @@
 /******************************** IMPORTS ********************************/
 // libraries
 import { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import  StarRatings from 'react-star-ratings';
 // local files
-import { thunkCreateSingleReview, thunkUpdateSingleReview } from "../../../store/reviewsReducer";
+import { thunkCreateSingleReview, thunkReadUserReviews, thunkUpdateSingleReview } from "../../../store/reviewsReducer";
 import { convertInformalDate } from "../../../component-resources";
 
 /******************************* COMPONENT *******************************/
@@ -29,7 +29,22 @@ function ReviewForm({reviewFormAction, spot, userReview, modalFunc}) {
         setStars(userReview ? userReview.stars : 5)
     }, [userReview]);
 
+    useEffect(() => {
+        const errors = [];
+
+        if (review.length > 0 && review.length < 5) {
+            errors.push("Please write a longer review.")
+        } else if (review.length > 500) {
+            errors.push("Please write a shorter review.")
+        }
+
+        setValidationErrors(errors)
+    }, [review])
+
+
     /***************** handle events *******************/
+    const history = useHistory();
+
     // submit form
     const handleSubmit = (e) => {
 
@@ -80,7 +95,8 @@ function ReviewForm({reviewFormAction, spot, userReview, modalFunc}) {
                 }
             );
 
-            return modalFunc(false)
+            modalFunc(false)
+            return history.push('/reviews')
 
         } else if (reviewFormAction == "Update") {
             let reviewId = userReview.id

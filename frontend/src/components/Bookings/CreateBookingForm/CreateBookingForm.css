@@ -123,6 +123,9 @@
 }
 
 /********** UNAVAILABLE DATES **********/
+/* 🛑 The following properties are shared with "UpdateBooking" 🛑 */
+/* START SHARE */
+
 .unavailable-dates-title {
     color: #b0b0b0;
 }
@@ -154,6 +157,8 @@
 
     text-align: left;
 }
+/* END SHARE */
+
 
 /********** FEE ITEMIZATION **********/
 .CreateBookingForm-itemization-container {

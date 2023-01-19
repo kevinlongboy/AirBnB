@@ -55,7 +55,7 @@ function UserReviews() {
 
     useEffect(() => {
         dispatch(thunkReadUserReviews())
-    }, [dispatch]);
+    }, [dispatch, reviewsArr.length]);
 
     useEffect(() => {
         dispatch(thunkReadUserBookings())

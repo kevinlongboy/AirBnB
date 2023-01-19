@@ -56,7 +56,6 @@ export const thunkCreateSingleBooking = (spotId, createBookingData) => async (di
     });
     if (response.ok) {
         const newBooking = await response.json();
-        console.log("newBooking", newBooking)
         dispatch(actionCreateSingleBooking(newBooking));
         return newBooking;
     };
@@ -84,18 +83,19 @@ export const thunkReadSpotReservations = (spotId) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spotId}/bookings`);
     if (response.ok) {
         const spotReservations = await response.json();
-        console.log("spotReservations", spotReservations)
         dispatch(actionReadSpotReservations(spotReservations));
         return spotReservations;
     };
 };
 
 export const thunkUpdateSpotBooking = (bookingId, updateBookingData) => async (dispatch) => {
+    console.log("reach from thunkUpdateSpotBooking")
     const response = await csrfFetch(`/api/bookings/${bookingId}`, {
         method: 'put',
         headers: { 'Content-Type': 'application/json' } ,
         body: JSON.stringify(updateBookingData)
     });
+    console.log("this line doesn't get printed regardless of thunk status")
     if (response.ok) {
         const updateBooking = await response.json();
         dispatch(actionUpdateSpotBooking(updateBooking));
@@ -159,7 +159,6 @@ const bookingsReducer = (state = initialState, action) => {
         case BOOKINGS_READ_SPOT_RESERVATIONS:
             newState.userBookings = { ...state.userBookings };
             newState.userReservations = { ...state.userReservations }
-            console.log("action.payload", action.payload)
             newState.spotReservations = normalizeArray(action.payload.Bookings);
             return newState
 
