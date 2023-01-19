@@ -18,10 +18,12 @@ function Navigation({ isLoaded }){
 
   /****************** access store *******************/
   const sessionUser = useSelector(state => state.session.user);
+  console.log("isLoaded", isLoaded)
 
   /************ key into pertinent values ************/
   let userId
   if (sessionUser) userId = sessionUser.id
+  console.log("userId", userId)
 
   /****************** manage state *******************/
   const [desktop, setDesktop] = useState(true);
@@ -70,7 +72,7 @@ function Navigation({ isLoaded }){
       </div>
 
       <div className="nav-bar-middle-container">
-        <SearchBar />
+        {/* <SearchBar /> */}
       </div>
 
       <div className="nav-bar-right-container">

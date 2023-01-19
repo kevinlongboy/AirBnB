@@ -78,6 +78,11 @@ function LoginForm() {
     // history.push('/');
   };
 
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    setShowModal(true)
+  }
+
   /**************** render component *****************/
   return (
     <div className="LoginForm-component">
@@ -144,7 +149,8 @@ function LoginForm() {
 
         <button
           className="loginFormContinueButton"
-          onClick={() => setShowModal(true)}
+          // onClick={() => setShowModal(true)}
+          onClick={handleSignUp}
         >
           <div className="loginFormContinueButtonLogo"><i class="fa-regular fa-envelope"></i></div>
           <div className="loginFormContinueButtonText">Continue to Sign Up</div>

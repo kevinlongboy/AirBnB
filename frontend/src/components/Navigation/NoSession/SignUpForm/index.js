@@ -11,10 +11,7 @@ import './SignUpForm.css'
 
 /******************************* COMPONENT *******************************/
 function SignUpForm() {
-
-  /****************** access store *******************/
-  const sessionUser = useSelector((state) => state.session.user);
-
+  
   /************ reducer/API communication ************/
   const dispatch = useDispatch();
 
@@ -45,7 +42,7 @@ function SignUpForm() {
 
       let userData = {firstName, lastName, username, password, email }
 
-      return  dispatch(sessionActions.signup(userData)).catch(
+      return dispatch(sessionActions.signup(userData)).catch(
 
         async (res) => {
           const data = await res.json();
