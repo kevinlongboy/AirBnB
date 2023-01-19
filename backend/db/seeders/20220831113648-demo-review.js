@@ -91,12 +91,13 @@ const demoReviews = [
 
 
   /*********************** 5. Martin's Ballard Apartment ***********************/
-  // { // Roz reviews Martin’s
-  //   spotId: 5,
-  //   userId: 5,
-  //   review: "This was one the cutest places that I've stayed at in a while, and it's in the perfect location. Lots of great restaurants and bars, and I even found a cute little park for my daughter to play in. Definitely recommend to everyone, and definitely coming back.",
-  //   stars: 5,
-  // },
+  { // Roz reviews Martin’s
+    spotId: 5,
+    userId: 5,
+    review: "This was one of the cutest places I've stayed at in a while, and it's in the perfect location. Lots of great restaurants & bars, and I even found a cute little park for my daughter to play in. Definitely recommend to everyone, and definitely coming back.",
+    stars: 5,
+  },
+
   { // Gertrude reviews Martin's
     spotId: 5,
     userId: 11,
