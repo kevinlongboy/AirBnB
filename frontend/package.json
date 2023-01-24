@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.8.3",
     "dayjs": "^1.11.7",
     "js-cookie": "^3.0.1",
+    "loading-indicator": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-image-gallery": "^1.2.11",
