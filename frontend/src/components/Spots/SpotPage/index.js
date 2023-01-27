@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ImageGallery from 'react-image-gallery';
-import loading from 'loading-indicator';
+import loading from 'loading-indicator'; 
 // local files
 import './SpotPage.css';
 import { thunkReadSingleSpotDetails, thunkReadSingleSpotReviews } from "../../../store/spotsReducer";
