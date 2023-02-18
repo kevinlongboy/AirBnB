@@ -98,8 +98,8 @@ const demoBookings = [
     {
       spotId: 3,
       userId: 1, // userId of guest (person renting spot)
-      startDate: '2023-01-23',
-      endDate: '2023-01-25',
+      startDate: '2023-06-23',
+      endDate: '2023-06-25',
       guests: 1,
       total: 325,
     },
@@ -107,8 +107,8 @@ const demoBookings = [
     {
       spotId: 1,
       userId: 1, // userId of guest (person renting spot)
-      startDate: '2023-01-27',
-      endDate: '2023-01-30',
+      startDate: '2023-07-27',
+      endDate: '2023-07-30',
       guests: 2,
       total: 3075,
     },
@@ -165,16 +165,16 @@ const demoBookings = [
     {
       spotId: 14,
       userId: 4, // userId of guest (person renting spot)
-      startDate: '2023-01-28',
-      endDate: '2023-01-30',
+      startDate: '2023-06-28',
+      endDate: '2023-06-30',
       guests: 2,
       total: 475,
     },
     {
       spotId: 15,
       userId: 2, // userId of guest (person renting spot)
-      startDate: '2023-02-03',
-      endDate: '2023-02-05',
+      startDate: '2023-07-03',
+      endDate: '2023-07-05',
       guests: 2,
       total: 1675,
     },
